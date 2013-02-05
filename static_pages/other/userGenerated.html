@@ -1,0 +1,57 @@
+
+{% extends "teaching_base.html" %}
+{% block body %}
+<H1>Introduction to User Generated Data</H1>
+
+<p>This lesson introduces user generated data, that is, data which is input by the user. The instructor will demo a note taking app in which the user enters notes in a text box which the system stores and displays in a list. The student will use the lesson to build a musical record/playback system. The music playback app provides experience with building a list and then iterating through it within the clock timer.</p>
+
+
+<h4>Instructor Demo, Part 1</h4>
+<p>Demonstrate the development of a simple notetaker with a UI something like Twitter. You will not add any persistence yet, just show how to add items to list and a simple method for displaying the list.
+<ul>
+<li>
+    Add a label, textbox and button for the input form. Name them
+</li>
+<li>
+    Arrange the components in a horizontal arrangement
+</li>
+<li>
+   Add a hint to textbox
+</li>
+<li>
+
+Add a label "NoteListLabel" to show all notes, and a header for it. 
+</li>
+<li>
+    In the blocks editor, add a list NotesList with a makelist but no items. Emphasize the form of this initially empty list and compare to question list in President Quiz.
+</li>
+<li>
+   on SubmitButton.Click, add textbook contents to list using add items to list.
+</li>
+<li>
+
+show list in NoteListLabel by simply setting the text property to list. It will display in a default, ugly manner. 
+</li>
+</ul>
+<h4>Try It, Part 1</h4>
+<p>Ask the students to build a music player. It will have three buttons. When each button is clicked, a musical note will play, and the note will be recorded. <ul>
+<li>
+
+         Add three buttons, a Sound component, and a label to show the recorded notes. Add a sound component. Find at least three musical notes from the web.
+</li>
+<li>
+         In blocks editor, Create a list MusicalNoteList
+</li>
+<li>
+         When each button is clicked, play the note and add the fileName of the note to the list. Display the list in label.
+</li>
+<li>
+Now add a Start button and a Next Button (like with quiz). Program these so one can click to replay recorded music a single note at a time. Test until it works.      
+</li>
+</ul>
+<h4>Try It, Part 2</h4>
+
+Now add a Clock and a Play button (this will replace Start/Next). The Play Button can enable the Clock timer. The Clock.Timer event can play a single note and increment the index. Make sure and deal with what should happen when the end of the list is reached!       
+
+
+{% endblock %}

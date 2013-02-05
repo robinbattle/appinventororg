@@ -1,0 +1,30 @@
+application: appinventororg
+version: 2
+runtime: python27
+api_version: 1
+threadsafe: no
+
+handlers:
+
+- url: /apps
+  static_dir: apps
+- url: /apps/amazon
+  static_dir: amazon  
+- url: /assets
+  static_dir: assets
+- url: /assets/css
+  static_dir: assets/css
+- url: /older
+  static_dir: older
+- url: /tutorial_files
+  static_dir: tutorial_files    
+- url: /
+  script: app_controller.py
+- url: /Admin
+  script: app_controller.py
+  login: admin
+- url: /.*
+  script: app_controller.py
+   
+
+

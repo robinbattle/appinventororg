@@ -1,0 +1,48 @@
+
+{% extends "teaching_base.html" %}
+{% block body %}
+<H1>Introduction to Canvases</H1>
+<br/>
+ <div class="row-fluid">
+
+ <div class="span6">
+
+<h3>Canvas -- a sub-panel of the screen</h3>
+<ul>
+    <li>The app or a user can draw in it</li>
+    <li>The app can animate objects within it</li>
+</ul>
+
+<h3>Canvas has an X,Y coordinate system</h3>
+<ul>
+
+    <li>X goes from 1 right to width of canvas</li>
+    <li>Y goes from 1 down to height of canvas (note down is bigger, unlike math)</li>
+</ul>
+    
+<h3>Canvas properties, functions, and events</h3>
+<ul>
+    <li>Canvas properties: Width, Height, BackgroundColor, PaintColor</li>
+    <li>Canvas functions: DrawCircle, DrawLine</li>
+    <li>Canvas events: Touched(x,y), Dragged(starts,starry,previousx,previousy, currentx, currenty)</li>
+    <li>note that dragged is triggered many times as user drags finger across the screen</li>
+</ul>    
+
+<h3>Instructor Demo</h3>
+<ul>
+    <li>Set the width of the canvas to "Fill parent"</li>
+    <li>Draw a circle at 30,30 not matter where touched</li>
+    <li>Draw circle at x,y on touched event</li>
+    <li>Note that event parameters of events found in "My Blocks": do not drag from event-handler</li>
+
+    <li>Show x,y coordinates in a label when you touch canvas, draw circle when touch canvas</li>
+    <li>Draw a circle in middle of canvas no matter where touched</li>
+</ul> 
+
+</div>
+<div class="span6">
+<iframe width="420" height="315" src="http://www.youtube.com/embed/MrweyPm_6SY" frameborder="0" allowfullscreen></iframe>
+
+</div>
+</div>
+{% endblock %}

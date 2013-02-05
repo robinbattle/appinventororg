@@ -1,0 +1,5 @@
+GettingCache(self, tableName, whereClause, whereField, dataId, orderClause, orderField, orderValue, fetch):
+
+AdminHandler()   .get() <<<<<<<<< problem check, not sure if problem exists
+
+
