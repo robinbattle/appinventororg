@@ -32,6 +32,7 @@
       <link rel="stylesheet" type="text/css" href="../../assets/appCarousel/TSWImageCarousel.css" />
    </head>
    <body>
+
       <div class="navbar navbar-fixed-top">
          <div class="navbar-inner">
             <div class="container">
@@ -64,27 +65,8 @@
                      </li>
                   </ul>
                   {% endif %}
-                  <ul class="nav">
-                     <li>
-                        <!--Google-->
-                        <div style="width:0px;overflow:hidden;height:0px;">
-                           <!-- if you use display:none here it doesn't work-->
-                           <gcse:search></gcse:search>
-                        </div>
-                        <form class="form-search" id="searchbox_002873954108960030835:l3_jvzrakeu" action="/siteSearch">
-                           
-                           <input class="input-xlarge" id="q" name="q" placeholder="paint pot" type="text" value='{{q}}'/>
-                           <button class="btn">Search</button>
-                        </form>
-                        <!--Google-->
-					
-				 
-		
-                     </li>
-                  </ul>
                </div>
                <!--/.nav-collapse -->
-			
             </div>
          </div>
       </div>
@@ -94,50 +76,100 @@
             <!-- <iframe class="span5 thumbnail" width="550" height="324" src="http://www.youtube.com/embed/E9Zm56Od1pw"
                frameborder="0" allowfullscreen></iframe> -->
             <div class="span5">
-               <div id="myCarousel" class="carousel slide thumbnail">
-                  <!-- Carousel items -->
-                  <div class="carousel-inner">
-                     <div class="active item">
-                        <iframe width="460" height="360" src="http://www.youtube.com/embed/E9Zm56Od1pw" frameborder="0" allowfullscreen></iframe>
-                        <div class="carousel-caption">
-                           <h4>The App Inventor Course at USF</h4>
-                        </div>
-                     </div>
-                     <div class="item">
-                        <iframe width="460" height="360" src="http://www.youtube.com/embed/sGiaXOKqeKg" frameborder="0" allowfullscreen></iframe>
-                        <div class="carousel-caption">
-                           <h4>What is App Inventor?</h4>
-                        </div>
-                     </div>
-                     <div class="item">
-                        <iframe width="460" height="360" src="http://www.youtube.com/embed/rrwrfX8T_c8" frameborder="0" allowfullscreen></iframe>
-                        <div class="carousel-caption">
-                           <h4>"No Texting While Driving" #1 (Sample Tutorial Video)</h4>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Carousel nav -->
-                  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-               </div>
+			<img class="img-polaroid" src="/imageHandler?key={{account.key}}"/>
+		   
+		      
             </div>
             <div class="span6">
                <!-- start of lesson box -->
                <div class="span6">
                   <!-- <a href="/notetaker">notetaker</a> -->
-                  <h2>Watch. Build. Practice. </h2>
+                  <h2>User Profile</h2>
                   <p class="lead"> Learn to build Android apps in hours.<br />Learn App Inventor. Learn to program.</p>
-                  <p id="right-panel-copy">App Inventor provides the fastest way to build apps for Android phones and tablets. Even with no prior experience, you can learn to build apps within hours. Here, you'll learn from USF Professor David Wolber, who has been teaching beginners programming with App Inventor since its inception in 2009. With step-by-step video screencasts, Wolber starts with the basics then leads you through the development of successively more complex apps, teaching you programming concepts as you go. </p>
-                  <p style="margin-top:20px">
-                     <a class="btn btn-success btn-large" href="/hellopurr">Get Started&nbsp; <i class="icon-arrow-right icon-white"></i></a>
-                     <a class="btn btn-success btn-large" href="/projects" style="margin-left: 20px">Check out the Apps&nbsp;
-                     <i class="icon-arrow-right icon-white"></i></a>
-                  </p>
-               </div>
-               <div class="span5 well" style="margin-top: 20px">
-                  <p class="lead" align="center"><strong> Teaching App Inventor?</strong>
-                     <a class="btn btn-success btn-large" href="/course-in-a-box_teaching"> Go to the Course-in-a-Box <i class="icon-arrow-right icon-white"></i></a>
-                  </p>
+                  <div class="row-fluid">
+                     <table class="table table-striped">
+                        <tr>
+                           <form class="form-search" action="/uploadPicture" enctype="multipart/form-data" method="post">
+                              <td>
+                                 Upload Picture:
+                              </td>
+                              <td>
+                                 <input type="file" name="pictureFile" />
+                                 <input type="submit" value="upload" class="btn" />
+                              </td>
+                           </form>
+                        </tr>
+                     </table>
+                     <form class="form-search" action="/saveProfile" method="get">
+                        <table class="table table-striped">
+                           <tr>
+                              <td>First Name: </td>
+                              <td><input id="user_firstName" class="input-medium search-query span12" type="text" name="firstName" value="{{account.firstName}}" /></td>
+                           </tr>
+                           <tr>
+                              <td>Last Name: </td>
+                              <td><input id="user_lastName" class="input-medium search-query span12" type="text" name="lastName" value="{{account.lastName}}" /></td>
+                           </tr>
+                           <tr>
+                              <td>Location: </td>
+                              <td><input id="user_location" class="input-medium search-query span12" type="text" name="location" value="{{account.location}}" /></td>
+                           </tr>
+                           <tr>
+                              <td>Community: </td>
+                              <td><input id="user_community" class="input-medium search-query span12" type="text" name="community" value="{{account.community}}" /></td>
+                           </tr>
+                           <tr>
+                              <td>Are you an educator: </td>
+                              <td>
+                                 {% if account.ifEducator%}
+                                 <label class="radio">
+                                 <input type="radio" id="user_ifEducatorYes" name="ifEducator" value="True" checked /> Yes
+                                 </label>
+                                 <label class="radio">
+                                 <input type="radio" id="user_ifEducatorNo" name="ifEducator" value="False" /> 
+                                 No
+                                 </label>
+                                 {% else %}
+                                 <label class="radio">
+                                 <input type="radio" id="user_ifEducatorYes" name="ifEducator" value="True" /> Yes
+                                 </label>
+                                 <label class="radio">
+                                 <input type="radio" id="user_ifEducatorNo" name="ifEducator" value="False" checked /> 
+                                 No
+                                 </label>
+                                 {% endif %}
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Are you an educator: </td>
+                              <td>
+                                 <p><label class="radio">
+                                    <input type="radio" name="educationLevel" id="user_educationLevel1" value="K-8" {{educationLevelCheck0}} />
+                                    K-8(Elementery)
+                                    </label>
+                                 </p>
+                                 <label class="radio">
+                                    <p><input type="radio" name="educationLevel" id="user_educationLevel2" value="High School" {{educationLevelCheck1}} />
+                                       High School
+                                 </label>
+                                 </p>
+                                 <p><input type="radio" name="educationLevel" id="user_educationLevel3" value="College/University" {{educationLevelCheck2}} />
+                                    College/University
+                                    </label>
+                                 </p>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Link to your course/teaching website: </td>
+                              <td><input id="user_introductionLink" class="input-medium search-query span12" type="text" name="introductionLink" value="{{account.introductionLink}}" /></td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td><input type="submit" class="btn btn-large btn-block btn btn-success" value="Confirm to Update" </td>
+                           </tr>
+                        </table>
+                     </form>
+                  </div>
                </div>
             </div>
          </div>
@@ -336,6 +368,5 @@
       <script src="/assets/js/bootstrap-collapse.js"></script>
       <script src="/assets/js/bootstrap-carousel.js"></script>
       <script src="/assets/js/bootstrap-typeahead.js"></script>
-      <script src="/assets/js/cse-searchbox.js"></script>
    </body>
 </html>

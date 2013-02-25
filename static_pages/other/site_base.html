@@ -60,6 +60,19 @@
                     <li><a href="/hellopurr">Learn</a></li>
                     <li><a href="/teaching-android">Teach</a></li>
                     <li><a href="/about">About</a></li>
+			    {% if ifUser%}
+                     <li>
+                        <a href="/profile"> Profile </a> 
+                     </li>        
+                     <li>
+                        <a href="{{logouturl}}"> logout </a>
+                     </li>
+                     {% else %}
+                     <li>
+                        <a href="{{loginurl}}"> login </a>
+                     </li>
+                     {% endif %}
+
 
 
                 </ul>
@@ -183,6 +196,7 @@
         </div>
 
     </div>
+    
 </footer>
 
 </html>

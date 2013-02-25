@@ -1,0 +1,113 @@
+{% extends "site_base.html" %}
+{% block body %}
+
+<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+   <script language="Javascript" type="text/javascript">
+      //<!
+      google.load('search', '1');
+      
+      function OnLoad() {
+        //google.load("search", "1", {"nocss" : true});
+        // Create a search control
+        var searchControl = new google.search.SearchControl();
+      
+        // Add in a full set of searchers
+        //searchControl.addSearcher(new google.search.WebSearch());
+       
+        var siteSearch = new google.search.WebSearch();
+        siteSearch.setUserDefinedLabel("Appinventor.org");
+        siteSearch.setUserDefinedClassSuffix("siteSearch");
+        siteSearch.setSiteRestriction("appinventor.org");
+        searchControl.addSearcher(siteSearch);
+        
+      
+      
+        // tell the searcher to draw itself and tell it where to attach
+        searchControl.draw(document.getElementById("searchcontrol"));
+      
+        // execute an inital search
+        searchControl.execute("{{query}}");
+      }
+      google.setOnLoadCallback(OnLoad);
+      
+      //]]>
+   </script>
+
+   
+
+
+        <div class="span9">
+            <div class="hero-unit">
+                <h1>Search Result</h1>
+            </div>
+
+            <br/>
+
+            
+<div style="width:30%">
+
+	<gcse:search></gcse:search>
+
+</div>
+
+            <div id="searchcontrol">Loading</div>
+
+
+
+<script src="/assets/js/google-customsearch.js"></script>
+
+
+<div class="step">
+            <div class="row-fluid">
+                <p class="lead">
+                    <a data-toggle="collapse" data-target="#step1">
+                        <strong>Click Me to Fill out Details</strong> 
+                    </a>
+                </p>
+            </div>
+
+            <div id="step1" class="collapse">
+
+                
+		 <p>I am the details</p>
+                
+
+                
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+                    
+
+<table>
+<tr>
+<a data-toggle="collapse" data-target="#step2">
+<label class="checkbox inline">
+  <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+</label>
+ </a>
+
+</tr>
+</table>
+
+                    
+                   
+
+<div id="step2" class="collapse">
+
+<table><tr><p>I am the details</p></tr></table>
+</div>
+        
+
+
+{% endblock %}
+
+

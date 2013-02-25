@@ -64,27 +64,18 @@
                      </li>
                   </ul>
                   {% endif %}
-                  <ul class="nav">
-                     <li>
-                        <!--Google-->
-                        <div style="width:0px;overflow:hidden;height:0px;">
-                           <!-- if you use display:none here it doesn't work-->
-                           <gcse:search></gcse:search>
-                        </div>
-                        <form class="form-search" id="searchbox_002873954108960030835:l3_jvzrakeu" action="/siteSearch">
-                           
-                           <input class="input-xlarge" id="q" name="q" placeholder="paint pot" type="text" value='{{q}}'/>
-                           <button class="btn">Search</button>
-                        </form>
-                        <!--Google-->
-					
-				 
-		
-                     </li>
-                  </ul>
+                  
+			  
                </div>
                <!--/.nav-collapse -->
-			
+
+			<div class="span3 pull-right">
+				
+				<gcse:searchbox-only></gcse:searchbox-only>
+				
+			</div>
+
+
             </div>
          </div>
       </div>

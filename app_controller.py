@@ -1,4 +1,5 @@
 
+
 import logging
 import os
 import datetime
@@ -6,9 +7,12 @@ try: import simplejson as json
 except ImportError: import json
 import wsgiref.handlers
 import cgi
+import urllib2, json
+from google.appengine.api import urlfetch
 
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
+from google.appengine.api import images
 from google.appengine.api import memcache
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -19,11 +23,13 @@ from datastore import App
 from datastore import Step
 from datastore import Custom
 from datastore import Account
+from datastore import Position
 
 
 
 class Home(webapp.RequestHandler):
     def get(self):
+        q = self.request.get('q')
         #login info
         currenttime = datetime.utcnow()
         user = users.get_current_user()
@@ -44,7 +50,7 @@ class Home(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl}
+        template_values={'q':q, 'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/index.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -60,6 +66,11 @@ class ProfileHandler(webapp.RequestHandler):
         loginurl = users.create_login_url(self.request.uri)
         logouturl = users.create_logout_url('/')
 
+        educationLevelCheck0 = ''
+        educationLevelCheck1 = ''
+        educationLevelCheck2 = ''
+        ifEducatorShow = "collapse"
+
         if user:
             saysHello = 'Hello, ' + user.nickname()
             ifUser = True
@@ -72,27 +83,104 @@ class ProfileHandler(webapp.RequestHandler):
             message='Welcome Back,'
             firstName = account.firstName
             lastName = account.lastName
-            dateOfBirth = account.dateOfBirth
             location = account.location
-            organization = account.organization
-            userNickName = account.user.nickname
+            community = account.community
+            ifEducator = account.ifEducator
+            if(ifEducator == True):
+                ifEducatorShow = "collapse in"
+            else:
+                ifEducatorShow = "collapse"
+
+            educationLevel = account.educationLevel
+            if educationLevel == None:
+                educationLevelCheck0 = 'checked'
+            else:
+                if educationLevel == 'K-8':
+                    educationLevelCheck0 = 'checked'
+                elif educationLevel == 'High School':
+                    educationLevelCheck1 = 'checked'
+                else:
+                    educationLevelCheck2 = 'checked'
+            
         else:
             message='Welcome Aboard,'
             firstName = ''
             lastName = ''
-            dateOfBirth = ''
             location = ''
-            organization = ''
-            userNickName = ''
+            community = ''
+            ifEducator = ''
+            educationLevel = ''
 
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl,
-                         'firstName': firstName, 'lastName': lastName, 'dateOfBirth': dateOfBirth, 'location': location, 'organization': organization, 'userNickName': userNickName }
+        template_values={'account': account, 'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl,
+                         'ifEducatorShow': ifEducatorShow, 'educationLevel': educationLevel, 'educationLevelCheck0': educationLevelCheck0, 'educationLevelCheck1': educationLevelCheck1, 'educationLevelCheck2': educationLevelCheck2}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/profile.html')
         self.response.out.write(template.render(path, template_values))
-        
+
+class ChangeProfileHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        user = users.get_current_user()
+        pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
+        account = pquery.get()
+
+        loginurl = users.create_login_url(self.request.uri)
+        logouturl = users.create_logout_url('/')
+
+        educationLevelCheck0 = ''
+        educationLevelCheck1 = ''
+        educationLevelCheck2 = ''
+        ifEducatorShow = "collapse"
+
+        if user:
+            saysHello = 'Hello, ' + user.nickname()
+            ifUser = True
+        else:
+            saysHello = "welcome"
+            ifUser = False
+            self.redirect(loginurl)
+
+        if account:  # dude has already registered
+            message='Welcome Back,'
+            firstName = account.firstName
+            lastName = account.lastName
+            location = account.location
+            community = account.community
+            ifEducator = account.ifEducator
+            if(ifEducator == True):
+                ifEducatorShow = "collapse in"
+            else:
+                ifEducatorShow = "collapse"
+
+            educationLevel = account.educationLevel
+            if educationLevel == None:
+                educationLevelCheck0 = 'checked'
+            else:
+                if educationLevel == 'K-8':
+                    educationLevelCheck0 = 'checked'
+                elif educationLevel == 'High School':
+                    educationLevelCheck1 = 'checked'
+                else:
+                    educationLevelCheck2 = 'checked'
+            
+        else:
+            message='Welcome Aboard,'
+            firstName = ''
+            lastName = ''
+            location = ''
+            community = ''
+            ifEducator = ''
+            educationLevel = ''
+
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+        template_values={'account': account, 'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl,
+                         'ifEducatorShow': ifEducatorShow, 'educationLevelCheck0': educationLevelCheck0, 'educationLevelCheck1': educationLevelCheck1, 'educationLevelCheck2': educationLevelCheck2}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/changeProfile.html')
+        self.response.out.write(template.render(path, template_values))        
 class SaveProfile(webapp.RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -117,12 +205,21 @@ class SaveProfile(webapp.RequestHandler):
             message='Welcome Aboard,'
             account = Account()
 
+        account.user=user
         account.firstName=self.request.get('firstName')
         account.lastName=self.request.get('lastName')
-        account.dateOfBirth=self.request.get('dateOfBirth')
         account.location=self.request.get('location')
-        account.organization=self.request.get('organization')
-        account.user=user
+        account.community=self.request.get('community')
+        b=self.request.get('ifEducator')
+        if(b == "on"):
+                account.ifEducator = True
+        else:
+                account.ifEducator = False
+        
+        
+        account.educationLevel=self.request.get('educationLevel')
+        account.introductionLink=self.request.get('introductionLink')
+        
         account.put()
             
 
@@ -425,7 +522,7 @@ class PaintPotIntroHandler(webapp.RequestHandler):
         
         allAppsList = allAppsQuery.fetch(appCount)
         template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/PaintPotIntro.html')
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintPotIntro.html')
         self.response.out.write(template.render(path, template_values))
 
 class MediaHandlerTeaching(webapp.RequestHandler):
@@ -1128,6 +1225,170 @@ class SetupHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/setup.html')
         self.response.out.write(template.render(path, template_values))
 
+
+#Upload Pic
+class UploadPictureHandler(webapp.RequestHandler):
+      def post(self):
+                
+                picture = self.request.get('pictureFile')
+                
+                user = users.get_current_user()
+                account_query = db.GqlQuery("Select * from Account where user=:1",user)
+                account = account_query.get()
+
+                
+
+                x1=float(self.request.get('x1'))
+                y1=float(self.request.get('y1'))
+                x2=float(self.request.get('x2'))
+                y2=float(self.request.get('y2'))
+                newH=float(self.request.get('h'))
+                newW=float(self.request.get('w'))
+
+                x_left=float(self.request.get('x_left'))
+                y_top=float(self.request.get('y_top'))
+                x_right=float(self.request.get('x_right'))
+                y_bottom=float(self.request.get('y_bottom'))
+
+                originalW = x_right-x_left
+                originalH = y_bottom-y_top
+
+                #originalW = 300
+                #originalH = 300
+
+                
+                #if x1 > x_left or x2 < x_right or y1 > y_top or y2 < y_bottom:
+                #    self.redirect('/profile?status=error')
+                #    return
+
+                if x1 < x_left:
+                    self.redirect('/profile?status=erroronx1')
+                    return
+                elif x2 > x_right:
+                    self.redirect('/profile?status=erroronx2')
+                    return
+                elif y1 < y_top:
+                    self.redirect('/profile?status=errorony1')
+                    return
+                elif y2 > y_bottom:
+                    self.redirect('/profile?status=errorony2')
+                    return
+
+                x1_fixed = x1 - x_left
+                y1_fixed = y1 - y_top
+                x2_fixed = x2 - x_left
+                y2_fixed = y2 - y_top
+
+
+                
+                picture = images.crop(picture, float(x1_fixed/originalW), float(y1_fixed/originalH), float(x2_fixed/originalW), float(y2_fixed/originalH))
+                
+
+                if not account:
+                    account = Account()
+                if picture:
+                    account.user = user      #maybe duplicate, but it is really imporant to make sure
+                    account.profilePicture = db.Blob(picture)  
+                account.put()
+                ad = picture
+                self.redirect('/profile')
+                
+        
+
+
+class ImageHandler (webapp.RequestHandler):
+      def get(self):
+                user = users.get_current_user()
+                account_query = db.GqlQuery("Select * from Account where user=:1",user)
+                account = account_query.get()
+
+                if not account:
+                    self.redirect('/assets/img/avatar-default.gif')
+                    return
+                    
+                account_key=self.request.get('key')
+                
+                account = db.get(account_key)
+                if account.profilePicture:
+                    self.response.headers['Content-Type'] = "image/png"
+                    self.response.out.write(account.profilePicture)
+                else:
+                    self.redirect('/assets/img/avatar-default.gif')
+                    #self.response.headers['Content-Type'] = "image/png"
+                    #self.response.out.write('/assets/img/avatar-default.gif')
+                    #self.error(404)
+
+
+#Search Bar powered by Google
+class SearchHandler (webapp.RequestHandler):
+      def get(self):
+               
+               query=self.request.get('query')
+               currenttime = datetime.utcnow()
+            
+               template_values={'currenttime':currenttime, 'query': query}
+               path = os.path.join(os.path.dirname(__file__),'static_pages/other/searchResult.html')
+               self.response.out.write(template.render(path, template_values))
+
+class TeachingBaseHandler (webapp.RequestHandler):
+      def get(self):
+               
+               
+               currenttime = datetime.utcnow()
+            
+               template_values={'currenttime':currenttime}
+               path = os.path.join(os.path.dirname(__file__),'static_pages/other/site_base.html')
+               self.response.out.write(template.render(path, template_values))
+
+#Map
+
+class LocatoinOnMapsHandler(webapp.RequestHandler):
+      def get(self):
+               #position = Position()
+               #position.latitude = float(37.775)
+               #position.longitude = float(-118.418)
+               #position.put()
+               allPositionsQuery = db.GqlQuery("SELECT * FROM Position")
+
+               positionCount = allPositionsQuery.count()
+               positions = allPositionsQuery.fetch(positionCount)
+               positions = []
+
+               allAccountsQuery = db.GqlQuery("SELECT * FROM Account")
+
+               accountCount = allAccountsQuery.count()
+               accounts = allAccountsQuery.fetch(accountCount)
+               
+               
+               
+               currenttime = datetime.utcnow()
+               template_values={'currenttime':currenttime, 'positions':positions, 'accounts': accounts}
+               path = os.path.join(os.path.dirname(__file__),'static_pages/other/maps.html')
+               self.response.out.write(template.render(path, template_values))               
+               
+               
+class GeoJsonHandler(webapp.RequestHandler):
+      def get(self):
+               currenttime = datetime.utcnow()
+               #address = self.request.get('address')
+               #sensor = self.request.get('sensor')
+
+               #address = "565, 33rd AVE, San Francisco, CA".replace(' ', '+').lower()
+               #sensor = 'false'
+               #URL = 'http://maps.googleapis.com/maps/api/geocode/json?'+'address='+address+'&'+'sensor='+sensor
+               #googleResponse = urllib2.urlopen(URL)
+               #jsonResponse = json.loads(googleResponse.read())
+               #json = jsonResponse
+
+            
+
+               json = "1"
+
+               
+               template_values={'currenttime':currenttime, 'json':json}
+               path = os.path.join(os.path.dirname(__file__),'static_pages/other/jsonPage.html')
+               self.response.out.write(template.render(path, template_values))
+
 #Cache
 
 class CacheHandler(webapp.RequestHandler):
@@ -1207,7 +1468,8 @@ application = webapp.WSGIApplication(
         ('/DeleteApp', DeleteApp), ('/AddStepPage', AddStepRenderer), ('/DeleteStep', DeleteStep), ('/AddCustomPage', AddCustomRenderer),
         ('/projects', BookHandler ), ('/appinventortutorials', BookHandler), ('/get_app_data', GetAppDataHandler),
         ('/get_step_data', GetStepDataHandler), ('/get_custom_data', GetCustomDataHandler), ('/setup', SetupHandler),
-        ('/profile', ProfileHandler), ('/saveProfile', SaveProfile)
+        ('/profile', ProfileHandler), ('/changeProfile', ChangeProfileHandler),('/saveProfile', SaveProfile), ('/uploadPicture', UploadPictureHandler), ('/imageHandler', ImageHandler),
+        ('/siteSearch', SearchHandler), ('/teachingBase', TeachingBaseHandler), ('/locationOnMaps', LocatoinOnMapsHandler), ('/geoJson', GeoJsonHandler)
     ],
     debug=True)
 

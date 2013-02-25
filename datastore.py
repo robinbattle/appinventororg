@@ -47,13 +47,28 @@ class Custom(db.Model):
 
 
 class Account(db.Model):
+        user = db.UserProperty()
+        profilePicture = db.BlobProperty()
     	firstName = db.StringProperty()
 	lastName = db.StringProperty()
-	dateOfBirth = db.StringProperty()
 	location = db.StringProperty()
-	organization = db.StringProperty()
+	community = db.StringProperty()
+	ifEducator = db.BooleanProperty(default=False)
+	educationLevel = db.StringProperty()
+	introductionLink = db.StringProperty()
 	timestamp = db.DateTimeProperty(auto_now=True)
-	user = db.UserProperty()
+	latitude = db.FloatProperty()
+	longitude = db.FloatProperty()
+
+class DefaultAvatarImage(db.Model):
+        title = db.StringProperty()
+        picture = db.BlobProperty(default=None)
+
+class Position(db.Model):
+        latitude = db.FloatProperty()
+	longitude = db.FloatProperty()
+	
+	
 
 
 # for the "Conceptualize It" section of a generated app page	

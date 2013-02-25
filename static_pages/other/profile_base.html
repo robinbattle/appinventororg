@@ -4,14 +4,26 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>AppInventor.org: Democratizing App Building</title>
+    <title>AppInventor.org</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../../assets/css/bootstrap.css" rel="stylesheet">
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/ai_styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/jcrop-thumbnail.css" type="text/css" />
+
+    <!-- Avatar-->
+    <link rel="stylesheet" href="demos/demo_files/main.css" type="text/css" />
+<link rel="stylesheet" href="demos/demo_files/demos.css" type="text/css" />
+<link rel="stylesheet" href="/assets/css/jquery.Jcrop.css" type="text/css" />
+<link rel="stylesheet" href="/assets/css/jcrop-thumbnail.css" type="text/css" />
+<link rel="stylesheet" href="/assets/css/jcrop-preview.css" type="text/css" />
+
+
+
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -22,7 +34,7 @@
             padding: 9px 0;
         }
     </style>
-    <link href="../../assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -41,7 +53,7 @@
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
 </head>
 
-<body id="course-in-a-box">
+<body>
 
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -59,8 +71,22 @@
                     <li><a href="/hellopurr">Learn</a></li>
                     <li><a href="/teaching-android">Teach</a></li>
                     <li><a href="/about">About</a></li>
-                </ul>
+			    {% if ifUser%}
+                     <li>
+                        <a href="/profile"> Profile </a> 
+                     </li>        
+                     <li>
+                        <a href="{{logouturl}}"> logout </a>
+                     </li>
+                     {% else %}
+                     <li>
+                        <a href="{{loginurl}}"> login </a>
+                     </li>
+                     {% endif %}
 
+
+
+                </ul>
 
 
             </div>
@@ -92,29 +118,16 @@
 
                     <br/>
 
-
-                    <li class="nav-header">Introducing App Inventor</li>
-                    <li><a href="/teaching-android">Teaching App Inventor</a></li>
-                    
-                    <li><a href="/media_teaching">Media</a></li>
-		   <li><a href="/course-in-a-box_teaching">Course-In-A-Box Intro</a></li>
-
-                    <li class="nav-header">Course-in-a-box Modules</li>
-                    <li><a href="/module1">1.Introduction</a></li>
-                    <li><a href="/module2">2.Games</a></li>
-                    <li><a href="/module3">3.Texting/Location</a></li>
-                    <li><a href="/module4">4.Data</a></li>
-                    <li><a href="/module5">5.Shared Data</a></li>
-                    <li><a href="/module6">6.Software Engineering</a></li>
-                    <li><a href="/module7">7.Web APIs</a></li>
+                    <li class="nav-header">About App Inventor</li>
+                    <li><a href="/introduction">Introducing App Inventor</a></li>
+                    <li><a href="/gettingstarted">Getting Started</a></li>
+                    <li><a href="/course-in-a-box">Course-In-A-Box</a></li>
+                    <li><a href="/media">Media</a></li>
+                    <li><a href="/setup">Setup</a></li>
 
                     <li class="nav-header">Apps</li>
                     {% for app in allAppsList %}
-
-
-
                         <li><a href="/{{ app.appId }}">{{ app.title }}</a></li>
-
                     {% endfor %}
 
                     <li class="nav-header">Links</li>
@@ -123,13 +136,12 @@
                     <li><a href="http://twitter.com/wolberd">Tweet @Dave Wolber</a></li>
 
 
-
-
                 </ul>
             </div>
             <!--/.well -->
         </div>
         <!--/span-->
+        <!-- /SIDE MENU -->
 
 
         <div class="span9">
@@ -140,9 +152,6 @@
 
         </div>
         <!--/.fluid-container-->
-
-
-
 
 
         <!-- SCRIPTS
@@ -163,6 +172,14 @@
         <script src="/assets/js/bootstrap-carousel.js"></script>
         <script src="/assets/js/bootstrap-typeahead.js"></script>
 
+        <!-- Avatar Preview-->
+	   <script src="/assets/js/jquery.min.js"></script>
+	   <script src="/assets/js/jquery.Jcrop.js"></script>
+         <script src="/assets/js/jcrop-xy.js"></script>
+	   <script src="/assets/js/jcrop-preview.js"></script>
+	   
+
+
     </div>
 </div>
 
@@ -179,12 +196,12 @@
         </div>
 
         <div class="span8">
-		 
+
             <div class="tiny-text">
-			
+
                 AppInventor.org by David Wolber is licensed under an
                 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
-		
+
                 <br/>
 
 
@@ -198,6 +215,7 @@
         </div>
 
     </div>
+    
 </footer>
 
 </html>
