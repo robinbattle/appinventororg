@@ -84,7 +84,7 @@ class ProfileHandler(webapp.RequestHandler):
             firstName = account.firstName
             lastName = account.lastName
             location = account.location
-            community = account.community
+            organization = account.organization
             ifEducator = account.ifEducator
             if(ifEducator == True):
                 ifEducatorShow = "collapse in"
@@ -107,7 +107,7 @@ class ProfileHandler(webapp.RequestHandler):
             firstName = ''
             lastName = ''
             location = ''
-            community = ''
+            organization = ''
             ifEducator = ''
             educationLevel = ''
 
@@ -147,7 +147,7 @@ class ChangeProfileHandler(webapp.RequestHandler):
             firstName = account.firstName
             lastName = account.lastName
             location = account.location
-            community = account.community
+            organization = account.organization
             ifEducator = account.ifEducator
             if(ifEducator == True):
                 ifEducatorShow = "collapse in"
@@ -170,7 +170,7 @@ class ChangeProfileHandler(webapp.RequestHandler):
             firstName = ''
             lastName = ''
             location = ''
-            community = ''
+            organization = ''
             ifEducator = ''
             educationLevel = ''
 
@@ -209,7 +209,7 @@ class SaveProfile(webapp.RequestHandler):
         account.firstName=self.request.get('firstName')
         account.lastName=self.request.get('lastName')
         account.location=self.request.get('location')
-        account.community=self.request.get('community')
+        account.organization=self.request.get('organization')
         b=self.request.get('ifEducator')
         if(b == "on"):
                 account.ifEducator = True
@@ -1145,7 +1145,106 @@ class AppRenderer(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'app_base.html')
         self.response.out.write(template.render(path, template_values))
 
+class NewAppRenderer(webapp.RequestHandler):
+    def get(self):
+        path = self.request.path
+        #t_path = path[1:]
+        t_path = path[1:(len(path)-4)]
 
+        
+        currenttime = datetime.utcnow()
+        user = users.get_current_user()
+        pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
+        account = pquery.get()
+
+
+        
+        loginurl = users.create_login_url(self.request.uri)
+        logouturl = users.create_logout_url('/'+ t_path)
+
+        if user:
+            saysHello = 'Hello, ' + user.nickname()
+            ifUser = True
+        else:
+            saysHello = "welcome"
+            ifUser = False
+
+
+        cacheHandler = CacheHandler()
+        app = cacheHandler.GettingCache("App", True, "appId", t_path, False, None, None, False)
+        # logging.info(app.heroCopy)
+
+            
+        steps = cacheHandler.GettingCache("Step", True, "appId", t_path, True, "number", "ASC", True)    
+        customs = cacheHandler.GettingCache("Custom", True, "appId", t_path, True, "number", "ASC", True)
+
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+
+
+        template_values = {
+            'steps': steps,
+            'customs': customs,
+            'app': app,
+            'allAppsList': allAppsList,
+            'loginurl': loginurl,
+            'logouturl': logouturl,
+            'ifUser': ifUser
+            }
+
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/newCourseExample.html')
+        self.response.out.write(template.render(path, template_values))
+        
+
+class NewCourseExampleRenderer(webapp.RequestHandler):
+    def get(self):
+        #path = self.request.path
+        #t_path = path[1:]
+        t_path = "hellopurr"
+
+        
+        currenttime = datetime.utcnow()
+        user = users.get_current_user()
+        pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
+        account = pquery.get()
+
+
+        
+        loginurl = users.create_login_url(self.request.uri)
+        logouturl = users.create_logout_url('/'+ t_path)
+
+        if user:
+            saysHello = 'Hello, ' + user.nickname()
+            ifUser = True
+        else:
+            saysHello = "welcome"
+            ifUser = False
+
+
+        cacheHandler = CacheHandler()
+        app = cacheHandler.GettingCache("App", True, "appId", t_path, False, None, None, False)
+        # logging.info(app.heroCopy)
+
+            
+        steps = cacheHandler.GettingCache("Step", True, "appId", t_path, True, "number", "ASC", True)    
+        customs = cacheHandler.GettingCache("Custom", True, "appId", t_path, True, "number", "ASC", True)
+
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+
+
+        template_values = {
+            'steps': steps,
+            'customs': customs,
+            'app': app,
+            'allAppsList': allAppsList,
+            'loginurl': loginurl,
+            'logouturl': logouturl,
+            'ifUser': ifUser
+            }
+
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/newCourseExample.html')
+        self.response.out.write(template.render(path, template_values))
 
 class AboutHandler(webapp.RequestHandler):
     def get(self):
@@ -1469,7 +1568,17 @@ application = webapp.WSGIApplication(
         ('/projects', BookHandler ), ('/appinventortutorials', BookHandler), ('/get_app_data', GetAppDataHandler),
         ('/get_step_data', GetStepDataHandler), ('/get_custom_data', GetCustomDataHandler), ('/setup', SetupHandler),
         ('/profile', ProfileHandler), ('/changeProfile', ChangeProfileHandler),('/saveProfile', SaveProfile), ('/uploadPicture', UploadPictureHandler), ('/imageHandler', ImageHandler),
-        ('/siteSearch', SearchHandler), ('/teachingBase', TeachingBaseHandler), ('/locationOnMaps', LocatoinOnMapsHandler), ('/geoJson', GeoJsonHandler)
+        ('/siteSearch', SearchHandler), ('/teachingBase', TeachingBaseHandler), ('/locationOnMaps', LocatoinOnMapsHandler), ('/geoJson', GeoJsonHandler),
+        ('/newCourseExample', NewCourseExampleRenderer),
+
+         #should replace the top AppRenderer after experimental test
+        ('/hellopurr-box', NewAppRenderer), ('/paintpot-box', NewAppRenderer), ('/molemash-box', NewAppRenderer),
+        ('/shootergame-box', NewAppRenderer), ('/no-text-while-driving-box', NewAppRenderer), ('/ladybug-chase-box', NewAppRenderer),
+        ('/map-tour-box', NewAppRenderer), ('/android-where-s-my-car-box', NewAppRenderer), ('/quiz-box', NewAppRenderer),
+        ('/notetaker-box', NewAppRenderer), ('/xylophone-box', NewAppRenderer), ('/makequiz-and-takequiz-1-box', NewAppRenderer),
+        ('/broadcaster-hub-1-box', NewAppRenderer), ('/robot-remote-box', NewAppRenderer), ('/stockmarket-box', NewAppRenderer),
+     
+     
     ],
     debug=True)
 

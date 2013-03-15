@@ -1,5 +1,4 @@
-/* ==========================================================
- * bootstrap-carousel.js v2.0.4
+* bootstrap-carousel.js v2.0.4
  * http://twitter.github.com/bootstrap/javascript.html#carousel
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
@@ -146,8 +145,8 @@
   }
 
   $.fn.carousel.defaults = {
-    interval: 5000
-  , pause: 'hover'
+    interval: false
+  , pause: true
   }
 
   $.fn.carousel.Constructor = Carousel
@@ -166,4 +165,4 @@
     })
   })
 
-}(window.jQuery);
+}(window.jQuery);/* =============================================================

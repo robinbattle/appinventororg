@@ -52,7 +52,7 @@ class Account(db.Model):
     	firstName = db.StringProperty()
 	lastName = db.StringProperty()
 	location = db.StringProperty()
-	community = db.StringProperty()
+	organization = db.StringProperty()
 	ifEducator = db.BooleanProperty(default=False)
 	educationLevel = db.StringProperty()
 	introductionLink = db.StringProperty()
