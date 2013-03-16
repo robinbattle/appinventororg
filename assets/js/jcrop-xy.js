@@ -7,7 +7,11 @@
     $('#targetxy').Jcrop({
       onChange:   showCoords,
       onSelect:   showCoords,
-      onRelease:  clearCoords
+      onRelease:  clearCoords,
+	 aspectRatio:1,
+	 bgFade:     true,
+	 bgOpacity: .2
+      
     },function(){
       jcrop_api = this;
       
@@ -15,10 +19,26 @@
     });
 
     $('#coords').on('change','input',function(e){
-      var x1 = $('#x1').val(),
-          x2 = $('#x2').val(),
-          y1 = $('#y1').val(),
-          y2 = $('#y2').val();
+      var x1 = $('#x1').val();
+      var x2 = $('#x2').val();
+      var y1 = $('#y1').val();
+      var y2 = $('#y2').val();
+
+	//var x_left = document.getElementById("x_left").value;
+	//var x_right = document.getElementById("x_right ").value;
+	//var y_top = document.getElementById("y_top").value;
+	//var y_bottom = document.getElementById("y_bottom").value;
+	//if(x1 < x_left){
+	//return false;}
+	//if(x2 > x_right){
+	//return false;}
+	//if(y1 < y_top){
+	//return false;}
+	//if(y2 > y_bottom){
+	//return false;}
+
+
+
       jcrop_api.setSelect([x1,y1,x2,y2]);
     });
 
@@ -78,6 +98,42 @@
 
 
 
+//checkinIfCroppingValid
+
+function checkinIfCroppingValid()
+  {
+      var x1 = $('#x1').val();
+      var x2 = $('#x2').val();
+      var y1 = $('#y1').val();
+      var y2 = $('#y2').val();
+
+	var x_left = document.getElementById("x_left").value;
+	var x_right = document.getElementById("x_right").value;
+	var y_top = document.getElementById("y_top").value;
+	var y_bottom = document.getElementById("y_bottom").value;
+
+
+
+	if(x1 < x_left){
+	alert("invalid x_left");
+	return false;}
+	if(x2 > x_right){
+	alert("invalid x_right");
+	return false;}
+	if(y1 < y_top){
+	alert("invalid y_top");
+	return false;}
+	if(y2 > y_bottom){
+	alert("invalid y_bottom");
+	return false;}
+
+	
+
+	return true;
+  }
+
+
+
 
 
 
@@ -89,6 +145,10 @@
 
   function previewImage(file)
         {
+		
+
+		 jcrop_api.setSelect([50,50,200,200]);
+
 		 enableCropPicture();
 		 /*
             var targetDiv = document.getElementById('targetxy');
@@ -148,6 +208,8 @@
 
 
             }
+		 
+		 
         }
         function clacImgZoomParam( maxWidth, maxHeight, width, height ){
             var param = {top:0, left:0, width:width, height:height};
@@ -171,4 +233,56 @@
             param.top = Math.round((maxHeight - param.height) / 2);
             return param;
         }
+
+
+
+
+function showFileSize() {
+    var input, file;
+
+    // (Can't use `typeof FileReader === "function"` because apparently
+    // it comes back as "object" on some browsers. So just see if it's there
+    // at all.)
+    if (!window.FileReader) {
+	  alert("The file API isn't supported on this browser yet.");
+        return false;
+    }
+
+    input = document.getElementById('picturefile');
+    if (!input) {
+	   alert("Um, couldn't find the fileinput element.");
+	   return false;
+
+    }
+    else if (!input.files) {
+	  alert("This browser doesn't seem to support the `files` property of file inputs.");
+	  return false;
+
+    }
+    else if (!input.files[0]) {
+        alert("Please select a file before clicking 'Load'");
+	  return false;
+
+    }
+    else {
+        file = input.files[0];
+	   if(file.size > 1024000){
+        alert("File " + file.name + " is " + file.size/1024 + " kb; maxium is 1000kb");
+	   return false;
+	   }else{
+	   return true;
+	   }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
   

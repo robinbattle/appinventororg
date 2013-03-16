@@ -80,6 +80,13 @@
                   <ul class="nav">
                      <!-- <li class="active"><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li> -->
                      <li><a href="/about">About</a></li>
+				
+			     {% if ifUser %}
+				<li><a href="/profile">Profile</a></li>
+				<li><a href="{{logouturl}}">Log Out </a></li>
+				{% else %}
+				<li><a href="{{loginurl}}"> Login </a></li>
+				{% endif %}
                   </ul>
                   <!--Google Custom Search starts-->
                   <ul class="nav">

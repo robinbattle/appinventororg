@@ -23,10 +23,19 @@
                            Upload Picture:
                         </td>
                         <td>
-                           <input type="file" name="pictureFile" onchange="previewImage(this)" />
+                           <input type="file" name="pictureFile" id="picturefile" onchange="previewImage(this)" accept="image/*"/>
 					
 
-                           <input type="submit" value="Upload" class="btn" />
+                           <input type="submit" value="Upload" class="btn" onclick="if (showFileSize()== true && checkinIfCroppingValid()== true)
+  {
+  
+  return true;
+  }
+else
+  {
+  return false;
+  }
+"/>
                         </td>
                         <!-- hidden parameters of picture crop-->
                         <input type="hidden" id="x1" name="x1" />
@@ -113,7 +122,7 @@
                      <tr>
                         <td>
                         </td>
-                        <td><input type="submit" class="btn btn-large btn-block btn btn-success" value="Confirm to Update" </td>
+                        <td><input type="submit" class="btn btn-large btn-block btn btn-success" value="Save" </td>
                      </tr>
                   </table>
                </form>
@@ -135,4 +144,7 @@
    <!-- end of row -->
 </div>
 <!-- end of container -->
+
+
+
 {% endblock %}
