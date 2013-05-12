@@ -80,13 +80,22 @@
                   <ul class="nav">
                      <!-- <li class="active"><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li> -->
                      <li><a href="/about">About</a></li>
+			     <li><a href="/teacherMap">People Map</a></li>
+
+				{% if userStatus.ifUser%}
+                     <li>
+                        <a href="/profile"> Profile </a> 
+                     </li>        
+                     <li>
+                        <a href="{{userStatus.logouturl}}"> logout </a>
+                     </li>
+                     {% else %}
+                     <li>
+                        <a href="{{userStatus.loginurl}}"> login </a>
+                     </li>
+                     {% endif %}
 				
-			     {% if ifUser %}
-				<li><a href="/profile">Profile</a></li>
-				<li><a href="{{logouturl}}">Log Out </a></li>
-				{% else %}
-				<li><a href="{{loginurl}}"> Login </a></li>
-				{% endif %}
+
                   </ul>
                   <!--Google Custom Search starts-->
                   <ul class="nav">
@@ -159,18 +168,30 @@
                            <p class="lead"> Learn to build Android apps in hours.<br/>Learn App Inventor. Learn to program.</p>
                            <p id="right-panel-copy">App Inventor provides the fastest way to build apps for Android phones and tablets. Even with no prior experience, you can learn to build apps within hours. Here, you'll learn from USF Professor David Wolber, who has been teaching beginners programming with App Inventor since its inception in 2009. With step-by-step video screencasts, Wolber starts with the basics then leads you through the development of successively more complex apps, teaching you programming concepts as you go. </p>
                            <p style="margin-top:20px">
-                              <a class="btn btn-success btn-large" href="/hellopurr">Get Started&nbsp; <i
+                              <a class="btn btn-success btn-large" href="/hellopurr-steps">Get Started&nbsp; <i
                                  class="icon-arrow-right icon-white"></i></a>
-                              <a class="btn btn-success btn-large" href="/projects" style="margin-left: 20px">Check out the Apps&nbsp;
+                              <a class="btn btn-success btn-large" href="/tryit" style="margin-left: 20px">Check out the Apps&nbsp;
                               <i class="icon-arrow-right icon-white"></i></a>
+					    <a class="btn btn-success btn-large" href="/projects" style="margin-left: 20px">Check out the Book&nbsp;
+                              <i class="icon-arrow-right icon-white"></i></a>
+
+
                            </p>
+				
                         </div>
 			
-                        <div class="span7 well" style="margin-top: 35px">
+                        <div class="span7 well" style="margin-top: 5px">
                            <p class="lead" align="center"><strong> Teaching App Inventor?</strong>
-                              <a class="btn btn-success btn-large" href="/course-in-a-box_teaching"> Go to the Course-in-a-Box <i class="icon-arrow-right icon-white"></i></a>
+                              <a class="btn btn-success btn-large" href="/course-in-a-box_teaching"> Go to the Course-in-a-box <i class="icon-arrow-right icon-white"></i></a>
                            </p>
+					<p class="lead" align="center"><strong> Who's Teaching App Inventor?</strong>
+                              <a class="btn btn-success btn-large" href="/teacherMap"> Go to People Map <i class="icon-arrow-right icon-white"></i></a>
+                           </p>
+
+					
                         </div>
+				  
+
                      </div>
                   </td>
                </tr>
@@ -201,7 +222,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/hellopurr">
+                           <a href="/hellopurr-steps">
                            <img src="../../apps/hellopurr/half.png" border="0"/>
                            </a>
                         </div>
@@ -211,7 +232,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/paintpot">
+                           <a href="/paintpot-steps">
                            <img src="../../apps/paintpot/half.png" border="0"/>
                            </a>
                         </div>
@@ -221,7 +242,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/molemash">
+                           <a href="/molemash-steps">
                            <img src="../../apps/molemash/half.png" border="0"/>
                            </a>
                         </div>
@@ -231,7 +252,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/shootergame"><img src="../../apps/shootergame/half.png" border="0"/></a>
+                           <a href="/shootergame-steps"><img src="../../apps/shootergame/half.png" border="0"/></a>
                         </div>
                      </div>
                      <div class="tswImageCarouselItemTitle">Shooter Game</div>
@@ -239,27 +260,18 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/stockmarket"><img src="../../apps/stockmarket/half.png" border="0"/></a>
+                           <a href="/stockmarket-steps"><img src="../../apps/stockmarket/half.png" border="0"/></a>
                         </div>
                      </div>
                      <div class="tswImageCarouselItemTitle">Stock Market</div>
                   </div>
                </div>
-               <div class="tswImageCarouselItem">
-                  <div class="tswImageCarouselItemImage">
-                     <div>
-                        <a href="\amazon">
-                        <img src="../../apps/amazon/half.png" border="0"/>
-                        </a>
-                     </div>
-                  </div>
-                  <div class="tswImageCarouselItemTitle">Amazon</div>
-               </div>
+               
                <div class="tswImageCarouselPage">
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/android-where-s-my-car"><img src="../../apps/android-where-s-my-car/half.png"
+                           <a href="/android-where-s-my-car-steps"><img src="../../apps/android-where-s-my-car/half.png"
                               border="0"/></a>
                         </div>
                      </div>
@@ -268,7 +280,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/makequiz-and-takequiz-1"><img
+                           <a href="/makequiz-and-takequiz-1-steps"><img
                               src="../../apps/makequiz-and-takequiz-1/half.png" border="0"/></a>
                         </div>
                      </div>
@@ -277,7 +289,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/broadcaster-hub-1"><img src="../../apps/broadcaster-hub-1/half.png"
+                           <a href="/broadcaster-hub-1-steps"><img src="../../apps/broadcaster-hub-1/half.png"
                               border="0"/></a>
                         </div>
                      </div>
@@ -286,7 +298,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/robot-remote"><img src="../../apps/robot-remote/half.png" border="0"/></a>
+                           <a href="/robot-remote-steps"><img src="../../apps/robot-remote/half.png" border="0"/></a>
                         </div>
                      </div>
                      <div class="tswImageCarouselItemTitle">Robot Remote</div>
@@ -294,7 +306,7 @@
                   <div class="tswImageCarouselItem">
                      <div class="tswImageCarouselItemImage">
                         <div>
-                           <a href="/map-tour"><img src="../../apps/map-tour/half.png" border="0"/></a>
+                           <a href="/map-tour-steps"><img src="../../apps/map-tour/half.png" border="0"/></a>
                         </div>
                      </div>
                      <div class="tswImageCarouselItemTitle">Map Tour</div>

@@ -116,16 +116,17 @@
 
 
                                 <form action="/DeleteCustom" method="get">
-                                        <a href="#add_custom" role="button" class="btn btn-success btn"
-                                           data-toggle="modal">Add / Mod Custom</a>
+                                        <a href="#add_custom" role="button" class="btn btn-inverse btn"
+                                           data-toggle="modal" onclick="clear_custom_form();">Add Custom</a>
+							   <a href="#add_custom" role="button" id="mod_custom_btn" class="btn btn-success btn" data-toggle="modal">Mod Custom</a>
 
 
                                         <input class="btn btn-danger btn-medium" type="submit" value="Delete Custom">
 
                                         {#                <button class="btn">Delete App</button>#}
-
+							   <a href="/Admin" class="btn">Go Back</a>
                                 </form>
-
+						
 
                             </div>
 
@@ -286,10 +287,23 @@
 <script type="text/javascript">  // main scripts
 
 
+function clear_custom_form(){
+	$("#app_id").val("");
+      $("#custom_number").val("");
+      $("#custom_header").val("");
+      $("#custom_copy").val("");
+	$("#custom_video").val("");
+	$("#custom_full").val("");
+
+	$('.highlight').removeClass('highlight');
+	$("#mod_custom_btn").attr("disabled", true);//unclickable now
+}
+
+
 $(document).ready(function () {
 
     var custom_listing = "{{ custom_listing }}";
-
+    $("#mod_custom_btn").attr("disabled", true);//init as disable
 
     var total_text_elem = '';
 
@@ -308,6 +322,7 @@ $(document).ready(function () {
     $(".customname").click(function () {
         $('.highlight').removeClass('highlight');
         $(this).addClass('highlight');
+	  $("#mod_custom_btn").attr("disabled", false);//custom selected, clickable now
         var path = $(this).data("customname");
 
         console.log("hello, world!");

@@ -39,6 +39,23 @@
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed"
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+
+
+<!-- Google Analytics Starts -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-684961-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- Google Analytics Ends -->
 </head>
 
 <body id="course-in-a-box">
@@ -56,11 +73,42 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <!-- <li class="active"><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li> -->
-                    <li><a href="/hellopurr">Learn</a></li>
+                    <li><a href="/hellopurr-steps">Learn</a></li>
                     <li><a href="/teaching-android">Teach</a></li>
                     <li><a href="/about">About</a></li>
+			    <li><a href="/teacherMap">People Map</a></li>
+
+			    {% if userStatus.ifUser%}
+                     <li>
+                        <a href="/profile"> Profile </a> 
+                     </li>        
+                     <li>
+                        <a href="{{userStatus.logouturl}}"> logout </a>
+                     </li>
+                     {% else %}
+                     <li>
+                        <a href="{{userStatus.loginurl}}"> login </a>
+                     </li>
+                     {% endif %}
+
                 </ul>
 
+		
+		     <!--Google Custom Search starts-->
+		     <ul class="nav">
+                     <li>
+                        <div style="width:0px;overflow:hidden;height:0px;">
+                           <!-- if you use display:none here it doesn't work-->
+                           <gcse:search></gcse:search>
+                        </div>
+                        <form class="form-search" id="searchbox_002873954108960030835:l3_jvzrakeu" action="/siteSearch">
+                           
+                           <input class="input-xlarge" id="q" name="q" type="text" value='{{q}}'/>
+                           <button class="btn">Search</button>
+                        </form>
+                     </li>
+                  </ul>
+                  <!--Google Custom Search ends-->
 
 
             </div>
@@ -105,15 +153,15 @@
                     <li><a href="/module3">3.Texting/Location</a></li>
                     <li><a href="/module4">4.Data</a></li>
                     <li><a href="/module5">5.Shared Data</a></li>
-                    <li><a href="/module6">6.Software Engineering</a></li>
-                    <li><a href="/module7">7.Web APIs</a></li>
+                    <li><a href="/module6">6.Web APIs</a></li>
+		     <li><a href="/moduleX">X.Software Engineering</a></li>
 
                     <li class="nav-header">Apps</li>
                     {% for app in allAppsList %}
 
 
 
-                        <li><a href="/{{ app.appId }}">{{ app.title }}</a></li>
+                        <li><a href="/{{ app.appId }}-steps">{{ app.title }}</a></li>
 
                     {% endfor %}
 
@@ -162,6 +210,7 @@
         <script src="/assets/js/bootstrap-collapse.js"></script>
         <script src="/assets/js/bootstrap-carousel.js"></script>
         <script src="/assets/js/bootstrap-typeahead.js"></script>
+	   <script src="/assets/js/cse-searchbox.js"></script>
 
     </div>
 </div>
@@ -179,12 +228,12 @@
         </div>
 
         <div class="span8">
-		 
+
             <div class="tiny-text">
-			
+
                 AppInventor.org by David Wolber is licensed under an
                 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
-		
+
                 <br/>
 
 

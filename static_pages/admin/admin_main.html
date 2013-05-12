@@ -83,7 +83,12 @@
                     steps and customization exercises.
                 </p>
             </div>
-
+		 <p><b>Instructions after adding or modifying app</b></p>
+		 <ul>
+  			<li>Flush the memcached in <a href="https://appengine.google.com/datastore/explorer?submitted=1&app_id=s~appinventororg&show_options=no&version_id=1.366706941235179009&kind=App&query=SELECT+*+FROM+Step" target="_blank">GAE dashboard</a> (at bottom, called "Flush Memcache"), or click <a href="/memcache_flush_all">Here</a></li>
+  			<li>Make sure appId is not conflicted</li>
+  			<li>Add corresponding handler in <b>app_controller.py</b>; e.g. ('/amazon-steps', NewAppRenderer)</li>
+		</ul>
 
         </div>
 
@@ -116,8 +121,11 @@
 
 {#                            These bring up modals#}
                             <form action="/DeleteApp" method="get">
-                                    <a href="#add_app" role="button" class="btn btn-success btn-medium"
-                                       data-toggle="modal">Add / Mod App</a>
+							<a href="#add_app" role="button" class="btn btn-inverse btn-medium" data-toggle="modal" onclick="clear_app_form();">Add App</a>
+                                    <a href="#add_app" role="button" id="mod_app_btn" class="btn btn-success btn-medium"
+                                       data-toggle="modal">Mod App</a>
+						    
+
 
                                     <input class="input" id="del_name" type="hidden" name="del_name" value=""/>
                                     <input class="btn btn-danger btn-medium" type="submit" value="Delete App">
@@ -249,8 +257,40 @@
                             </small>
                         </p>
 			    
-			    <input id = "app_pdfChapter" type="radio" name="pdfChapter" value="True">Yes<br>
-			    <input id = "app_pdfChapter" type="radio" name="pdfChapter" value="False">No
+			    <input id = "app_pdfChapter_True" type="radio" name="pdfChapter" value="True">Yes<br>
+			    <input id = "app_pdfChapter_False" type="radio" name="pdfChapter" value="False">No
+			    
+                        
+                    </div>
+
+                    <br/>
+
+			  <div class="form-unit">
+                        <strong>Conceptual Link</strong>
+
+                        <p>
+                            <small> (Specify whether there is a conceptual link or not.)
+                            </small>
+                        </p>
+			    
+			    <input id = "app_conceptualLink_True" type="radio" name="conceptualLink" value="True">Yes<br>
+			    <input id = "app_conceptualLink_False" type="radio" name="conceptualLink" value="False">No
+			    
+                        
+                    </div>
+
+                    <br/>
+
+			  <div class="form-unit">
+                        <strong>Many Mold</strong>
+
+                        <p>
+                            <small> (manymold ID; leave it blank if there is no manymold for this app)
+                            </small>
+                        </p>
+			    
+			    <input id = "app_manyMold" type="text" name="manyMold"><br>
+			   
 			    
                         
                     </div>
@@ -303,6 +343,17 @@ function get_app_data(element){
 
 }
 
+function clear_app_form(){
+	$("#app_title").val("");
+      $("#add_name").val("");
+      $("#app_number").val("");
+      $("#app_header").val("");
+      $("#app_copy").val("");
+
+	$('.highlight').removeClass('highlight');
+	$("#mod_app_btn").attr("disabled", true);//unclickable now
+}
+
 
 $(document).ready(function () {
 
@@ -311,7 +362,7 @@ $(document).ready(function () {
     var number = 0;
     var title = "";
     var id = "";
-
+    $("#mod_app_btn").attr("disabled", true); //init as disable
 
     var app_listing = "{{ app_listing }}";
 
@@ -333,6 +384,7 @@ $(document).ready(function () {
     $(".appname").click(function () {
         $('.highlight').removeClass('highlight');
         $(this).addClass('highlight');
+	  $("#mod_app_btn").attr("disabled", false); //app selected, clickable now
         var path = $(this).data('appname');
 
         console.log("hello, world!");
@@ -362,6 +414,32 @@ $(document).ready(function () {
                     if (i == "title") {
                         $("#app_title").val(item);
                     }
+			  if (i == "pdfChapter") {
+				if(item == true){
+					document.getElementById('app_pdfChapter_True').checked = true;
+				}else{
+					document.getElementById('app_pdfChapter_False').checked = true;
+
+				}  
+                    }
+			  if (i == "conceptualLink") {
+				if(item == true){
+					document.getElementById('app_conceptualLink_True').checked = true;
+				}else{
+					document.getElementById('app_conceptualLink_False').checked = true;
+
+				}  
+                    }
+			  if (i == "manyMold") {
+				if(item == null){
+					$("#app_manyMold").val("");
+				}else{
+					$("#app_manyMold").val(item);
+				}  
+                    }
+			  
+
+
                 });
 
             });

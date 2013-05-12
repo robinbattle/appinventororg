@@ -343,11 +343,12 @@ class MediaHandlerTeaching(webapp.RequestHandler):
 class PaintPotIntroHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        allAppsQuery = db.GqlQuery("SELECT * FROM App ORDER BY number ASC")
+        #allAppsQuery = db.GqlQuery("SELECT * FROM App ORDER BY number ASC")
 
-        appCount = allAppsQuery.count()
-        allAppsList = allAppsQuery.fetch(appCount)
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #appCount = allAppsQuery.count()
+        #allAppsList = allAppsQuery.fetch(appCount)
+        #template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        template_values={}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/PaintPotIntro.html')
         self.response.out.write(template.render(path, template_values))
 

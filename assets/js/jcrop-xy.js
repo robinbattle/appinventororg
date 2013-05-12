@@ -85,6 +85,7 @@
     $('#y2').val(c.y2);
     $('#w').val(c.w);
     $('#h').val(c.h);
+
   };
 
   function clearCoords()
@@ -102,15 +103,15 @@
 
 function checkinIfCroppingValid()
   {
-      var x1 = $('#x1').val();
-      var x2 = $('#x2').val();
-      var y1 = $('#y1').val();
-      var y2 = $('#y2').val();
+      var x1 = parseInt($('#x1').val());
+      var x2 = parseInt($('#x2').val());
+      var y1 = parseInt($('#y1').val());
+      var y2 = parseInt($('#y2').val());
 
-	var x_left = document.getElementById("x_left").value;
-	var x_right = document.getElementById("x_right").value;
-	var y_top = document.getElementById("y_top").value;
-	var y_bottom = document.getElementById("y_bottom").value;
+	var x_left = parseInt(document.getElementById("x_left").value);
+	var x_right = parseInt(document.getElementById("x_right").value);
+	var y_top = parseInt(document.getElementById("y_top").value);
+	var y_bottom = parseInt(document.getElementById("y_bottom").value);
 
 
 
@@ -259,11 +260,11 @@ function showFileSize() {
 	  return false;
 
     }
-    else if (!input.files[0]) {
-        alert("Please select a file before clicking 'Load'");
-	  return false;
+    //else if (!input.files[0]) {
+    //    alert("Please select a file before clicking 'Upload'");
+    //	  return false;
 
-    }
+    //}
     else {
         file = input.files[0];
 	   if(file.size > 1024000){

@@ -38,6 +38,21 @@
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed"
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+<!-- Google Analytics Starts -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-684961-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- Google Analytics Ends -->
 </head>
 
 <body id="course-in-a-box">
@@ -112,7 +127,7 @@
 
 
 
-                        <li><a href="/{{ app.appId }}">{{ app.title }}</a></li>
+                        <li><a href="/{{ app.appId }}-box">{{ app.title }}</a></li>
 
                     {% endfor %}
 

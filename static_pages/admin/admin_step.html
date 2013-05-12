@@ -116,13 +116,17 @@
 
 
                                 <form action="/DeleteStep" method="get">
-                                        <a href="#add_step" role="button" class="btn btn-success btn"
-                                           data-toggle="modal">Add / Mod Step</a>
+                                        <a href="#add_step" role="button" class="btn btn-inverse btn"
+                                           data-toggle="modal" onclick="clear_step_form();">Add Step</a>
+							   <a href="#add_step" role="button" id="mod_step_btn" class="btn btn-success btn"
+                                           data-toggle="modal">Mod Step</a>
 
 
                                         <input class="btn btn-danger btn-medium" type="submit" value="Delete Step">
 
                                         {#                <button class="btn">Delete App</button>#}
+							  <a href="/Admin" class="btn">Go Back</a>
+
 
                                 </form>
 
@@ -274,12 +278,23 @@
 
 <script type="text/javascript">  // main scripts
 
+function clear_step_form(){
+	$("#app_id").val("");
+      $("#step_number").val("");
+      $("#step_header").val("");
+      $("#step_copy").val("");
+      $("#step_video").val("");
+	$("#step_full").val("");
+
+	$('.highlight').removeClass('highlight');
+	$("#mod_step_btn").attr("disabled", true);//unclickable now
+}
+
 
 $(document).ready(function () {
-
+    $("#mod_step_btn").attr("disabled", true);//init unclickable
     var step_listing = "{{ step_listing }}";
-
-
+    
     var total_text_elem = '';
 
     var lines = step_listing.split("|");
@@ -296,6 +311,7 @@ $(document).ready(function () {
     $(".stepname").click(function () {
         $('.highlight').removeClass('highlight');
         $(this).addClass('highlight');
+	  $("#mod_step_btn").attr("disabled", false);//step seleted, clickalbe now
         var path = $(this).data("stepname");
 
         console.log("hello, world!");

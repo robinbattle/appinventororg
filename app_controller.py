@@ -1,5 +1,3 @@
-
-
 import logging
 import os
 import datetime
@@ -23,38 +21,31 @@ from datastore import App
 from datastore import Step
 from datastore import Custom
 from datastore import Account
+from datastore import Comment
 from datastore import Position
 
 
 
 class Home(webapp.RequestHandler):
     def get(self):
-        q = self.request.get('q')
-        #login info
         currenttime = datetime.utcnow()
-        user = users.get_current_user()
-        pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
-        account = pquery.get()
+        # login_url=users.create_login_url(self.request.uri)
+        #		logout_url=users.create_logout_url(self.request.uri)
 
-        loginurl = users.create_login_url(self.request.uri)
-        logouturl = users.create_logout_url('/')
+        #allAppsQuery = db.GqlQuery("SELECT * FROM App ORDER BY number ASC")
 
-        if user:
-            saysHello = 'Hello, ' + user.nickname()
-            ifUser = True
-        else:
-            saysHello = "welcome"
-            ifUser = False
-            
-        #app
+        #appCount = allAppsQuery.count()
+        #allAppsList = allAppsQuery.fetch(appCount)
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-        template_values={'q':q, 'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/index.html')
         self.response.out.write(template.render(path, template_values))
-
-
 
 class ProfileHandler(webapp.RequestHandler):
     def get(self):
@@ -63,21 +54,16 @@ class ProfileHandler(webapp.RequestHandler):
         pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
         account = pquery.get()
 
-        loginurl = users.create_login_url(self.request.uri)
-        logouturl = users.create_logout_url('/')
-
         educationLevelCheck0 = ''
         educationLevelCheck1 = ''
         educationLevelCheck2 = ''
         ifEducatorShow = "collapse"
 
-        if user:
-            saysHello = 'Hello, ' + user.nickname()
-            ifUser = True
-        else:
-            saysHello = "welcome"
-            ifUser = False
-            self.redirect(loginurl)
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        if not user:
+            self.redirect(userStatus['loginurl'])
 
         if account:  # dude has already registered
             message='Welcome Back,'
@@ -99,7 +85,7 @@ class ProfileHandler(webapp.RequestHandler):
                     educationLevelCheck0 = 'checked'
                 elif educationLevel == 'High School':
                     educationLevelCheck1 = 'checked'
-                else:
+                elif educationLevel == 'College/University':
                     educationLevelCheck2 = 'checked'
             
         else:
@@ -114,7 +100,11 @@ class ProfileHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-        template_values={'account': account, 'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl,
+
+
+
+
+        template_values={'account': account, 'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus,
                          'ifEducatorShow': ifEducatorShow, 'educationLevel': educationLevel, 'educationLevelCheck0': educationLevelCheck0, 'educationLevelCheck1': educationLevelCheck1, 'educationLevelCheck2': educationLevelCheck2}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/profile.html')
         self.response.out.write(template.render(path, template_values))
@@ -126,21 +116,19 @@ class ChangeProfileHandler(webapp.RequestHandler):
         pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
         account = pquery.get()
 
-        loginurl = users.create_login_url(self.request.uri)
-        logouturl = users.create_logout_url('/')
+        
 
         educationLevelCheck0 = ''
         educationLevelCheck1 = ''
         educationLevelCheck2 = ''
         ifEducatorShow = "collapse"
 
-        if user:
-            saysHello = 'Hello, ' + user.nickname()
-            ifUser = True
-        else:
-            saysHello = "welcome"
-            ifUser = False
-            self.redirect(loginurl)
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        if not user:
+            self.redirect(userStatus['loginurl'])
+
 
         if account:  # dude has already registered
             message='Welcome Back,'
@@ -177,27 +165,24 @@ class ChangeProfileHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-        template_values={'account': account, 'currenttime':currenttime, 'allAppsList': allAppsList, 'ifUser': ifUser, 'loginurl': loginurl, 'logouturl': logouturl,
+        template_values={'account': account, 'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus, 
                          'ifEducatorShow': ifEducatorShow, 'educationLevelCheck0': educationLevelCheck0, 'educationLevelCheck1': educationLevelCheck1, 'educationLevelCheck2': educationLevelCheck2}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/changeProfile.html')
-        self.response.out.write(template.render(path, template_values))        
+        self.response.out.write(template.render(path, template_values))
+    
+        
 class SaveProfile(webapp.RequestHandler):
-    def get(self):
+    def post(self):
         user = users.get_current_user()
         pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
         account = pquery.get()
 
-        loginurl = users.create_login_url(self.request.uri)
-        logouturl = users.create_logout_url('/')
+        ##user status
+        #userStatus = UserStatus()
+        #userStatus = userStatus.getStatus(self.request.uri)
+        #if not user:
+        #    self.redirect(userStatus['loginurl'])
 
-        if user:
-            saysHello = 'Hello, ' + user.nickname()
-            ifUser = True
-            
-        else:
-            saysHello = "welcome"
-            ifUser = False
-            self.redirect(loginurl)
 
         if account:  # dude has already registered
             message='Welcome Back,'
@@ -219,21 +204,88 @@ class SaveProfile(webapp.RequestHandler):
         
         account.educationLevel=self.request.get('educationLevel')
         account.introductionLink=self.request.get('introductionLink')
-        
         account.put()
-            
 
-        self.redirect("/profile?save=successful")
+        #if uploading image
+        if self.request.get('pictureFile') is not None :
+            if len(self.request.get('pictureFile').strip(' \t\n\r')) != 0:
+                self.uploadimage()
+                self.redirect("/profile?savePic=successful")
+
+        self.redirect("/profile?save=successful" + str(self.request.get('h')))
+        #self.redirect("/profile?save=successful")
+        
+    def uploadimage(self):
+        picture = self.request.get('pictureFile')
+
+        user = users.get_current_user()
+        account_query = db.GqlQuery("Select * from Account where user=:1",user)
+        account = account_query.get()
 
 
 
+        x1=float(self.request.get('x1'))
+        y1=float(self.request.get('y1'))
+        x2=float(self.request.get('x2'))
+        y2=float(self.request.get('y2'))
+        newH=float(self.request.get('h'))
+        newW=float(self.request.get('w'))
+
+        x_left=float(self.request.get('x_left'))
+        y_top=float(self.request.get('y_top'))
+        x_right=float(self.request.get('x_right'))
+        y_bottom=float(self.request.get('y_bottom'))
+
+        originalW = x_right-x_left
+        originalH = y_bottom-y_top
+
+        #originalW = 300
+        #originalH = 300
+
+        
+
+
+        x1_fixed = x1 - x_left
+        y1_fixed = y1 - y_top
+        x2_fixed = x2 - x_left
+        y2_fixed = y2 - y_top
+
+
+        if(x1_fixed < 0):
+            x1_fixed = 0
+        if(y1_fixed < 0):
+            y1_fixed = 0
+        if(x2_fixed > originalW):
+            x2_fixed = originalW
+        if(y2_fixed > originalH):
+            y2_fixed = originalH
+
+
+        picture = images.crop(picture, float(x1_fixed/originalW), float(y1_fixed/originalH), float(x2_fixed/originalW), float(y2_fixed/originalH))
+        picture = images.resize(picture, 300, 300)
+
+
+        if not account:
+            account = Account()
+        if picture:
+            account.user = user      #maybe duplicate, but it is really imporant to make sure
+            account.profilePicture = db.Blob(picture)  
+        account.put()
+        return
+
+
+    
 class CourseOutlineHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/outline.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -243,7 +295,11 @@ class GettingStartedHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/gettingstarted.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -253,7 +309,11 @@ class IntroductionHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/introduction.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -263,7 +323,11 @@ class CourseInABoxHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/course-in-a-box.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -273,7 +337,11 @@ class CourseInABoxHandlerTeaching(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/course-in-a-box.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -284,7 +352,11 @@ class SoundBoardHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime': currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/soundboard.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -294,7 +366,11 @@ class PortfolioHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime': currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/portfolio.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -305,7 +381,11 @@ class IntroTimerHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/introTimerEvents.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -315,7 +395,11 @@ class SmoothAnimationHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/smoothAnimation.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -325,10 +409,27 @@ class MediaHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/media.html')
         self.response.out.write(template.render(path, template_values))
 
+class MediaFilesHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/mediaFiles.html')
+        self.response.out.write(template.render(path, template_values))
 
 class StructureHandler(webapp.RequestHandler):
     def get(self):
@@ -336,7 +437,11 @@ class StructureHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/structure.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -347,7 +452,11 @@ class HelloPurrHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/helloPurr.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -357,7 +466,11 @@ class AppPageHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/appPage.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -367,19 +480,55 @@ class AppInventorIntroHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/appInventorIntro.html')
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/AppInventorIntro.html')
         self.response.out.write(template.render(path, template_values))
 
+class RaffleHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/raffleApp.html')
+        self.response.out.write(template.render(path, template_values))
 class LoveYouHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/loveYou.html')
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/raffleApp.html')
         self.response.out.write(template.render(path, template_values))
+
+class LoveYouWSHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/loveYouWS.html')
+        self.response.out.write(template.render(path, template_values))
+
 
 class AndroidWhereHandler(webapp.RequestHandler):
     def get(self):
@@ -387,7 +536,11 @@ class AndroidWhereHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/androidWhere.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -397,7 +550,11 @@ class GPSHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/gpsIntro.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -407,7 +564,11 @@ class NoTextingHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/noTexting.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -417,7 +578,11 @@ class MoleMashHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/moleMash.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -427,7 +592,13 @@ class PaintPotHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintPot.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -437,7 +608,11 @@ class ShooterHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/shooter.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -447,7 +622,11 @@ class UserGeneratedHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/userGenerated.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -457,7 +636,11 @@ class BroadcastHubHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/broadcastHub.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -468,7 +651,11 @@ class NoteTakerHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/noteTaker.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -479,7 +666,11 @@ class QuizHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/quiz.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -489,17 +680,24 @@ class QuizIntroHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/quizIntro.html')
         self.response.out.write(template.render(path, template_values))
-
 class IntroIfHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/introIf.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -509,8 +707,31 @@ class MediaHandlerTeaching(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintpot.html')
+        self.response.out.write(template.render(path, template_values))
+
+class TryItHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+        manyMoldAppsList = []
+        for app in allAppsList:
+            if app.manyMold:
+                manyMoldAppsList.append(app)
+
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'manyMoldAppsList': manyMoldAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/tryit.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -520,9 +741,26 @@ class PaintPotIntroHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        allAppsList = allAppsQuery.fetch(appCount)
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintPotIntro.html')
+        self.response.out.write(template.render(path, template_values))
+
+class MoleMashManymoHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/moleMashManymo.html')
         self.response.out.write(template.render(path, template_values))
 
 class MediaHandlerTeaching(webapp.RequestHandler):
@@ -531,7 +769,11 @@ class MediaHandlerTeaching(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/media.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -542,7 +784,11 @@ class TeachingHandler(webapp.RequestHandler):
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/teaching.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -550,162 +796,298 @@ class TeachingHandler(webapp.RequestHandler):
 class Module1Handler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/module1.html')
         self.response.out.write(template.render(path, template_values))
 
 class Module2Handler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/module2.html')
         self.response.out.write(template.render(path, template_values))
 
 class Module3Handler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/module3.html')
         self.response.out.write(template.render(path, template_values))
 
 class Module4Handler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/module4.html')
         self.response.out.write(template.render(path, template_values))
 
 class Module5Handler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/module5.html')
         self.response.out.write(template.render(path, template_values))
 
 class Module6Handler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/module6.html')
         self.response.out.write(template.render(path, template_values))
 
-class Module7Handler(webapp.RequestHandler):
+class ModuleXHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/module7.html')
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/moduleX.html')
         self.response.out.write(template.render(path, template_values))
-
-
+class Quiz1Handler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/quiz1.html')
+        self.response.out.write(template.render(path, template_values))
+class ConditionsHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/introIf.html')
+        self.response.out.write(template.render(path, template_values))
 
 #LESSON PLANS
 
 class LPIntroHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/ai_introduction.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPCreatingHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/creating.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPConceptsHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/programming_concepts.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPAugmentedHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/augmented.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPGamesHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/games.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPIteratingHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/iterating.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPUserGenHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/user_gen_data.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPForeachHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/foreach.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPPersistenceWorksheetHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/persistence_worksheet.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPPersistenceFollowupHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/persistence_followup.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPFunctionsHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/functions.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPCodeReuseHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/code_reuse.html')
         self.response.out.write(template.render(path, template_values))
 
 class LPQRHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/lesson_plans/qr_code.html')
         self.response.out.write(template.render(path, template_values))
 
 class ContactHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/contact.html')
         self.response.out.write(template.render(path, template_values))
 
 class BookHandler(webapp.RequestHandler):
     def get(self):
-
+        currenttime = datetime.utcnow()
+        
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
         
-        currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, }
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/book.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -715,77 +1097,121 @@ class BookHandler(webapp.RequestHandler):
 class Handler14(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter14.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler15(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter15.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler16(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter16.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler17(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter17.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler18(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter18.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler19(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter19.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler20(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter20.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler21(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter21.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler22(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter22.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler23(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter23.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handler24(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'/assets/pdf/chapter24.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -811,7 +1237,11 @@ class AddAppHandler(webapp.RequestHandler):
         # login_url=users.create_login_url(self.request.uri)
         #		logout_url=users.create_logout_url(self.request.uri)
 
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'addapp.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -821,7 +1251,11 @@ class AddStepHandler(webapp.RequestHandler):
         # login_url=users.create_login_url(self.request.uri)
         #		logout_url=users.create_logout_url(self.request.uri)
 
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'admin_step.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -831,7 +1265,11 @@ class AddConceptHandler(webapp.RequestHandler):
         # login_url=users.create_login_url(self.request.uri)
         #		logout_url=users.create_logout_url(self.request.uri)
 
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'addconcept.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -841,7 +1279,11 @@ class AddCustomHandler(webapp.RequestHandler):
         # login_url=users.create_login_url(self.request.uri)
         #		logout_url=users.create_logout_url(self.request.uri)
 
-        template_values={'currenttime':currenttime}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'addcustom.html')
         self.response.out.write(template.render(path, template_values))
         
@@ -946,10 +1388,8 @@ class PostApp(webapp.RequestHandler):
         appId = self.request.get('modify_app_name')
 
         if (appId):
-            #cacheHandler = CacheHandler()
-            #app = cacheHandler.GettingCache("App", True, "appId", appId, False, None, None, False)
-            appsQuery = db.GqlQuery("SELECT * FROM App WHERE appId = :1", appId)
-            app = appsQuery.get()
+            cacheHandler = CacheHandler()
+            app = cacheHandler.GettingCache("App", True, "appId", appId, False, None, None, False)
         else:
             app = App()
 
@@ -974,13 +1414,19 @@ class PostApp(webapp.RequestHandler):
                 app.pdfChapter = True
             else:
                 app.pdfChapter = False
-        
-        
+                
+        if self.request.get('conceptualLink'):
+            b = self.request.get('conceptualLink')
+            if(b == "True"):
+                app.conceptualLink = True
+            else:
+                app.conceptualLink = False
+
+        if (self.request.get('manyMold').strip() != ''):
+            app.manyMold = self.request.get('manyMold')
+            
+
         app.put() # now the app has a key() --> id()
-        #memcache.flush_all()
-        #memcache.add("app"+app.appId, app, 86400)
-        
-        
         self.redirect('/Admin') # TODO: change to /admin (area)
         # wherever we put() to datastore, we'll need to also save the appId
 
@@ -1083,7 +1529,7 @@ class AdminHandler(webapp.RequestHandler):
         app_listing = ""
 
         cacheHandler = CacheHandler()
-        apps = cacheHandler.GettingCache("App", False, None, None, False, None, None, False)
+        apps = cacheHandler.GettingCache("App", False, None, None, False, None, None, True)
 
         for app in apps:
             app_listing += app.appId + '|'
@@ -1101,25 +1547,7 @@ class AppRenderer(webapp.RequestHandler):
     def get(self):
         path = self.request.path
         t_path = path[1:]
-        
-        currenttime = datetime.utcnow()
-        user = users.get_current_user()
-        pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
-        account = pquery.get()
-
-
-        
-        loginurl = users.create_login_url(self.request.uri)
-        logouturl = users.create_logout_url('/'+ t_path)
-
-        if user:
-            saysHello = 'Hello, ' + user.nickname()
-            ifUser = True
-        else:
-            saysHello = "welcome"
-            ifUser = False
-
-
+        logging.info(t_path)
         cacheHandler = CacheHandler()
         app = cacheHandler.GettingCache("App", True, "appId", t_path, False, None, None, False)
         # logging.info(app.heroCopy)
@@ -1130,16 +1558,16 @@ class AppRenderer(webapp.RequestHandler):
 
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
 
         template_values = {
             'steps': steps,
             'customs': customs,
             'app': app,
-            'allAppsList': allAppsList,
-            'loginurl': loginurl,
-            'logouturl': logouturl,
-            'ifUser': ifUser
+            'userStatus': userStatus,
+            'allAppsList': allAppsList
             }
 
         path = os.path.join(os.path.dirname(__file__),'app_base.html')
@@ -1149,7 +1577,8 @@ class NewAppRenderer(webapp.RequestHandler):
     def get(self):
         path = self.request.path
         #t_path = path[1:]
-        t_path = path[1:(len(path)-4)]
+        t_path = path[1:(len(path)-6)] #take out -steps in path
+        
 
         
         currenttime = datetime.utcnow()
@@ -1157,17 +1586,6 @@ class NewAppRenderer(webapp.RequestHandler):
         pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
         account = pquery.get()
 
-
-        
-        loginurl = users.create_login_url(self.request.uri)
-        logouturl = users.create_logout_url('/'+ t_path)
-
-        if user:
-            saysHello = 'Hello, ' + user.nickname()
-            ifUser = True
-        else:
-            saysHello = "welcome"
-            ifUser = False
 
 
         cacheHandler = CacheHandler()
@@ -1180,76 +1598,94 @@ class NewAppRenderer(webapp.RequestHandler):
 
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
+   
+        #check if reach the last one
+        try:
+            nextApp = allAppsList[app.number]
+        except:
+            nextApp = None
+            
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
 
+        #comment
+        pquery = db.GqlQuery("SELECT * FROM Comment WHERE appId = :1 ORDER BY timestamp DESC", t_path) # t_path is appID
+        #pquery = db.GqlQuery("SELECT * FROM Comment")
+        comments = pquery.fetch(pquery.count())
 
         template_values = {
             'steps': steps,
             'customs': customs,
             'app': app,
             'allAppsList': allAppsList,
-            'loginurl': loginurl,
-            'logouturl': logouturl,
-            'ifUser': ifUser
+            'userStatus': userStatus,
+            'nextApp':nextApp,
+            'comments': comments
             }
 
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/newCourseExample.html')
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/app_base_new.html')
         self.response.out.write(template.render(path, template_values))
-        
 
-class NewCourseExampleRenderer(webapp.RequestHandler):
+#commenting system
+class PostCommentHandler (webapp.RequestHandler):
     def get(self):
-        #path = self.request.path
-        #t_path = path[1:]
-        t_path = "hellopurr"
-
-        
         currenttime = datetime.utcnow()
-        user = users.get_current_user()
-        pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
-        account = pquery.get()
-
-
-        
-        loginurl = users.create_login_url(self.request.uri)
-        logouturl = users.create_logout_url('/'+ t_path)
-
-        if user:
-            saysHello = 'Hello, ' + user.nickname()
-            ifUser = True
-        else:
-            saysHello = "welcome"
-            ifUser = False
-
-
         cacheHandler = CacheHandler()
-        app = cacheHandler.GettingCache("App", True, "appId", t_path, False, None, None, False)
-        # logging.info(app.heroCopy)
-
-            
-        steps = cacheHandler.GettingCache("Step", True, "appId", t_path, True, "number", "ASC", True)    
-        customs = cacheHandler.GettingCache("Custom", True, "appId", t_path, True, "number", "ASC", True)
-
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
 
+        user = users.get_current_user()
 
-        template_values = {
-            'steps': steps,
-            'customs': customs,
-            'app': app,
-            'allAppsList': allAppsList,
-            'loginurl': loginurl,
-            'logouturl': logouturl,
-            'ifUser': ifUser
-            }
+        if not user:
+            self.redirect(userStatus['loginurl'])
 
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/newCourseExample.html')
-        self.response.out.write(template.render(path, template_values))
+        content = self.request.get('comment_content').strip(' \t\n\r')
+        if(content != ''):
+            user = users.get_current_user()
+            pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
+            account = pquery.get()
+            comment = Comment()
+            comment.submitter = account
+            comment.content = content
+            comment.appId = self.request.get('comment_appId')
+            comment.put()
 
+        
+        self.redirect(self.request.get('redirect_link'))
+class DeleteCommentHandler (webapp.RequestHandler):
+    def get(self):
+        
+
+        user = users.get_current_user()
+        
+        
+
+        if users.is_current_user_admin():
+            commentKey = self.request.get('commentKey')
+            if(commentKey != ""):
+                db.delete(commentKey)
+            self.redirect(self.request.get('redirect_link'))
+        else:
+            
+            print 'Content-Type: text/plain'
+            print 'You are NOT administrator'
+        
+       
 class AboutHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime}
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/about.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -1259,6 +1695,7 @@ class GetAppDataHandler(webapp.RequestHandler):
     def get(self):
         logging.info("I'm inside get_app_data()")
         app = self.request.get('app')
+        cacheHandler = CacheHandler()        
         app_to_get = cacheHandler.GettingCache("App", True, "appId", app, False, None, None, False)
 
         appId = app
@@ -1267,8 +1704,11 @@ class GetAppDataHandler(webapp.RequestHandler):
         title = app_to_get.title;
         heroHeader = app_to_get.heroHeader;
         heroCopy = app_to_get.heroCopy;
+        pdfChapter = app_to_get.pdfChapter;
+        conceptualLink = app_to_get.conceptualLink;
+        manyMold = app_to_get.manyMold;
 
-        my_response = {'number': number, 'title': title, 'heroHeader': heroHeader, 'heroCopy': heroCopy}
+        my_response = {'number': number, 'title': title, 'heroHeader': heroHeader, 'heroCopy': heroCopy, 'pdfChapter':pdfChapter, 'conceptualLink': conceptualLink, 'manyMold': manyMold}
 #        json = JSON.dumps(my_response)
 
         self.response.headers.add_header('content-type', 'application/json', charset='utf-8')
@@ -1279,6 +1719,7 @@ class GetStepDataHandler(webapp.RequestHandler):
     def get(self):
         logging.info("I'm inside get_step_data()")
         step_header = self.request.get('step_header')
+        cacheHandler = CacheHandler()
         step = cacheHandler.GettingCache("Step", True, "header", step_header, False, None, None, False)
 
         appId = step.appId;
@@ -1299,6 +1740,7 @@ class GetCustomDataHandler(webapp.RequestHandler):
         logging.info("I'm inside get_custom_data()")
         custom_header = self.request.get('custom_header')
         logging.info("custom_header: " + custom_header)
+        cacheHandler = CacheHandler()
         custom = cacheHandler.GettingCache("Custom", True, "header", custom_header, False, None, None, False)
 
         number = custom.number;
@@ -1320,173 +1762,179 @@ class SetupHandler(webapp.RequestHandler):
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime, 'allAppsList': allAppsList}
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/setup.html')
+        self.response.out.write(template.render(path, template_values))
+
+class TryItHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+
+        manyMoldAppsList = []
+        for app in allAppsList:
+            if app.manyMold:
+                manyMoldAppsList.append(app)
+
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+       
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus, 'manyMoldAppsList': manyMoldAppsList}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/tryit.html')
         self.response.out.write(template.render(path, template_values))
 
 
 #Upload Pic
 class UploadPictureHandler(webapp.RequestHandler):
-      def post(self):
+    def post(self):
                 
-                picture = self.request.get('pictureFile')
-                
-                user = users.get_current_user()
-                account_query = db.GqlQuery("Select * from Account where user=:1",user)
-                account = account_query.get()
+        picture = self.request.get('pictureFile')
 
-                
-
-                x1=float(self.request.get('x1'))
-                y1=float(self.request.get('y1'))
-                x2=float(self.request.get('x2'))
-                y2=float(self.request.get('y2'))
-                newH=float(self.request.get('h'))
-                newW=float(self.request.get('w'))
-
-                x_left=float(self.request.get('x_left'))
-                y_top=float(self.request.get('y_top'))
-                x_right=float(self.request.get('x_right'))
-                y_bottom=float(self.request.get('y_bottom'))
-
-                originalW = x_right-x_left
-                originalH = y_bottom-y_top
-
-                #originalW = 300
-                #originalH = 300
-
-                
-                #if x1 > x_left or x2 < x_right or y1 > y_top or y2 < y_bottom:
-                #    self.redirect('/profile?status=error')
-                #    return
-
-                if x1 < x_left:
-                    self.redirect('/profile?status=erroronx1')
-                    return
-                elif x2 > x_right:
-                    self.redirect('/profile?status=erroronx2')
-                    return
-                elif y1 < y_top:
-                    self.redirect('/profile?status=errorony1')
-                    return
-                elif y2 > y_bottom:
-                    self.redirect('/profile?status=errorony2')
-                    return
-
-                x1_fixed = x1 - x_left
-                y1_fixed = y1 - y_top
-                x2_fixed = x2 - x_left
-                y2_fixed = y2 - y_top
+        user = users.get_current_user()
+        account_query = db.GqlQuery("Select * from Account where user=:1",user)
+        account = account_query.get()
 
 
-                
-                picture = images.crop(picture, float(x1_fixed/originalW), float(y1_fixed/originalH), float(x2_fixed/originalW), float(y2_fixed/originalH))
-                
 
-                if not account:
-                    account = Account()
-                if picture:
-                    account.user = user      #maybe duplicate, but it is really imporant to make sure
-                    account.profilePicture = db.Blob(picture)  
-                account.put()
-                ad = picture
-                self.redirect('/profile')
-                
+        x1=float(self.request.get('x1'))
+        y1=float(self.request.get('y1'))
+        x2=float(self.request.get('x2'))
+        y2=float(self.request.get('y2'))
+        newH=float(self.request.get('h'))
+        newW=float(self.request.get('w'))
+
+        x_left=float(self.request.get('x_left'))
+        y_top=float(self.request.get('y_top'))
+        x_right=float(self.request.get('x_right'))
+        y_bottom=float(self.request.get('y_bottom'))
+
+        originalW = x_right-x_left
+        originalH = y_bottom-y_top
+
+        #originalW = 300
+        #originalH = 300
+
         
 
 
-class ImageHandler (webapp.RequestHandler):
-      def get(self):
-                user = users.get_current_user()
-                account_query = db.GqlQuery("Select * from Account where user=:1",user)
-                account = account_query.get()
+        x1_fixed = x1 - x_left
+        y1_fixed = y1 - y_top
+        x2_fixed = x2 - x_left
+        y2_fixed = y2 - y_top
 
-                if not account:
-                    self.redirect('/assets/img/avatar-default.gif')
-                    return
-                    
-                account_key=self.request.get('key')
+
+        if(x1_fixed < 0):
+            x1_fixed = 0
+        if(y1_fixed < 0):
+            y1_fixed = 0
+        if(x2_fixed > originalW):
+            x2_fixed = originalW
+        if(y2_fixed > originalH):
+            y2_fixed = originalH
+
+
+        picture = images.crop(picture, float(x1_fixed/originalW), float(y1_fixed/originalH), float(x2_fixed/originalW), float(y2_fixed/originalH))
+        picture = images.resize(picture, 300, 300)
+
+        if not account:
+            account = Account()
+        if picture:
+            account.user = user      #maybe duplicate, but it is really imporant to make sure
+            account.profilePicture = db.Blob(picture)  
+        account.put()
+        ad = picture
+        self.redirect('/changeProfile')
                 
-                account = db.get(account_key)
-                if account.profilePicture:
-                    self.response.headers['Content-Type'] = "image/png"
-                    self.response.out.write(account.profilePicture)
-                else:
-                    self.redirect('/assets/img/avatar-default.gif')
-                    #self.response.headers['Content-Type'] = "image/png"
-                    #self.response.out.write('/assets/img/avatar-default.gif')
-                    #self.error(404)
 
+class ImageHandler (webapp.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        account_query = db.GqlQuery("Select * from Account where user=:1",user)
+        account = account_query.get()
 
-#Search Bar powered by Google
-class SearchHandler (webapp.RequestHandler):
-      def get(self):
-               
-               query=self.request.get('query')
-               currenttime = datetime.utcnow()
+        #if not account:
+        #    self.redirect('/assets/img/avatar-default.gif')
+        #    return
             
-               template_values={'currenttime':currenttime, 'query': query}
-               path = os.path.join(os.path.dirname(__file__),'static_pages/other/searchResult.html')
-               self.response.out.write(template.render(path, template_values))
+        account_key=self.request.get('key')
 
-class TeachingBaseHandler (webapp.RequestHandler):
-      def get(self):
-               
-               
-               currenttime = datetime.utcnow()
+        if(len(account_key) == 0):
+            self.redirect('/assets/img/avatar-default.gif')
+            return
             
-               template_values={'currenttime':currenttime}
-               path = os.path.join(os.path.dirname(__file__),'static_pages/other/site_base.html')
-               self.response.out.write(template.render(path, template_values))
 
+        account = db.get(account_key)
+        if account.profilePicture:
+            self.response.headers['Content-Type'] = "image/png"
+            self.response.out.write(account.profilePicture)
+        else:
+            self.redirect('/assets/img/avatar-default.gif')
+            #self.response.headers['Content-Type'] = "image/png"
+            #self.response.out.write('/assets/img/avatar-default.gif')
+            #self.error(404)
 #Map
+class TeacherMapHandler(webapp.RequestHandler):
+    def get(self):
 
-class LocatoinOnMapsHandler(webapp.RequestHandler):
-      def get(self):
-               #position = Position()
-               #position.latitude = float(37.775)
-               #position.longitude = float(-118.418)
-               #position.put()
-               allPositionsQuery = db.GqlQuery("SELECT * FROM Position")
+        #all apps list
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-               positionCount = allPositionsQuery.count()
-               positions = allPositionsQuery.fetch(positionCount)
-               positions = []
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        #allAccountsQuery = db.GqlQuery("SELECT * FROM Account")
+        allAccountsQuery = db.GqlQuery("SELECT * FROM Account WHERE ifEducator=:1", True)
+                                                                                    #now only show teachers
+                                                                                    #TO-DO:Not sure if need to be memcached
 
-               allAccountsQuery = db.GqlQuery("SELECT * FROM Account")
+        accountCount = allAccountsQuery.count()
+        accounts = allAccountsQuery.fetch(accountCount)
 
-               accountCount = allAccountsQuery.count()
-               accounts = allAccountsQuery.fetch(accountCount)
+        account_k_8 = []
+        account_high_school = []
+        account_college_university = []
+        for account in accounts:
+           if(account.ifEducator):
+               if(account.educationLevel == "K-8"):
+                   account_k_8.append(account)
+               elif(account.educationLevel == "High School" ):
+                   account_high_school.append(account)
+               elif(account.educationLevel == "College/University"):
+                   account_college_university.append(account)
                
-               
-               
-               currenttime = datetime.utcnow()
-               template_values={'currenttime':currenttime, 'positions':positions, 'accounts': accounts}
-               path = os.path.join(os.path.dirname(__file__),'static_pages/other/maps.html')
-               self.response.out.write(template.render(path, template_values))               
-               
-               
-class GeoJsonHandler(webapp.RequestHandler):
-      def get(self):
-               currenttime = datetime.utcnow()
-               #address = self.request.get('address')
-               #sensor = self.request.get('sensor')
 
-               #address = "565, 33rd AVE, San Francisco, CA".replace(' ', '+').lower()
-               #sensor = 'false'
-               #URL = 'http://maps.googleapis.com/maps/api/geocode/json?'+'address='+address+'&'+'sensor='+sensor
-               #googleResponse = urllib2.urlopen(URL)
-               #jsonResponse = json.loads(googleResponse.read())
-               #json = jsonResponse
-
-            
-
-               json = "1"
-
+        currenttime = datetime.utcnow()
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'accounts': accounts, 'account_k_8':account_k_8,  'account_high_school':account_high_school, 'account_college_university':account_college_university, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/maps.html')
+        self.response.out.write(template.render(path, template_values))               
                
-               template_values={'currenttime':currenttime, 'json':json}
-               path = os.path.join(os.path.dirname(__file__),'static_pages/other/jsonPage.html')
-               self.response.out.write(template.render(path, template_values))
+#Google Custom Search
+class SearchHandler (webapp.RequestHandler):
+    def get(self):
+               
+        query=self.request.get('query')
+        currenttime = datetime.utcnow()
+
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/searchResult.html')
+        self.response.out.write(template.render(path, template_values))
+
 
 #Cache
 
@@ -1497,7 +1945,7 @@ class CacheHandler(webapp.RequestHandler):
         if(whereClause == True):
             keyName = keyName + dataId
 
-        expiredTime = 21600
+        expiredTime = 86400
         data = memcache.get(keyName)
 
         if data is not None:
@@ -1532,6 +1980,64 @@ class CacheHandler(webapp.RequestHandler):
 
         return query1 + query2 + query3
 
+class MemcacheFlushHandler(webapp.RequestHandler):
+
+    def get(self):
+        memcache.flush_all()       
+       
+        if users.is_current_user_admin():
+            if(self.request.get('redirect_link')):                  # not implemented yet
+                self.redirect(self.request.get('redirect_link'))
+            else:
+                self.redirect("/Admin")
+        else:        
+            print 'Content-Type: text/plain'
+            print 'You are NOT administrator'        
+        return
+
+
+# user status checking(login/logout)
+class UserStatus(webapp.RequestHandler):
+    
+   
+    def getStatus(self, uri):
+        user = users.get_current_user()
+        pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
+        account = pquery.get()
+
+        loginurl = users.create_login_url(uri)
+        logouturl = users.create_logout_url('/')
+
+        admin = False
+        if user:
+            ifUser = True
+            if users.is_current_user_admin():
+                admin = True
+        else:
+            ifUser = False
+
+        
+        
+        status = {'loginurl': loginurl, 'logouturl':logouturl, 'ifUser':ifUser, 'account':account, 'admin': admin}
+        return status
+
+
+
+
+#only use when add new field to database
+class UpdateDatabase (webapp.RequestHandler):
+    def get(self):
+
+        allAppsQuery = db.GqlQuery("SELECT * FROM App ORDER BY number ASC")
+
+        appCount = allAppsQuery.count()
+        allAppsList = allAppsQuery.fetch(appCount)
+
+        for app in allAppsList:
+            app.put()
+
+        return
+
 
 # create this global variable that represents the application and specifies which class
 # should handle each page in the site
@@ -1548,18 +2054,18 @@ application = webapp.WSGIApplication(
         ('/AddConcept', AddConceptHandler), ('/AddCustom', AddCustomHandler),
         ('/PostApp', PostApp), ('/PostStep', PostStep), ('/PostCustom', PostCustom),
         ('/outline', CourseOutlineHandler), ('/introduction', IntroductionHandler), ('/course-in-a-box', CourseInABoxHandler),('/portfolio', PortfolioHandler),('/introTimer', IntroTimerHandler),('/smoothAnimation', SmoothAnimationHandler),('/soundboard', SoundBoardHandler),
-        ('/media', MediaHandler), ('/teaching-android', TeachingHandler), ('/lesson-introduction-to-app-inventor', LPIntroHandler),
+        ('/media', MediaHandler), ('/mediaFiles',MediaFilesHandler),('/teaching-android', TeachingHandler), ('/lesson-introduction-to-app-inventor', LPIntroHandler),
         ('/lesson-plan-creating', LPCreatingHandler), ('/lesson-plan-paintpot-and-initial-discussion-of-programming-con', LPConceptsHandler),
         ('/lesson-plan-mobile-apps-and-augmented-real', LPAugmentedHandler), ('/lesson-plan-games', LPGamesHandler),
         ('/iterate-through-a-list', LPIteratingHandler), ('/lesson-plan-user-g', LPUserGenHandler),
         ('/lesson-plan-foreach-iteration-and', LPForeachHandler), ('/persistence-worksheet', LPPersistenceWorksheetHandler),
         ('/persistence-r', LPPersistenceFollowupHandler), ('/functions', LPFunctionsHandler),
-	('/helloPurrLesson', HelloPurrHandler),('/paintPotLesson', PaintPotHandler),('/moleMashLesson', MoleMashHandler),('/shooterLesson', ShooterHandler),('/paintPotIntro', PaintPotIntroHandler),('/structure', StructureHandler), ('/appPage', AppPageHandler),('/appInventorIntro', AppInventorIntroHandler),('/loveYouLesson', LoveYouHandler),('/noTextingLesson', NoTextingHandler),('/gpsIntro', GPSHandler),('/androidWhere', AndroidWhereHandler), ('/quizLesson', QuizHandler),('/quizIntro', QuizIntroHandler),('/userGenerated', UserGeneratedHandler),('/noteTakerLesson', NoteTakerHandler),('/broadcastHubLesson', BroadcastHubHandler), ('/introIf', IntroIfHandler),
-
+	('/hellopurrLesson', HelloPurrHandler),('/paintpotLesson', PaintPotHandler),('/molemashLesson', MoleMashHandler),('/no-text-while-drivingLesson', NoTextingHandler),('/notetakerLesson', NoteTakerHandler),('/broadcaster-hub-1Lesson', BroadcastHubHandler),('/quizLesson', QuizHandler),('/shootergameLesson', ShooterHandler),('/paintPotIntro', PaintPotIntroHandler),('/structure', StructureHandler), ('/appPage', AppPageHandler),('/appInventorIntro', AppInventorIntroHandler),('/loveYouLesson', LoveYouHandler),('/loveYouWS', LoveYouWSHandler),('/raffle',RaffleHandler),('/gpsIntro', GPSHandler),('/androidWhere', AndroidWhereHandler), ('/quizIntro', QuizIntroHandler),('/userGenerated', UserGeneratedHandler), ('/tryit',TryItHandler),
         ('/procedures', LPCodeReuseHandler), ('/deploying-an-app-and-posting-qr-code-on-web', LPQRHandler),
         ('/module1', Module1Handler), ('/module2', Module2Handler), ('/module3', Module3Handler),
         ('/module4', Module4Handler), ('/module5', Module5Handler), ('/module6', Module6Handler),
-        ('/module7', Module7Handler), ('/contact', ContactHandler), ('/about', AboutHandler ), ('/book', BookHandler),
+        ('/moduleX', ModuleXHandler), ('/contact', ContactHandler), ('/about', AboutHandler ), ('/book', BookHandler),
+	('/quiz1',Quiz1Handler),('/conditionals',ConditionsHandler),
         ('/app-architecture', Handler14), ('/engineering-and-debugging', Handler15), ('/variables-1', Handler16),
         ('/animation-3', Handler17), ('/conditionals', Handler18), ('/lists-2', Handler19),
         ('/iteration-2', Handler20), ('/procedures-1', Handler21), ("/databases", Handler22), ("/sensors-1", Handler23),
@@ -1567,18 +2073,24 @@ application = webapp.WSGIApplication(
         ('/DeleteApp', DeleteApp), ('/AddStepPage', AddStepRenderer), ('/DeleteStep', DeleteStep), ('/AddCustomPage', AddCustomRenderer),
         ('/projects', BookHandler ), ('/appinventortutorials', BookHandler), ('/get_app_data', GetAppDataHandler),
         ('/get_step_data', GetStepDataHandler), ('/get_custom_data', GetCustomDataHandler), ('/setup', SetupHandler),
-        ('/profile', ProfileHandler), ('/changeProfile', ChangeProfileHandler),('/saveProfile', SaveProfile), ('/uploadPicture', UploadPictureHandler), ('/imageHandler', ImageHandler),
-        ('/siteSearch', SearchHandler), ('/teachingBase', TeachingBaseHandler), ('/locationOnMaps', LocatoinOnMapsHandler), ('/geoJson', GeoJsonHandler),
-        ('/newCourseExample', NewCourseExampleRenderer),
+        ('/profile', ProfileHandler), ('/changeProfile', ChangeProfileHandler),('/saveProfile', SaveProfile), ('/uploadPicture', UploadPictureHandler), ('/imageHandler', ImageHandler), ('/teacherMap', TeacherMapHandler),
+        ('/siteSearch', SearchHandler), ('/moleMashManymo',MoleMashManymoHandler),
 
-         #should replace the top AppRenderer after experimental test
-        ('/hellopurr-box', NewAppRenderer), ('/paintpot-box', NewAppRenderer), ('/molemash-box', NewAppRenderer),
-        ('/shootergame-box', NewAppRenderer), ('/no-text-while-driving-box', NewAppRenderer), ('/ladybug-chase-box', NewAppRenderer),
-        ('/map-tour-box', NewAppRenderer), ('/android-where-s-my-car-box', NewAppRenderer), ('/quiz-box', NewAppRenderer),
-        ('/notetaker-box', NewAppRenderer), ('/xylophone-box', NewAppRenderer), ('/makequiz-and-takequiz-1-box', NewAppRenderer),
-        ('/broadcaster-hub-1-box', NewAppRenderer), ('/robot-remote-box', NewAppRenderer), ('/stockmarket-box', NewAppRenderer),
-     
-     
+
+        # NewAppRenderer 
+        ('/hellopurr-steps', NewAppRenderer), ('/paintpot-steps', NewAppRenderer), ('/molemash-steps', NewAppRenderer),
+        ('/shootergame-steps', NewAppRenderer), ('/no-text-while-driving-steps', NewAppRenderer), ('/ladybug-chase-steps', NewAppRenderer),
+        ('/map-tour-steps', NewAppRenderer), ('/android-where-s-my-car-steps', NewAppRenderer), ('/quiz-steps', NewAppRenderer),
+        ('/notetaker-steps', NewAppRenderer), ('/xylophone-steps', NewAppRenderer), ('/makequiz-and-takequiz-1-steps', NewAppRenderer),
+        ('/broadcaster-hub-1-steps', NewAppRenderer), ('/robot-remote-steps', NewAppRenderer), ('/stockmarket-steps', NewAppRenderer),
+        ('/amazon-steps', NewAppRenderer),
+
+         # Comment
+        ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
+
+         #memcache flush
+         ('/memcache_flush_all', MemcacheFlushHandler)
+        
     ],
     debug=True)
 

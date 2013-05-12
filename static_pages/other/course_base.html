@@ -13,8 +13,11 @@
 
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/ai_styles-fixed.css" rel="stylesheet">
+    
+
     <style type="text/css">
-         body {
+        
+        body {
          padding-top: 60px;
          padding-bottom: 40px;
          }
@@ -25,7 +28,7 @@
          }
 	   .carousel .carousel-control { 
 		visibility: hidden; 
-		top: 3%;
+		top: 2.5%;
 		font-size: 60px;
 		width: 30px;
   		height: 30px;
@@ -41,23 +44,24 @@
          
          .carousel-caption p a {display:none;}
          #carousel-nav {
-         text-align: center;
+         //text-align: center;
+ 	    padding-left:55px;
          border-bottom: 1px dotted #CCC;
          }
          #carousel-nav a {
          margin: 5px 0px;
-	    padding-top:5px;
-	    padding-left:15px;
- 	    padding-right:15px;
-	    padding-bottom:5px;
+	    padding-top:2px;
+	    padding-left:20px;
+ 	    padding-right:20px;
+	    padding-bottom:2px;
          background: #eee;
          color: #000;
          display: inline-block;
-         width: 25px;
-         height: 25px;
+         width: 20px;
+         height: 20px;
          opacity: 0.5;
          filter: alpha(opacity=50);
-	    font-size: 25px;
+	    font-size: 18px;
          }
          
          #carousel-nav a.active {
@@ -67,7 +71,7 @@
          
 	   tr.spaceUnder > td
    {
-   padding-bottom: 10px;
+   padding-bottom: 2px;
    }
    	   tr.spaceUnder > td > a
    {
@@ -76,17 +80,41 @@
    }
 
 
+   .leadfont {
+  	margin-bottom: 5px;
+  	font-size: 18px;
+  	font-weight: 50;
+  	line-height: 18px;
+	color:grey;
+  }
+
+  .mediumleadfont {
+  	margin-bottom: 5px;
+  	font-size: 15px;
+  	font-weight: 30;
+  	line-height: 12px;
+	color:grey;
+  }
 
 
+   .smallleadfont {
+  	margin-bottom: 5px;
+  	font-size: 12px;
+  	font-weight: 30;
+  	line-height: 12px;
+	color:grey;
+  }
 
 
       </style>
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/assets/js/jquery-1.7.2.min.js"></script>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+	
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.ico">
@@ -120,21 +148,39 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <!-- <li class="active"><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li> -->
-                    <li><a href="/hellopurr">Learn</a></li>
+                    <li><a href="/hellopurr-steps">Learn</a></li>
                     <li><a href="/teaching-android">Teach</a></li>
                     <li><a href="/about">About</a></li>
-			    {% if ifUser%}
+			    <li><a href="/teacherMap">People Map</a></li>
+			    {% if userStatus.ifUser%}
                      <li>
                         <a href="/profile"> Profile </a> 
                      </li>        
                      <li>
-                        <a href="{{logouturl}}"> logout </a>
+                        <a href="{{userStatus.logouturl}}"> logout </a>
                      </li>
                      {% else %}
                      <li>
-                        <a href="{{loginurl}}"> login </a>
+                        <a href="{{userStatus.loginurl}}"> login </a>
                      </li>
                      {% endif %}
+                     <li>
+                        
+
+				<!--Google Custom Search starts-->
+		     
+                        <div style="width:0px;overflow:hidden;height:0px;">
+                           <!-- if you use display:none here it doesn't work-->
+                           <gcse:search></gcse:search>
+                        </div>
+                        <form class="form-search" id="searchbox_002873954108960030835:l3_jvzrakeu" action="/siteSearch">
+                           
+                           <input class="input-xlarge" id="q" name="q" type="text" value=''/>
+                           <button class="btn">Search</button>
+                        </form>
+                     
+                  <!--Google Custom Search ends-->
+
 
 
 
@@ -179,7 +225,7 @@
 
                     <li class="nav-header">Apps</li>
                     {% for app in allAppsList %}
-                        <li><a href="/{{ app.appId }}">{{ app.title }}</a></li>
+                        <li><a href="/{{ app.appId }}-steps">{{ app.title }}</a></li>
                     {% endfor %}
 
                     <li class="nav-header">Links</li>
@@ -210,7 +256,7 @@
        ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
 
-        <script src="/assets/js/jquery-1.7.2.min.js"></script>
+        
       <script src="/assets/js/bootstrap.js"></script>
       <script src="/assets/js/index-onload.js"></script>
       
@@ -219,6 +265,7 @@
   	<script src="/assets/js/carousel-datato-index.js"></script>
 
 
+	
 
 
 

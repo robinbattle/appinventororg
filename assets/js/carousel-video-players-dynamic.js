@@ -28,8 +28,8 @@
 
 	  for (var i = 0; i < videoIdList.length; i++) {
     	     videoPlayerList[i]=new YT.Player(videoNameList[i], {
-          		height: '700',
-          		width: '1190',
+          		//height: '700',
+          		//width: '1230',
           		videoId: videoIdList[i]
           	      
            });

@@ -71,23 +71,39 @@
                     <li><a href="/hellopurr">Learn</a></li>
                     <li><a href="/teaching-android">Teach</a></li>
                     <li><a href="/about">About</a></li>
-			    {% if ifUser%}
+			    <li><a href="/teacherMap">People Map</a></li>
+			    {% if userStatus.ifUser%}
                      <li>
                         <a href="/profile"> Profile </a> 
                      </li>        
                      <li>
-                        <a href="{{logouturl}}"> logout </a>
+                        <a href="{{userStatus.logouturl}}"> logout </a>
                      </li>
                      {% else %}
                      <li>
-                        <a href="{{loginurl}}"> login </a>
+                        <a href="{{userStatus.loginurl}}"> login </a>
                      </li>
                      {% endif %}
 
 
 
                 </ul>
-
+		
+			<!--Google Custom Search starts-->
+		     <ul class="nav">
+                     <li>
+                        <div style="width:0px;overflow:hidden;height:0px;">
+                           <!-- if you use display:none here it doesn't work-->
+                           <gcse:search></gcse:search>
+                        </div>
+                        <form class="form-search" id="searchbox_002873954108960030835:l3_jvzrakeu" action="/siteSearch">
+                           
+                           <input class="input-xlarge" id="q" name="q" type="text" value='{{q}}'/>
+                           <button class="btn">Search</button>
+                        </form>
+                     </li>
+                  </ul>
+                  <!--Google Custom Search ends-->
 
             </div>
             <!--/.nav-collapse -->

@@ -10,6 +10,8 @@ class App(db.Model):
     heroHeader = db.StringProperty()
     heroCopy = db.TextProperty()
     pdfChapter = db.BooleanProperty(default=True)
+    conceptualLink = db.BooleanProperty(default=True)
+    manyMold = db.StringProperty()
     timestamp = db.DateTimeProperty(auto_now=True)
 
 # for the "Build It" section of a generated app page
@@ -67,6 +69,13 @@ class DefaultAvatarImage(db.Model):
 class Position(db.Model):
         latitude = db.FloatProperty()
 	longitude = db.FloatProperty()
+
+class Comment(db.Model):
+        submitter = db.ReferenceProperty()
+        timestamp = db.DateTimeProperty(auto_now=True)
+        content = db.StringProperty()
+        appId = db.StringProperty()
+	
 	
 	
 

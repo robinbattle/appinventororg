@@ -1,0 +1,327 @@
+{% extends "course_base.html" %}
+{% block body %}
+<div class="container-fluid" style="padding-top: 0px;">
+   <div class="row-fluid">
+      <div class="span4">
+         <h2>{{app.heroHeader}}</h2>
+         <p>{{app.heroCopy}}</p>
+      </div>
+      <div class="offset1 span2">
+         <img class="" src="apps/{{ app.appId }}/hero.png" alt="screenshot" style="height:200px;
+            width:200px;">
+         </img>
+      </div>
+      <div class="offset2 span2">
+         <table class="pull-right">
+            {% if app.pdfChapter %}
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini"
+                     href="apps/{{ app.appId }}/{{ app.appId }}.pdf">
+                  Download the Chapter&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i></a>
+               </td>
+            </tr>
+            {% else %}
+            <!--Hide PDF, nothing here-->
+            {% endif %}
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini"
+                     href="apps/{{ app.appId }}/{{ app.appId }}.zip" title="Download this zip file for the App Inventor source blocks. Then, in App Inventor, go to More Actions | Upload Source, to upload and customize the app">
+                  Download the Source&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i>
+                  </a>
+               </td>
+            </tr>
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini"
+                     href="apps/{{ app.appId }}/{{ app.appId }}.apk">
+                  Download the APK&nbsp&nbsp&nbsp&nbsp&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i>
+                  </a>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <img class="qr" src="apps/{{ app.appId }}/qr.png" alt="" style="width:150px;height:150px" title="Scan barcode to install this app on your phone.">
+               </td>
+            </tr>
+         </table>
+      </div>
+   </div>
+   <div class="row-fluid">
+      {% if steps %}
+		<div class="span11" id="course-steps">
+         <div id="myCarousel" class="carousel slide thumbnail">
+            <!-- Carousel Nav -->
+            <div id="carousel-nav">
+               {% for step in steps|slice:":1" %}
+               <a href="#myCarousel" data-to="{{forloop.counter}}" class="active" onclick="stopVideo();">{{forloop.counter}}</a>
+               {%  endfor %}
+               {% for step in steps|slice:"1:" %}
+               <a href="#myCarousel" data-to="{{forloop.counter|add:1}}" onclick="stopVideo();">{{forloop.counter|add:1}}</a>
+               {%  endfor %}
+            </div>
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+               {% for step in steps|slice:":1" %}
+               <div class="active item">
+                  <div class="row-fluid">
+                     <div class="span9">
+                        <p class="leadfont">
+                           <a href="" onclick="return false;">
+                           <strong>Step{{ step.number }}:</strong> {{step.header}}
+                           </a>
+                           <br>
+                           <small>{{step.copy}}</small>
+                        </p>
+				   <p></p>
+                        <p class="smal6Cleadfont">
+                           <a id="step{{ step.number }}blocklink" data-toggle="collapse" data-target="#step{{ step.number }}block">View Blocks For This Step<small>&nbsp;&nbsp;(click for details)</small></a>
+                        <div id="step{{ step.number }}block" class="collapse"> <img src="apps/{{ app.appId }}/blocks{{ step.number }}.png" ></img></div>
+                        </p>
+                        <script>
+                           $(document).ready(function(){
+                             $('#step{{ step.number }}block').on('shown', function () {
+                                 document.getElementById("step{{ step.number }}blocklink").innerHTML="Hide Blocks For This Step<small>&nbsp;&nbsp;(click to hide)</small>"
+                             })
+                             
+                             $('#step{{ step.number }}block').on('hidden', function () {
+                                 document.getElementById("step{{ step.number }}blocklink").innerHTML="View Blocks For This Step<small>&nbsp;&nbsp;(click for details)</small>"
+                             })
+                           
+                             
+                           });
+                        </script>
+                     </div>
+				<div class="span2 pull-right">
+				{% if steps %}
+         			<p></p>
+				<p class="mediumleadfont pull-right">
+				<a href="{{ app.appId }}">View All Steps</a>
+				</p>
+
+
+         			{% else %}
+         			<!--Hide See All Steps Link, nothing here-->
+         			{% endif %}
+				</div>
+                  </div>
+                  <div id="youtube_player{{step.number}}"></div>
+                  <script>
+                     addVideo('{{step.videoPath}}', 'youtube_player{{step.number}}');
+				 $(document).ready(function () {
+
+     					$(window).resize(function () {
+
+         					$("#youtube_player{{step.number}}").css({
+             					width: $("#course-steps").width(),
+             					height: ($(this).width()) * .37
+         					});
+
+     					});
+
+     				$(window).resize();
+
+ 				});
+                      
+                  </script>
+                  <div class="carousel-caption">
+                     <h4>&nbsp&nbsp&nbsp&nbsp&nbsp {{ step.number }}: {{step.header}}</h4>
+                  </div>
+               </div>
+               {%  endfor %}
+               {% for step in steps|slice:"1:" %}
+               <div class="item">
+                  <div class="row-fluid">
+                     <div class="span9">
+                        <p class="leadfont">
+                           <a href="" onclick="return false;">
+                           <strong>Step{{ step.number }}:</strong> {{step.header}}
+                           </a>
+                           <br>
+                           <small>{{step.copy}}</small>
+                        </p>
+                        <p class="smallleadfont">
+                           <a id="step{{ step.number }}blocklink" data-toggle="collapse" data-target="#step{{ step.number }}block">View Blocks For This Step<small>&nbsp;&nbsp;(click for details)</small></a>
+                        <div id="step{{ step.number }}block" class="collapse"> <img src="apps/{{ app.appId }}/blocks{{ step.number }}.png" ></img></div>
+                        </p>
+                        <script>
+                           $(document).ready(function(){
+                             $('#step{{ step.number }}block').on('shown', function () {
+                                 document.getElementById("step{{ step.number }}blocklink").innerHTML="Hide Blocks For This Step<small>&nbsp;&nbsp;(click to hide)</small>"
+                             })
+                             
+                             $('#step{{ step.number }}block').on('hidden', function () {
+                                 document.getElementById("step{{ step.number }}blocklink").innerHTML="View Blocks For This Step<small>&nbsp;&nbsp;(click for details)</small>"
+                             })
+                           
+                             
+                           });
+                        </script>
+                     </div>
+				<div class="span2">
+				{% if steps %}
+         			<p></p>
+				<p class="smallleadfont">
+				<a href="{{ app.appId }}">View All Steps</a>
+				</p>
+
+
+         			{% else %}
+         			<!--Hide See All Steps Link, nothing here-->
+         			{% endif %}
+				</div>
+
+                  </div>
+                  <div id="youtube_player{{step.number}}"></div>
+                  <script>
+                     addVideo('{{step.videoPath}}', 'youtube_player{{step.number}}');
+				$(document).ready(function () {
+
+     					$(window).resize(function () {
+
+         					$("#youtube_player{{step.number}}").css({
+             					width: $("#course-steps").width(),
+             					height: ($(this).width()) * .37
+         					});
+
+     					});
+
+     				$(window).resize();
+
+ 				});
+                      
+                  </script>
+                  <div class="carousel-caption">
+                     <h4>&nbsp&nbsp&nbsp&nbsp&nbsp {{ step.number }}: {{step.header}}</h4>
+                  </div>
+               </div>
+               {%  endfor %}
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#myCarousel" onclick="if(currentPage>0){currentPage=((currentPage-(2))%pagesCount);$('#myCarousel').carousel(currentPage+1);stopVideo();}">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" onclick="if(currentPage<pagesCount){$('#myCarousel').carousel(currentPage+1);stopVideo();}">&rsaquo;</a>
+         </div>
+      </div>
+	 {% else %}
+		<div class="span6">
+		<p class="leadfont">
+		Video coming soon, for now 		
+		<a href="apps/{{ app.appId }}/{{ app.appId }}.pdf">
+                  download the chapter
+                  <i class="icon-download-alt icon-white"></i></a>
+
+
+		</p>	
+		</div>
+	 {% endif %}
+
+
+      
+   </div>
+   <!-- End of row-fluid-->
+
+   <div class="row-fluid">
+	<div class="span4">
+         {% if app.conceptualLink %}
+         <a class="btn btn-success"
+            href="{{ app.appId }}Lesson" title="Study questions and customization challenges">
+         &nbspConceptualize/Customize&nbsp;&nbsp;
+         </a>
+         {% else %}
+         <!--Hide Conceptual Link, nothing here-->
+         {% endif %}
+      </div>
+	<div class="span4">	
+	</div>
+
+      <div class="offset1 span2">
+         {% if nextApp %}
+         <a class="btn btn-block btn-success" href="/{{ nextApp.appId }}-steps" title="{{nextApp.title}}">&nbsp;&nbsp;Next App&nbsp;&nbsp;<i class="icon-arrow-right icon-white"></i>&nbsp;&nbsp;</a>
+         {% else %}
+         <!--Hide nextApp Link, nothing here-->
+         {% endif %}
+      </div>
+   </div>
+
+
+   <div class="row-fluid" style="margin-top:50px;">
+		<div class="span7">
+			{% if userStatus.ifUser%}
+		<div class="span1">
+			<img src="/imageHandler?key={{userStatus.account.key}}" style="width:50px;height=50px;" />
+		</div>
+			<div class="span11">
+
+			<form action="/postComment">
+			<textarea type="text" rows="2"  name="comment_content" placeholder="Enter comment/question" class="span12"></textarea>
+		
+			<input type="hidden" value= "{{ app.appId }}" name="comment_appId" />
+			<input type="hidden" value= "{{ app.appId }}-steps" name="redirect_link" />
+		
+			
+			<div class="pull-right" style="margin-bottom:50px;">
+			<input type="submit" class="btn" value="Submit"/>
+			</div>
+		
+     				</form>
+			</div>
+			{% else %}
+			<div class="span12" style="background: #eee;
+border: 1px solid #ccc;height:50px;">
+			<p><a href="{{userStatus.loginurl}}"> Login </a>
+ now to post a comment!</p>
+			</div>
+			{% endif %}
+
+
+     		
+		
+
+     <table class="table table-striped">
+	
+	
+
+
+     {% for comment in comments %}
+	<tr>
+		<td>
+		
+		
+		<div class="span9">
+			<div class="span1">
+				<img src="/imageHandler?key={{comment.submitter.key}}" style="width:50px;height=50px;" />
+			</div>
+			<div class="span6">
+				<b>{{comment.content}}</b>
+				<font size="1" color="grey">{{comment.timestamp}}</font>
+			</div>
+					{% if userStatus.admin %}
+				<div class="span2">
+				<a href="/deleteComment?commentKey={{comment.key}}&redirect_link=%2Fhellopurr-steps">delete</a>
+						</div>
+					{% endif %}
+
+			
+			
+			
+		</div>
+		</td>	
+	</tr>
+     {% endfor %}
+	
+	
+	</table>
+
+   </div>
+   </div>
+
+
+
+
+</div>
+<!-- End of Container-->{% endblock %}
+{#end of body block#}

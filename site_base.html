@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>AppInventor.org: Democratizing App Building</title>
+    <title>AppInventor.org</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -40,6 +40,21 @@
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed"
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+<!-- Google Analytics Starts -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-684961-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- Google Analytics Ends -->
 </head>
 
 <body>
@@ -60,23 +75,41 @@
                     <li><a href="/hellopurr">Learn</a></li>
                     <li><a href="/teaching-android">Teach</a></li>
                     <li><a href="/about">About</a></li>
-				
-			   {% if ifUser%}
-<li>
-<a href="/profile"> Profile </a> 
-</li>
-			
-<li>
-<a href="{{logouturl}}"> logout </a>
-</li>
-			   {% else %}
-			
-<li>
-<a href="{{loginurl}}"> login </a>
-</li>
-			   {% endif %}
+			    <li><a href="/teacherMap">People Map</a></li>
+
+			    {% if userStatus.ifUser%}
+                     <li>
+                        <a href="/profile"> Profile </a> 
+                     </li>        
+                     <li>
+                        <a href="{{userStatus.logouturl}}"> logout </a>
+                     </li>
+                     {% else %}
+                     <li>
+                        <a href="{{userStatus.loginurl}}"> login </a>
+                     </li>
+                     {% endif %}
+
+
 
                 </ul>
+		     
+		     <!--Google Custom Search starts-->
+		     <ul class="nav">
+                     <li>
+                        <div style="width:0px;overflow:hidden;height:0px;">
+                           <!-- if you use display:none here it doesn't work-->
+                           <gcse:search></gcse:search>
+                        </div>
+                        <form class="form-search" id="searchbox_002873954108960030835:l3_jvzrakeu" action="/siteSearch">
+                           
+                           <input class="input-xlarge" id="q" name="q" type="text" value='{{q}}'/>
+                           <button class="btn">Search</button>
+                        </form>
+                     </li>
+                  </ul>
+                  <!--Google Custom Search ends-->
+
 
 
             </div>
@@ -110,14 +143,14 @@
 
                     <li class="nav-header">About App Inventor</li>
                     <li><a href="/introduction">Introducing App Inventor</a></li>
-                    <li><a href="/gettingstarted">Getting Started</a></li>
+                    
                     <li><a href="/course-in-a-box">Course-In-A-Box</a></li>
                     <li><a href="/media">Media</a></li>
                     <li><a href="/setup">Setup</a></li>
 
                     <li class="nav-header">Apps</li>
                     {% for app in allAppsList %}
-                        <li><a href="/{{ app.appId }}">{{ app.title }}</a></li>
+                        <li><a href="/{{ app.appId }}-steps">{{ app.title }}</a></li>
                     {% endfor %}
 
                     <li class="nav-header">Links</li>
@@ -161,7 +194,8 @@
         <script src="/assets/js/bootstrap-collapse.js"></script>
         <script src="/assets/js/bootstrap-carousel.js"></script>
         <script src="/assets/js/bootstrap-typeahead.js"></script>
-	   <script src="/assets/js/carousel-datato-index.js"></script>
+	   <script src="/assets/js/cse-searchbox.js"></script>
+
 
     </div>
 </div>

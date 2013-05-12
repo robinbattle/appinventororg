@@ -20,32 +20,22 @@ Now build the PaintPot painting app. Follow the instructions in App Inventor cha
 Topics: Canvases and drawing, event parameters
 
 <ol>
-<li>
-A number of event-handlers are involved with lines being drawn a particular color. Circle them in the blocks to the right.
-</li>
-<li>
-There are event parameters for some of the events handlers. Name the events with event parameters and describe the data each parameter holds.
-</li>
 
 <li>
- How are event parameters different than function call parameters (e.g., Draw.Line(x,y,5) or Sound.Vibrate (500) from HelloPurr) ? Who specifies function parameters? Who specifies event parameters?
+The Canvas.Touched and Canvas.Dragged events have <em>event parameters</em>. For the Dragged event, what does each parameter represent (e.g., what is startx?)
 </li>
-
-<li>
-What variable is defined in PaintPot?</li>
-<li>
-Circle the blocks used to define the variable in PaintPot. Once you define a variable, what blocks appear in "My Definitions"
+<li>You can unplug and rename event parameters, but you don't need to and should not. In which drawer can you grab a reference to an event parameter, e.g, a 'value startx' block?
 </li>
 <li>
-Sketch how the app's memory changes when you define a variable?
+Event parameters are different than function call parameters such as the x,y, and r of DrawCircle. Who specifies function parameters? Who specifies event parameters?
 </li>
 <li>
-You don't need to define a variable for 'PaintColor', the color of the paint on the canvas. Why not?
+What variable is defined in the PaintPot version on the right?</li>
+<li>
+Why do you need to define a variable for 'dotsize' but not for 'PaintColor' (the color that circles and lines are drawn)?
 </li>
 <li>
 Define the term variable. How is a variable similar to a property? How is a variable different than a property?
-</li>
-</ul>
 </li>
 <li>
 One customization of PaintPot involves using a Textbox for the dotsize.  How is a textbox different from a variable? How is a textbox different from a label?
@@ -63,8 +53,8 @@ One customization of PaintPot involves using a Textbox for the dotsize.  How is 
 <p>Note: these variations are slightly modified from the book version.
 <ol>
 <li>
-The user interface does not display the current color. Modify the app so that when the user changes color, the chosen button's color is modified.</li>
-<li>The dot size used for circle drawing can only be 2 or 8. Change this so that the user can enter the dot size within a TextBox component and thus change it to other values besides 2 and 8. For more information on input forms and the TextBox component, see the No Texting While Driving app of <a href="no-text-while-driving">Chapter 4</a>
+The user interface does not display the current chosen color-- the user can only tell what color is chosen by drawing. Add immediate feedback for the user so that when he clicks to change color, the UI changes to make it clear which color is chosen(e.g., change the text of the button to bold, and unbold others)</li>
+<li>The dot size used for circle drawing can only be 2 or 8 in the version to the right. Change this so that the user can enter the dot size within a TextBox component and thus change it to other values besides 2 and 8. For more information on input forms and the TextBox component, see the No Texting While Driving app of <a href="no-text-while-driving">Chapter 4</a>
 </li>
 </ol>
 <a href="/apps/paintpot/paintpot_custom.zip">Solution for Customization Exercises</a>. Download this zip file, then open App Inventor and choose More Actions | Upload Source.
