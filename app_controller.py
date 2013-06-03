@@ -96,6 +96,15 @@ class ProfileHandler(webapp.RequestHandler):
             organization = ''
             ifEducator = ''
             educationLevel = ''
+            user = users.get_current_user()
+            account = Account()
+            account.user  = user
+            account.firstName = ''
+            account.lastName = ''
+            account.location = ''
+            account.organization = ''
+            account.introductionLink = ''
+            account.put()
 
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
@@ -1648,6 +1657,10 @@ class PostCommentHandler (webapp.RequestHandler):
             user = users.get_current_user()
             pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
             account = pquery.get()
+            if not account:
+                account = Account()
+                account.user  = user
+                account.put()
             comment = Comment()
             comment.submitter = account
             comment.content = content

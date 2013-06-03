@@ -31,10 +31,12 @@ var geocoder, map, marker;
 
           break;
         case google.maps.GeocoderStatus.ZERO_RESULTS:
-          alert("No results were found");
+          
+	     document.getElementById('noresultsfound').innerHTML = 'sorry, please provide more location information';
           break;
         default:
-          alert("An error occured while validating this address")
+	     document.getElementById('noresultsfound').innerHTML = 'sorry, please provide more location information';
+
       }
     });
   }
@@ -44,10 +46,12 @@ var geocoder, map, marker;
     document.getElementById('result0').innerHTML = '';
     document.getElementById('result1').innerHTML = '';
     document.getElementById('result2').innerHTML = '';
+    document.getElementById('noresultsfound').innerHTML = '';
     
     document.getElementById('result0').style.display='none';
     document.getElementById('result1').style.display='none';
     document.getElementById('result2').style.display='none';
+    
 
 
 

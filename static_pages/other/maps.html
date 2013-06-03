@@ -198,9 +198,10 @@ $('#results').empty();
 			document.getElementById("College/University_selected").checked=true;
 
 			//automatically to all onchange(add)
+			handleChange(document.getElementById("College/University_selected"));
 			handleChange(document.getElementById("K_8_selected"));
 			handleChange(document.getElementById("high_school_chool_selected"));
-			handleChange(document.getElementById("College/University_selected"));
+			
 
 			
 
@@ -221,6 +222,18 @@ $('#results').empty();
 
 	 function handleChange(cb) {
     	 	if(cb.checked == true){
+
+			if (cb.value == "K-8") {
+							document.getElementById('account_k_8_well').style.display = '';
+
+						}else if (cb.value == "High School") {
+							document.getElementById('account_high_school_well').style.display = '';
+
+						}else if (cb.value == "College/University") {
+						document.getElementById('account_college_university_well').style.display = '';
+
+}
+
 			
 			{% for account in accounts %}
 				if('{{account.ifEducator}}' == 'True'){
@@ -235,18 +248,16 @@ $('#results').empty();
 						dataList[4] = "{{account.educationLevel}}";
 						dataList[5] = "{{account.introductionLink}}";
 						dataList[6] = "/imageHandler?key={{account.key}}";
-						showAddress(dataList, cb.value);
 
-					     if (cb.value == "K-8") {
-							document.getElementById('account_k_8_well').style.display = '';
+						{% if account.location %}
+							showAddress(dataList, cb.value);
+						{% else %}
+				
+						{% endif %}
 
-						}else if (cb.value == "High School") {
-							document.getElementById('account_high_school_well').style.display = '';
+						
 
-						}else if (cb.value == "College/University") {
-						document.getElementById('account_college_university_well').style.display = '';
-
-}
+					     
 
 					}
 				}
@@ -314,7 +325,7 @@ if (cb.value == "K-8") {
    </div>
    <div class="span2">
 	<a class="btn btn-success btn-mini"
-                   href="http://appinventor.mit.edu/explore/forums.html">
+                   href="https://groups.google.com/forum/#!forum/app-inventor-instructors" target="_blank">
 		App Inventor Educators Google Forum
 	</a>
    </div>
@@ -354,11 +365,12 @@ if (cb.value == "K-8") {
 			<p>{{account.educationLevel}}</p>
 			<p style="display: inline;overflow:hidden;word-wrap:normal;text-overflow: ellipsis;">{{account.organization}}</p>
 			{% if account.introductionLink %}
-				<p><a href="{{account.introductionLink }}" target="_blank">Link</a></p>
+				<p><a href="{{account.introductionLink }}" target="_blank">More Infomation</a></p>
 			{% else %}
 				
 			{% endif %}
-			
+
+					
 		</div>
 	
 	</div>
@@ -409,7 +421,7 @@ if (cb.value == "K-8") {
 			<p>{{account.educationLevel}}</p>
 			<p style="overflow:hidden;word-wrap:normal;">{{account.organization}}</p>
 			{% if account.introductionLink %}
-				<p><a href="{{account.introductionLink }}" target="_blank">Link</a></p>
+				<p><a href="{{account.introductionLink }}" target="_blank">More Infomation</a></p>
 			{% else %}
 				
 			{% endif %}
@@ -460,9 +472,9 @@ if (cb.value == "K-8") {
 			<p>{{account.educationLevel}}</p>
 			<p style="overflow:hidden;word-wrap:normal;">{{account.organization}}</p>
 			{% if account.introductionLink %}
-				<p><a href="{{account.introductionLink }}" target="_blank">Link</a></p>
+				<p><a href="{{account.introductionLink }}" target="_blank">More Infomation</a></p>
 			{% else %}
-				<p><a href="#" target="_blank">Link</a></p>
+				<p><a href="#" target="_blank">More Infomation</a></p>
 
 			{% endif %}
 			
@@ -493,4 +505,5 @@ if (cb.value == "K-8") {
 
 
 {% endblock %}
+
 

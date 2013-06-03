@@ -70,8 +70,9 @@
                     <!-- <li class="active"><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li> -->
                     <li><a href="/hellopurr">Learn</a></li>
                     <li><a href="/teaching-android">Teach</a></li>
-                    <li><a href="/about">About</a></li>
 			    <li><a href="/teacherMap">People Map</a></li>
+                    <li><a href="/about">About</a></li>
+			    
 			    {% if userStatus.ifUser%}
                      <li>
                         <a href="/profile"> Profile </a> 
@@ -143,7 +144,7 @@
 
                     <li class="nav-header">Apps</li>
                     {% for app in allAppsList %}
-                        <li><a href="/{{ app.appId }}">{{ app.title }}</a></li>
+                        <li><a href="/{{ app.appId }}-steps">{{ app.title }}</a></li>
                     {% endfor %}
 
                     <li class="nav-header">Links</li>
@@ -221,7 +222,8 @@
                 <br/>
 
 
-                Designed and coded by <a href="http://www.jdmanuel.com">J.D. Manuel.</a>
+                Designed and coded by <a href="http://www.jdmanuel.com">J.D. Manuel.</a> <a href="https://www.cs.usfca.edu/~blu2/introduction/">,&nbsp; Bin Lu</a>
+
 
             </div>
         </div>

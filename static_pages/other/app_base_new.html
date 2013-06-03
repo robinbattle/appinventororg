@@ -295,13 +295,18 @@ border: 1px solid #ccc;height:50px;">
 			<div class="span1">
 				<img src="/imageHandler?key={{comment.submitter.key}}" style="width:50px;height=50px;" />
 			</div>
+			<div class="span3">
+				<b>{{comment.submitter.firstName}}
+				&nbsp;
+				{{comment.submitter.lastName}}</b>
+			</div>
 			<div class="span6">
-				<b>{{comment.content}}</b>
+				{{comment.content}}
 				<font size="1" color="grey">{{comment.timestamp}}</font>
 			</div>
 					{% if userStatus.admin %}
 				<div class="span2">
-				<a href="/deleteComment?commentKey={{comment.key}}&redirect_link=%2Fhellopurr-steps">delete</a>
+				<a href="/deleteComment?commentKey={{comment.key}}&redirect_link=%2F{{ app.appId }}-steps">delete</a>
 						</div>
 					{% endif %}
 
