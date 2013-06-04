@@ -521,7 +521,7 @@ class LoveYouHandler(webapp.RequestHandler):
         userStatus = userStatus.getStatus(self.request.uri)
         
         template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/raffleApp.html')
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/loveYou.html')
         self.response.out.write(template.render(path, template_values))
 
 class LoveYouWSHandler(webapp.RequestHandler):
@@ -1638,7 +1638,7 @@ class NewAppRenderer(webapp.RequestHandler):
 
 #commenting system
 class PostCommentHandler (webapp.RequestHandler):
-    def get(self):
+    def post(self):
         currenttime = datetime.utcnow()
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
@@ -1801,6 +1801,16 @@ class TryItHandler(webapp.RequestHandler):
        
         template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus, 'manyMoldAppsList': manyMoldAppsList}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/tryit.html')
+        self.response.out.write(template.render(path, template_values))
+
+
+class DLC_AdvirsorBoardAboutPageHandler(webapp.RequestHandler):
+    def get(self):
+        currenttime = datetime.utcnow()
+        
+       
+        template_values={}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/dlc_advisoryboardaboutpage.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -2102,7 +2112,9 @@ application = webapp.WSGIApplication(
         ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
 
          #memcache flush
-         ('/memcache_flush_all', MemcacheFlushHandler)
+         ('/memcache_flush_all', MemcacheFlushHandler),
+
+         ('/dlc', DLC_AdvirsorBoardAboutPageHandler)
         
     ],
     debug=True)

@@ -21,6 +21,7 @@ from datastore import App
 from datastore import Step
 from datastore import Custom
 from datastore import Account
+from datastore import Comment
 from datastore import Position
 
 
@@ -95,6 +96,15 @@ class ProfileHandler(webapp.RequestHandler):
             organization = ''
             ifEducator = ''
             educationLevel = ''
+            user = users.get_current_user()
+            account = Account()
+            account.user  = user
+            account.firstName = ''
+            account.lastName = ''
+            account.location = ''
+            account.organization = ''
+            account.introductionLink = ''
+            account.put()
 
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
@@ -167,9 +177,11 @@ class ChangeProfileHandler(webapp.RequestHandler):
         template_values={'account': account, 'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus, 
                          'ifEducatorShow': ifEducatorShow, 'educationLevelCheck0': educationLevelCheck0, 'educationLevelCheck1': educationLevelCheck1, 'educationLevelCheck2': educationLevelCheck2}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/changeProfile.html')
-        self.response.out.write(template.render(path, template_values))        
+        self.response.out.write(template.render(path, template_values))
+    
+        
 class SaveProfile(webapp.RequestHandler):
-    def get(self):
+    def post(self):
         user = users.get_current_user()
         pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
         account = pquery.get()
@@ -203,7 +215,73 @@ class SaveProfile(webapp.RequestHandler):
         account.introductionLink=self.request.get('introductionLink')
         account.put()
 
-        self.redirect("/profile?save=successful")
+        #if uploading image
+        if self.request.get('pictureFile') is not None :
+            if len(self.request.get('pictureFile').strip(' \t\n\r')) != 0:
+                self.uploadimage()
+                self.redirect("/profile?savePic=successful")
+
+        self.redirect("/profile?save=successful" + str(self.request.get('h')))
+        #self.redirect("/profile?save=successful")
+        
+    def uploadimage(self):
+        picture = self.request.get('pictureFile')
+
+        user = users.get_current_user()
+        account_query = db.GqlQuery("Select * from Account where user=:1",user)
+        account = account_query.get()
+
+
+
+        x1=float(self.request.get('x1'))
+        y1=float(self.request.get('y1'))
+        x2=float(self.request.get('x2'))
+        y2=float(self.request.get('y2'))
+        newH=float(self.request.get('h'))
+        newW=float(self.request.get('w'))
+
+        x_left=float(self.request.get('x_left'))
+        y_top=float(self.request.get('y_top'))
+        x_right=float(self.request.get('x_right'))
+        y_bottom=float(self.request.get('y_bottom'))
+
+        originalW = x_right-x_left
+        originalH = y_bottom-y_top
+
+        #originalW = 300
+        #originalH = 300
+
+        
+
+
+        x1_fixed = x1 - x_left
+        y1_fixed = y1 - y_top
+        x2_fixed = x2 - x_left
+        y2_fixed = y2 - y_top
+
+
+        if(x1_fixed < 0):
+            x1_fixed = 0
+        if(y1_fixed < 0):
+            y1_fixed = 0
+        if(x2_fixed > originalW):
+            x2_fixed = originalW
+        if(y2_fixed > originalH):
+            y2_fixed = originalH
+
+
+        picture = images.crop(picture, float(x1_fixed/originalW), float(y1_fixed/originalH), float(x2_fixed/originalW), float(y2_fixed/originalH))
+        picture = images.resize(picture, 300, 300)
+
+
+        if not account:
+            account = Account()
+        if picture:
+            account.user = user      #maybe duplicate, but it is really imporant to make sure
+            account.profilePicture = db.Blob(picture)  
+        account.put()
+        return
+
 
     
 class CourseOutlineHandler(webapp.RequestHandler):
@@ -443,7 +521,7 @@ class LoveYouHandler(webapp.RequestHandler):
         userStatus = userStatus.getStatus(self.request.uri)
         
         template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'userStatus': userStatus}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/raffleApp.html')
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/loveYou.html')
         self.response.out.write(template.render(path, template_values))
 
 class LoveYouWSHandler(webapp.RequestHandler):
@@ -1460,7 +1538,7 @@ class AdminHandler(webapp.RequestHandler):
         app_listing = ""
 
         cacheHandler = CacheHandler()
-        apps = cacheHandler.GettingCache("App", False, None, None, False, None, None, False)
+        apps = cacheHandler.GettingCache("App", False, None, None, False, None, None, True)
 
         for app in apps:
             app_listing += app.appId + '|'
@@ -1529,7 +1607,6 @@ class NewAppRenderer(webapp.RequestHandler):
 
         allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
 
-
    
         #check if reach the last one
         try:
@@ -1541,18 +1618,76 @@ class NewAppRenderer(webapp.RequestHandler):
         userStatus = UserStatus()
         userStatus = userStatus.getStatus(self.request.uri)
 
+        #comment
+        pquery = db.GqlQuery("SELECT * FROM Comment WHERE appId = :1 ORDER BY timestamp DESC", t_path) # t_path is appID
+        #pquery = db.GqlQuery("SELECT * FROM Comment")
+        comments = pquery.fetch(pquery.count())
+
         template_values = {
             'steps': steps,
             'customs': customs,
             'app': app,
             'allAppsList': allAppsList,
             'userStatus': userStatus,
-            'nextApp':nextApp
+            'nextApp':nextApp,
+            'comments': comments
             }
 
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/app_base_new.html')
         self.response.out.write(template.render(path, template_values))
 
+#commenting system
+class PostCommentHandler (webapp.RequestHandler):
+    def post(self):
+        currenttime = datetime.utcnow()
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+
+        user = users.get_current_user()
+
+        if not user:
+            self.redirect(userStatus['loginurl'])
+
+        content = self.request.get('comment_content').strip(' \t\n\r')
+        if(content != ''):
+            user = users.get_current_user()
+            pquery = db.GqlQuery("SELECT * FROM Account where user= :1 ",user)
+            account = pquery.get()
+            if not account:
+                account = Account()
+                account.user  = user
+                account.put()
+            comment = Comment()
+            comment.submitter = account
+            comment.content = content
+            comment.appId = self.request.get('comment_appId')
+            comment.put()
+
+        
+        self.redirect(self.request.get('redirect_link'))
+class DeleteCommentHandler (webapp.RequestHandler):
+    def get(self):
+        
+
+        user = users.get_current_user()
+        
+        
+
+        if users.is_current_user_admin():
+            commentKey = self.request.get('commentKey')
+            if(commentKey != ""):
+                db.delete(commentKey)
+            self.redirect(self.request.get('redirect_link'))
+        else:
+            
+            print 'Content-Type: text/plain'
+            print 'You are NOT administrator'
+        
+       
 class AboutHandler(webapp.RequestHandler):
     def get(self):
         currenttime = datetime.utcnow()
@@ -1699,29 +1834,23 @@ class UploadPictureHandler(webapp.RequestHandler):
         #originalW = 300
         #originalH = 300
 
+        
 
-        #if x1 > x_left or x2 < x_right or y1 > y_top or y2 < y_bottom:
-        #    self.redirect('/profile?status=error')
-        #    return
-
-        if x1 < x_left:
-            self.redirect('/profile?status=erroronx1')
-            return
-        elif x2 > x_right:
-            self.redirect('/profile?status=erroronx2')
-            return
-        elif y1 < y_top:
-            self.redirect('/profile?status=errorony1')
-            return
-        elif y2 > y_bottom:
-            self.redirect('/profile?status=errorony2')
-            return
 
         x1_fixed = x1 - x_left
         y1_fixed = y1 - y_top
         x2_fixed = x2 - x_left
         y2_fixed = y2 - y_top
 
+
+        if(x1_fixed < 0):
+            x1_fixed = 0
+        if(y1_fixed < 0):
+            y1_fixed = 0
+        if(x2_fixed > originalW):
+            x2_fixed = originalW
+        if(y2_fixed > originalH):
+            y2_fixed = originalH
 
 
         picture = images.crop(picture, float(x1_fixed/originalW), float(y1_fixed/originalH), float(x2_fixed/originalW), float(y2_fixed/originalH))
@@ -1736,8 +1865,6 @@ class UploadPictureHandler(webapp.RequestHandler):
         ad = picture
         self.redirect('/changeProfile')
                 
-        
-
 
 class ImageHandler (webapp.RequestHandler):
     def get(self):
@@ -1766,19 +1893,23 @@ class ImageHandler (webapp.RequestHandler):
             #self.response.out.write('/assets/img/avatar-default.gif')
             #self.error(404)
 #Map
-class LocationOnMapsHandler(webapp.RequestHandler):
+class TeacherMapHandler(webapp.RequestHandler):
     def get(self):
+
+        #all apps list
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", False, None, None, True, "number", "ASC", True)
+
         #user status
         userStatus = UserStatus()
         userStatus = userStatus.getStatus(self.request.uri)
-        allAccountsQuery = db.GqlQuery("SELECT * FROM Account")
+        #allAccountsQuery = db.GqlQuery("SELECT * FROM Account")
+        allAccountsQuery = db.GqlQuery("SELECT * FROM Account WHERE ifEducator=:1", True)
+                                                                                    #now only show teachers
+                                                                                    #TO-DO:Not sure if need to be memcached
 
         accountCount = allAccountsQuery.count()
         accounts = allAccountsQuery.fetch(accountCount)
-
-        #user status
-        userStatus = UserStatus()
-        userStatus = userStatus.getStatus(self.request.uri)
 
         account_k_8 = []
         account_high_school = []
@@ -1794,7 +1925,7 @@ class LocationOnMapsHandler(webapp.RequestHandler):
                
 
         currenttime = datetime.utcnow()
-        template_values={'currenttime':currenttime,  'accounts': accounts, 'account_k_8':account_k_8,  'account_high_school':account_high_school, 'account_college_university':account_college_university, 'userStatus': userStatus}
+        template_values={'currenttime':currenttime, 'allAppsList': allAppsList, 'accounts': accounts, 'account_k_8':account_k_8,  'account_high_school':account_high_school, 'account_college_university':account_college_university, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/maps.html')
         self.response.out.write(template.render(path, template_values))               
                
@@ -1862,6 +1993,22 @@ class CacheHandler(webapp.RequestHandler):
 
         return query1 + query2 + query3
 
+class MemcacheFlushHandler(webapp.RequestHandler):
+
+    def get(self):
+        memcache.flush_all()       
+       
+        if users.is_current_user_admin():
+            if(self.request.get('redirect_link')):                  # not implemented yet
+                self.redirect(self.request.get('redirect_link'))
+            else:
+                self.redirect("/Admin")
+        else:        
+            print 'Content-Type: text/plain'
+            print 'You are NOT administrator'        
+        return
+
+
 # user status checking(login/logout)
 class UserStatus(webapp.RequestHandler):
     
@@ -1874,11 +2021,17 @@ class UserStatus(webapp.RequestHandler):
         loginurl = users.create_login_url(uri)
         logouturl = users.create_logout_url('/')
 
+        admin = False
         if user:
             ifUser = True
+            if users.is_current_user_admin():
+                admin = True
         else:
             ifUser = False
-        status = {'loginurl': loginurl, 'logouturl':logouturl, 'ifUser':ifUser}
+
+        
+        
+        status = {'loginurl': loginurl, 'logouturl':logouturl, 'ifUser':ifUser, 'account':account, 'admin': admin}
         return status
 
 
@@ -1933,7 +2086,7 @@ application = webapp.WSGIApplication(
         ('/DeleteApp', DeleteApp), ('/AddStepPage', AddStepRenderer), ('/DeleteStep', DeleteStep), ('/AddCustomPage', AddCustomRenderer),
         ('/projects', BookHandler ), ('/appinventortutorials', BookHandler), ('/get_app_data', GetAppDataHandler),
         ('/get_step_data', GetStepDataHandler), ('/get_custom_data', GetCustomDataHandler), ('/setup', SetupHandler),
-        ('/profile', ProfileHandler), ('/changeProfile', ChangeProfileHandler),('/saveProfile', SaveProfile), ('/uploadPicture', UploadPictureHandler), ('/imageHandler', ImageHandler), ('/locationOnMaps', LocationOnMapsHandler),
+        ('/profile', ProfileHandler), ('/changeProfile', ChangeProfileHandler),('/saveProfile', SaveProfile), ('/uploadPicture', UploadPictureHandler), ('/imageHandler', ImageHandler), ('/teacherMap', TeacherMapHandler),
         ('/siteSearch', SearchHandler), ('/moleMashManymo',MoleMashManymoHandler),
 
 
@@ -1944,7 +2097,12 @@ application = webapp.WSGIApplication(
         ('/notetaker-steps', NewAppRenderer), ('/xylophone-steps', NewAppRenderer), ('/makequiz-and-takequiz-1-steps', NewAppRenderer),
         ('/broadcaster-hub-1-steps', NewAppRenderer), ('/robot-remote-steps', NewAppRenderer), ('/stockmarket-steps', NewAppRenderer),
         ('/amazon-steps', NewAppRenderer),
-     
+
+         # Comment
+        ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
+
+         #memcache flush
+         ('/memcache_flush_all', MemcacheFlushHandler)
         
     ],
     debug=True)

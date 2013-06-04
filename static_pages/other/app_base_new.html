@@ -256,8 +256,8 @@
 		</div>
 			<div class="span11">
 
-			<form action="/postComment">
-			<textarea type="text" rows="2"  name="comment_content" placeholder="Enter comment/question" class="span12"></textarea>
+			<form action="/postComment" method="post">
+			<textarea type="text" rows="2"  name="comment_content" placeholder="Enter comment/question" class="span12" maxlength="400"></textarea>
 		
 			<input type="hidden" value= "{{ app.appId }}" name="comment_appId" />
 			<input type="hidden" value= "{{ app.appId }}-steps" name="redirect_link" />
