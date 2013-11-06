@@ -16,26 +16,28 @@
 <h3>Canvas has an X,Y coordinate system</h3>
 <ul>
 
-    <li>X goes from 1 right to width of canvas</li>
-    <li>Y goes from 1 down to height of canvas (note down is bigger, unlike math)</li>
+    <li>X represents the horizontal location of an object. The left-side of the Canvas is X=1. If the Canvas has a width of 300, then the right-side of the Canvas is X=300.</li>
+    <li>Y represents the vertical location of an object. The top of the Canvas is Y=1. If the Canvas has a height of 400, then the bottom of the Canvas is Y=400. Note that Y gets bigger as you go down, which is the opposite of the traditional math coordinate system.</li>
 </ul>
     
 <h3>Canvas properties, functions, and events</h3>
 <ul>
     <li>Canvas properties: Width, Height, BackgroundColor, PaintColor</li>
     <li>Canvas functions: DrawCircle, DrawLine</li>
-    <li>Canvas events: Touched(x,y), Dragged(starts,starry,previousx,previousy, currentx, currenty)</li>
+    <li>Canvas events: Touched(x,y), Dragged(startx,starty,previousx,previousy, currentx, currenty)</li>
     <li>note that dragged is triggered many times as user drags finger across the screen</li>
 </ul>    
 
 <h3>Instructor Demo</h3>
+<p>Demonstrate the following or give some or all of them to your students as challenges:
 <ul>
-    <li>Set the width of the canvas to "Fill parent"</li>
-    <li>Draw a circle at 30,30 not matter where touched</li>
-    <li>Draw circle at x,y on touched event</li>
-    <li>Note that event parameters of events found in "My Blocks": do not drag from event-handler</li>
+    <li>Drag in a Canvas and set the width of the canvas to "Fill parent" and the height to 400</li>
+    <li>Add a button below the Canvas.</li>
+    <li>On the Button click, draw a circle at 30,30 no matter where touched</li>
+    <li>On Canvas.Touched event, draw a circle at x,y</li>
+    <li>Note that event parameters are found in "My Blocks": do not drag from event-handler</li>
 
-    <li>Show x,y coordinates in a label when you touch canvas, draw circle when touch canvas</li>
+    <li>On Canvas.Touched event, show x,y coordinates in a label.</li>
     <li>Draw a circle in middle of canvas no matter where touched</li>
 </ul> 
 

@@ -7,7 +7,7 @@
          		
 			margin-top:10px;
 			outline:1px solid grey;
-			background-color:#40664D;
+			background-color:#a5cd42;
          }
          .personal_avatar{
 			float:left;
@@ -22,12 +22,36 @@
 			float:right;
          }
 	   .personal_info > .personal_content> p{
-         		color:white;
+         		color:#f9fff1;
+         }
+	   .personal_info > .personal_content> p > b > a{
+         		color:#f9fff1;
+         }
+	   .personal_info > .personal_content> p > b > a:hover{
+			text-decoration:underline; 
          }
 	   .personal_info > .personal_content> p > a{
-         		color:#CAE1FF;
+         		color:#0072e4;
          }
 
+	   .span3{
+			min-width:150px;
+	   }
+
+	   #earth-spinner {
+    		-webkit-animation: rotation 10s infinite linear;
+		margin-top:75px;
+		margin-bottom:75px;
+		width:220px;
+		height:220px;
+
+
+   }
+
+   @-webkit-keyframes rotation {
+    	from {-webkit-transform: rotate(0deg);}
+    	to   {-webkit-transform: rotate(359deg);}
+   }
 
 
 
@@ -64,6 +88,8 @@
 
 		document.getElementById("All").checked=true;
 		handleChangeAll(document.getElementById("All"));
+
+           $( "#spinner-div" ).hide();
      
          }
 	    google.maps.event.addDomListener(window, 'load', initialize);
@@ -72,14 +98,12 @@
 	    function showAddress(dataList, cb_value){
 		var address_string = dataList[2];
 		
+		if (dataList[7] != "None"){
+			geoPosition=new google.maps.LatLng(dataList[7], dataList[8]);
+			placeMarker(geoPosition, dataList, cb_value);
+		}
 
-
-		geocoder = new google.maps.Geocoder();
-           geocoder .geocode({'address' : address_string}, function(results, status){
-            geoPosition=new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-            placeMarker(geoPosition, dataList, cb_value);
-		 
-            });
+	
           }
          
          
@@ -91,9 +115,19 @@
 		var educationLevel = dataList[4];
 		var introductionLink = dataList[5];
 		var profilePicture = dataList[6];
+		var userKey = dataList[9];
 
-           var introductionLinkString='<a href="' + introductionLink + '" target="_blank">' + introductionLink + '</a>';
-		var profilePictureString = '<img src="'+ profilePicture + '" class="pull-right" style="width:50px;height:50px;"></img>';		
+		var userNameString;
+		userNameString = '<a class="introduction_link" href="/publicProfile?accountKey=' + userKey + '" target="_blank">' + firstName +' '+ lastName + '</a>';
+
+           var introductionLinkString;
+		if(dataList[5] == 'None'){
+			introductionLinkString = '';
+		}else{
+			introductionLinkString ='<a href="http://' + introductionLink + '" target="_blank">' + introductionLink + '</a>';
+		}
+
+		var profilePictureString = '<a class="introduction_link" target="_blank" href="/publicProfile?accountKey=' + userKey +'"><img src="'+ profilePicture + '" class="pull-right" style="width:50px;height:50px;margin-left:5px;"></img></a>';		
 		
 		people_list.push(dataList);
 
@@ -125,7 +159,7 @@
 		}
 
            var infowindow = new google.maps.InfoWindow({
-             content: firstName +' '+ lastName + profilePictureString + '<br>'+'' + educationLevel  + '<br>' + '' + organization +'<br/>' +introductionLinkString
+             content: userNameString + '  ' + profilePictureString + '<br>'+'' + educationLevel  + '<br>' + '' + organization +'<br/>' +introductionLinkString
            });
 		
            //setTimeout(function () { infowindow.close(); }, 5000);
@@ -248,7 +282,9 @@ $('#results').empty();
 						dataList[4] = "{{account.educationLevel}}";
 						dataList[5] = "{{account.introductionLink}}";
 						dataList[6] = "/imageHandler?key={{account.key}}";
-
+						dataList[7] = "{{account.latitude}}";
+						dataList[8] = "{{account.longitude}}";
+						dataList[9] = "{{account.key}}";
 						{% if account.location %}
 							showAddress(dataList, cb.value);
 						{% else %}
@@ -304,39 +340,53 @@ if (cb.value == "K-8") {
 	
 
       </script>
-<div class="row-fluid">
+<div class="row-fluid" style="min-width: 1200px">
+
    <div class="span2">
       <input type="checkbox" id="All" value="All" onchange='handleChangeAll(this);'>&nbsp;All
    </div>
    <div class="span2">
       <input type="checkbox" id="K_8_selected" value="K-8" onchange='handleChange(this);'>&nbsp;K-8
+	<img src="/assets/img/maps/green-dot.png"></img>	 
    </div>
    <div class="span2">
       <input type="checkbox" id="high_school_chool_selected" value="High School" onchange='handleChange(this);'>&nbsp;High School
+	 <img src="/assets/img/maps/blue-dot.png"></img>
+
    </div>
    <div class="span2">
       <input type="checkbox" id="College/University_selected" value="College/University" onchange='handleChange(this);'>&nbsp;College/University 
+	 <img src="/assets/img/maps/red-dot.png"></img>
+
    </div>
+
    <div class="span2">
    {% if userStatus.ifUser%}
    {% else %}
     Are you an educator? <a href="{{userStatus.loginurl}}">login</a> and tell us about yourself
    {% endif %}
    </div>
-   <div class="span2">
-	<a class="btn btn-success btn-mini"
+    <div class="span2">
+	<a class="btn btn-success btn-mini" style="background:#FFAE00;"
                    href="https://groups.google.com/forum/#!forum/app-inventor-instructors" target="_blank">
 		App Inventor Educators Google Forum
 	</a>
    </div>
 
+   
+   
+
 </div>
 
 
 
-<div class="row-fluid">
+<div class="row-fluid" >
    <div class="span12">
-	 <div id="map_canvas">
+	 <div class="offset4 span4 offset4" id="spinner-div">
+	 	<img id="earth-spinner" src="/assets/img/earth.png"></img>
+	 <p><b>Loading data now, please wait...</b></p>
+	 </div>
+	 <div id="map_canvas" >
 		<div id="googleMap" style="width:100%;height:514px;"></div>
 	 </div>
 
@@ -348,6 +398,7 @@ if (cb.value == "K-8") {
 <p></p>
 
 <!-------------------account_college_university--------------->
+
 <div id="account_college_university_well">
 	<p>College/University:</p>
 <div class="row-fluid well">
@@ -358,16 +409,18 @@ if (cb.value == "K-8") {
 	<div class="span3 personal_info">
 	
 		<div class="span4 personal_avatar">
-			<img src="/imageHandler?key={{account.key}}"></img>
+			<a href="/publicProfile?accountKey={{account.key}}" target="_blank"><img src="/imageHandler?key={{account.key}}"></img></a>
+			
 		</div>
 		<div class="span8 personal_content">
-			<p>{{account.firstName}}&nbsp;{{account.lastName}} </p>
+			<p><b><a href="/publicProfile?accountKey={{account.key}}" target="_blank">{{account.firstName}}&nbsp;{{account.lastName}} </a></b></p>
 			<p>{{account.educationLevel}}</p>
 			<p style="display: inline;overflow:hidden;word-wrap:normal;text-overflow: ellipsis;">{{account.organization}}</p>
 			{% if account.introductionLink %}
-				<p><a href="{{account.introductionLink }}" target="_blank">More Infomation</a></p>
-			{% else %}
 				
+				<p><a href="http://{{account.introductionLink }}" target="_blank">More Infomation</a></p>
+			{% else %}
+				<p></p>
 			{% endif %}
 
 					
@@ -414,16 +467,16 @@ if (cb.value == "K-8") {
 	<div class="span3 personal_info">
 	
 		<div class="span4 personal_avatar">
-			<img src="/imageHandler?key={{account.key}}"></img>
+			<a href="/publicProfile?accountKey={{account.key}}" target="_blank"><img src="/imageHandler?key={{account.key}}"></img></a>
 		</div>
 		<div class="span8 personal_content">
-			<p>{{account.firstName}}&nbsp;{{account.lastName}} </p>
+			<p><b><a href="/publicProfile?accountKey={{account.key}}" target="_blank">{{account.firstName}}&nbsp;{{account.lastName}} </a></b></p>
 			<p>{{account.educationLevel}}</p>
 			<p style="overflow:hidden;word-wrap:normal;">{{account.organization}}</p>
 			{% if account.introductionLink %}
-				<p><a href="{{account.introductionLink }}" target="_blank">More Infomation</a></p>
+				<p><a href="http://{{account.introductionLink }}" target="_blank">More Infomation</a></p>
 			{% else %}
-				
+				<p></p>
 			{% endif %}
 			
 		</div>
@@ -465,17 +518,16 @@ if (cb.value == "K-8") {
 	<div class="span3 personal_info">
 	
 		<div class="span4 personal_avatar">
-			<img src="/imageHandler?key={{account.key}}"></img>
+			<a href="/publicProfile?accountKey={{account.key}}" target="_blank"><img src="/imageHandler?key={{account.key}}"></img></a>
 		</div>
 		<div class="span8 personal_content">
-			<p>{{account.firstName}}&nbsp;{{account.lastName}} </p>
+			<p><b><a href="/publicProfile?accountKey={{account.key}}" target="_blank">{{account.firstName}}&nbsp;{{account.lastName}} </a></b></p>
 			<p>{{account.educationLevel}}</p>
 			<p style="overflow:hidden;word-wrap:normal;">{{account.organization}}</p>
 			{% if account.introductionLink %}
-				<p><a href="{{account.introductionLink }}" target="_blank">More Infomation</a></p>
+				<p><a href="http://{{account.introductionLink }}" target="_blank">More Infomation</a></p>
 			{% else %}
-				<p><a href="#" target="_blank">More Infomation</a></p>
-
+				<p></p>
 			{% endif %}
 			
 		</div>
@@ -505,5 +557,6 @@ if (cb.value == "K-8") {
 
 
 {% endblock %}
+
 
 

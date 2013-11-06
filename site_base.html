@@ -147,10 +147,16 @@
                     <li><a href="/course-in-a-box">Course-In-A-Box</a></li>
                     <li><a href="/media">Media</a></li>
                     <li><a href="/setup">Setup</a></li>
-
-                    <li class="nav-header">Apps</li>
+		    <li><a href="/concepts">Conceptual Roadmap</a></li>
+		    <li><a href="/appInventor2">App Inventor 2</a></li>
+			    <li class="nav-header" style="color:white; font-size:15px">Apps</li>
                     {% for app in allAppsList %}
-                        <li><a href="/{{ app.appId }}-steps">{{ app.title }}</a></li>
+                    <li><a href="/{{ app.appId }}-steps" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;{{ app.title }}</a></li>
+                    {% endfor %}
+
+			    <li class="nav-header" style="color:white; font-size:15px">App Inventor 2</li>
+                    {% for app in allAppsList2 %}
+                    <li><a href="/{{ app.appId }}-steps" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;{{ app.title }}</a></li>
                     {% endfor %}
 
                     <li class="nav-header">Links</li>
@@ -214,15 +220,12 @@
 
         <div class="span8">
 
-            <div class="tiny-text">
-
-                AppInventor.org by David Wolber is licensed under an
-                <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
-
-                <br/>
-
-
-                Designed and coded by <a href="http://www.jdmanuel.com">J.D. Manuel.</a> <a href="https://www.cs.usfca.edu/~blu2/introduction/">,&nbsp; Bin Lu</a>
+             <div class="tiny-text" style="color:black">
+                  AppInventor.org by David Wolber is licensed under an
+                  <b><a style="color:#0072e4" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Attribution-NonCommercial-ShareAlike 3.0 Unported License</a></b>.
+                  <br/>
+                  Designed by: Colin Russel,&nbsp; Cayla Shaver</br>
+                  Coded by: <b><a style="color:#0072e4" href="http://adamtothfejel.appspot.com">Adam Toth-Fejel</a></b> <b><a style="color:#0072e4" href="http://www.jdmanuel.com">,&nbsp; J.D. Manuel.</a></b> <b><a style="color:#0072e4" href="https://www.cs.usfca.edu/~blu2/introduction/">,&nbsp; Bin Lu</a></b>
 
 
             </div>

@@ -106,7 +106,7 @@
                         <div id="app_box">
 
 
-                            <h2>Apps currently on the site</h2>
+                            <h2>AI1 currently on the site</h2>
 
                             <div class="thumbnail">
 
@@ -117,6 +117,21 @@
 
                             </div>
 
+					 <h2>AI2 currently on the site</h2>
+
+					 <div class="thumbnail">
+
+                                <div rows="20" class="input-xxlarge" id="app_listing2"></div>
+
+                                <br/>
+                                <br/>
+
+                            </div>
+
+					
+
+
+
                             <br/>
 
 {#                            These bring up modals#}
@@ -126,8 +141,8 @@
                                        data-toggle="modal">Mod App</a>
 						    
 
+						    <input class="input" id="del_app_name" type="hidden" name="del_app_name" value=""/>
 
-                                    <input class="input" id="del_name" type="hidden" name="del_name" value=""/>
                                     <input class="btn btn-danger btn-medium" type="submit" value="Delete App">
                             </form>
 
@@ -153,6 +168,37 @@
 
 
                 </div>
+
+
+
+			 <h2>Web Tutorials currently on the site  {{ tutorials_listing}}  {{tutorials|length}}</h2>
+
+			<div class="thumbnail">
+
+                                <div rows="20" class="input-xxlarge" id="tutorials_listing"></div>
+
+                                <br/>
+                                <br/>
+
+                 </div>
+
+{#			  These bring up modals#}
+                  <form action="/DeleteTutorial" method="get">
+							<a href="#add_tutorial" role="button" class="btn btn-inverse btn-medium" data-toggle="modal" onclick="clear_tutorial_form();">Add Tutorial</a>
+                                    <a href="#add_tutorial" role="button" id="mod_tutorial_btn" class="btn btn-success btn-medium"
+                                       data-toggle="modal">Mod Tutorial</a>
+						    
+
+						    <input class="input" id="del_tutorial_name" type="hidden" name="del_tutorial_name" value=""/>
+
+                                    <input class="btn btn-danger btn-medium" type="submit" value="Delete Tutorial">
+                 </form>
+
+{#               These redirect to other pages#}
+                 <form action="/AddTutorialStepPage" method="get">
+                                    <input class="input" id="add_step_tutorial_name" type="hidden" name="add_step_tutorial_name" value=""/>
+                                    <button class="btn">Add Step</button>
+                 </form>
 
                 <div class="row-fluid">
                     &nbsp;
@@ -266,6 +312,23 @@
                     <br/>
 
 			  <div class="form-unit">
+                        <strong>Web Chapter</strong>
+
+                        <p>
+                            <small> (Specify whether there is a Web tutorial chapter or not.)
+                            </small>
+                        </p>
+			    
+			    <input id = "web_tutorial_True" type="radio" name="webTutorial" value="True" onclick="show_web_tutorial_link();">Yes<br>
+			    <input id = "web_tutorial_False" type="radio" name="webTutorial" value="False" onclick="hide_web_tutorial_link();">No
+			    <input id = "web_tutorial_link" type="text" name="webTutorialLink" value="" style="display:none;">
+
+                        
+                    </div>
+
+                    <br/>
+
+			  <div class="form-unit">
                         <strong>Conceptual Link</strong>
 
                         <p>
@@ -297,6 +360,21 @@
 
                     <br/>
 
+			  <div class="form-unit">
+                        <strong>Version</strong>
+
+                        <p>
+                            <small> (App Inventor Version.)
+                            </small>
+                        </p>
+			    
+			    <input id = "app_version_1" type="radio" name="version" value="1">1<br>
+			    <input id = "app_version_2" type="radio" name="version" value="2">2
+			    
+                        
+                    </div>
+
+			  <br/>
 
                 </div>
 
@@ -311,6 +389,110 @@
 
 
         </div>
+
+
+
+
+	{# ADD_Tutorial MODAL #}
+
+        <div id="add_tutorial" class="modal hide fade" tabindex="-1" role="dialog">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 id="myModalLabel">Add or Modify a Tutorial</h3>
+            </div>
+
+            <form action="/PostTutorial" method="post">
+
+                <input class="input" id="modify_tutorial_name" type="hidden" name="modify_tutorial_name" value=""/>
+
+                <div class="modal-body">
+
+                    <div class="form-unit">
+                        <strong>Tutorial Title</strong>
+
+                        <p>
+
+                        </p>
+                        <input id="tutorial_title" type="text" value="This is a test" name="tutorialTitle">
+                    </div>
+
+
+                    <div class="form-unit">
+                        <strong>Tutorial ID</strong>
+
+                        <p>
+                            <small> (If any websites link to this tutorial, ensure that this field corresponds to the
+                                link
+                                on those sites. For example, if a site has a link to "appinventor.org/hellopurr" and you
+                                are entering fields for the Hello Purr app, make sure this field == "hellopurr".)
+                            </small>
+                        </p>
+                        <input id="add_tutorial_name" type="text" name="tutorialId">
+                    </div>
+
+                    <div class="form-unit">
+                        <strong>Tutorial Number</strong>
+
+                        <p>
+                            <small> This number determines the order in which apps appear in the sidebar.
+                                    Number 1 will appear first in the list.
+                            </small>
+                        </p>
+                        <input id="tutorial_number" type="text" name="tutorialNumber">
+                    </div>
+
+
+                    <br/>
+
+                    <div class="form-unit">
+                        <strong>Hero Header</strong>
+
+                        <p>
+                            <small> (Should either be or include the name of the app. For example, "Build the Paint Pot
+                                App".)
+                            </small>
+                        </p>
+                        <input id="tutorial_header" type="text" name="tutorialHeroHeader">
+                    </div>
+
+                    <br/>
+
+                    <div class="form-unit">
+                        <strong>Hero Copy</strong>
+
+                        <p>
+                            <small> (Describes the app -- what it does and what you can learn from building it.)
+                            </small>
+                        </p>
+                        <textarea id="tutorial_copy" name="tutorialHeroCopy" rows="4" cols="60">Type hero copy here.</textarea>
+                    </div>
+
+                    <br/>
+
+			
+			 
+			  
+                </div>
+
+
+                <div class="modal-footer">
+                    <input class="btn btn-success btn-medium" type="submit" value="Submit"/>
+
+
+                </div>
+
+            </form>
+
+
+        </div>
+
+
+
+
+
+
+
 
     </div>
 
@@ -354,6 +536,32 @@ function clear_app_form(){
 	$("#mod_app_btn").attr("disabled", true);//unclickable now
 }
 
+function clear_tutorial_form(){
+	$("#tutorial_title").val("");
+      $("#tutorial_name").val("");
+      $("#tutorial_number").val("");
+      $("#tutorial_header").val("");
+      $("#tutorial_copy").val("");
+      $("#add_tutorial_name").val("");
+ 	
+
+	
+	$('.highlight').removeClass('highlight');
+	$("#mod_tutorial_btn").attr("disabled", true);//unclickable now
+}
+
+
+function hide_web_tutorial_link(){
+	var e = document.getElementById("web_tutorial_link");
+	e.style.display = 'none';
+}
+
+function show_web_tutorial_link(){
+	var e = document.getElementById("web_tutorial_link");
+	e.style.display = 'block';
+}
+
+
 
 $(document).ready(function () {
 
@@ -363,8 +571,11 @@ $(document).ready(function () {
     var title = "";
     var id = "";
     $("#mod_app_btn").attr("disabled", true); //init as disable
+    $("#mod_tutorial_btn").attr("disabled", true);//unclickable now
 
     var app_listing = "{{ app_listing }}";
+    var app_listing2 = "{{ app_listing2 }}";
+    var tutorials_listing = "{{ tutorials_listing}}";
 
 
     var total_text_elem = '';
@@ -374,10 +585,81 @@ $(document).ready(function () {
         console.log(item);
         total_text_elem += '<div class="appname" data-appname="' + item + '">' + '<a href="#">' + item + '</a>' + '</div>';
     });
-
-    console.log(total_text_elem);
-
     $("#app_listing").html(total_text_elem);
+
+
+    var total_text_elem2 = '';
+
+    lines = app_listing2.split("|");
+    $.each(lines, function (i, item) {
+        console.log(item);
+        total_text_elem2 += '<div class="appname" data-appname="' + item + '">' + '<a href="#">' + item + '</a>' + '</div>';
+    });
+    $("#app_listing2").html(total_text_elem2);
+
+
+    var total_text_elem3 = '';
+
+    lines = tutorials_listing.split("|");
+    $.each(lines, function (i, item) {
+        console.log(item);
+        total_text_elem3 +='<div class="tutorialname" data-tutorialname="' + item + '">' + '<a href="#">' + item + '</a>' + '</div>';
+    });
+    $("#tutorials_listing").html(total_text_elem3 );
+    
+    
+     $(".tutorialname").click(function () {
+		$('.highlight').removeClass('highlight');
+        	$(this).addClass('highlight');
+		$("#mod_tutorial_btn").attr("disabled", false); //app selected, clickable now
+
+		var path = $(this).data('tutorialname');
+
+		$.getJSON("/get_tutorial_data?tutorial=" + path,
+            function (data) {
+
+                console.log("calling get_app_data()");
+
+                $.each(data, function(i, item) {
+                    console.log("item is " + item);
+
+                    if (i == "heroHeader") {
+                        $("#tutorial_header").val(item);
+                    }
+
+                    if (i == "heroCopy") {
+                        $("#tutorial_copy").val(item);
+                    }
+
+                    if (i == "number") {
+                        $("#tutorial_number").val(item);
+                    }
+
+                    if (i == "title") {
+                        $("#tutorial_title").val(item);
+                    }
+
+			  if (i == "tutorialId") {
+                        $("#add_tutorial_name").val(item);
+                    }
+
+	
+
+	
+		
+
+                });
+
+            });
+
+		$("#del_tutorial_name").val(path);
+        	$("#add_step_tutorial_name").val(path);
+        	$("#modify_tutorial_name").val(path);
+        	$("#add_custom_tutorial_name").val(path);
+
+
+  	});
+
 
 
 
@@ -422,6 +704,20 @@ $(document).ready(function () {
 
 				}  
                     }
+			  if (i == "webTutorial") {
+				if(item == true){
+					document.getElementById('web_tutorial_True').checked = true;
+					show_web_tutorial_link();
+				}else{
+					document.getElementById('web_tutorial_False').checked = true;
+					hide_web_tutorial_link();
+				}  
+                    }
+
+			  if (i == "webTutorialLink") {
+				document.getElementById('web_tutorial_link').value = item;
+			  }
+
 			  if (i == "conceptualLink") {
 				if(item == true){
 					document.getElementById('app_conceptualLink_True').checked = true;
@@ -438,7 +734,14 @@ $(document).ready(function () {
 				}  
                     }
 			  
+			  if (i == "version") {
+				if(item == "1"){
+					document.getElementById('app_version_1').checked = true;
+				}else if(item == "2"){
+					document.getElementById('app_version_2').checked = true;
 
+				}  
+                    }
 
                 });
 
@@ -457,7 +760,7 @@ $(document).ready(function () {
         $("#app_copy").val(copy);
 
 
-        $("#del_name").val(path);
+        $("#del_app_name").val(path);
         $("#add_step_app_name").val(path);
         $("#modify_app_name").val(path);
         $("#add_custom_app_name").val(path);

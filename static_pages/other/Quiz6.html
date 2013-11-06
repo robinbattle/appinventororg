@@ -1,0 +1,40 @@
+{% extends "teaching_base.html" %}
+{% block body %}
+       
+        <h1>Quiz 6</h1>
+        
+        
+    
+
+          <h2>1.</h2>
+          <p>Consider a quiz app that lets the user step through the questions of the quiz by clicking a Next button. The Next button should move to the next question and display it. When the user gets to the last question, the Next button should be disabled.</p>
+          <img src="../../assets/img/Quiz6q1.png">
+          <p>Show the blocks for the NextButton.Click event handler. Here are the blocks you’ll need</p>
+          <img src="../../assets/img/Quiz6q1b.png" /><br/>
+          <p>You can use any numbers, operators (e.g., +,-) or comparison operators (>,<,=).
+          QuestionLabel is the selected component in the snapshot of the app above.
+          You only need to code the NextButton, not any other blocks for the quiz.
+          Your NextButton.Click blocks should work no matter how many items are in the list.</p>
+          <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer</a></div>  
+        <div id="demo1" class="collapse"> 
+          <img src="../../assets/img/q6n1.png"> 
+          
+          </div>
+        
+          <h2>2.</h2>
+          <p>Why is it important that the blocks above work regardless of how many items are in the list?
+              
+          <div id="myCollapsibleExample"><a href="#demo2" data-toggle="collapse">Answer</a></div>  
+        <div id="demo2" class="collapse">
+	<p>  
+         Since there were four quiz questions in the given blocks, you could have put "4" instead of "length of list" in the blocks above, and the code would work. But you always want code that is maintainable because code, at least if its good, is often changed and remixed. By using the more generic "length of list" above, the programmer sets it up so that she can change the list without modifying the computational code if the number of quiz questions changes.  Also, most apps have dynamic user generated data.  So if the code were remixed in an app in which the user (quiz writer) builds the list, it will still work.
+        </p>
+	</div>
+       
+      
+     
+     
+        
+    
+    
+{% endblock %}

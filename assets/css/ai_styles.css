@@ -63,7 +63,7 @@ figcaption {
 
 #appCarousel {
     margin-top: -20px;
-
+	margin: 0 auto;
 	text-align: center;
 
 }

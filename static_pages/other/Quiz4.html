@@ -1,0 +1,106 @@
+{% extends "teaching_base.html" %}
+{% block body %}
+    <style>
+      
+
+      /* Custom container */
+      .container {
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+      .container > hr {
+        margin: 60px 0;
+      }
+      ul#list { 
+        list-style-type: none; 
+      }
+
+     
+
+      
+
+    </style>
+   
+
+  
+
+     <hr>
+        <h1><center>Quiz 4</center></h1>
+        
+        
+    
+
+      <hr>
+      
+
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+        <div class="">
+          <h2>1.</h2>
+          <img src="../../assets/img/shs.png" height="500" width="500">
+          <p>(25) Using the blocks above, sketch the blocks for making a ball move diagonally from the bottom-right corner to the top-left corner. You can assume the canvas is 300x300 and that the ball starts in the bottom-right corner. The ball should move gradually, but for this question you need not be concerned with speed or the size of the timer interval.</p>
+         <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer</a></div>  
+        <div id="demo1" class="collapse"></br>
+        <img src="../../assets/img/newq4n1.png" height="300" width="300"></br>
+          
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="">
+          <h2>2.</h2>
+          <p>(25) Sketch the blocks for making a ball move down at a speed of 30 pixels a second. The ball should move smoothly so specify an appropriate timer interval (you don’t need to show the blocks, just note what you will set the timer interval to in the designer). Show your math. </p>
+              
+          <div id="myCollapsibleExample"><a href="#demo2" data-toggle="collapse">Answer</a></div>  
+        <div id="demo2" class="collapse"></br>
+        <img src="../../assets/img/q4n2.png" height="400" width="400"></br>  
+<p>With the above blocks, set the Clock2.TimerInterval to 50. Explanation: If you didn't care that the ball moved smoothly, you'd set the TimerInterval to 1000 (a second) and you'd move by 30 pixels each time. But you don't want choppy movement, so you need a smaller Clock.TimerInterval, say 50 ms. You know the Clock.Timer event will then be triggered every 50 ms. The question then is how far to move the ball each 50 ms in order to get a speed of 30 pixels/second.
+</p>
+<p>The equation to setup is this:  x/50=30/1000, where x is the amount to move. If you cross-multiply, you get x*1000=30*50, or x=1.5. 
+</p>
+       
+        </div>
+       </div>
+     </div>
+      <div class="row-fluid">
+        <div class="">
+          <h2>3.</h2>
+          <p>(50) Sketch the blocks for making a ball move horizontally, back and forth, continuously. When the ball hits the right edge it should start going left, when it hits the left edge it should start going right.
+           
+         <div id="myCollapsibleExample"><a href="#demo3" data-toggle="collapse">Answer</a></div>  
+        <div id="demo3" class="collapse">  
+        <p>Following are two solutions for this question. The key is that you need to define a variable, named "distance" in the solutions below, that "remembers" whether the ball is moving left or right. So if distance is 5, the ball is moving right, if distance is -5, it is moving left. The solutions below differ in how the variable is changed when an edge is reached.</p>
+        <br/>
+	solution 1:<br/>
+        <img src="../../assets/img/q4n3a.png" height="350" width="350">
+        <br/>
+	solution 2:<br/>
+        <img src="../../assets/img/q4n3b.png" height="350" width="350">
+        
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="">
+          <h2>4.</h2>
+          <p>BONUS 10 (ONLY DO WHEN YOU ARE DONE): Modify the app in question 3 so the ball goes back and forth between the left side and the middle of the canvas.
+         <div id="myCollapsibleExample"><a href="#demo4" data-toggle="collapse">Answer</a></div>  
+        <div id="demo4" class="collapse">  
+        This answer can be used with either of the two above answers the only change is the if test within the Clock.Timer. 
+        </br>
+        <img src="../../assets/img/q4n4new.png" height="450" width="450"></br>
+        </br>
+          </div>
+        </div>
+      </div>
+     
+        
+      
+
+      <hr>
+
+    
+    </div> <!-- /container -->
+
+      {% endblock %}

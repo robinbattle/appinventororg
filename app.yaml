@@ -8,6 +8,10 @@ handlers:
 
 - url: /apps
   static_dir: apps
+- url: /apps2
+  static_dir: apps2
+- url: /quizly
+  static_dir: quizly
 - url: /apps/amazon
   static_dir: amazon  
 - url: /assets

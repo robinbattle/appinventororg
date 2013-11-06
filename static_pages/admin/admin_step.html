@@ -81,6 +81,14 @@
 
             </div>
 
+		 <p><b>Instructions after adding or modifying step</b></p>
+		 <ul>
+  			<li>Flush the memcached in <a href="https://appengine.google.com/datastore/explorer?submitted=1&app_id=s~appinventororg&show_options=no&version_id=1.366706941235179009&kind=App&query=SELECT+*+FROM+Step" target="_blank">GAE dashboard</a> (at bottom, called "Flush Memcache"), or click <a href="/memcache_flush_all" id="mem_flush_all">Here</a></li>
+  			<li>Make sure the step number is not conflicted</li>
+  			
+		</ul>
+
+
 
         </div>
 
@@ -121,7 +129,7 @@
 							   <a href="#add_step" role="button" id="mod_step_btn" class="btn btn-success btn"
                                            data-toggle="modal">Mod Step</a>
 
-
+							   <input class="input" id="del_step_name" type="hidden" name="del_step_name" value=""/>
                                         <input class="btn btn-danger btn-medium" type="submit" value="Delete Step">
 
                                         {#                <button class="btn">Delete App</button>#}
@@ -360,12 +368,16 @@ $(document).ready(function () {
         //        var original_color = this.style.backgroundColor;
 //        this.style.backgroundColor = "#FDFF47";
 //        $("appname").effect("highlight", {color:"#669966"}, 3000);
-        $("#del_name").val(path);
+        $("#del_step_name").val(path);
         $("#modify_step_name").val(path);
 
 
     });
 });
+
+
+//give memcache_flush_all a redirect link, so it can redirect back to where we were.
+document.getElementById("mem_flush_all").setAttribute("href","/memcache_flush_all?redirect_link=" + window.location.href)
 
 
 </script>

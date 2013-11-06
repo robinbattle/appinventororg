@@ -15,7 +15,11 @@
             <p class="lead"> Please tell us some information about you.</p>
             <div class="row-fluid">
               	  
-                  <table class="table table-striped">
+                  <table class="table table-hover">
+		     <tr>
+                        <td>DisplayName: </td>
+                        <td>{{account.displayName}}</td>
+                     </tr>
                      <tr>
                         <td>First Name: </td>
                         <td>{{account.firstName}}</td>
@@ -56,7 +60,7 @@
 
 			     <tr>
                          <td>Link to your course/teaching website: </td>
-                           <td>{{account.introductionLink}}</td>
+                           <td><a class="introduction_link" href="http://{{account.introductionLink}}" target="_blank">http://{{account.introductionLink}}</a></td>
 
                      </tr>
 				
@@ -67,11 +71,12 @@
                   {% endif %}
                   </table>
 
-			 <table class="table table-striped">
+			 <table class="table">
                      <tr>
                         <td>
                         </td>
                         <td> <a href="/changeProfile" class="btn btn-large btn-block btn btn-success">Change Profile</a></td>
+                       <!--  onclick="{{account.introductionLink}} = {{account.introductionLink}}.replace("http://",""); -->
                      </tr>
                   </table>
 
@@ -89,6 +94,23 @@
    <!-- end of row -->
 </div>
 <!-- end of container -->
+
+<script>
+{% if account.location %}
+	
+	var geocoder = new google.maps.Geocoder();
+var address = '{{account.location}}';
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    
+      alert(results[0].geometry.location);
+
+    }
+
+
+{% endif %}
+</script>
+
+
 {% endblock %}
 
 

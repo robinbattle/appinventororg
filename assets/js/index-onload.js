@@ -18,6 +18,11 @@ function prepareContactForm()
 
 window.onload = function()
 {
-	prepareContactForm();
+	//prepareContactForm();
 	// other prep functions called here
+	
 }
+  
+$(document).ready(function(){
+	$('#banner_top').animate({opacity:1}, 1500);
+});

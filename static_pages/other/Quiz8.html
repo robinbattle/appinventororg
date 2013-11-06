@@ -1,0 +1,96 @@
+{% extends "teaching_base.html" %}
+{% block body %}
+    <style>
+      
+
+      /* Custom container */
+      .container {
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+      .container > hr {
+        margin: 60px 0;
+      }
+      ul#list { 
+        list-style-type: none; 
+      }
+
+     
+
+      
+
+    </style>
+   
+
+  
+
+     <hr>
+        <h1><center>Quiz 8</center></h1>
+        
+        
+    
+
+      <hr>
+
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+        <div class="span6">
+          <h2>1.</h2>
+          <p>(40) Show the blocks to add up a list of numbers. Use a foreach block. Note that your code should work no matter how many items are in the list. You need NOT worry about an event handler or the user interface, just show the blocks for computing the total of all items in the list.</p>
+          
+          
+          <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer</a></div>  
+        <div id="demo1" class="collapse">  
+          <img src="../../assets/img/q8n1.png" height="500" width="500">
+          
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span6">
+          <h2>2.</h2>
+          <p>(40) The Factorial function is the product of all positive integers less than or equal to n. For example, for Factorial (5) you multiply the numbers from 1 to 5:
+          </br>
+          Factorial (5) = 5 x 4 x 3 x 2 x 1 =120
+          </br>
+          Note that Factorial (1) = 1 and Factorial (0)=1
+          </br>
+          Your job is to show the blocks for an app in which the user enters a number in a textbox and the app calculates factorial and shows the result in a label. Assume the Button is named FactorialButton, the TextBox is NumberTextBox and the label is ResultLabel.
+        </p>
+        <img src="../../assets/img/Quiz8q2.png" height="400" width="400">
+          <div id="myCollapsibleExample"><a href="#demo2" data-toggle="collapse">Answer</a></div>  
+        <div id="demo2" class="collapse"> 
+          <img src="../../assets/img/q8n2best.png" height="500" width="500"> 
+          
+        </div>
+       </div>
+     </div>
+
+      <div class="row-fluid">
+        <div class="span4">
+          <h2>3.</h2>
+          <p>(20) Describe the difference between a web site and a web service (API). Who does each “serve” and what type of files does each send over the net.</p>
+         <div id="myCollapsibleExample"><a href="#demo3" data-toggle="collapse">Answer</a></div>  
+        <div id="demo3" class="collapse">  
+          A website serves web pages to a browser (that people view).  A web service serves data to another software entity (computer-computer communication).  Websites send a human-readable web page typically consisting of HTML, CSS and Javascript files.  Web services send just data that is not very human-readability, typically in JSON or XML format.
+          </div>
+        </div>
+      </div>
+
+    </br>
+    </br>
+    </br>
+    </br>
+    <p><strong>Blocks for Questions 1 and 2 (NOTE: you may use any comparisons, numbers, math operators, variable definitions and in fact any blocks you would like).</strong></p>
+    <img src="../../assets/img/Quiz8q3.png" height="500" width="500">
+
+      
+     
+      <hr>
+
+      
+
+    </div> 
+
+   {% endblock %}

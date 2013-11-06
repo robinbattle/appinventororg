@@ -1,0 +1,36 @@
+{% extends "teaching_base.html" %}
+{% block body %}
+    
+        <h1>Quiz 9</h1>
+    
+          <h2>1.</h2>
+          <p>In App Inventor, what is the TinyDB component used for? What is TinyWebDB used for?</p>
+          
+          
+          <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer</a></div>  
+        <div id="demo1" class="collapse">  
+          TinyDB and TinyWebDB are both used to store data persistently so that it exists even after an app is closed and re-opened.</br>
+          TinyDB is used to store and retrieve data from a database directly on the device.  TinyWebDB is for storing and retrieving data on the web, and is thus used for apps that share data amongst users and devices.
+          </div>
+       
+      
+
+ 
+          <h2>2.</h2>
+          <p>TinyWebDB is more complicated to program than TinyDB. Explain the differences, being sure to mention the following blocks:
+          </p>
+        <img src="../../assets/img/Quiz9a2.png" height="700" width="700">
+          <div id="myCollapsibleExample"><a href="#demo2" data-toggle="collapse">Answer</a></div>  
+        <div id="demo2" class="collapse">  
+          TinyWebDB can stored data onto any App-Inventor-compatible web service, so unlike TinyDB, TinyWebDB has a ServiceURL property which you set to specify the particular web database to be used.</br>With TinyDB the app receives data from the database immediately on a call to GetValue.  With TinyWebDB, on the other hand, retrieving data is a two step process:  you first request data with TinyWebDB.GetValue. Data is not returned immediately to this block. Instead, when the data arrives from the web the TinyWebDB.GotValue event is triggered. Thus, put your code to process the data in this event handler.
+        </div>
+      
+
+            
+
+      
+     
+     
+   
+
+   {% endblock %}

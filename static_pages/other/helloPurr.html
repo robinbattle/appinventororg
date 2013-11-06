@@ -10,7 +10,7 @@
 Open a browser and navigate to <a href="http://beta.appinventor.mit.edu">http://beta.appinventor.mit.edu</a>. Login with your Google account.
 </li>
 <li>
-Now build your first app, HelloPurr. Follow the instructions in App Inventor chapter 1, using either the paperback version, the <a href="/hellopurr/hellopurr.pdf">pdf version</a>, or the <a href="hellopurr">step-by-step video lesson</a>. You can find your own kitty picture and meow sound on the web, or use the ones at: <a href="http://examples.oreilly.com/0636920016632/">http://examples.oreilly.com/0636920016632/</a>
+Now build your first app, HelloPurr. Follow the instructions in App Inventor chapter 1, using either the paperback version, the <a href="apps/hellopurr/hellopurr.pdf">pdf version</a>, or the <a href="hellopurr">step-by-step video lesson</a>. You can find your own kitty picture and meow sound on the web, or use the ones at: <a href="http://examples.oreilly.com/0636920016632/">http://examples.oreilly.com/0636920016632/</a>
 </li>
 </ol>
 <h2>Conceptualize It</h2>
@@ -70,15 +70,17 @@ One function call in the HelloPurr app requires an argument (also known as param
 </div>
 <div class="span6">
 <img src="/assets/img/lessons/helloPurrBlocks.png"/><br/>
-<img src="/assets/img/lessons/helloPurrEmulator.png"/><
+<img src="/assets/img/lessons/helloPurrEmulator.png"/>
 </div>
 </div>
 
 <h2>Customize It</h2>
 <ol>
 <li>
-As you shake the phone, the meows will sound strange, as if they are echoing. That is because the accelerometer sensor is triggering the shaking event many times a second, so the meows are overlapping. If you look at the Sound component in the Designer, you will see a property called Minimum interval. That determines how close together successive sounds can start. It is currently set at a half-second (500 milliseconds), which is less than the duration of a single meow. By playing with the minimum interval, you can change how much the meows overlap.</li>
-<li>If you run the packaged app and walk around with the phone in your pocket, your phone will meow every time you move suddenly, something you might find embarrassing. Android apps are typically designed to keep running even when you are not looking at them; your app continues to communicate with the accelerometer and the meow just keeps going. To really quit the app,  press the menu button and choose close application.
+As you shake the phone, the meows will sound strange, as if they are echoing. That is because the accelerometer sensor is triggering the shaking event many times a second, so the meows are overlapping. If you look at the Sound component in the Designer, you will see a property called Minimum interval. That determines how close together successive sounds can start. It is currently set at a half-second (500 milliseconds), which is less than the duration of a single meow. By playing with the minimum interval, you can change how much the meows overlap.
+</li>
+<li>
+If you run the packaged app and walk around with the phone in your pocket, your phone will meow every time you move suddenly, something you might find embarrassing. Android apps are typically designed to keep running even when you are not looking at them; your app continues to communicate with the accelerometer and the meow just keeps going. To really quit the app,  press the menu button and choose close application.
 </li>
 
 {% endblock %}

@@ -81,6 +81,14 @@
 
             </div>
 
+		 <p><b>Instructions after adding or modifying custom</b></p>
+		 <ul>
+  			<li>Flush the memcached in <a href="https://appengine.google.com/datastore/explorer?submitted=1&app_id=s~appinventororg&show_options=no&version_id=1.366706941235179009&kind=App&query=SELECT+*+FROM+Step" target="_blank">GAE dashboard</a> (at bottom, called "Flush Memcache"), or click <a href="/memcache_flush_all" id="mem_flush_all">Here</a></li>
+  			<li>Make sure the custom number is not conflicted</li>
+  			
+		</ul>
+
+
 
         </div>
 
@@ -377,6 +385,9 @@ $(document).ready(function () {
 
     });
 });
+
+//give memcache_flush_all a redirect link, so it can redirect back to where we were.
+document.getElementById("mem_flush_all").setAttribute("href","/memcache_flush_all?redirect_link=" + window.location.href)
 
 
 </script>

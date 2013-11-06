@@ -1,0 +1,110 @@
+{% extends "teaching_base.html" %}
+{% block body %}
+    <style>
+      
+
+      /* Custom container */
+      .container {
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+      .container > hr {
+        margin: 60px 0;
+      }
+      ul#list { 
+        list-style-type: none; 
+      }
+
+     
+
+      
+
+    </style>
+   
+
+  
+
+     <hr>
+        <h1><center>Quiz 3</center></h1>
+        
+        
+    
+
+      <hr>
+
+
+
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+        <div class="span9">
+          <h2>1.</h2>
+          <p>(10) To what events does the MoleMash app respond?</p>
+         <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer</a></div>  
+        <div id="demo1" class="collapse"> 
+	<p> 
+          The MoleMash app responds to 1)  the user touching the screen, which triggers a Canvas.Touched event and sometimes an ImageSprite.Touched event, and 2) a Clock.Timer event-- the passing of time is an event. 
+        </p>
+        
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span9">
+          <h2>2.</h2>
+          <p>(10) What properties of an ImageSprite (or Ball) are used to record its location? What does each represent? </p>
+          <div id="myCollapsibleExample"><a href="#demo2" data-toggle="collapse">Answer</a></div>  
+        <div id="demo2" class="collapse">  
+          The location of an image sprite or ball is recorded in the X and Y properties, with X determining the horizontal location and Y the vertical location. The X and Y values are relative to the enclosing Canvas, so X=5 means the sprite is 5 pixels to the right of the left-edge of the Canvas. A Y value of 0 refers to the top of the Canvas, and Y values get bigger as you go down.
+        </div>
+       </div>
+     </div>
+      <div class="row-fluid">
+        <div class="span9">
+          <h2>3.</h2>
+          <p>(20) Explain why the subtractions are performed in the blocks below:</br>
+            <img src="../../assets/img/Quiz3q3.png"></br>
+         <div id="myCollapsibleExample"><a href="#demo3" data-toggle="collapse">Answer</a></div>  
+        <div id="demo3" class="collapse">  
+        The subtractions in the MoveMole procedure are performed so that the image always stays completely on the Canvas. The X-Y location of an image sprite corresponds to its top-left corner,  so if a large X or Y value is randomly selected, part of the image sprite might be to the right or below the canvas and thus not appear.
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span9">
+          <h2>4.</h2>
+          <p>(10) Assume a Canvas has imageSprite1 on it. When the user touches imageSprite1, what event are triggered?
+          </p>
+         <div id="myCollapsibleExample"><a href="#demo4" data-toggle="collapse">Answer</a></div>  
+        <div id="demo4" class="collapse">  
+        When ImageSprite1 (or any image sprite) is touched by the user, two events are triggered: ImageSprite1.Touched and Canvas.Touched. 
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+          <div class="">
+          <h2>5.</h2>
+          <p>(50) Sketch the blocks for a “countdown” app that:</br>
+          a.  Displays the number 10 (in label CountLabel) when the app begins.</br>
+          b.  Subtracts 1 from the number each second, so it shows 10, then 9, then 8, etc.</br>
+          c.  When the number reaches 0, the countdown stops.</br>      
+          d.  When the user clicks the restartButton, 10 is redisplayed and the countdown restarts.</p></br>
+          <img src="../../assets/img/s.png" height="50" weight="50"></br>
+          <p>You may use the blocks below (you need not use all of them, and you can use some twice):</p></br>
+          <img src="../../assets/img/sh.png"></br>
+          <p>Sketch blocks here:</p>
+        <div id="myCollapsibleExample"><a href="#demo5" data-toggle="collapse">Answer</a></div>  
+        <div id="demo5" class="collapse"> </br>
+        <img src="../../assets/img/q3q5.png">
+      </br> 
+      </div>
+         
+          
+        </div>
+      </div>
+        
+      
+
+      <hr>
+
+       {% endblock %}

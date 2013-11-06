@@ -22,16 +22,17 @@
         player1 = new YT.Player('youtube_player1', {
           height: '360',
           width: '515',
-	     videoId: 'cWzrhYwn0xk',
+
+	     videoId: 'HbntNGGXamw',
 
           
           
         });
-
+		  
 	   player2 = new YT.Player('youtube_player2', {
           height: '360',
           width: '515',
-	     videoId: 'E9Zm56Od1pw',
+	     videoId: 'sGiaXOKqeKg',
           events: {
             
            
@@ -41,7 +42,17 @@
 	   player3 = new YT.Player('youtube_player3', {
           height: '360',
           width: '515',
-          videoId: 'sGiaXOKqeKg',
+          videoId: 'cWzrhYwn0xk',
+          events: {
+            
+           
+          }
+        });
+
+	  player4 = new YT.Player('youtube_player4', {
+          height: '360',
+          width: '515',
+          videoId: 'E9Zm56Od1pw',
           events: {
             
            
