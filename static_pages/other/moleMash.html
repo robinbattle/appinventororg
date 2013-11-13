@@ -1,5 +1,5 @@
 
-{% extends "teaching_base.html" %}
+{% extends "site_base.html" %}
 {% block body %}
 <H1>MoleMash: Build, Conceptualize, Customize</H1>
 <br/>
@@ -65,9 +65,11 @@ When a row of blocks is performed, in what order are they performed?
 <li>
 Add buttons to let the user make the mole move faster or slower.
 </li>
-<li>Add a label to keep track of and display the number of times the mole has appeared (moved).
+<li>
+Add a label to keep track of and display the number of times the mole has appeared (moved).
 </li>
-<li>Add a second ImageSprite with a picture of something that the user should not hit, such as a flower. If the user touches it, penalize him by reducing his score or ending the game.
+<li>
+Add a second ImageSprite with a picture of something that the user should not hit, such as a flower. If the user touches it, penalize him by reducing his score or ending the game.
 </li>
 <li>
 Instead of using a picture of a mole, let the user select a picture with the ContactPicker component.
@@ -76,16 +78,22 @@ Instead of using a picture of a mole, let the user select a picture with the Con
 <h3> More Variations</h3>
 <ol>
 <li>
-Customize the app with a different image (not a mole), a canvas background image, and custom sound effects. </li>
-<li>Allow the user to specify how fast the mole should move by entering a number in a textbox. The number should be in "jumps per second" and this should be clear to user.
+Customize the app with a different image (not a mole), a canvas background image, and custom sound effects. 
 </li>
-<li>Constrain the app so that the user can only enter a number that is reasonable for the speed of the mole. If the user enters an invalid number, display an error message using the Notifier component and keep the speed as it was.
+<li>
+Allow the user to specify how fast the mole should move by entering a number in a textbox. The number should be in "jumps per second" and this should be clear to user.
 </li>
-<li>Show the user's score using a colored bar instead of a label.
+<li>
+Constrain the app so that the user can only enter a number that is reasonable for the speed of the mole. If the user enters an invalid number, display an error message using the Notifier component and keep the speed as it was.
 </li>
-<li>add "levels": when the user hits the "mole" x number of times, make the mole go faster automatically.
+<li>
+Show the user's score using a colored bar instead of a label.
 </li>
-<li>Keep a high-score for the user and display it in the app. Note that even if the app is closed and re-opened, the high score isn't forgotten. You'll need to use the TinyDB component.
+<li>
+add "levels": when the user hits the "mole" x number of times, make the mole go faster automatically.
+</li>
+<li>
+Keep a high-score for the user and display it in the app. Note that even if the app is closed and re-opened, the high score isn't forgotten. You'll need to use the TinyDB component.
 </li>
 </ol>
 <a href="/apps/molemash/molemash_custom.zip">Solution for Customization Exercises</a>. Download this zip file, then open App Inventor and choose More Actions | Upload Source.

@@ -6,7 +6,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat. 
- * CS modified for AppInventor.org by J.D. Manuel
+ * CS modified for AppInventor.org by J.D. Manuel, Bin Lu
  */
 
 
@@ -4634,6 +4634,7 @@ button.close {
 @media (max-width: 979px) {
   body {
     padding-top: 0;
+    background-color: #d2edff;
   }
   .navbar-fixed-top,
   .navbar-fixed-bottom {
@@ -4764,3 +4765,135 @@ button.close {
     overflow: visible !important;
   }
 }
+
+
+
+/*Bin's additions*/
+
+body {
+padding-bottom:40px;
+background-color: #d2edff;
+}
+
+#background {
+position:fixed;
+width:100%;
+height:100%;
+left:0;
+top:0;
+z-index:-1;
+}
+
+.hr {
+background-color:#FFAE00;
+border:1px solid #FFAE00;
+height:2px;
+width:100%;
+margin:10px 0;
+}
+
+.hero-unit {
+background-color:#A4CA39;
+}
+
+.sidebar-nav {
+padding:9px 0;
+}
+
+.carousel-caption {
+position:relative;
+padding:5px 15px;
+}
+
+.carousel .carousel-control {
+visibility:hidden;
+top:2.5%;
+font-size:60px;
+width:30px;
+height:30px;
+line-height:20px;
+}
+
+.carousel:hover .carousel-control {
+visibility:visible;
+}
+
+.navbar-inner {
+background-color:#282828;
+background-image:none;
+background-repeat:no-repeat;
+filter:none;
+}
+
+.introduction_link {
+color:#000;
+}
+
+.introduction_link:hover {
+text-decoration:underline;
+}
+
+.carousel-caption p a {
+display:none;
+}
+
+#carousel-nav {
+text-align:center;
+padding-left:55px;
+border-bottom:1px dotted #CCC;
+}
+
+#carousel-nav a {
+background:#eee;
+color:#000;
+display:inline-block;
+width:20px;
+height:20px;
+opacity:0.5;
+filter:alpha(opacity=50);
+font-size:18px;
+margin:5px 0;
+padding:2px 20px;
+}
+
+#carousel-nav a.active {
+background:red;
+color:#fff;
+}
+
+tr.spaceUnder > td {
+padding-bottom:2px;
+}
+
+tr.spaceUnder > td > a {
+font-size:15px;
+}
+
+.leadfont {
+margin-bottom:5px;
+font-size:18px;
+font-weight:50;
+line-height:18px;
+color:grey;
+}
+
+.mediumleadfont {
+margin-bottom:5px;
+font-size:15px;
+font-weight:30;
+line-height:12px;
+color:grey;
+}
+
+.smallleadfont {
+margin-bottom:5px;
+font-size:12px;
+font-weight:30;
+line-height:12px;
+color:grey;
+}
+
+.btn btn-success btn-large,.btn btn-navbar {
+background-color:#282828;
+}
+

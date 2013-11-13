@@ -1,5 +1,5 @@
 
-{% extends "teaching_base.html" %}
+{% extends "site_base.html" %}
 {% block body %}
 
 <h1>PaintPot</h1>
@@ -45,7 +45,7 @@
 </p>
 	<h2>Getting Started</h2>
 	<p>
-	Make sure your computer and your device are set up to use App Inventor, and navigate to the App Inventor website at <a href="http://ai2.appinventor.mit.edu/">ai2.appinventor.mit.edu</a>. Start a new project and name it &quot;PaintPot&quot;. Open the Blocks Editor, click &quot;Connect to &quot;, and select Connect Companion, then follow the instructions within the information box to connect your app to your device (be sure you have the MIT App Companion installed on your Android device).
+	Make sure your computer and your device are set up to use App Inventor, and navigate to the App Inventor website at <a href="http://ai2.appinventor.mit.edu/">ai2.appinventor.mit.edu</a>. Start a new project and name it &quot;PaintPot&quot;. Open the Blocks Editor, click &quot;Connect&quot;, and select AI Companion, then follow the instructions within the information box to connect your app to your device (be sure you have the MIT App Companion installed on your Android device).
 	</p>
 	<p>
 	To get started, go to the Properties panel on the right of the Designer and change the screen title to &quot;PaintPot&quot;. You should see this change on the device, with the new title displayed in the title bar of your app.
@@ -55,7 +55,7 @@
 	</p>
 	<p>
 	<ul>
-		<li>The name you choose for your project as you work on it. This will also be the name of the application when you package it for the device. Note that you can click Save As in the Component Designer to start a new version or rename a project.</li>
+		<li>The name you choose for your project as you work on it. This will also be the name of the application when you package it for the device. Note that you can click File and select Save As in the Component Designer to start a new version or rename a project.</li>
 		<li>The component name, Screen1, which you&apos;ll see in the panel that lists the application&apos;s components. You can&apos;t change this name in the current version of App Inventor.</li>
 		<li>The title of the screen, which is what you&apos;ll see in the device&apos;s title bar. This starts out being Screen1, which is what you used in HelloPurr. But you can change it, as we just did for PaintPot.</li>
 	</ul>
@@ -91,7 +91,7 @@
 <div class="row-fluid">
 	<div class="span9">
 	<p>
-	<strong>Test your app.</strong> <em>If you haven&apos;t clicked &quot;Connect to&quot; and connected your device, do so now and check how your app looks on either your device (if it&apos;s plugged in) or in the emulator.</em>
+	<strong>Test your app.</strong> <em>If you haven&apos;t clicked &quot;Connect&quot; and connected your device, do so now and check how your app looks on either your device (if it&apos;s connected) or in the emulator.</em>
 	</p>
 </div>
 </div>
@@ -100,7 +100,7 @@
 	You should now have three buttons stacked on top of one another. But for this app, you want them all lined up next to one another at the top of the screen, as shown in Figure 2-3. You do this using a <b>HorizontalArrangement</b> component:
 	</p>
 	<ol>
-		<li>From the Palette&apos;s Screen Arrangement category, drag out a <b>HorizontalArrangement</b> component and place it under the buttons.</li>
+		<li>From the Palette&apos;s Layout category, drag out a <b>HorizontalArrangement</b> component and place it under the buttons.</li>
 		<li>In the Properties panel, change the <b>Width</b> of the <b>HorizontalArrangement</b> to &quot;Fill parent&quot; so that it fills the entire width of the screen.</li>
 		<li>Move the three buttons one by one into the <b>HorizontalArrangement</b> component. <em>Hint</em>: You&apos;ll see a blue vertical line that shows where the piece you&apos;re dragging will go.</li>
 	</ol>
@@ -129,9 +129,9 @@
 	The canvas is where the user will draw circles and lines. Add it, and add the <em>kitty.png</em> file from HelloPurr as the <b>BackgroundImage</b>:
 	</p>
 	<ol>
-		<li>From the Palette&apos;s Basic category, drag a <b>Canvas</b> component onto the Viewer. Change its name to <b>DrawingCanvas</b>. Set its <b>Width</b> to &quot;Fill parent.&quot; Set its <b>Height</b> to 300 pixels</li>
+		<li>From the Palette&apos;s Drawing and Animation category, drag a <b>Canvas</b> component onto the Viewer. Change its name to <b>DrawingCanvas</b>. Set its <b>Width</b> to &quot;Fill parent.&quot; Set its <b>Height</b> to 300 pixels</li>
 		<li>If you&apos;ve completed the HelloPurr tutorial (Chapter 1), you have already downloaded the <em>kitty.png</em> file. If you haven&apos;t, you can download it here <a href="{{apps2Dir}}/PaintPot/Media/kitty.png"><em>kitty.png</em></a>.</li>
-		<li>Set the <b>BackgroundImage</b> of the <b>Canvas</b> to the <em>kitty.png</em> file. In the Property editor, the <b>BackgroundImage</b> will be set to None. Click the field and choose Add to upload the <em>kitty.png</em> file.</li>
+		<li>Set the <b>BackgroundImage</b> of the <b>Canvas</b> to the <em>kitty.png</em> file. In the Properties section of the Components Designer, the <b>BackgroundImage</b> will be set to None. Click the field and choose Upload New to add the <em>kitty.png</em> file.</li>
 		<li>Set the <b>PaintColor</b> of the Canvas to red so that when the user starts the app but hasn&apos;t clicked on a button yet, his drawings will be red. Check to see that what you&apos;ve built looks like Figure 2-4.</li>
 	</ol>
 <img src="{{apps2Dir}}/PaintPot/pp2-4.PNG" alt="">
@@ -195,7 +195,7 @@
 		<p>
 			<em>Figure 2-7. When the user touches the canvas, the app draws a circle</em>
 		</p>
-	On the right side of the <strong>DrawingCanvas.DrawCircle</strong> block, you&apos;ll see three slots for the arguments we need to fill in: x, y, and r. The x and y arguments specify the location where the circle should be drawn, and r determines the radius (or size) of the circle. The yellow warning box with the exclamation point at the top of the <strong>DrawingCanvas.Touched</strong> event handler denotes that these slots haven&apos;t yet been filled. We&apos;ll build the blocks to do that next.
+	On the right side of the <strong>DrawingCanvas.DrawCircle</strong> block, you&apos;ll see three slots for the arguments we need to fill in: x, y, and r. The x and y arguments specify the location where the circle should be drawn, and r determines the radius (or size) of the circle. The yellow warning box with the exclamation point at the bottom left of the screen will show a 1 this denotes that these slots haven&apos;t yet been filled. We&apos;ll build the blocks to do that next.
 	This event handler can be a bit confusing because the <strong>DrawingCanvas.Touched</strong> event also has an x and y ; just keep in mind that the x and y for the <strong>DrawingCanvas.Touched</strong> event tell you where the user touched, while the x and y for the <strong>DrawingCanvas.DrawCircle</strong> event are open slots for you to specify where the circle should be drawn. 
 	Because you want to draw the circle where the user touched, you'll plug in the x and y values from <strong>DrawingCanvas.Touched</strong> as the values of the x and y parameters in <strong>DrawingCanvas.DrawCircle</strong>.</li>
 </p>
@@ -213,13 +213,13 @@
 <div class="span5">
 <img src="{{apps2Dir}}/PaintPot/pp2-8a.PNG" alt="">
 <p>
-	<em>Figure 2-8a. To access an event parameter, go to the Variables folder and drag out a "get" block reference. Once you place it in the event handler, click the upside down rectangle to choose the parameter you want.</em>
+	<em>Figure 2-8a. To access an event parameter, go to the Variables drawer and drag out a "get" block reference. Once you place it in the event handler, click the drop down menu to choose the parameter you want.</em>
 </p>
 </div>
 <div class="span5">
 <img src="{{apps2Dir}}/PaintPot/pp2-8b.PNG" alt="">
 <p>
-<em>Figure 2-8b. Clicking the upside-down rectangle on a "get" block shows you all the variable and parameters you can choose.</em>
+<em>Figure 2-8b. Clicking the drop down menu on a "get" block shows you all the variables and parameters you can choose.</em>
 </p>
 </div>
 </div>
@@ -230,7 +230,7 @@
 		<p>
 			<em>Figure 2-9. The app knows where to draw (x,y), but we still need to specify how big the circle should be</em>
 		</p>
-		<li>You&apos;ll also need to specify the radius, r, of the circle to draw. The radius is measured in pixels, which is the tiniest dot that can be drawn on the screen. For now, set it to 5: click in a blank area of the screen and type 5 then return (this will create a number block automatically) and plug that in for the <b>r</b> slot. When you do, the yellow box in the top-left corner will disappear as all the slots are filled. Figure 2-10 illustrates how the final <strong>DrawingCanvas.Touched</strong> event handler should look.</li>
+		<li>You&apos;ll also need to specify the radius, r, of the circle to draw. The radius is measured in pixels, which is the tiniest dot that can be drawn on the screen. For now, set it to 5: click in a blank area of the screen and type 5 then return (this will create a number block automatically) and plug that in for the <b>r</b> slot. When you do, the yellow box in the bottom left corner will return to 0 as all the slots are filled. Figure 2-10 illustrates how the final <strong>DrawingCanvas.Touched</strong> event handler should look.</li>
 	</ol>
 </p>
 <div class="span2">
@@ -277,13 +277,13 @@
 </p>
 <ul>
 <li>
-		<b>startx, starty</b>: the position of your finger back where the drag started.
+		<b>startX, startY</b>: the position of your finger back where the drag started.
 </li>
 <li>
-		<b>currentx, currenty</b>: the current position of your finger
+		<b>currentX, currentY</b>: the current position of your finger
 </li>
 <li>
-		<b>prevx, prevy</b>: the immediately previous position of your finger.
+		<b>prevX, prevY</b>: the immediately previous position of your finger.
 </li>
 <li>
 		<b>draggedSprite</b>: a boolean, it will be true if the user drags directly on an image sprite. We won&apos;t use this argument in this tutorial.</li>
@@ -390,7 +390,7 @@
 	Let&apos;s start by defining a variable <b>dotSize</b>:
 	</p>
 	<ol>
-		<li>In the Blocks Editor, open the Variables drawer and drag out an <strong>initialize global name block</strong> block. Change the text &quot;name&quot; to &quot;dotSize&quot;.</li>
+		<li>In the Blocks Editor, open the Variables drawer and drag out an <strong>initialize global name to</strong> block. Change the text &quot;name&quot; to &quot;dotSize&quot;.</li>
 		<li>Notice that the <strong>initialize global dotSize to</strong> block has an open slot. This is where you can specify the initial value for the variable, or the value that it defaults to when the app begins. (This is often referred to as &quot;initializing a variable&quot; in programming terms.) For this app, initialize the <b>dotSize</b> to 2 by creating a number <strong>2</strong> block (by either starting to type the number 2 or dragging a <strong>0</strong> block out of the Math drawer) and plugging it into <strong>initialize global dotSize to</strong>, as shown in Figure 2-17.</li>
 		
 	</ol>
@@ -403,7 +403,7 @@
 	Next, we want to change the argument of <strong>DrawingCanvas.DrawCircle</strong> in the <strong>DrawingCanvas.Touched</strong> event handler so that it uses the value of <strong>dotSize</strong> rather than always using a fixed number. (It may seem like we&apos;ve &quot;fixed&quot; <b>dotSize</b> to the value 2 because we initialized it that way, but you&apos;ll see in a minute how we can change the value of <b>dotSize</b> and therefore change the size of the dot that gets drawn.)
 	</p>
 	<ol>
-		<li>Open the Variables drawer and drag out a "get" block. You should see a new option under the <strong> get</strong> drop down menu--a <strong>get global dotSize</strong> block that provides the value of the variable.</li>
+		<li>Open the Variables drawer and drag out a "get" block. You should see a new option under the <strong>get</strong> drop down menu--a <strong>get global dotSize</strong> block that provides the value of the variable.</li>
 		<li>Go to the <strong>DrawingCanvas.Touched</strong> event handler and drag the number <strong>5</strong> block out of the r slot and place it into the trash. Then replace it with the <strong>get global dotSize</strong> block (see Figure 2-18). When the user touches the canvas, the app will now determine the radius from the variable <b>dotSize</b>.</li>
 	</ol>
 	<img src="{{apps2Dir}}/PaintPot/pp2-18.PNG" alt="">

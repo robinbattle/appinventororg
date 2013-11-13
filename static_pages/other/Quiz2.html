@@ -1,25 +1,6 @@
-{% extends "teaching_base.html" %}
+{% extends "site_base.html" %}
 {% block body %}
-    <style>
-      
 
-      /* Custom container */
-      .container {
-        margin: 0 auto;
-        max-width: 1000px;
-      }
-      .container > hr {
-        margin: 60px 0;
-      }
-      ul#list { 
-        list-style-type: none; 
-      }
-
-     
-
-      
-
-    </style>
    
 
   
@@ -35,9 +16,8 @@
       <!-- Example row of columns -->
       <div class="row-fluid row-fluid-temp">
         <div class="span9">
-          
           <h2>1.</h2>
-          <p>(10) Define the term ‘variable’ in the context of an app inventor app.</p>
+          <p>(10) Define the 'term variable' in the context of an app inventor app.</p>
          <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer</a></div>  
         <div id="demo1" class="collapse">  
           A variable is a named memory cell, a place where information can be stored. 
@@ -48,7 +28,7 @@
       <div class="row-fluid">
         <div class="span9">
           <h2>2.</h2>
-          <p>(10) In the PaintPot app, a variable is needed for the size of the circles but not for the size of the lines. Explain. </p>
+          <p>(10) In the PaintPot app shown on the other page a variable is needed for the size of the circles but not for the size of the lines. Explain. </p>
               
           <div id="myCollapsibleExample"><a href="#demo2" data-toggle="collapse">Answer</a></div>  
         <div id="demo2" class="collapse">  
@@ -71,20 +51,17 @@
           <h2>4.</h2>
           <p>(10) Circle and label the event parameters and function parameters in the following blocks:</p>
             <img src="../../assets/img/q2n4.png" height="500" width="500">
-            <p>Who specifies the event-parameters? Who specifies the function parameters?</p>
+            <p>Who specifies the event-paramters? Who specifies the function parameters?</p>
          <div id="myCollapsibleExample"><a href="#demo4" data-toggle="collapse">Answer</a></div>  
         <div id="demo4" class="collapse">  
         <img src="../../assets/img/fixedq2n2.png" height="500" width="500">
-	<p>
-	Event parameters are specified by the system-- when an event occurs, these parameters provide information about the event. Function parameters are specified by the programmer-- they provide information the function needs to do its job. 
-        </p>  
-	</div>
+          </div>
         </div>
       </div>
       <div class="row-fluid">
         <div class="span9">
           <h2>5.</h2>
-          <p>(10) Suppose in the Canvas.  Dragged blocks above, the ‘value prevX’ and ‘value prevY’ blocks were replaced with ‘value startX’ and ‘value startY’ blocks, respectively. As the user dragged on the screen, what would happen?
+          <p>(10) Suppose in the Canvas.  Dragged blocks above, the 'value prevX' and 'value prevY' blocks were replaced with 'value startX' and 'value startY' blocks, respectively. As the user dragged on the screen, what would happen?
         <div id="myCollapsibleExample"><a href="#demo5" data-toggle="collapse">Answer</a></div>  
         <div id="demo5" class="collapse">  
         Under the given conditions, all lines drawn will originate from the start point (where the user first clicked down). So instead of a series of connected line segments, you'll see a circle or part of a circle form.
@@ -127,4 +104,4 @@
 
     </div> 
 
-   {% endblock %}
+{% endblock %}

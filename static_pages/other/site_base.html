@@ -17,50 +17,16 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/ai_styles.css" rel="stylesheet">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-    <style type="text/css">
-        body {
-            
-            padding-bottom: 40px;
-        }
-         #background {
-    position: fixed; 
-    width: 100%; 
-    height: 100%;
-    left: 0px; 
-    top: 0px; 
-    z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
-}
-   .hr {
-background-color: #FFAE00;
-border: 1px solid #FFAE00;
-height: 2px;
-margin: 10px 0;
-width: 100%;
-}
-
-.hero-unit{
-    background-color: #A4CA39;
- }
- .btn btn-success btn-large {
-    background-color:#282828;
- }
-
- 
-
-        .sidebar-nav {
-            padding: 9px 0;
-        }
-        .btn btn-navbar{
-            background-color:#282828;
-        }
-        .navbar-inner {
-  background-color: #282828; /* background color will be black for all browsers */
-  background-image: none;
-  background-repeat: no-repeat;
-  filter: none;
-}
-    </style>
+    
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/assets/js/jquery-1.7.2.min.js"></script>
+
+    <!-- Avatar-->
+    <link rel="stylesheet" href="demos/demo_files/main.css" type="text/css" />
+<link rel="stylesheet" href="demos/demo_files/demos.css" type="text/css" />
+<link rel="stylesheet" href="/assets/css/jquery.Jcrop.css" type="text/css" />
+<link rel="stylesheet" href="/assets/css/jcrop-thumbnail.css" type="text/css" />
+<link rel="stylesheet" href="/assets/css/jcrop-preview.css" type="text/css" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -77,6 +43,10 @@ width: 100%;
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed"
           href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+
+<!-- Youtube Videos, need to be load first-->
+      <script src="/assets/js/carousel-video-players-dynamic.js"></script>
+
 <!-- Google Analytics Starts -->
 <script type="text/javascript">
 
@@ -94,7 +64,6 @@ width: 100%;
 <!-- Google Analytics Ends -->
 </head>
 
-<body style="background-color: #d2edff;">
 
 
 <div class="navbar navbar-absolute-top" style="top:0;" >
@@ -227,21 +196,19 @@ width: 100%;
         <!-- SCRIPTS
        ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-
+	
         <script src="/assets/js/jquery.js"></script>
-        <script src="/assets/js/bootstrap-transition.js"></script>
-        <script src="/assets/js/bootstrap-alert.js"></script>
-        <script src="/assets/js/bootstrap-modal.js"></script>
-        <script src="/assets/js/bootstrap-dropdown.js"></script>
-        <script src="/assets/js/bootstrap-scrollspy.js"></script>
-        <script src="/assets/js/bootstrap-tab.js"></script>
-        <script src="/assets/js/bootstrap-tooltip.js"></script>
-        <script src="/assets/js/bootstrap-popover.js"></script>
-        <script src="/assets/js/bootstrap-button.js"></script>
-        <script src="/assets/js/bootstrap-collapse.js"></script>
-        <script src="/assets/js/bootstrap-carousel.js"></script>
-        <script src="/assets/js/bootstrap-typeahead.js"></script>
+	   <script src="/assets/js/bootstrap.js"></script>
+
 	   <script src="/assets/js/cse-searchbox.js"></script>
+	   <script src="/assets/js/index-onload.js"></script>
+	   <script src="/assets/js/carousel-datato-index.js"></script>
+
+	   <!-- Avatar Preview-->
+	   <script src="/assets/js/jquery.Jcrop.js"></script>
+        <script src="/assets/js/jcrop-xy.js"></script>
+	   <script src="/assets/js/jcrop-preview.js"></script>
+
 
 
     </div>
@@ -279,3 +246,7 @@ width: 100%;
 </footer>
 
 </html>
+
+
+
+

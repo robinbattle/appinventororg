@@ -1,4 +1,4 @@
-{% extends "teaching_base.html" %}
+{% extends "site_base.html" %}
 {% block body %}
 <H1>Event Handlers</H1>
 <p>In the early days of computers, software computed things and solved big, hairy math formulas. Because of this, software languages were modeled after a recipe, a set of math instructions: do A, then B, then C. Programming languages were developed such that the top-level structure is a "main" program consisting of high-level steps. 
@@ -35,14 +35,14 @@ A button click is an example of a <i>user-initiated event</i>. But not all event
 <p>You might find all event types in a single app. In a game, for instance, the app might respond to the app startup by requesting high game information from the web. When the information arrives to the app, the app might respond by displaying it in on the screen. Once the game gets going, the app might respond to time passing by moving characters or shortening an energy bar. You can also conceive of a game that responds to an incoming text from another player, or to the phone being moved to another physical location.
 </p>
 <h2>An App is a Set of Event Handlers</h2>
-<p>With many of today's popular languages-- Python, Java, C, C++, Objective C-- events are second-class citizens. One reason App Inventor  is intuitive is that it’s based directly on the
+<p>With many of today's popular languages-- Python, Java, C, C++, Objective C-- events are second-class citizens. One reason App Inventor  is intuitive is that it is based directly on the
 stimulus-response paradigm. Instead of specifying a "main" program, you specify a set of event handlers: <i>when this event happens, perform the following operations.</i>These first-level blocks are called event-handlers.
 <p>
 Your job as a programmer is to specify what should happen in response to each event. You start by dragging out <strong>event handler</strong> blocks, yellowish blocks that read, "when <some event> do". You program event responses by placing blocks within the <strong>when-do</strong> blocks. 
 <img src="{{apps2Dir}}/eventHandlers/eventHandlers.png" alt=""/><br/>
 
 <h2>What Happened to the Recipe?</h2>
-<p>App Inventor apps still have recipes-- do A, do B…-- but the recipes are embedded in event handlers. Indeed, each event handler is like its own "main" program and can include step-by-step instructions along with conditionals and iteration just like in traditional languages.
+<p>App Inventor apps still have recipes-- do A, do B...- but the recipes are embedded in event handlers. Indeed, each event handler is like its own "main" program and can include step-by-step instructions along with conditionals and iteration just like in traditional languages.
 </p> 
 
 {% endblock %}
