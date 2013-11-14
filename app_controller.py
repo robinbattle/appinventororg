@@ -957,20 +957,6 @@ class IHaveADreamHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/IHaveADream.html')
         self.response.out.write(template.render(path, template_values))
 
-class PaintPot2Handler(webapp.RequestHandler):
-    def get(self):
-        
-        cacheHandler = CacheHandler()
-        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
-        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
-
-        #user status
-        userStatus = UserStatus()
-        userStatus = userStatus.getStatus(self.request.uri)
-        
-        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintpotAI2.html')
-        self.response.out.write(template.render(path, template_values))
 
 class WebDatabaseHandler(webapp.RequestHandler):
     def get(self):
@@ -1028,7 +1014,7 @@ class MoleMash2Handler(webapp.RequestHandler):
         userStatus = UserStatus()
         userStatus = userStatus.getStatus(self.request.uri)
         
-        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/molemashAI2.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -1043,8 +1029,38 @@ class HelloPurr2Handler(webapp.RequestHandler):
         userStatus = UserStatus()
         userStatus = userStatus.getStatus(self.request.uri)
         
-        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/hellopurrAI2.html')
+        self.response.out.write(template.render(path, template_values))
+
+class PaintPot2Handler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintpotAI2.html')
+        self.response.out.write(template.render(path, template_values))
+        
+class NoTexting2Handler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/notextingAI2.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -3276,7 +3292,7 @@ application = webapp.WSGIApplication(
         ('/introIf',ConditionsHandler),
       
 
-        ('/IHaveADream', IHaveADreamHandler),('/properties', PropertiesHandler), ('/eventHandlers', EventHandlersHandler),('/quizly',QuizlyHandler),('/conditionalsInfo',ConditionalsInfoHandler), ('/workingWithMedia',WorkingWithMediaHandler),('/mathBlaster',MathBlasterHandler),('/appInventor2',AppInventor2Handler) ,('/slideshowQuiz',SlideShowQuizHandler), ('/javaBridge',JavaBridgeHandler), ('/meetMyClassmates',MeetMyClassmatesHandler),('/PaintPot2', PaintPot2Handler), ('/webDatabase',WebDatabaseHandler), ('/concepts',ConceptsHandler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler), ('/abstraction',AbstractionHandler),('/galleryHowTo', GalleryHowToHandler), 
+        ('/IHaveADream', IHaveADreamHandler),('/properties', PropertiesHandler), ('/eventHandlers', EventHandlersHandler),('/quizly',QuizlyHandler),('/conditionalsInfo',ConditionalsInfoHandler), ('/workingWithMedia',WorkingWithMediaHandler),('/mathBlaster',MathBlasterHandler),('/appInventor2',AppInventor2Handler) ,('/slideshowQuiz',SlideShowQuizHandler), ('/javaBridge',JavaBridgeHandler), ('/meetMyClassmates',MeetMyClassmatesHandler), ('/webDatabase',WebDatabaseHandler), ('/concepts',ConceptsHandler), ('/abstraction',AbstractionHandler),('/galleryHowTo', GalleryHowToHandler), 
         ('/sentEmail', EmailHandler),
 
         # Update Database
@@ -3289,7 +3305,10 @@ application = webapp.WSGIApplication(
         ('/webtutorial', WebTutorialHandler), ('/get_tutorial_data', GetTutorialDataHandler),('/PostTutorial', PostTutorial), ('/AddTutorialStepPage', AddTutorialStepRenderer), ('/PostTutorialStep', PostTutorialStep), ('/get_tutorial_step_data', GetTutorialStepDataHandler),
 
         #Public Profile
-        ('/publicProfile', PublicProfileHandler)
+        ('/publicProfile', PublicProfileHandler),
+
+        #AI2 Chapter
+        ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler),
         
         
     ],

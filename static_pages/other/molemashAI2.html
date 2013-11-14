@@ -1,4 +1,4 @@
-{% extends "teaching_base.html" %}
+{% extends "site_base.html" %}
 {% block body %}
 
 <h1>MoleMash</h1>
@@ -17,7 +17,7 @@
 <p>For the MoleMash app shown in Figure 3-1, you&apos;ll implement the following functionality:
 <ul>
 <li>A mole pops up at random locations on the screen, moving once every second.</li>
-<li>Touching the mole causes the phone to vibrate, the display of hits to be incremented (increased by one), and the mole to move immediately to a new location.</li>
+<li>Touching the mole causes the device to vibrate, the display of hits to be incremented (increased by one), and the mole to move immediately to a new location.</li>
 <li>Touching the screen but missing the mole causes the display of misses to be incremented.</li>
 <li>Pressing the Reset button resets the counts of hits and misses.</li>
 </ul>
@@ -45,7 +45,7 @@
 </p>
 <h2>Getting Started</h2>
 <p>
-Connect to the App Inventor website and start a new project. Name it &quot;MoleMash&quot; and also set the screen&apos;s title to &quot;MoleMash&quot;. Open the Blocks Editor and connect to the phone.
+Connect to the App Inventor website and start a new project. Name it &quot;MoleMash&quot; and also set the screen&apos;s title to &quot;MoleMash&quot;. Open the Blocks Editor and connect to the device.
 </p>
 <div class="row-fluid">
 	<div class="span9">
@@ -87,7 +87,7 @@ Connect to the App Inventor website and start a new project. Name it &quot;MoleM
 <p>Your screen should now look something like Figure 3-2 (although your mole may be in a different position).</p>
 <img src="{{apps2Dir}}/MoleMash/mm3-2.png" alt="">
 <p>
-	<em>Figure 3-2. The Component Designer view of the “action” components </em>
+	<em>Figure 3-2. The Component Designer view of the "action" components</em>
 </p>
 <h2>Placing the Label components</h2>
 <p>
@@ -153,7 +153,7 @@ To create the procedure:
 <li>To specify that the new x coordinate for the mole should be between 0 and <b>Canvas1.Width</b> &ndash; <b>Mole.Width</b>, as discussed earlier:
 <ul>
 <li>Click the Math drawer.</li>
-<li>Drag out the <strong>random integer from</strong> block, putting the plug (protrusion) on its left side into the “x” socket on <strong>call Mole.MoveTo</strong>.</li>
+<li>Drag out the <strong>random integer from</strong> block, putting the plug (protrusion) on  its left side into the "x" socket on <strong>call Mole.MoveTo</strong>.</li>
 <li>Change the <strong>number 1</strong> on the &quot;from&quot; socket by clicking it and then entering 0.</li>
 <li>Discard the <strong>number 100</strong> by clicking it and pressing your keyboard&apos;s Del or Delete button, or by dragging it to the trash can.</li>
 <li>Click the Math drawer and drag a subtraction (-) block into the &quot;to&quot; socket.</li>
@@ -213,7 +213,7 @@ Here&apos;s how to create the blocks:
 <li>Click the HitsCountLabel drawer, and drag the <strong>HitsCountLabel.Text</strong> block to the left of the plus sign.</li>
 <li>Click the Math drawer, and drag a <strong>0</strong> block to the right of the plus sign. Click 0 and change it to 1.</li>
 </ul>
-<li>Repeat step 4 for <b>MissesCountLabel</b> in the &quot;else-do&quot; section of the <strong>ifelse</strong>.</li>
+<li>Repeat step 4 for <b>MissesCountLabel</b> in the &quot;else-do&quot; section of the <strong>ifelse</strong> block.</li>
 </ol>
 </p>
 <div class="span2">
@@ -222,13 +222,13 @@ Here&apos;s how to create the blocks:
 <div class="row-fluid">
 	<div class="span9">
 		<p> 
-<strong>Test your app.</strong> <em>You can test this new code on your phone by touching the canvas, on and off the mole, and watching the score change.</em>
+<strong>Test your app.</strong> <em>You can test this new code on your device by touching the canvas, on and off the mole, and watching the score change.</em>
 </p>
 </div>
 </div>
 <h2>Procedural Abstraction</h2>
 <p>
-The ability to name and later call a set of instructions like MoveMole is one of the key tools incomputer science and is referred to as <em>procedural abstraction</em>. It is called &quot;abstraction&quot; because the caller of the procedure (who, in real-world projects, is likely to be different from the author of the procedure) only needs to know what the procedure does (moves the mole), not how it does it (by making two calls to the random-number generator). Without procedural abstraction, big computer programs would not be possible, because they contain too much code for one person to hold in his head at a time. This is analogous to the division of labor in the real world, where, for example, different engineers design different parts of a car, none of them understanding all of the details, and the driver only has to understand the interface (e.g.,pressing the brake pedal to stop the car), not the implementation.
+The ability to name and later call a set of instructions like MoveMole is one of the key tools in computer science and is referred to as <em>procedural abstraction</em>. It is called &quot;abstraction&quot; because the caller of the procedure (who, in real-world projects, is likely to be different from the author of the procedure) only needs to know what the procedure does (moves the mole), not how it does it (by making two calls to the random-number generator). Without procedural abstraction, big computer programs would not be possible, because they contain too much code for one person to hold in his head at a time. This is analogous to the division of labor in the real world, where, for example, different engineers design different parts of a car, none of them understanding all of the details, and the driver only has to understand the interface (e.g.,pressing the brake pedal to stop the car), not the implementation.
 </p>
 <p>
 Some advantages of procedural abstraction over copying and pasting code are:
@@ -251,7 +251,7 @@ What we need is a <strong>ResetButton.Click block</strong> that sets the values 
 </p>
 <img src="{{apps2Dir}}/MoleMash/mm3-9.png" alt="">
 <p>
-	<em>Figure 3-9. Resetting the number of hits (HitsCountLabel) and Misses (MissesCountLabel) when the Reset button is pressed</em>
+	<em>Figure 3-9. Resetting the number of Hits (HitsCountLabel) and Misses (MissesCountLabel) when the Reset button is pressed</em>
 </p>
 <p>
 At this point, you probably don&apos;t need step-by-step instructions for creating a button click event handler with text labels, but here&apos;s a tip to help speed up the process: instead of getting your number from the Math drawer, just type 0, and the block should be created for you. (These kinds of keyboard shortcuts exist for other blocks, too.)
@@ -268,18 +268,18 @@ At this point, you probably don&apos;t need step-by-step instructions for creati
 </div>
 <h2>Adding Behavior When the Mole Is Touched</h2>
 <p>
-We said earlier that we want the phone to vibrate when the mole is touched, which we can do with the <strong>Sound1.Vibrate</strong> block, as shown in Figure 3-10. 
+We said earlier that we want the device to vibrate when the mole is touched, which we can do with the <strong>Sound1.Vibrate</strong> block, as shown in Figure 3-10. 
 </p>
 <img src="{{apps2Dir}}/MoleMash/mm3-10.png" alt="">
 <p>
-	<em>Figure 3-10. Making the phone vibrate briefly (for 100 milliseconds) when the mole is touched</em>
+	<em>Figure 3-10. Making the device vibrate briefly (for 100 milliseconds) when the mole is touched</em>
 </p>
 <div class="span2">
 <img src="{{apps2Dir}}/phone.png" alt="">
 </div>
 <div class="row-fluid">
 	<div class="span9">
-<strong>Test your app.</strong> <em>See how the vibration works when you actually touch the mole. If the vibration is too long or too short for your taste, change the number of milliseconds in <strong>Sound1.Vibrate</strong>.</em>
+<strong>Test your app.</strong> <em>See how the vibration works when you actually touch the mole. If the vibration is too long or too short for your taste, change the number of milliseconds in <strong>Sound1.Vibrate</strong> block.</em>
 </p>
 </div>
 </div>
@@ -307,10 +307,10 @@ In this chapter, we&apos;ve covered a number of techniques useful for apps in ge
 games in particular:
 <ul>
 <li>The <b>Canvas</b> component makes use of an x-y coordinate system, where x represents the horizontal direction (from 0 at the left to <b>Canvas.Width</b>&ndash;1 at the right) and y the vertical direction (from 0 at the top to <b>Canvas.Height</b>&ndash;1 at the bottom). The height and width of an <b>ImageSprite</b> can be subtracted from the height and width of a <b>Canvas</b> to make sure the sprite fits entirely on the <b>Canvas</b>.</li>
-<li>You can take advantage of the phone&apos;s touchscreen through the <b>Canvas</b> and <b>ImageSprite</b> components&apos; <b>Touched</b> methods.</li>
-<li>You can create real-time applications that react not just to user input but also in response to the phone&apos;s internal timer. Specifically, the <strong>Clock.Timer</strong> block runs at the frequency specified in the <em>Clock.Interval</em> property and can be used to move <b>ImageSprite</b> (or other) components.</li>
+<li>You can take advantage of the device&apos;s touchscreen through the <b>Canvas</b> and <b>ImageSprite</b> components&apos; <b>Touched</b> methods.</li>
+<li>You can create real-time applications that react not just to user input but also in response to the device&apos;s internal timer. Specifically, the <strong>Clock.Timer</strong> block runs at the frequency specified in the <em>Clock.Interval</em> property and can be used to move <b>ImageSprite</b> (or other) components.</li>
 <li>Labels can be used to display scores, which go up (or down) in response to the player&apos;s actions.</li>
-<li>Tactile feedback can be provided to users through the <b>Sound.Vibrate</b> method, which makes the phone vibrate for the specified number of milliseconds.</li>
+<li>Tactile feedback can be provided to users through the <b>Sound.Vibrate</b> method, which makes the device vibrate for the specified number of milliseconds.</li>
 <li>Instead of just using the built-in methods, you can create procedures to name a set of blocks (<strong>MoveMole</strong>) that can be called just like the built-in ones. This is called procedural abstraction and is a key idea in computer science, enabling code reuse and making complex applications possible.</li>
 <li>You can generate unpredictable behavior with the <strong>random integer</strong> block in the Math drawer, making a game different every time it is played.</li>
 </ul>
