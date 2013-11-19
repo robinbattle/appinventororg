@@ -131,12 +131,12 @@
 	<ol>
 		<li>From the Palette&apos;s Drawing and Animation category, drag a <b>Canvas</b> component onto the Viewer. Change its name to <b>DrawingCanvas</b>. Set its <b>Width</b> to &quot;Fill parent.&quot; Set its <b>Height</b> to 300 pixels</li>
 		<li>If you&apos;ve completed the HelloPurr tutorial (Chapter 1), you have already downloaded the <em>kitty.png</em> file. If you haven&apos;t, you can download it here <a href="{{apps2Dir}}/PaintPot/Media/kitty.png"><em>kitty.png</em></a>.</li>
-		<li>Set the <b>BackgroundImage</b> of the <b>Canvas</b> to the <em>kitty.png</em> file. In the Properties section of the Components Designer, the <b>BackgroundImage</b> will be set to None. Click the field and choose Upload New to add the <em>kitty.png</em> file.</li>
-		<li>Set the <b>PaintColor</b> of the Canvas to red so that when the user starts the app but hasn&apos;t clicked on a button yet, his drawings will be red. Check to see that what you&apos;ve built looks like Figure 2-4.</li>
+		<li>Set the <b>BackgroundImage</b> of the <b>DrawingCanvas</b> to the <em>kitty.png</em> file. In the Properties section of the Components Designer, the <b>BackgroundImage</b> will be set to None. Click the field and choose Upload New to add the <em>kitty.png</em> file.</li>
+		<li>Set the <b>PaintColor</b> of the DrawingCanvas to red so that when the user starts the app but hasn&apos;t clicked on a button yet, his drawings will be red. Check to see that what you&apos;ve built looks like Figure 2-4.</li>
 	</ol>
 <img src="{{apps2Dir}}/PaintPot/pp2-4.PNG" alt="">
 <p>
-<em>Figure 2-4. The Canvas component has a BackgroundImage of the kitty picture</em>
+<em>Figure 2-4. The DrawingCanvas component has a BackgroundImage of the kitty picture</em>
 </p>
 	<h2>Arranging the Bottom Buttons and the Camera Component</h2>
 	<ol>
@@ -186,7 +186,7 @@
 <div class="row-fluid">
 	<div class="span9">
 	<p>
-	<strong>Note.</strong> <em>If you&apos;ve completed the HelloPurr app in Chapter 1, you&apos;re familiar with</em> <strong>Button.Click</strong> <em>events, but not with Canvas events.</em> <strong>Button.Click</strong> <em>events are fairly simple because there&apos;s nothing to know about the event other than that it happened. Some event handlers, however, come with information about the event called arguments. The </em><strong>DrawingCanvas.Touched</strong> <em>event tells you the x and y coordinates of the touch within the canvas. It also tells you if an object within the <b>DrawingCanvas</b> (in App Inventor, this is called a sprite) was touched, but we won&apos;t need that until Chapter 3. The x and y coordinates are the arguments we&apos;ll use to note where the user touched the screen, so we can then draw the dot at that position.</em>
+	<strong>Note.</strong> <em>If you&apos;ve completed the HelloPurr app in Chapter 1, you&apos;re familiar with</em> <strong>Button.Click</strong> <em>events, but not with Canvas events.</em> <strong>Button.Click</strong> <em>events are fairly simple because there&apos;s nothing to know about the event other than that it happened. Some event handlers, however, come with information about the event called arguments. The </em><strong>DrawingCanvas.Touched</strong> <em>event tells you the x and y coordinates of the touch within the DrawingCanvas. It also tells you if an object within the <b>DrawingCanvas</b> (in App Inventor, this is called a sprite) was touched, but we won&apos;t need that until Chapter 3. The x and y coordinates are the arguments we&apos;ll use to note where the user touched the screen, so we can then draw the dot at that position.</em>
 	</p>
 </div>
 </div>
@@ -205,21 +205,15 @@
 <div class="row-fluid">
 	<div class="span9">
 	<p>
-	<strong>Note.</strong> <em>You can access the event parameter values by dragging a "get" block from the Variables drawer, as shown in Figure 2-8a and 2.8b.</em>
+	<strong>Note.</strong> <em>You can access the event parameter values by mousing over them in the "when" block. "get" and "set" blocks will appear.  Drag the "get x" and plug it in as the "x" value of DrawCircle, as shown in Figure 2-8.</em>
 	</p>
 </div>
 </div>
 <div class="row-fluid">
 <div class="span5">
-<img src="{{apps2Dir}}/PaintPot/pp2-8a.PNG" alt="">
+<img src="{{apps2Dir}}/PaintPot/pp2-8.PNG" alt="">
 <p>
-	<em>Figure 2-8a. To access an event parameter, go to the Variables drawer and drag out a "get" block reference. Once you place it in the event handler, click the drop down menu to choose the parameter you want.</em>
-</p>
-</div>
-<div class="span5">
-<img src="{{apps2Dir}}/PaintPot/pp2-8b.PNG" alt="">
-<p>
-<em>Figure 2-8b. Clicking the drop down menu on a "get" block shows you all the variables and parameters you can choose.</em>
+	<em>Figure 2-8. To access an event parameter, drag out a "get" block reference from the <strong>DrawingCanvas.Touched</strong> component.</em>
 </p>
 </div>
 </div>
@@ -245,7 +239,7 @@
 </div>
 <img src="{{apps2Dir}}/PaintPot/pp2-10.PNG" alt="">
 <p>
-	<em>Figure 2-10. When the user touches the canvas, a circle of radius 5 will be drawn at (x,y)</em>
+	<em>Figure 2-10. When the user touches the DrawingCanvas, a circle of radius 5 will be drawn at (x,y)</em>
 </p>
 <div class="span2">
 <img src="{{apps2Dir}}/phone.png" alt="">
@@ -253,7 +247,7 @@
 <div class="row-fluid">
 	<div class="span9">
 	<p>
-	<strong>Test your app.</strong> <em>Try out what you have so far on the device. Touch the canvas&ndash;your finger should leave a dot at each place you touch. The dots will be red if you set the </em><b>Canvas.PaintColor</b> <em>property to red in the Component Designer (otherwise, it&apos;s black, as that&apos;s the default).</em>
+	<strong>Test your app.</strong> <em>Try out what you have so far on the device. Touch the DrawingCanvas&ndash;your finger should leave a dot at each place you touch. The dots will be red if you set the </em><b>DrawingCanvas.PaintColor</b> <em>property to red in the Component Designer (otherwise, it&apos;s black, as that&apos;s the default).</em>
 	</p>
 </div>
 </div>
@@ -262,8 +256,8 @@
 	Next, you&apos;ll add the drag event handler. Here&apos;s the difference between a touch and a drag:
 	</p>
 	<ul>
-		<li>A <em>touch</em> is when you place your finger on the canvas and lift it without moving it.</li>
-		<li>A <em>drag</em> is when you place your finger on the canvas and move it while keeping it in contact with the screen.</li>
+		<li>A <em>touch</em> is when you place your finger on the DrawingCanvas and lift it without moving it.</li>
+		<li>A <em>drag</em> is when you place your finger on the DrawingCanvas and move it while keeping it in contact with the screen.</li>
 	</ul>
 	<p>
 	In a paint program, dragging your finger across the screen appears to draw a giant, curved line along your finger&apos;s path. What you&apos;re actually doing is drawing hundreds of tiny, straight lines; each time you move your finger, even a little bit, you extend the line from your finger&apos;s last position to its new position.
@@ -299,9 +293,9 @@
 				<em>Figure 2-12. Adding the capability to draw lines</em>
 			</p>
 <p>
-		The <strong>DrawingCanvas.DrawLine</strong> block has four arguments, two for each point that determines the line: (<b>x1,y1</b>) is one point, while (<b>x2,y2</b>) is the other. Can you figure out what values need to be plugged into each argument? Remember, the <strong>Dragged</strong> event will be called many times as you drag your finger across the canvas: the app draws a tiny line each time your finger moves, from (<b>prevx,prevy</b>) to (<b>currentX,currentY</b>). Let&apos;s add those to our <strong>DrawingCanvas.DrawLine</strong> block:</li>
+		The <strong>DrawingCanvas.DrawLine</strong> block has four arguments, two for each point that determines the line: (<b>x1,y1</b>) is one point, while (<b>x2,y2</b>) is the other. Can you figure out what values need to be plugged into each argument? Remember, the <strong>Dragged</strong> event will be called many times as you drag your finger across the DrawingCanvas: the app draws a tiny line each time your finger moves, from (<b>prevx,prevy</b>) to (<b>currentX,currentY</b>). Let&apos;s add those to our <strong>DrawingCanvas.DrawLine</strong> block:</li>
 </p>
-		<li>Click the Variables drawer and drag out "get" blocks for the arguments you need. A <strong>get prevX</strong> and <strong>get prevY</strong> should be plugged into the x1 and y1 slots, respectively. A <strong>get currentX</strong> and <strong>get currentY</strong> should be plugged into the x2 and y2 slots, respectively, as shown in Figure 2-13.</li>
+		<li>Drag out "get" blocks for the arguments you need. A <strong>get prevX</strong> and <strong>get prevY</strong> should be plugged into the x1 and y1 slots, respectively. A <strong>get currentX</strong> and <strong>get currentY</strong> should be plugged into the x2 and y2 slots, respectively, as shown in Figure 2-13.</li>
 
 	</ol>
 	<img src="{{apps2Dir}}/PaintPot/pp2-13.PNG" alt="">
@@ -335,7 +329,7 @@
 	</ol>
 	<img src="{{apps2Dir}}/PaintPot/pp2-14.PNG" alt="">
 	<p>
-		<em>Figure 2-14. Clicking the color buttons changes the canvas's PaintColor; clicking Wipe clears the screen</em>
+		<em>Figure 2-14. Clicking the color buttons changes the DrawingCanvas’s PaintColor; clicking Wipe clears the screen</em>
 	</p>
 	<h2>Letting the User Take a Picture</h2>
 	<p>
@@ -346,14 +340,14 @@
 		<li>From <b>Camera1</b>, drag out <strong>Camera1.TakePicture</strong> and place it in the <strong>TakePictureButton.Click</strong> event handler.</li>
 		<li>From <b>Camera1</b>, drag the Camera1.AfterPicture event handler into the workspace.</li>
 		<li>From <b>DrawingCanvas</b>, drag the <strong>set DrawingCanvas.BackgroundImage to</strong> block and place it in the <strong>Camera1.AfterPicture</strong> event handler.</li>
-		<li><strong>Camera1.AfterPicture</strong> has an argument named <b>image</b>, which is the picture that was just taken. You can get a reference to it, with a <strong>get block</strong>, in the Variables drawer; drag it out and plug it into <strong>DrawingCanvas.BackgroundImage</strong>.</li>
+		<li><strong>Camera1.AfterPicture</strong> has an argument named <b>image</b>, which is the picture that was just taken. You can get a reference to it, with a <strong>get</strong> block from the <strong>Camera1.AfterPicture</strong> block, plug it into <strong>DrawingCanvas.BackgroundImage</strong>.</li>
 	</ol>
 	<p>
 	The blocks should look like Figure 2-15.
 	</p>
 	<img src="{{apps2Dir}}/PaintPot/pp2-15.PNG" alt="">
 	<p>
-		<em>Figure 2-15. When the picture is taken, it's set as the canvas's background image</em>
+		<em>Figure 2-15. When the picture is taken, it’s set as the DrawingCanvas’s background image</em>
 	</p>
 	<div class="span2">
 <img src="{{apps2Dir}}/phone.png" alt="">
@@ -369,7 +363,7 @@
 <div class="row-fluid">
 	<div class="span6">
 	<p>
-	The size of the dots drawn on the canvas is determined in the call to <strong>DrawingCanvas.DrawCircle</strong> when the radius argument r is set to 5. To change the thickness, you can put in a different value for r. To test this, try changing the 5 to a 10 and testing it out on the device to see how it looks.
+	The size of the dots drawn on the DrawingCanvas is determined in the call to <strong>DrawingCanvas.DrawCircle</strong> when the radius argument r is set to 5. To change the thickness, you can put in a different value for r. To test this, try changing the 5 to a 10 and testing it out on the device to see how it looks.
 	</p>
 	<p>
 	The catch here is that whatever size you set in the radius argument is the only size the user can use. What if he wants to change the size of the dots? Let&apos;s modify the program so that the user, not just the programmer, can change the dot size. We&apos;ll change it so that when the user clicks a button labeled &quot;Big Dots,&quot; the dot size is 8, and when he clicks a button labeled &quot;Small Dots,&quot; it is 2.
@@ -390,7 +384,7 @@
 	Let&apos;s start by defining a variable <b>dotSize</b>:
 	</p>
 	<ol>
-		<li>In the Blocks Editor, open the Variables drawer and drag out an <strong>initialize global name to</strong> block. Change the text &quot;name&quot; to &quot;dotSize&quot;.</li>
+		<li>In the Blocks Editor, drag out an <strong>initialize global name to</strong> block from the variables drawer. Change the text &quot;name&quot; to &quot;dotSize&quot;.</li>
 		<li>Notice that the <strong>initialize global dotSize to</strong> block has an open slot. This is where you can specify the initial value for the variable, or the value that it defaults to when the app begins. (This is often referred to as &quot;initializing a variable&quot; in programming terms.) For this app, initialize the <b>dotSize</b> to 2 by creating a number <strong>2</strong> block (by either starting to type the number 2 or dragging a <strong>0</strong> block out of the Math drawer) and plugging it into <strong>initialize global dotSize to</strong>, as shown in Figure 2-17.</li>
 		
 	</ol>
@@ -403,8 +397,8 @@
 	Next, we want to change the argument of <strong>DrawingCanvas.DrawCircle</strong> in the <strong>DrawingCanvas.Touched</strong> event handler so that it uses the value of <strong>dotSize</strong> rather than always using a fixed number. (It may seem like we&apos;ve &quot;fixed&quot; <b>dotSize</b> to the value 2 because we initialized it that way, but you&apos;ll see in a minute how we can change the value of <b>dotSize</b> and therefore change the size of the dot that gets drawn.)
 	</p>
 	<ol>
-		<li>Open the Variables drawer and drag out a "get" block. You should see a new option under the <strong>get</strong> drop down menu--a <strong>get global dotSize</strong> block that provides the value of the variable.</li>
-		<li>Go to the <strong>DrawingCanvas.Touched</strong> event handler and drag the number <strong>5</strong> block out of the r slot and place it into the trash. Then replace it with the <strong>get global dotSize</strong> block (see Figure 2-18). When the user touches the canvas, the app will now determine the radius from the variable <b>dotSize</b>.</li>
+		<li>Drag out a "get" block from <strong>DrawingCanvas.DrawCircle</strong>. You should see a <strong>get global dotSize</strong> block that provides the value of the variable.</li>
+		<li>Go to the <strong>DrawingCanvas.Touched</strong> event handler and drag the number <strong>5</strong> block out of the r slot and place it into the trash. Then replace it with the <strong>get global dotSize</strong> block (see Figure 2-18). When the user touches the DrawingCanvas, the app will now determine the radius from the variable <b>dotSize</b>.</li>
 	</ol>
 	<img src="{{apps2Dir}}/PaintPot/pp2-18.PNG" alt="">
 	<p>
@@ -438,7 +432,7 @@
 <div class="row-fluid">
 	<div class="span9">
 	<p>
-	<strong>Test your app.</strong> <em>Try clicking the size buttons and then touching the canvas. Are the circles drawn with different sizes? Are the lines? The line size shouldn&apos;t change because you programmed dotSize to only be used in the</em> <strong>DrawingCanvas.DrawCircle</strong> <em>block. Based on that, can you think of how you&apos;d change your blocks so users could change the line size as well? (Note that Canvas has a property named LineWidth.)</em>
+	<strong>Test your app.</strong> <em>Try clicking the size buttons and then touching the DrawingCanvas. Are the circles drawn with different sizes? Are the lines? The line size shouldn&apos;t change because you programmed dotSize to only be used in the</em> <strong>DrawingCanvas.DrawCircle</strong> <em>block. Based on that, can you think of how you&apos;d change your blocks so users could change the line size as well? (Note that DrawingCanvas has a property named LineWidth.)</em>
 	</p>
 </div>
 </div>
@@ -463,14 +457,14 @@
 	Here are some of the ideas we&apos;ve covered in this chapter:
 	</p>
 	<ul>
-		<li>The <b>Canvas</b> component lets you draw on it. It can also sense touches and drags, and you can map these events to drawing functions.</li>
+		<li>The <b>DrawingCanvas</b> component lets you draw on it. It can also sense touches and drags, and you can map these events to drawing functions.</li>
 		<li>You can use screen arrangement components to organize the layout of components instead of just placing them one under the other.</li>
-		<li>Some event handlers come with information about the event, such as the coordinates of where the screen was touched. This information is represented by arguments. When you drag out an event handler that has arguments, App Inventor creates items within the drop down menu for them.</li>
+		<li>Some event handlers come with information about the event, such as the coordinates of where the screen was touched. This information is represented by arguments. When you drag out an event handler that has arguments, App Inventor creates "get" and "set" items within the block to use to reference these arguments.</li>
 		<li>You create variables by using <strong>initialize global name to</strong> blocks from the Variables drawer. Variables let the app remember information, like dot size, that isn&apos;t stored in a component property.</li>
-		<li>For each variable you define, App Inventor automatically supplies a <strong>get global</strong> reference that gives the value of the variable, and a <strong>set global variable </strong> reference for changing the value of the variable. To access these, drag out a "get" or a "set" from the variables drawer, click on the drop-down menu, and choose the reference you want.</li>
+		<li>For each variable you define, App Inventor automatically supplies a <strong>get global</strong> reference that gives the value of the variable, and a <strong>set global variable </strong> reference for changing the value of the variable. To access these, drag out a "get" or a "set" from the block itself.</li>
 	</ul>
 	<p>
-	This chapter showed how the Canvas component can be used for a painting program. You can also use it to program animations such as those you&apos;d find in 2D games. To learn more, check out the Ladybug Chase game in Chapter 5 and the discussion of animation in Chapter 17.
+	This chapter showed how the DrawingCanvas component can be used for a painting program. You can also use it to program animations such as those you&apos;d find in 2D games. To learn more, check out the Ladybug Chase game in Chapter 5 and the discussion of animation in Chapter 17.
 	</p>
 
 	{% endblock %}
