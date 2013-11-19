@@ -2477,6 +2477,8 @@ class PostCommentHandler (webapp.RequestHandler):
                 comment.replyTo = db.get(self.request.get('comment_replyTo'))
                 #comment.replyTo = self.request.get('comment_replyTo')
             comment.put()
+            emailHandler = EmailHandler()
+            emailHandler.sendToAdmin(self.request.get('redirect_link'), comment)
 
         
         self.redirect(self.request.get('redirect_link'))
@@ -2871,17 +2873,6 @@ class UserStatus(webapp.RequestHandler):
         return status
 
 
-class EmailHandler(webapp.RequestHandler):
-    def get(self):
-        
-
-        mail.send_mail(sender="Adam <adam00003456@gmail.com>",
-              to="Adam Toth-Fejel <aatothfejel@dons.usfca.edu>",
-              subject="Question",
-              body="""
-                    test
-
-                    """)
 
 
 #only use when add new field to database
@@ -3234,6 +3225,27 @@ class AddTutorialStepRenderer(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/admin/admin_tutorial_step.html')
         self.response.out.write(template.render(path, template_values))
 
+
+class EmailHandler(webapp.RequestHandler):
+    def get(self):
+        
+
+        mail.send_mail(sender=" App Inventor <lubin2012tj@gmail.com>",
+              to="<blu2@dons.usfca.edu>",
+              subject="Gmail ApI Test",
+              body="""
+                    Test Here
+
+                    """)
+
+    def sendToAdmin(self, link, comment):
+        mail.send_mail(sender=" <lubin2012tj@gmail.com>",
+              to="David W Wolber <blu2@usfca.edu>",
+              subject="Comment Notification",
+              body= '',
+              html= '<p><b>' + comment.submitter.displayName + '</b> says "' + comment.content + '"</p></p> <a href="http://www.appinventor.org/' + link + '">See this comment</a></p>'
+
+              )
 
 
 # create this global variable that represents the application and specifies which class
