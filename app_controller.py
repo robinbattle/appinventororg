@@ -1078,6 +1078,21 @@ class PresidentsQuiz2Handler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/presidentsquizAI2.html')
         self.response.out.write(template.render(path, template_values))
 
+class MapTour2Handler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/maptourAI2.html')
+        self.response.out.write(template.render(path, template_values))
+
 class EventHandlersHandler(webapp.RequestHandler):
     def get(self):
         
@@ -3334,7 +3349,7 @@ application = webapp.WSGIApplication(
         ('/publicProfile', PublicProfileHandler),
 
         #AI2 Chapter
-        ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler), ('/PresidentsQuiz2', PresidentsQuiz2Handler),
+        ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler), ('/PresidentsQuiz2', PresidentsQuiz2Handler), ('/MapTour2', MapTour2Handler),
         
         
     ],
