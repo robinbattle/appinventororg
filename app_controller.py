@@ -2916,7 +2916,7 @@ class UpdateDatabase (webapp.RequestHandler):
                 account.put()
     
     def bacup3(self):
-	  //this is from adam
+	  #this is from adam
         adam_boolean = true
         pquery = db.GqlQuery("SELECT * FROM Account")
         accounts = pquery.fetch(pquery.count())
