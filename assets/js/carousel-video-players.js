@@ -59,6 +59,26 @@
           }
         });
 
+	 player5 = new YT.Player('youtube_player5', {
+          height: '360',
+          width: '515',
+          videoId: 'qOE0avT5v68',
+          events: {
+            
+           
+          }
+        });
+
+	 player6 = new YT.Player('youtube_player6', {
+          height: '360',
+          width: '515',
+          videoId: '8wsGnG_yNrQ',
+          events: {
+            
+           
+          }
+        });
+
 	  
 
 
@@ -78,5 +98,7 @@
 	  player2.stopVideo();
        player3.stopVideo();
        player4.stopVideo();
+       player5.stopVideo();
+       player6.stopVideo();
 
       }
