@@ -3324,7 +3324,7 @@ application = webapp.WSGIApplication(
         ('/amazon-steps', NewAppRenderer),
 
         # AI2
-        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot3-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), 
+        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), 
 
         # Comment
         ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
