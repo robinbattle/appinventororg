@@ -103,7 +103,8 @@ function showComment(comment_index){
          </img>
       </div>
       <div class="offset2 span2">
-         <table class="pull-right">
+	 {% if app.version == "1" %}
+	  <table class="pull-right">
             {% if app.pdfChapter %}
             <tr class="spaceUnder">
                <td>
@@ -140,6 +141,45 @@ function showComment(comment_index){
                </td>
             </tr>
          </table>
+	 {% else %}<!--Version == "2"-->
+          <table class="pull-right">
+            {% if app.pdfChapter %}
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini" style="background:#FFAE00"
+                     href="{{currentAppsDir}}/{{ app.appId }}/{{ app.appId }}.pdf">
+                  Download the Chapter&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i></a>
+               </td>
+            </tr>
+            {% else %}
+            <!--Hide PDF, nothing here-->
+            {% endif %}
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini" style="background:#FFAE00"
+                     href="{{currentAppsDir}}/{{ app.appId }}/{{ app.appId }}.aia" title="Download this aia file for the App Inventor source blocks. Then, in App Inventor, go to More Actions | Upload Source, to upload and customize the app">
+                  Download the Source&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i>
+                  </a>
+               </td>
+            </tr>
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini" style="background:#FFAE00"
+                     href="{{currentAppsDir}}/{{ app.appId }}/{{ app.appId }}.apk">
+                  Download the APK&nbsp&nbsp&nbsp&nbsp&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i>
+                  </a>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <img class="qr" src="{{currentAppsDir}}/{{ app.appId }}/qr.png" alt="" style="width:150px;height:150px" title="Scan barcode to install this app on your phone.">
+               </td>
+            </tr>
+         </table>
+	 {% endif %}
       </div>
    </div>
    <div class="row-fluid">
