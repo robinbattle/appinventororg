@@ -189,6 +189,10 @@ margin-left:-20px;
 margin-right:-20px;
 }
 
+  .nav > li > a {
+
+	padding-left:6px;
+}
 
       </style>
 
@@ -203,11 +207,11 @@ margin-right:-20px;
     <div class="container" style="min-width:1300px">  
     <ul class="nav">
 
-  <li class="active">
-    <a class="brand" style="height:20px; border-style: solid;
+  <li>
+    <a class="brand" style=";height:20px; border-style: solid;
     border-color: orange; border-bottom-style:none; border-top-style:none;" href="/">
                 <div style="font-family:mused">
-                <span style="color: white; font-size: 25px"><strong>appinventor</strong></span>
+                <span style="color: #A4CA39; font-size: 25px"><strong>&nbsp;&nbsp;appinventor</strong></span>
                 <span style="color: #FFAE00; font-size: 25px">.org</span>
               
             </div></a>  
@@ -222,7 +226,7 @@ margin-right:-20px;
           <b class="caret" style="color:white"></b>  
     </a>  
     <ul class="dropdown-menu">  
-     <li><a href="http://appinventor.mit.edu/explore/setup-mit-app-inventor.html">MIT App Inventor</a></li>  
+     <li><a href="http://ai2.appinventor.mit.edu">MIT App Inventor</a></li>  
   <li><a href="http://beta.appinventor.mit.edu">MIT App Inventor (Classic)</a></li>    
     </ul>  
     
@@ -266,7 +270,7 @@ margin-right:-20px;
     </a>   
     <ul class="dropdown-menu">  
      <li><a href="http://gallery.appinventor.mit.edu/#">Gallery</a></li>  
-  <li><a href="/appInventor2">Forum</a></li>    
+  <li><a href="http://appinventor.mit.edu/explore/forums.html">Forum</a></li>    
     </ul>  
   </li>  
 </ul>
@@ -282,7 +286,7 @@ margin-right:-20px;
      <li><a href="http://appinventorblog.com/">Blog</a></li>  
   <li><a href="/media">Media</a></li>
   <li><a href="/teaching-android">Why App Inventor?</a></li>
-  <li><a href="/appInventor2">About</a></li>   
+  <li><a href="/about">About</a></li>   
     </ul>  
   </li>  
 </ul>
@@ -334,7 +338,9 @@ margin-right:-20px;
                      <img src="../../assets/img/Sidebar-Logo-v2.png" alt="SideBar Image" style="min-width:100px;"/>
                     </li>
                     <br/>
-                    
+
+<!-- temporarily hidden, save for future use
+         
                     <div id="myCollapsibleExample"><a href="#title5" data-toggle='collapse' class="nav-header" style="color:white; font-size:15px">Modules</a></div>
                     <div id="title5" class="collapse">
                     <li><a href="/module1" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;Introduction</a></li>
@@ -345,12 +351,14 @@ margin-right:-20px;
                     <li><a href="/moduleX" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;SE/Procedures</a></li>
                     <li><a href="/quizquestions" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;Quizzes&nbsp;</a></li></div>
 
-			  <li class="nav-header" style="color:white; font-size:15px">Apps(ai2)</li>
+end of temporarily hidden -->
+
+			  <li class="nav-header" style="color:white; font-size:15px">Apps (AI2)</li>
                     {% for app in allAppsList2 %}
                   <li><a href="/{{ app.appId }}-steps" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;{{ app.title }}</a></li>
                     {% endfor %}
 
-                  <li class="nav-header" style="color:white; font-size:15px">Apps Classic</li>
+                  <li class="nav-header" style="color:white; font-size:15px">Apps (Classic)</li>
                     {% for app in allAppsList %}
                     <li><a href="/{{ app.appId }}-steps" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;{{ app.title }}</a></li>
                     {% endfor %}
@@ -426,7 +434,6 @@ margin-right:-20px;
 </footer>
 
 </html>
-
 
 
 

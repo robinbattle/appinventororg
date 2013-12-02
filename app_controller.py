@@ -860,6 +860,21 @@ class MediaHandlerTeaching(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintpot.html')
         self.response.out.write(template.render(path, template_values))
 
+class StarterAppsHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/starterApps.html')
+        self.response.out.write(template.render(path, template_values))
+
 class TryItHandler(webapp.RequestHandler):
     def get(self):
         
@@ -1844,7 +1859,23 @@ class BookHandler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/book.html')
         self.response.out.write(template.render(path, template_values))
-
+        
+class Book2Handler(webapp.RequestHandler):
+    def get(self):
+        
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ }
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/book2.html')
+        self.response.out.write(template.render(path, template_values))
 
 # Inventor's Manual Handlers #
 
@@ -2336,15 +2367,21 @@ class AppRenderer(webapp.RequestHandler):
         userStatus = UserStatus()
         userStatus = userStatus.getStatus(self.request.uri)
 
+        if(app.version == '1'):
+            currentAppsDir = APPSDIR
+        elif(app.version == '2'):
+            currentAppsDir = APPS2DIR
+
         template_values = {
             'steps': steps,
             'customs': customs,
             'app': app,
             'userStatus': userStatus,
-            'allAppsList': allAppsList
+            'allAppsList': allAppsList,
+            'currentAppsDir':currentAppsDir
             }
 
-        path = os.path.join(os.path.dirname(__file__),'app_base.html')
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/app_base.html')
         self.response.out.write(template.render(path, template_values))
 
 class NewAppRenderer(webapp.RequestHandler):
@@ -3324,8 +3361,13 @@ application = webapp.WSGIApplication(
         ('/amazon-steps', NewAppRenderer),
 
         # AI2
-        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), 
+        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2), 
+        ('/book2', Book2Handler),
 
+        # AI2 view all steps, error on 'IHaveADream'
+        #('/IHaveADream', AppRenderer),
+        ('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer),
+     
         # Comment
         ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
 
@@ -3353,7 +3395,7 @@ application = webapp.WSGIApplication(
         #AI2 Chapter
         ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler), ('/PresidentsQuiz2', PresidentsQuiz2Handler), ('/MapTour2', MapTour2Handler),
         
-        
+        ('/starterApps',StarterAppsHandler),
     ],
     debug=True)
 
