@@ -815,6 +815,21 @@ class QuizHandler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/quiz.html')
         self.response.out.write(template.render(path, template_values))
+    
+class StarterAppsHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/starterApps.html')
+        self.response.out.write(template.render(path, template_values))
 
 class QuizIntroHandler(webapp.RequestHandler):
     def get(self):
@@ -1843,6 +1858,23 @@ class BookHandler(webapp.RequestHandler):
         template_values={ }
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/book.html')
+        self.response.out.write(template.render(path, template_values))
+        
+class Book2Handler(webapp.RequestHandler):
+    def get(self):
+        
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ }
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/book2.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -3324,7 +3356,8 @@ application = webapp.WSGIApplication(
         ('/amazon-steps', NewAppRenderer),
 
         # AI2
-        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), 
+        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),
+		('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),
 
         # Comment
         ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
@@ -3365,6 +3398,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
