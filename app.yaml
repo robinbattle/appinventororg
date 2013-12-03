@@ -16,6 +16,8 @@ handlers:
   static_dir: amazon  
 - url: /assets
   static_dir: assets
+- url: /images
+  static_dir: images
 - url: /assets/css
   static_dir: assets/css
 - url: /older
