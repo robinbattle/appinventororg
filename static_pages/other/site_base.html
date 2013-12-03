@@ -194,6 +194,7 @@ margin-right:-20px;
 	padding-left:6px;
 }
 
+
       </style>
 
 </head>
@@ -201,21 +202,18 @@ margin-right:-20px;
 
 
 <body style="background-color: #abe9ff;">
-
 <div class="navbar navbar-fixed-top">  
-  <div class="navbar-inner" style="height:34px; min-width:1300px">  
-    <div class="container" style="min-width:1300px">  
-    <ul class="nav">
-
-  <li>
+  <div class="navbar-inner" style="height:34px; >  
+    <div class="container" >  
+    <ul class="nav" style="position:absolute;min-width:1300px;">
     <a class="brand" style=";height:20px; border-style: solid;
-    border-color: orange; border-bottom-style:none; border-top-style:none;" href="/">
+    border-color: orange; border-bottom-style:none; border-top-style:none;margin-left:40px;" href="/">
                 <div style="font-family:mused">
-                <span style="color: #A4CA39; font-size: 25px"><strong>&nbsp;&nbsp;appinventor</strong></span>
+                <span style="color: #FFF; font-size: 25px"><strong>&nbsp;&nbsp;appinventor</strong></span>
                 <span style="color: #FFAE00; font-size: 25px">.org</span>
               
             </div></a>  
-  </li>
+
   
   <ul class="nav" style="width:70px">  
   <li class="dropdown">  
@@ -249,7 +247,7 @@ margin-right:-20px;
   <li class="dropdown">  
     <a href="#"  
           class="dropdown-toggle"  
-          data-toggle="dropdown" style="color: white;height:20px; width:55px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-top-style:none; border-right-style:none;">  
+          data-toggle="dropdown" style="color: white;height:20px; width:50px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-top-style:none; border-right-style:none;">  
           Teach
           <b class="caret" style="color:white"></b>  
     </a>  
@@ -264,7 +262,7 @@ margin-right:-20px;
   <li class="dropdown">  
     <a href="#"  
           class="dropdown-toggle"  
-          data-toggle="dropdown" style="color: white;height:20px; width:55px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-right-style:none; border-top-style:none;"> 
+          data-toggle="dropdown" style="color: white;height:20px; width:50px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-right-style:none; border-top-style:none;"> 
           Share
           <b class="caret"></b>  
     </a>   
@@ -292,23 +290,16 @@ margin-right:-20px;
 </ul>
 
 
-   {% if userStatus.ifUser%}
+   
                      <li>
                         <a href="/profile" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profile</a> 
                      </li>        
                      <li>
-                        <a href="{{userStatus.logouturl}}" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout </a>
+                        <a href="http://2.appinventor.org/_ah/logout?continue=https://www.google.com/accounts/Logout%3Fcontinue%3Dhttps://appengine.google.com/_ah/logout%253Fcontinue%253Dhttp://2.appinventor.org/%26service%3Dah" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout </a>
                      </li>
-                     {% else %}
-                     <li>
-                        <a href="{{userStatus.loginurl}}" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login </a>
-                     </li>
-                     {% endif %}
-
-
-
+                     
 <!--Google Custom Search starts-->
-         <ul class="nav" style="margin-left: 20px">
+         <ul class="nav" style="margin-left: 20px;">
                      <li>
                         <div style="width:0px;overflow:hidden;height:0px;">
                            <!-- if you use display:none here it doesn't work-->
@@ -316,19 +307,24 @@ margin-right:-20px;
                         </div>
                         <form class="form-search" id="searchbox_002873954108960030835:l3_jvzrakeu" action="/siteSearch">
                            
-                           <input class="input-xlarge" id="q" name="q" type="text" value='{{q}}'/>
+                           <input class="input-xlarge" id="q" name="q" type="text" value=''/>
                            <button class="btn">Search</button>
                         </form>
                      </li>
                   </ul>
-                  <!--Google Custom Search ends-->
- 
+<!--Google Custom Search ends-->
+
+
+
+
     </div>  
   </div>  
 </div>  
+
 
 
-<div class="container-fluid" style="margin-left:28px;">
+
+<div class="container-fluid">
     <div class="row-fluid">
         <div class="span2" style="min-width:200px;">
             <div class="well sidebar-nav" style="background:#FFAE00">
@@ -434,7 +430,6 @@ end of temporarily hidden -->
 </footer>
 
 </html>
-
 
 
 
