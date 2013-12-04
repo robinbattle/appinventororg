@@ -843,7 +843,7 @@ class AppInventor2ChangesHandler(webapp.RequestHandler):
         userStatus = userStatus.getStatus(self.request.uri)
         
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/appInventor2Changes.html')
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/AppInventor2Changes.html')
         self.response.out.write(template.render(path, template_values))
 
 class QuizIntroHandler(webapp.RequestHandler):
@@ -3382,9 +3382,9 @@ class EmailHandler(webapp.RequestHandler):
                     """)
 
     def sendToAdmin(self, link, comment):
-        mail.send_mail(sender=" <lubin2012tj@gmail.com>",
-              to="David W Wolber <blu2@usfca.edu>",
-              subject="Comment Notification",
+        mail.send_mail(sender=" AppInventor Comment <appinventorcomment@gmail.com>",
+              to="David W Wolber <wolberd@gmail.com>",
+              subject="[Comment Notification]",
               body= '',
               html= '<p><b>' + comment.submitter.displayName + '</b> says "' + comment.content + '"</p></p> <a href="http://www.appinventor.org/' + link + '">See this comment</a></p>'
 

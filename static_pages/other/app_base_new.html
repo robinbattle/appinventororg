@@ -117,6 +117,18 @@ function showComment(comment_index){
             {% else %}
             <!--Hide PDF, nothing here-->
             {% endif %}
+            {% if app.webTutorial %}
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini" style="background:#FFAE00"
+                     href="{{ app.webTutorialLink }}">
+                  View the Web Chapter&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i></a>
+               </td>
+            </tr>
+            {% else %}
+            <!--Hide Web Tutorial, nothing here-->
+            {% endif %}
             <tr class="spaceUnder">
                <td>
                   <a class="btn btn-success btn-block btn-mini" style="background:#FFAE00"
@@ -154,6 +166,18 @@ function showComment(comment_index){
             </tr>
             {% else %}
             <!--Hide PDF, nothing here-->
+            {% endif %}
+            {% if app.webTutorial %}
+            <tr class="spaceUnder">
+               <td>
+                  <a class="btn btn-success btn-block btn-mini" style="background:#FFAE00"
+                     href="{{ app.webTutorialLink }}">
+                  View the Web Chapter&nbsp;&nbsp;
+                  <i class="icon-download-alt icon-white"></i></a>
+               </td>
+            </tr>
+            {% else %}
+            <!--Hide Web Tutorial, nothing here-->
             {% endif %}
             <tr class="spaceUnder">
                <td>
