@@ -289,14 +289,20 @@ margin-right:-20px;
   </li>  
 </ul>
 
-
-   
+   {% if userStatus.ifUser%}
                      <li>
                         <a href="/profile" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Profile</a> 
                      </li>        
                      <li>
-                        <a href="http://2.appinventor.org/_ah/logout?continue=https://www.google.com/accounts/Logout%3Fcontinue%3Dhttps://appengine.google.com/_ah/logout%253Fcontinue%253Dhttp://2.appinventor.org/%26service%3Dah" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout </a>
+                        <a href="{{userStatus.logouturl}}" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout </a>
                      </li>
+   {% else %}
+		     <li>
+		     	<a href="{{userStatus.loginurl}}" class="brand" style="color: white;height:20px; width:60px; border-style: solid; font-size: 16px; border-color: orange; border-bottom-style:none; border-left-style:none; border-top-style:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login</a> 
+                     </li>
+   {% endif %}
+   
+
                      
 <!--Google Custom Search starts-->
          <ul class="nav" style="margin-left: 20px;">
