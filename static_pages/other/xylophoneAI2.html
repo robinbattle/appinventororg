@@ -27,7 +27,7 @@
 </div>
 <div class="span5">
 <img src="{{apps2Dir}}/Xylophone/xp9-1.png" alt="">
-<em>Figure 9-1. The Xylophone app UI</em>
+<p><em>Figure 9-1. The Xylophone app UI</em></p>
 </div>
 </div>
 
@@ -50,7 +50,7 @@
 <p>
 	This app has 13 different components (8 of which compose the keyboard), listed in Table 9-1. Since there are so many, it would get pretty boring to create all of them before starting to write our program, so we'll break down the app into its functional parts and build them sequentially by going back and forth between the Designer and the Blocks Editor, as we did with the Ladybug Chase app in Chapter 5.
 </p>
-<em>Table 9-1. All of the components for the Xylophone app</em>
+<p><em>Table 9-1. All of the components for the Xylophone app</em></p>
 <img src="{{apps2Dir}}/Xylophone/xp9-1T.png" alt="">
 <h2>Creating the Keyboard</h2>
 <p>
@@ -78,7 +78,7 @@
 	The view in the Component Designer should look something like Figure 9-2.
 </p>
 <img src="{{apps2Dir}}/Xylophone/xp9-2.png" alt="">
-<em>Figure 9-2. Placing buttons to create a keyboard</em>
+<p><em>Figure 9-2. Placing buttons to create a keyboard</em></p>
 <p>
 	The display on your phone should look similar, although there will not be any empty space between the two colored buttons.
 </p>
@@ -100,12 +100,12 @@
 	</ol>
 </p>
 <img src="{{apps2Dir}}/Xylophone/xp9-3.png" alt="">
-<em>Figure 9-3. Playing a sound when a button is clicked</em>
+<p><em>Figure 9-3. Playing a sound when a button is clicked</em></p>
 <p>
 	We could do the same for <b>Button2</b>, as shown in Figure 9-4 (just changing the text value), but the code would be awfully repetitive.
 </p>
 <img src="{{apps2Dir}}/Xylophone/xp9-4.png" alt="">
-<em>Figure 9-4. Adding more sounds</em>
+<p><em>Figure 9-4. Adding more sounds</em></p>
 <p>
 	Repeated code is a good sign that you should create a procedure, which you've already done in Chapter 3’s MoleMash game and Chapter 5’s Ladybug Chase game. Specifically, we'll create a procedure that takes a number as an argument, sets <b>Sound1</b>'s <b>Source</b> to the appropriate file, and plays the sound. This is another example of <em>refactoring</em>-improving a program’s implementation without changing its behavior, a concept introduced in the MoleMash tutorial. We can use the Text drawer's <strong>join</strong> block to combine the number (e.g., 1) and the text ".wav" to create the proper filename (e.g., "1.wav"). Here are the steps for creating the procedure we need:
 	<ol>
@@ -130,7 +130,7 @@
 	Create a similar <strong>Button2.Click</strong> block with a call to <b>PlayNote</b> with an argument of 2.(You can copy the existing <strong>PlayNote</strong> block and move it into the body of <strong>Button2.Click</strong>, making sure to change the argument.) Your program should look like Figure 9-5.
 </p>
 <img src="{{apps2Dir}}/Xylophone/xp9-5.png" alt="">
-<em>Figure 9-5. Creating a procedure to play a note</em>
+<p><em>Figure 9-5. Creating a procedure to play a note</em></p>
 <h2>Telling Android to Load the Sounds</h2>
 <p>
 	If you tried out the preceding calls to <b>PlayNote</b>, you may have been disappointed by not hearing the sound you expected or by experiencing an unexpected delay. That's because Android needs to load sounds at runtime, which takes time, before they can be played. This issue didn't come up before, because filenames placed in a <b>Sound</b> component’s <b>Source</b> property in the Designer are automatically loaded when the program starts. Since we don’t set <b>Sound1.Source</b> until <em>after</b> the program has started, that initialization process does not take place. We have to explicitly load the sounds when the program starts up, as shown in Figure 9-6.

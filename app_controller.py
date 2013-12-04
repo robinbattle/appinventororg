@@ -25,6 +25,7 @@ from datastore import Comment
 from datastore import Position
 from datastore import Tutorial
 from datastore import TutorialStep
+from datastore import AdminAccount
 import gdata.analytics.client
 import gdata.sample_util
 import datetime
@@ -65,8 +66,10 @@ class Home(webapp.RequestHandler):
         userStatus = userStatus.getStatus(self.request.uri)
         
         #visitor
-        email="lubin2012tj@gmail.com"             #change it here
-        password="1223343a"       #chage it here
+        pquery = db.GqlQuery("SELECT * FROM AdminAccount where name= :1 ","System Account")
+        adminAccount = pquery.get()
+        email = adminAccount.gmail
+        password= adminAccount.password
         table_ids = (
                     'ga:34666339',          # TABLE_ID for first website
                                             # This is the table ID, or can be seen as
@@ -3020,12 +3023,7 @@ class UserStatus(webapp.RequestHandler):
 class UpdateDatabase (webapp.RequestHandler):
 
     def get(self):
-        pquery = db.GqlQuery("SELECT * FROM Account")
-        accounts = pquery.fetch(pquery.count())
-        for account in accounts:
-            if account.introductionLink == None:
-                account.introductionLink = ''
-                account.put()
+        adam_boolean = true
     
     def bacup3(self):
 	  #this is from adam

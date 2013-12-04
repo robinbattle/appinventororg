@@ -98,6 +98,11 @@ class TutorialStep(db.Model):
 	copy = db.TextProperty()
 	tutorialLink = db.StringProperty()
 	timestamp = db.DateTimeProperty(auto_now=True)
+
+class AdminAccount(db.Model):
+        name = db.StringProperty()
+        gmail = db.StringProperty()
+        password = db.StringProperty()
 	
 
 

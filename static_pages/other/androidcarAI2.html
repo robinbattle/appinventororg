@@ -37,12 +37,12 @@
 </p>
 <p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-1.png" alt="" align = "middle" >
-<em>Figure 7-1. The "Android, Where's My Car?" app in the Component Designer</em>
+<p><em>Figure 7-1. The "Android, Where's My Car?" app in the Component Designer</em></p>
 </p>
 <p>
 	You can build the user interface shown in Figure 7-1 by dragging out the components in Table 7-1.
 </p>
-<em>Table 7-1. All of the components for the app</em>
+<p><em>Table 7-1. All of the components for the app</em></p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-1T.png">
 <p>
 	Set the properties of the components in the following way:
@@ -54,7 +54,7 @@
 		<li>Set the <b>ActivityStarter</b> properties so that ActivityStarter. StartActivity will open Google Maps. (The <b>ActivityStarter</b>'s properties are only partially visible in the user interface shown in Figure 7-1.) Table 7-2 describes how they should be specified; you can leave blank any properties not listed in the table.</li>
 	</ul>
 </p>
-<em>Table 7-2. ActivityStarter properties for launching Google Maps</em>
+<p><em>Table 7-2. ActivityStarter properties for launching Google Maps</em></p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-2T.png">
 <div class="span2">
 <img src="{{apps2Dir}}/block.png" alt="">
@@ -82,7 +82,7 @@
 <p>
 	When you do get a location reading, the app should place the data into the appropriate labels. Table 7-3 lists all the blocks you'll need to do this.
 </p>
-<em>Table 7-3. Blocks for getting a location reading and displaying it in the app's UI</em>
+<p><em>Table 7-3. Blocks for getting a location reading and displaying it in the app's UI</em></p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-3T.png">
 
 <h2>How the blocks work</h2>
@@ -93,7 +93,7 @@
 	This event handler also enables the <b>RememberButton</b>. We initialized it as disabled (unchecked) in the Component Designer because there is nothing for the user to remember until the sensor gets a reading, so now we'll program that behavior.
 </p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-2.png">
-<em>Figure 7-2. Using the LocationSensor to read the current location</em>
+<p><em>Figure 7-2. Using the LocationSensor to read the current location</em></p>
 <div class="span2">
 <img src="{{apps2Dir}}/phone.png" alt="">
 </div>
@@ -111,7 +111,7 @@
 <p>
 	When the user clicks the <b>RememberButton</b>, the most current location data should be placed into the labels for displaying the remembered data. Table 7-4 shows you which blocks you'll need for this functionality.
 </p>
-<em>Table 7-4. Blocks for recording and displaying the current location</em>
+<p><em>Table 7-4. Blocks for recording and displaying the current location</em></p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-4Ta.png">
 <img src="{{apps2Dir}}/AndroidCar/ac7-4Tb.png">
 <h2>How the blocks work</h2>
@@ -119,7 +119,7 @@
 	When the user clicks the <b>RememberButton</b>, the location sensor's current readings are put into the "remembered" labels, as shown in Figure 7-3.
 </p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-3.png">
-<em>Figure 7-3. Placing the current location information in the "remembered" labels</em>
+<p><em>Figure 7-3. Placing the current location information in the "remembered" labels</em></p>
 <p>
 	You'll notice also that the <b>DirectionsButton</b> is enabled. This could get tricky, because if the user clicks the <b>DirectionsButton</b> immediately, the remembered location will be the same as the current location, so the map that appears won't provide much in terms of directions. But that's not something anyone is likely to do; after the user moves (e.g., walks to the concert), the current location and remembered location will diverge.
 </p>
@@ -160,10 +160,10 @@
 <p>
 	The resulting URL consists of the Maps domain (<em>http://maps.google.com/maps</em>) along with two URL parameters, <b>saddr</b> and <b>daddr</b>, which specify the source and destination locations for the directions. For this app, the <b>saddr</b> is set to the latitude and longitude of the current location, and the <b>daddr</b> is set to the latitude and longitude of the location stored for the car.
 </p>
-<em>Table 7-5. Blocks for recording and displaying the current location</em>
+<p><em>Table 7-5. Blocks for recording and displaying the current location</em></p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-5T.png">
 <img src="{{apps2Dir}}/AndroidCar/ac7-4.png">
-<em>Figure 7-4. Building the URL to use for launching the Maps application</em>
+<p><em>Figure 7-4. Building the URL to use for launching the Maps application</em></p>
 <div class="span2">
 <img src="{{apps2Dir}}/phone.png" alt="">
 </div>
@@ -188,7 +188,7 @@
 <p>
 	You'll start by modifying the <strong>RememberButton.Click</strong> event handler so that it stores the remembered data. To store the latitude, longitude, and address, you'll need three calls to <strong>TinyDB.StoreValue</strong>. Table 7-6 lists the additional blocks you'll need.
 </p>
-<em>Table 7-6. Blocks for recording and displaying the current location</em>
+<p><em>Table 7-6. Blocks for recording and displaying the current location</em></p>
 <img src="{{apps2Dir}}/AndroidCar/ac7-6T.png">
 <h2>How the blocks work</h2>
 <p>
@@ -263,4 +263,3 @@
 
 
 	{% endblock %}
-
