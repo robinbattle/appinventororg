@@ -12,6 +12,8 @@ handlers:
   static_dir: apps2
 - url: /quizly
   static_dir: quizly
+- url: /starterApps
+  static_dir: starterApps
 - url: /screensteps
   static_dir: screensteps
 - url: /apps/amazon
