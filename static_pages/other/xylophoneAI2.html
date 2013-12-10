@@ -91,7 +91,7 @@
 </p>
 <h2>Connecting the Sounds to the Buttons</h2>
 <p>
-	The behavior we need to program is for a sound file to play when the corresponding button is clicked. Specifically, if <b>Button1</b> is clicked, we'd like to play <em>1.wav</b>; if <b>Button2</b> is clicked, we'd like to play <em>2.wav</em>; and so on. We can set this up in the Blocks Editor as shown in Figure 9-3 by doing the following:
+	The behavior we need to program is for a sound file to play when the corresponding button is clicked. Specifically, if <b>Button1</b> is clicked, we'd like to play <em>1.wav</em>; if <b>Button2</b> is clicked, we'd like to play <em>2.wav</em>; and so on. We can set this up in the Blocks Editor as shown in Figure 9-3 by doing the following:
 	<ol>
 		<li>From the My Blocks tab and Button1 drawer, drag out the <strong>Button1.Click</strong> block.</li>
 		<li>From the Sound1 drawer, drag out the set <strong>Sound1.Source</strong> block, placing it in the <strong>Button1.Click</strong> block.</li>
@@ -133,7 +133,7 @@
 <p><em>Figure 9-5. Creating a procedure to play a note</em></p>
 <h2>Telling Android to Load the Sounds</h2>
 <p>
-	If you tried out the preceding calls to <b>PlayNote</b>, you may have been disappointed by not hearing the sound you expected or by experiencing an unexpected delay. That's because Android needs to load sounds at runtime, which takes time, before they can be played. This issue didn't come up before, because filenames placed in a <b>Sound</b> component’s <b>Source</b> property in the Designer are automatically loaded when the program starts. Since we don’t set <b>Sound1.Source</b> until <em>after</b> the program has started, that initialization process does not take place. We have to explicitly load the sounds when the program starts up, as shown in Figure 9-6.
+	If you tried out the preceding calls to <b>PlayNote</b>, you may have been disappointed by not hearing the sound you expected or by experiencing an unexpected delay. That's because Android needs to load sounds at runtime, which takes time, before they can be played. This issue didn't come up before, because filenames placed in a <b>Sound</b> component’s <b>Source</b> property in the Designer are automatically loaded when the program starts. Since we don’t set <b>Sound1.Source</b> until <em>after</em> the program has started, that initialization process does not take place. We have to explicitly load the sounds when the program starts up, as shown in Figure 9-6.
 </p>
 <img src="{{apps2Dir}}/Xylophone/xp9-6.png" alt="">
 <em>Figure 9-6. Loading sounds when the app launches</em>
@@ -272,7 +272,7 @@
 			<li>Since count (1) less than the length of notes (3),count gets incremented to 2, and <b>PlayBackNote</b> gets called again.</li>
 		</ul>
 		<img src="{{apps2Dir}}/Xylophone/xp9-13.png" alt="">
-<em>Figure 9-13. Playing back the recorded notes</b>
+<em>Figure 9-13. Playing back the recorded notes</em>
 	<li>The second time <b>PlayBackNote</b> is called, <b>count</b> = 2:</li>
 	<ul>
 		<li><b>Sound1.Source</b> is set to the second item in <b>notes</b>, which is <em>3.wav</em>.</li>
