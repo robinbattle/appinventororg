@@ -866,6 +866,21 @@ class PresidentsQuizTutHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/presidentsQuizTut.html')
         self.response.out.write(template.render(path, template_values))
 
+class IHaveADreamTutHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/IHaveADreamTut.html')
+        self.response.out.write(template.render(path, template_values))
+
 
 class QuizIntroHandler(webapp.RequestHandler):
     def get(self):
@@ -1202,6 +1217,21 @@ class XYLoPhone2Handler(webapp.RequestHandler):
         
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/xylophoneAI2.html')
+        self.response.out.write(template.render(path, template_values))
+    
+class Ladybug2Handler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/ladybugAI2.html')
         self.response.out.write(template.render(path, template_values))
         
 class EventHandlersHandler(webapp.RequestHandler):
@@ -3454,7 +3484,7 @@ application = webapp.WSGIApplication(
         # AI2
 
         ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),
-	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),
+	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),('/IHaveADreamTut', IHaveADreamTutHandler),
 
 
         # AI2 view all steps, error on 'IHaveADream'
@@ -3486,7 +3516,7 @@ application = webapp.WSGIApplication(
         ('/publicProfile', PublicProfileHandler),
 
         #AI2 Chapter
-        ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler), ('/PresidentsQuiz2', PresidentsQuiz2Handler), ('/MapTour2', MapTour2Handler), ('/AndroidCar2', AndroidCar2Handler), ('/BroadcastHub2', BroadcastHub2Handler), ('/Xylophone2', XYLoPhone2Handler), 
+        ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler), ('/PresidentsQuiz2', PresidentsQuiz2Handler), ('/MapTour2', MapTour2Handler), ('/AndroidCar2', AndroidCar2Handler), ('/BroadcastHub2', BroadcastHub2Handler), ('/Xylophone2', XYLoPhone2Handler),('/Ladybug2', Ladybug2Handler), 
         
         ('/starterApps',StarterAppsHandler)
     ],
