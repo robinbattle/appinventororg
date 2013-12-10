@@ -10,7 +10,7 @@
 		</p>
 		</div>
 <div class="span6">
-<img src="{{apps2Dir}}/LadyBug/lb.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb.png" alt="">
 </div>
 </div>
 <div class="row-fluid">
@@ -30,7 +30,7 @@
 
 
 <div class="span5">
-<img src="{{apps2Dir}}/LadyBug/lb5-1.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-1.png" alt="">
 <p>
 	<em>Figure 5-1. The Ladybug Chase game in the Designer</em>
 </p>
@@ -61,10 +61,10 @@
 <p>
 	<em>Table 5-1. All of the components for the Ladybug Chase game</em>
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-1T.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-1T.png" alt="">
 <h2>Getting Started</h2>
 <p>
-	Download the images of the <a href="{{apps2Dir}}/LadyBug/Media/ladybug.png"><em>ladybug</em></a>, <a href="{{apps2Dir}}/LadyBug/Media/aphid.png"><em>aphid</em></a>, <a href="{{apps2Dir}}/LadyBug/Media/deadladybug.png"><em>dead ladybug</em></a>, and <a href="{{apps2Dir}}/LadyBug/Media/frog.png"><em>frog</em></a>. You'll also need to download the sound file for the frog's <a href="{{apps2Dir}}/LadyBug/Media/frog.wav"><em>ribbit</em></a>.
+	Download the images of the <a href="{{apps2Dir}}/LadybugChase/Media/ladybug.png"><em>ladybug</em></a>, <a href="{{apps2Dir}}/LadybugChase/Media/aphid.png"><em>aphid</em></a>, <a href="{{apps2Dir}}/LadybugChase/Media/deadladybug.png"><em>dead ladybug</em></a>, and <a href="{{apps2Dir}}/LadybugChase/Media/frog.png"><em>frog</em></a>. You'll also need to download the sound file for the frog's <a href="{{apps2Dir}}/LadybugChase/Media/frog.wav"><em>ribbit</em></a>.
 	<p>
 		Connect to the App Inventor website and start a new project. Name it "LadybugChase" and also set the screen's title to "Ladybug Chase". Open the Blocks Editor and connect to the device. Add the images you found or created, as well as the sound file, to the Media panel.
 	</p>
@@ -115,11 +115,11 @@
 	<p>
 		Although you can try this out on the connected device, the ladybug's movement might be both slower and jerkier than if you package and download the app to the device. If, after doing that, you find the ladybug's movement too sluggish, increase the speed multiplier. If the ladybug seems too jerky, decrease it.
 	</p>
-	<img src="{{apps2Dir}}/LadyBug/lb5-2.png" alt="">
+	<img src="{{apps2Dir}}/LadybugChase/lb5-2.png" alt="">
 	<p>
 		<em>Figure 5-2. Setting up the user interface in the Component Designer for animating the ladybug</em>
 	</p>
-	<img src="{{apps2Dir}}/LadyBug/lb5-3png" alt="">
+	<img src="{{apps2Dir}}/LadybugChase/lb5-3png" alt="">
 	<p>
 		<em>Figure 5-3. Changing the ladybug's heading and speed every 10 milliseconds</em>
 	</p>
@@ -140,14 +140,14 @@
 			<li>Create a <strong>number 200</strong> block (by either starting to type the number 200 or dragging a <strong>number</strong> block out of the Math drawer) and plug it into <strong>global energy</strong>, as shown in Figure 5-4.</li>
 		</ol>
 	</p>
-		<img src="{{apps2Dir}}/LadyBug/lb5-4.png" alt="">
+		<img src="{{apps2Dir}}/LadybugChase/lb5-4.png" alt="">
 		<p>
 			<em>Figure 5-4. Initializing the variable energy to 200</em>
 		</p>
 		<p>
 			Figure 5-5 shows how creating the variable also added blocks to the My Definitions drawer to set or get the value of <strong>energy</strong>.
 		</p>
-			<img src="{{apps2Dir}}/LadyBug/lb5-5.png" alt="">
+			<img src="{{apps2Dir}}/LadybugChase/lb5-5.png" alt="">
 			<p>
 				<em>Figure 5-5. View of the My Definitions drawer showing new global energy and set global energy blocks</em>
 			</p>
@@ -171,14 +171,14 @@
 					<li>Fill in the rest of the procedure as shown in Figure 5-6. You can find the new <b>color</b> and <b>length</b> blocks in the My Definitions drawer.</li>
 				</ol>
 			</p>
-				<img src="{{apps2Dir}}/LadyBug/lb5-6.png" alt="">
+				<img src="{{apps2Dir}}/LadybugChase/lb5-6.png" alt="">
 				<p>
 					<em>Figure 5-6. Defining the procedure DrawEnergyLine</em>
 				</p>
 				<p>
 					Now that you're getting the hang of creating your own procedures, let's also write a <b>DisplayEnergyLevel</b> procedure that calls <b>DrawEnergyLine</b> twice, once to erase the old line (by drawing a white line all the way across the canvas) and once to display the new line, as shown in Figure 5-7.
 				</p>
-<img src="{{apps2Dir}}/LadyBug/lb5-7.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-7.png" alt="">
 <p>
 	<em>Figure 5-7. Defining the procedure DisplayEnergyLevel</em>
 </p>
@@ -206,7 +206,7 @@
 <p>
 	Unlike the apps in previous chapters, this game has a way to end: it's over if the ladybug fails to eat enough aphids or is eaten by the frog. In either of these cases, we want the ladybug to stop moving (which we can do by setting <b>Ladybug.Enabled</b> to false) and for the picture to change from a live ladybug to a dead one (which we can do by changing <b>Ladybug.Picture</b> to the name of the appropriate uploaded image). Create the <b>GameOver</b> procedure as shown in Figure 5-8.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-8.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-8.png" alt="">
 <p>
 	<em>Figure 5-8. Defining the procedure GameOver</em>
 </p>
@@ -228,7 +228,7 @@
 </div>
 <strong>Test your app.</strong> <em>You should be able to test this code on your device and verify that the energy level decreases over time, eventually causing the ladybug's demise. If you want to restart the application, press the "Connect to Device..." button in the Blocks Editor.</em>
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-9.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-9.png" alt="">
 <p>
 	<em>Figure 5-9. Second version of the procedure UpdateLadybug</em>
 </p>
@@ -256,7 +256,7 @@
 <p>
 	Whenever the timer goes off (100 times per second), both <strong>UpdateLadybug</strong> (like before) and <strong>UpdateAphid</strong> are called. The first thing that happens in <strong>UpdateAphid</strong> is that a random fraction between 0 and 1 is generated—for example, 0.15. If this number is less than 0.20 (which will happen 20% of the time), the aphid will change its direction to a random number of degrees between 0 and 360. If the number is not less than 0.20 (which will be the case the remaining 80% of the time), the aphid will stay the course.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-10.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-10.png" alt="">
 <p>
 	<em>Figure 5-10. Adding the procedure UpdateAphid</em>
 </p>
@@ -276,7 +276,7 @@
 <p>
 	Check that your blocks match Figure 5-11. If you had other ideas of what should happen, such as sound effects, you can add those too.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-11.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-11.png" alt="">
 <p>
 	<em>Figure 5-11. Adding the procedure EatAphid</em>
 </p>
@@ -288,7 +288,7 @@
 <p>
 	Figure 5-12 shows the code to detect collisions between the ladybug and the aphid. Note that when you add a condition to the "and" block, a new test socket appears.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-12.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-12.png" alt="">
 <p>
 	<em>Figure 5-12. Detecting and acting on collisions between the ladybug and aphid</em>
 </p>
@@ -310,7 +310,7 @@
 <p>
 	To make the aphid eventually reappear, you should modify <b>UpdateAphid</b> as shown in Figure 5-13 so it changes the aphid's direction only if it is visible. (Changing it if it's invisible is a waste of time.) If the aphid is not visible (as in, it has been eaten recently), there is a 1 in 20 (5%) chance that it will be reenabled—in other words, made eligible to be eaten again.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-13.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-13.png" alt="">
 <p>
 	<em>Figure 5-13. Modifying UpdateAphid to make invisible aphids come back to life</em>
 </p>
@@ -337,7 +337,7 @@
 		<li>Reenable the ladybug and change its picture back to the live ladybug (unless you want zombie ladybugs!).</li>
 	</ol>
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-1.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-1.png" alt="">
 <p>
 	<em>Figure 5-14. Restarting the game when RestartButton is pressed</em>
 </p>
@@ -352,7 +352,7 @@
 <p>
 	Figure 5-15 shows <b>UpdateFrog</b>, a new procedure you should create and call from <b>Clock1.Timer</b>.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-15.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-15.png" alt="">
 <p>
 	<em>Figure 5-15. Making the frog move toward the ladybug</em>
 </p>
@@ -364,7 +364,7 @@
 <p>
 	We now need to modify the collision code so that if the ladybug collides with the frog, the energy level and bar goes to 0 and the game ends, as shown in Figure 5-16.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-16.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-16.png" alt="">
 <p>
 	<em>Figure 5-16. Making the frog eat the ladybug</em>
 </p>
@@ -381,7 +381,7 @@
 <p>
 	<strong>RestartButton.Click</strong> already has code to replace the picture of the dead ladybug with the one of the live ladybug. Now you need to add code to move the live ladybug to a random location. (Think about what would happen if you didn't move the ladybug at the beginning of a new game. Where would it be in relation to the frog?) Figure 5-17 shows the blocks to move the ladybug when the game restarts.
 </p>
-<img src="{{apps2Dir}}/LadyBug/lb5-17.png" alt="">
+<img src="{{apps2Dir}}/LadybugChase/lb5-17.png" alt="">
 <p>
 	<em>Figure 5-17. The final version of RestartButton.Click</em>
 </p>
