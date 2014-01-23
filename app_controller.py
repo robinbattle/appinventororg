@@ -469,6 +469,20 @@ class CourseInABoxHandlerTeaching(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/course-in-a-box.html')
         self.response.out.write(template.render(path, template_values))
 
+class CourseInABox2Handler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/courseInABox2.html')
+        self.response.out.write(template.render(path, template_values))
 
 class SoundBoardHandler(webapp.RequestHandler):
     def get(self):
@@ -3461,7 +3475,7 @@ application = webapp.WSGIApplication(
         ('/AddApp', AddAppHandler), ('/AddStep', AddStepHandler),
         ('/AddConcept', AddConceptHandler), ('/AddCustom', AddCustomHandler),
         ('/PostApp', PostApp), ('/PostStep', PostStep), ('/PostCustom', PostCustom),
-        ('/outline', CourseOutlineHandler), ('/introduction', IntroductionHandler), ('/course-in-a-box', CourseInABoxHandler),('/portfolio', PortfolioHandler),('/introTimer', IntroTimerHandler),('/smoothAnimation', SmoothAnimationHandler),('/soundboard', SoundBoardHandler),
+        ('/outline', CourseOutlineHandler), ('/introduction', IntroductionHandler), ('/course-in-a-box', CourseInABoxHandler), ('/course-in-a-box2', CourseInABox2Handler),('/portfolio', PortfolioHandler),('/introTimer', IntroTimerHandler),('/smoothAnimation', SmoothAnimationHandler),('/soundboard', SoundBoardHandler),
         ('/media', MediaHandler), ('/mediaFiles',MediaFilesHandler),('/teaching-android', TeachingHandler), ('/lesson-introduction-to-app-inventor', LPIntroHandler),
         ('/lesson-plan-creating', LPCreatingHandler), ('/lesson-plan-paintpot-and-initial-discussion-of-programming-con', LPConceptsHandler),
         ('/lesson-plan-mobile-apps-and-augmented-real', LPAugmentedHandler), ('/lesson-plan-games', LPGamesHandler),
