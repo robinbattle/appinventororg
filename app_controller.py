@@ -2700,6 +2700,14 @@ class DeleteCommentHandler (webapp.RequestHandler):
         if users.is_current_user_admin():
             commentKey = self.request.get('commentKey')
             if(commentKey != ""):
+                #check all comments see if there exists comment/comments that references to the above one.
+                pquery = db.GqlQuery("SELECT * FROM Comment") 
+                comments = pquery.fetch(pquery.count())
+                for comment in comments:
+                    if comment.replyTo: 
+                        if (str(comment.replyTo.key()) == str(commentKey)):
+                            comment.replyTo = None
+                            comment.put()
                 db.delete(commentKey)
             self.redirect(self.request.get('redirect_link'))
         else:
