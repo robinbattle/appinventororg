@@ -32,6 +32,7 @@ from datetime import date
 from geopy import geocoders
 from google.appengine.api import mail
 import locale
+#comment
 
 APPSDIR='/apps'
 APPS2DIR='/apps2'
