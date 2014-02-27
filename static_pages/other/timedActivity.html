@@ -1,10 +1,8 @@
 {% extends "site_base.html" %}
 {% block body %}
 <title>Timed Activity</title>
-    <div class="row-fluid">
-
-        <div class="span6">
-          <h2>Timed Activity: How do you repeat an action, pausing between each iteration?</h2>
+  
+<h2>Timed Activity: How do you repeat an action, pausing between each iteration?</h2>
           <p>
 			How do you program time? How do you program animation? With many programming 
 			languages, concepts like animation are pushed back in the curriculum-- you might
@@ -13,13 +11,15 @@
 			serves as an alarm clock, and you use its Timer event to trigger timed activity.
 			 Check out the following examples:
 		  </p>
-			 
+		  <div class="row-fluid">	 
+        <div class="span6">
+          
 			 <a name="timedSound"></a> 
 		  <h3>Example 1. How do you play a sound every second?</h3>
 		    <img class="thumbnail" src="../../assets/img/TimedActivity/timedSound.png" border="0"/>
 		   <p>
-			The when Clock.Timer event is triggered repeatedly. Think of it like an alarm clock. 
-			The Clock.TimerInterval property, determines how often the sound will play. 
+			The when <span class="empfont">Clock.Timer</span> event is triggered repeatedly. Think of it like an alarm clock. 
+			The <span class="empfont">Clock.TimerInterval</span> property, determines how often the sound will play. 
 			By default it is 1000 milliseconds (1 second), so if you don’t change it the 
 			sound above will play every second. You can set this property in the designer or 
 			with blocks.
@@ -29,22 +29,22 @@
 			second? </strong><a href="#howFive">answer</a>
 			<hr/>
 			<a name="moveSpaceship"></a>
-			</div>
-			<div class="span4">
+		</div>
+		<div class="span4">
 			<br/><br/><br/>
             <iframe width="560" height="315" src="//www.youtube.com/embed/yp_CUcOPUyw" 
              frameborder="0" allowfullscreen></iframe>
-            </div>
-         </div>
+        </div>
+       </div>
          <div class="row-fluid">   
             <div class="span6">
             <a name="spaceship"></a> 
 			<h3>Example 2. How do you move a spaceship smoothly across the screen?</h3>
 			<img class="thumbnail" src="../../assets/img/TimedActivity/spaceshipmove.png" border="0"/>
 			<p>
-			The spaceship’s X coordinate defines its horizontal location. On each timer 
-			event, the X coordinate is increased and the spaceship appears further to the right. 
-			If the Clock.TimerInterval property is set to the default of 1000 ms, then the ship 
+			The spaceship’s <span class="empfont">X</span> coordinate defines its horizontal location. On each timer 
+			event, the <span class="empfont">X</span> coordinate is increased and the spaceship appears further to the right. 
+			If the <span class="empfont">Clock.TimerInterval</span> property is set to the default of 1000 ms, then the ship 
 			will move every one second, a very choppy motion. Typically, for this type of 
 			animation, you’ll set the timer interval to something like 40 ms.
 			</p>
@@ -74,12 +74,12 @@
 		  <h3>Example 1. When the user clicks a start button, start playing a sound every 
 		second. When they click a stop button, stop playing the sound.</h3>
 		<img class="thumbnail" src="../../assets/img/TimedActivity/startStopButton.png" border="0"/>
-		<p>The clock has a Clock.TimerEnabled property. When it is true, the alarm clock 
-		is on so the timer will trigger. When Clock.TimerEnabled is set to false the timer 
+		<p>The clock has a <span class="empfont">Clock.TimerEnabled</span> property. When it is true, the alarm clock 
+		is on so the timer will trigger. When <span class="empfont">Clock.TimerEnabled</span> is set to false the timer 
 		is dormant. </p>
 
 		<p>When the user clicks the start button, TimerEnabled is set to true to get things
-		 moving. A second later, and each second thereafter, the when Clock.Timer event 
+		 moving. A second later, and each second thereafter, the when <span class="empfont">Clock.Timer</span> event 
 		 will trigger and the sound will play. When the user clicks “Stop”, the timer is 
 		 disabled and the sound stops playing.</p>
 		 
@@ -93,21 +93,22 @@
         </div>
         <div class="row-fluid">   
           <div class="span6">
+          <a name="startStopShake"></a>
 		 <h3>Example 2. When the user speaks, start the spaceship moving. When the 
 		 user shakes the phone, stop the spaceship from moving.</h3>
 		 <img class="thumbnail" src="../../assets/img/TimedActivity/shakeSpeak.png" border="0"/>
 		<p> 
-		You need two additional components, a SpeechRecognizer that can recognize when the 
+		You need two additional components, a <span class="empfont">SpeechRecognizer</span> that can recognize when the 
 		user is speaking, and an AccelerometerSensor that senses when the device is being shook.
         </p>
         <p>
-		The Screen.Initialize event handler is triggered when the app begins. The 
-		SpeechRecognizer.GetText block opens the speech recognizer so that it 
+		The <span class="empfont">Screen.Initialize</span> event handler is triggered when the app begins. The 
+		<span class="empfont">SpeechRecognizer.GetText</span> block opens the speech recognizer so that it 
 		is waiting for the user to say something. When the user speaks, the 
-		SpeechRecognizer.AfterGettingText event handler is triggered. Here, you set 
-		Clock.TimerEnabled to true so the clock timer will start triggering and the sprite 
-		will begin moving. When the user shakes the phone, AccelerometerSensor.Shaking is 
-		triggered, the timer is disabled so the sprite stops, and the SpeechRecognizer.GetText 
+		<span class="empfont">SpeechRecognizer.AfterGettingText</span> event handler is triggered. Here, you set 
+		<span class="empfont">Clock.TimerEnabled</span> to true so the clock timer will start triggering and the sprite 
+		will begin moving. When the user shakes the phone, <span class="empfont">AccelerometerSensor.Shaking</span> is 
+		triggered, the timer is disabled so the sprite stops, and the <span class="empfont">SpeechRecognizer.GetText</span> 
 		is called to await the next time the user speaks.
          </p> 
          <hr/>
@@ -120,12 +121,12 @@
          <h2>Q and A</h2>
          <a name="howFive"></a>
          <strong>1. How can you play a sound every five seconds instead of every second?</strong>
-         <p>The Clock.TimerInterval property determines how often the Clock.Timer event triggers. 
+         <p><span class="empfont">The Clock.TimerInterval</span> property determines how often the <span class="empfont">Clock.Timer</span> event triggers. 
          By default, the timer interval is set to 1000 ms, or 1 second. If you set it to 5000, 
-         the clock.Timer event will trigger every 5 seconds. 
+         the <span class="empfont">Clock.Timer</span> event will trigger every 5 seconds. 
          <img class="thumbnail" src="../../assets/img/TimedActivity/setInterval5000.png" border="0"/>
-         It is a bit confusing and indirect, because you typically set the TimerInterval 
-         in the Designer, and the “when Clock.Timer” event is in the blocks editor. 
+         It is a bit confusing and indirect, because you typically set the <span class="empfont">TimerInterval</span> 
+         in the Designer, and the <span class="empfont">when Clock.Timer event</span> is in the blocks editor. 
          But just realize that the timer will be triggered every “TimerInterval” milliseconds.</p>
          <a name="fps"></a>
 		 <strong>2. A "moving picture" is really a sequence of pictures displayed very fast. 

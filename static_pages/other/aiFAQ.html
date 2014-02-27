@@ -1,28 +1,38 @@
 {% extends "site_base.html" %}
 <title>App Inventor Frequently Asked Questions</title>
 {% block body %}
-<h2>App Inventor Frequently Asked Questions</h2>
+<h2>App Inventor FAQ</h2>
 
-
-<h3>Timed Activity</h3>
-<ul>
-<li>
-<a href="/TimedActivity">How do you repeat an action, pausing between each iteration?</a>
+<h3>User-Initiated List Traversal</h3>
+How do you step through a list based on user-initiated events?
   <ul>
-    <li>How do you play a sound every second?</li>
-    <li>How do you move a spaceship smoothly across the screen?</li>
+    <li><a href="/UserListNav#nextButton">How do you create a slideshow so the user clicks to get to 
+		  the next picture?</a></li>
+    <li><a href="/UserListNav#prevButton">How do you add a previous button to make the slideshow go backwards?</a></li>
+     <li><a href="/UserListNav#loopBack">How do you make it so the slideshow loops back to the front?</a></li>
   </ul>
-</li>
-<li>
-<a href="/TimedActivity#startStop">How do you start and stop an animation?</a>
+<h3>Timed Activity</h3>
+How do you repeat an action, pausing between each iteration?
   <ul>
-  <li>When the user clicks a start button, start playing a sound every second. 
- When they click a stop button, stop playing the sound.</li>
+    <li><a href="/TimedActivity#timedSound">How do you play a sound every second?</a></li>
+    <li><a href="/TimedActivity#spaceship">How do you move a spaceship smoothly across the screen?</a></li>
+  </ul>
+How do you start and stop a timed activity?
+  <ul>
+  <li><a href="/TimedActivity#startStop">How do you start and stop the repeated playing of a sound?</a></li>
 
   <li>  
-  When the user speaks, start the spaceship moving. When the user shakes 
-  the phone, stop the spaceship from moving.</li>
+  <a href="/TimedActivity#startStopShake">How do you start a spaceship when the user speaks, 
+  and stop it when the user shakes the phone?</a></li>
   </ul>
-</u;>
+
+<h3>Timed Lists</h3>
+How do you process each item in a list, pausing in between?
+  <ul>
+    <li><a href="/TimedLists#playNotes">How do you play a list of musical notes?</a></li>
+    <li><a href="/TimedLists#sign">How do you sign the word 'code' using American Sign Language?</a></li>
+  </ul>
+
+
 
 {% endblock %}

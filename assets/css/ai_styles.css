@@ -4885,6 +4885,14 @@ line-height:12px;
 color:grey;
 }
 
+.empfont {
+margin-bottom:5px;
+font-size:14px;
+font-weight:30;
+line-height:12px;
+color:black;
+}
+
 .smallleadfont {
 margin-bottom:5px;
 font-size:12px;
