@@ -1,0 +1,25 @@
+{% extends "site_base.html" %}
+{% block body %}
+<title>Conditionals</title>
+  
+<h3>How do you start and pause a sound file when the user clicks a button?</h3>
+<img class="thumbnail" src="../../assets/img/conditionals/ifElsePlayPause.png" border="0"/>
+<p>
+This behavior from the “I Have a Dream” app illustrates the fundamental way that an app makes decisions. There is a button with a picture of Martin Luther King on it. The action taken when the button is clicked is not always the same. If the sound file (MLK’s speech) is playing, it should be paused. If it is not playing, it should be started.
+The if-else block is used to branch based on the situation. It checks the IsPlaying property of the Player component. If it is true, it pauses the speech. If it is false (else), the speech is (re-) started.</p>
+<hr/>
+<div class="row-fluid">   
+<div class="span6">
+<a name="WHERE"></a> 
+<h3>How do you auto-respond to a “WHERE” text from a particular person?</h3>
+<img class="thumbnail" src="../../assets/img/conditionals/textParticular.png" border="0"/>
+<p>
+	If your child or friend leaves this app running, you can always find out where they are by sending a “WHERE” text to them. This code illustrates a complex if-test, one with an “and” clause, as you must test that both the sender is a particular phone number and the text sent was “WHERE”. If both are true, a text auto-reply is sent back to the phone number.
+</p>
+	<hr/>
+	</div>
+
+</div>     
+
+
+{% endblock %}
