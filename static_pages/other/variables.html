@@ -56,7 +56,6 @@
 			the ball is moving to the left you want to add a negative number (e.g., -5). The 
 			amount you add to Ball1.X is dependent on the direction the ball is moving.
 		</p>
-		<img class="thumbnail" src="../../assets/img/variables/circleSize.png" border="0"/>
 		<p>To remember which way the ball is going, you define the variable distance. distance is initialized to 5, so when the app starts each timer event moves the ball to the right. When the ball hits the (right) edge, <span class="empfont">Ball1.EdgeReached</span> is triggered, and distance is set to itself times -1, or -5. In other words, its sign is flipped. Because distance is -5, the next timer events cause the ball to move left. When the ball hits the left edge, <span class="empfont">Ball1.EdgeReached</span> is triggered again, the sign of distance is flipped again, back to 5, and the ball begins moving right. This behavior continues so that the ball moves back and forth forever.
 		</p>
 		<p>Note: there are many ways to code this back-and-forth behavior and some that don’t include using a variable.</p>

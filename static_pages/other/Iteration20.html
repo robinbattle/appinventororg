@@ -6,34 +6,36 @@
 
 <h1>Iteration Blocks: Iteration</h2>
 	<div class="row-fluid">
-		<div class="span4">
+		<div class="span6">
 			<p>
 			<em>One thing computers are good at is Iteration operations-like little children, they never tire of repetition. They are also very fast and can do things like process your entire list of Facebook friends in a microsecond.</em>
 			</p>
+			<p>
+	In this chapter, you'll learn how to program repetition with just a few blocks instead of copying and pasting the same blocks over and over. You'll learn how to do things like send an SMS text to every phone number in a list and sort list items. You'll also learn that repeat blocks can significantly simplify an app.
+</p>
 			</div>
 <div class="span4">
 <img src="{{apps2Dir}}/Iteration20/r20.png" alt="">
 </div>
 </div>
-<p>
-	In this chapter, you'll learn how to program repetition with just a few blocks instead of copying and pasting the same blocks over and over. You'll learn how to do things like send an SMS text to every phone number in a list and sort list items. You'll also learn that repeat blocks can significantly simplify an app.
-</p>
+
 <h2>Controlling an App's Execution: Branching and Looping </h2>
 <p>
 	In previous chapters, you learned that you define an app's behavior with a set of event handlers: events and the functions that should be executed in response. You also learned that the response to an event is often not a linear sequence of functions and can contain blocks that are performed only under certain conditions. 
 </p>
 	<div class="row-fluid">
-		<div class="span4">
+		
+		<div class="span6">
+<p>
+	Repeat blocks are the other way in which an app behaves nonlinearly. Just as if and ifelse blocks allow a program to branch, repeat blocks allow a program to loop; that is, to perform some set of functions and then jump back up in the code and do it again, as illustrated in Figure 20-1. When an app executes, a program counter working beneath the hood of the app keeps track of the next operation to be performed. So far, you've examined apps in which the program counter starts at the top of an event handler and (conditionally) performs operations top to bottom. With repeat blocks, the program counter loops back up in the blocks, continuously Iteration functions.
+</p>
+</div>
+<div class="span4">
 			<img src="{{apps2Dir}}/Iteration20/r20-1.png" alt="">
 			<p>
 				<em>Figure 20-1. Repeat blocks cause a program to loop</em>
 			</p>
 		</div>
-		<div class="span4">
-<p>
-	Repeat blocks are the other way in which an app behaves nonlinearly. Just as if and ifelse blocks allow a program to branch, repeat blocks allow a program to loop; that is, to perform some set of functions and then jump back up in the code and do it again, as illustrated in Figure 20-1. When an app executes, a program counter working beneath the hood of the app keeps track of the next operation to be performed. So far, you've examined apps in which the program counter starts at the top of an event handler and (conditionally) performs operations top to bottom. With repeat blocks, the program counter loops back up in the blocks, continuously Iteration functions.
-</p>
-</div>
 </div>
 <p>
 	In App Inventor, there are two types of repeat blocks: <strong>foreach</strong> and <strong>while.foreach</strong> is used to specify functions that should be performed on each item of a list. So, if you have a list of phone numbers, you can specify that a text should be sent to each number in the list 
@@ -69,14 +71,16 @@
 <p>
 	This code can be read as:
 	<p>
-		&tbsp;&tbsp;For each item (phone number) in the list <b>phoneNumbers</b>, set the <b>Texting</b> object's phone number to the item and send out the text message. 
+		&nbsp;&nbsp;For each item (phone number) in the list <b>phoneNumbers</b>, set the <b>Texting</b> object's phone number to the item and send out the text message. 
 	</p>
 </p>
 <p>
-	When you drag out a <strong>foreach</strong> block, you must specify the list to process by plugging a reference into the "in list" parameter at the bottom of the block. In this case, the <strong>global phoneNumbers</strong> block was dragged out of the Variables palette and plugged in to provide the list of phone numbers to text. 
+	When you drag out a <strong>foreach</strong> block, you must specify the list to process by 
+	plugging a reference into the "in list" parameter slot. In this case, the <strong>get global phoneNumbers</strong> block 
+	was dragged out the phoneNumbers initialization block and plugged in to provide the list of phone numbers to text. 
 </p>
 <p>
-	At the top of the <strong>foreach</strong> block, you also provide a name for a <em>placeholder</em> variable that comes with the <strong>foreach</strong>. By default, this placeholder is named "var." You can leave it that way or rename it. One common name for it is "item," as it represents the current item being processed in the list. 
+	At the top of the <strong>foreach</strong> block, there is also  a <em>placeholder</em> variable that comes with the <strong>foreach</strong>. By default, this placeholder is named "item." You can leave it that way or rename it. This variable represents the current item being processed in the list. 
 </p>
 <p>
 	The blocks within the <strong>foreach</strong> are repeated for each item in the list, with the placeholder variable (in this example, <b>item</b>) always holding the item currently being processed. If a list has three items, the inner blocks will be executed three times. The inner blocks are said to be subordinate to, or within, the <strong>foreach</strong> block. We say that the program counter "loops" back up when it reaches the bottom block within the <strong>foreach</strong>.
@@ -116,7 +120,7 @@
 </p>
 <p>
 	When you plug a list directly into a <b>Text</b> property of a <b>Label</b>, the list items are displayed in the label as a single row of text separated by spaces and contained in parentheses: 
-	&tbsp;&tbsp;(111–1111 222–2222 333–3333) 
+	&nbsp;&nbsp;(111–1111 222–2222 333–3333) 
 </p>
 <p>
 	The numbers may or may not span more than one line, depending on how many there are. The user can see the data and perhaps comprehend that it's a list of phone numbers, but it's not very elegant. List items are more commonly displayed on separate lines or with commas separating them.
@@ -128,13 +132,13 @@
 	In our phone number list, we want a newline character, which is denoted by \n. When \n appears in a text block, it means "go down to the next line before you display the next thing." So the text object "111–1111\n222–2222\n333–3333" would appear as:
 </p>
 <p>
-	&tbsp; 111–1111 
+	&nbsp; 111–1111 
 </p>
 <p>
-	&tbsp; 222–2222
+	&nbsp; 222–2222
 </p>
 <p>
-	&tbsp; 333–3333
+	&nbsp; 333–3333
 </p>
 <p>
 	To build such a text object, we use a <strong>foreach</strong> block and "process" each item by adding it and a newline character to the <b>PhoneNumberLabel.Text</b>property, as shown in Figure 20-5.
@@ -146,10 +150,14 @@
 	<em>Figure 20-5. Using the foreach block to process the list and put a newline character before each item</em>
 </p>
 <p>
-	Let's trace the blocks to see how they work. As discussed in Chapter 15, tracing shows how each variable or property changes as the blocks are executed. With a <strong>foreach</strong>, we consider the values after each <em>iteration</em>; that is, each time the program goes through the <strong>foreach</strong> loop.
+	Let's trace the blocks to see how they work. As discussed in Chapter 15, tracing shows how each variable 
+	or property changes as the blocks are executed. With a <strong>foreach</strong>, we consider the values after each 
+	<em>iteration</em> that is, each time the program goes through the <strong>foreach</strong> loop.
 </p>
 <p>
-	Before the <strong>foreach</strong>, the <b>PhoneNumbersLabel</b>, is initialized to the empty text. When the <strong>foreach</strong> begins, the app automatically places the first item of the list (111–1111) into the placeholder variable <strong>number</strong>. The blocks in the <strong>foreach then <strong>make text</strong> with <strong>PhoneNumbersLabel.Text</strong> (the empty text), \n, and number, and set the result into <strong>PhoneNumbersLabel.Text</strong>. Thus, after the first iteration of the <strong>foreach</strong>, the pertinent variables store the values shown in Table 20-1. 
+	Before the <strong>foreach</strong>, the <b>PhoneNumbersLabel</b>, is initialized to the empty text. 
+	When the <strong>foreach</strong> begins, the app automatically places the first 
+	item of the list (111–1111) into the placeholder variable <strong>number</strong>. The blocks in the <strong>foreach </strong> then make text</strong> with <strong>PhoneNumbersLabel.Text</strong> (the empty text), \n, and number, and set the result into <strong>PhoneNumbersLabel.Text</strong>. Thus, after the first iteration of the <strong>foreach</strong>, the pertinent variables store the values shown in Table 20-1. 
 </p>
 <p>
 	<em>Table 20-1. The values of the variables after the first iteration of foreach</em>
@@ -178,13 +186,13 @@
 So, after each iteration, the label becomes larger and holds one more phone number (and one more newline). By the end of the <strong>foreach</strong>, <b>PhoneNumbersLabel.Text</b> is set so that the numbers will appear as:
 </p>
 <p>
-	&tbsp;&tbsp; 111–1111 
+	&nbsp;&nbsp; 111–1111 
 </p>
 <p>
-	&tbsp;&tbsp; 222–2222
+	&nbsp;&nbsp; 222–2222
 </p>
 <p>
-	&tbsp;&tbsp; 333–3333
+	&nbsp;&nbsp; 333–3333
 </p>
 <h2>Iteration Blocks with while </h2>
 <p>

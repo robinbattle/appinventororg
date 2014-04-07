@@ -172,7 +172,7 @@
 <p>
 	&tbsp;Angle returns the direction in which the device is tiled. That is, it tells 
 	&tbsp;the direction of the force that would be exerted by a ball rolling on the 
-	&tbsp;surface of the device. 
+	&nbsp;surface of the device. 
 </p>
 <p>
 	The <b>OrientationSensor</b> also provides the <strong>OrientationChanged</strong> event, which is triggered every time the orientation changes. To explore these properties further, write an app that illustrates how the properties change as the user tilts the device. Just add five heading labels, and five other labels to show the current values of the properties in the preceding list. Then add the blocks shown in Figure 23-8.
@@ -184,8 +184,7 @@
 	<em>Figure 23-8. Blocks to display the OrientationSensor data</em>
 </p>
 </p>
-<div class="row-fluid">
-<div class="span6">
+
 	<p>
 
 <img src="{{apps2Dir}}/Sensors23/s23-9.png" alt="">
@@ -193,14 +192,12 @@
 <p>
 <em>Figure 23-9. A user interface for exploring how "roll" can be used to move an image</em>
 </p>
-<div class="row-fluid">
-		<div class="span6">
+
 <h2>Using the Roll Parameter </h2>
 <p>
 	Now let's try to move an image left or right on the screen based on the user tilting the device, like you might do in a shooting or driving game. Drag out a <b>Canvas</b> and set the <b>Width</b> to "Fill parent" and the <b>Height</b> to 200 pixels. Then add an <b>ImageSprite</b> or <b>Ball</b> within the <b>Canvas</b>, and add a <b>Label</b> named <b>RollLabel</b> under it to display a property value, as shown in Figure 23-9.
 </p>
-</div>
-</div>
+
 <p>
 	The <b>OrientationSensor's Roll</b> property will tell you if the phone is tilted left or right (i.e., if you hold the phone upright and tilt it slightly to the left, you'll get a positive reading for the roll; if you tilt it slightly right, you'll get a negative reading). Therefore, you can let the user move an object with an event handler like the one shown in Figure 23-10.
 </p>
@@ -326,8 +323,7 @@
 <p>
 	To do this, you need the user to help you by laying the device flat on a table and then clicking a Calibrate button. When the user clicks the button, the app records the readings for the flat surface. Those readings can then be used later, in <strong>AccelerationChanged</strong> events, to offset the new readings and tell you if the device is moved rapidly in some dimension.
 </p>
-<div class="row-fluid">
-<div class="span6">
+
 	<p>
 
 <img src="{{apps2Dir}}/Sensors23/s23-15.png" alt="">
@@ -335,9 +331,7 @@
 <p>
 <em>Figure 23-15. Calibrating the acceleration readings</em>
 </p>
-</div>
-<div class="row-fluid">
-		<div class="span6">
+
 		<p>
 			Figure 23-15 shows a sample app that lets the user calibrate the readings and then detects acceleration. 
 		</p>

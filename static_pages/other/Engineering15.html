@@ -87,7 +87,7 @@
 </p>
 <h2>Comment Your Code</h2>
 <p>
-	If you've completed a few of the tutorials in this book, you've probably seen the small blue boxes within the blocks (see Figure 15-1). These are called <em>comments</em>. In App Inventor, you can add comments to any block by right-clicking it and choosing Add Comment. Comments are just annotation; they don't affect the app's execution at all.
+	If you've completed a few of the tutorials in this book, you've probably seen the small yellow boxes within the blocks (see Figure 15-1). These are called <em>comments</em>. In App Inventor, you can add comments to any block by right-clicking it and choosing Add Comment. Comments are just annotation; they don't affect the app's execution at all.
 </p>
 <p>
 	<img src="{{apps2Dir}}/Engineering15/e15-1.png">
@@ -137,7 +137,7 @@
 	The complexity of the sample you trace is almost immaterial; the key is that you slow down your thought process and examine the cause and effect of each block. You'll gradually begin to understand that the rules governing the whole process are not as overwhelming as you originally thought. 
 </p>
 <p>
-	For example, consider these slightly altered blocks, shown in Figures 15-2 and 15-3, from the Presidents Quiz app (Chapter 8).
+	For example, consider these blocks, shown in Figures 15-2, which are slight alterations of those from the Presidents Quiz app (Chapter 8).
 </p>
 <p>
 	<img src="{{apps2Dir}}/Engineering15/e15-2.png">
@@ -149,14 +149,10 @@
 	Do you understand this code? Can you trace it and show exactly what happens in each step? 
 </p>
 <p>
-	You start tracing by first drawing memory cell boxes for all pertinent variables and properties. In this case, you need boxes for the <b>currentQuestionIndex</b> and the <b>QuestionLabel.Text</b>, as shown in Table 15-1.
+	You start tracing by first drawing memory cell boxes for all pertinent variables and properties. In this case, you need boxes for the <b>currentQuestionIndex</b> and 
+	the <b>QuestionLabel.Text</b>, as shown in Table 15-1.
 </p>
-<p>
-	<img src="{{apps2Dir}}/Engineering15/e15-2.png">
-</p>
-<p>
-	<em>Figure 15-3. This block is executed when the user clicks the NextButton</em>
-</p>
+
 <p>
 	<em>Table 15-1. Boxes to hold the changing text and index values</em>
 </p>
@@ -184,7 +180,17 @@
 	<img src="{{apps2Dir}}/Engineering15/e15-2T.png">
 </p>
 <p>
-	Next, trace what happens when the user clicks the Next button. Examine each block one by one. First, the <b>currentQuestionIndex</b> is incremented. At an even more detailed level, the current value of the variable (1) is added to 1, and the result (2) is placed in <b>currentQuestionIndex</b>. The if statement is false because the value of <em>currentQuestionIndex</em> (2) is less than the length of QuestionList (3). So the second item is selected and put into <b>QuestionLabel.Text</b>, as illustrated in Table 15-3. 
+	Next, trace what happens when the user clicks the Next button. </p>
+	<p>
+	<img src="{{apps2Dir}}/Engineering15/e15-3.png">
+</p>
+<p>
+	<em>Figure 15-3. This block is executed when the user clicks the NextButton</em>
+</p>
+	
+	
+<p>	
+	Examine each block one by one. First, the <b>currentQuestionIndex</b> is incremented. At an even more detailed level, the current value of the variable (1) is added to 1, and the result (2) is placed in <b>currentQuestionIndex</b>. The if statement is false because the value of <em>currentQuestionIndex</em> (2) is less than the length of QuestionList (3). So the second item is selected and put into <b>QuestionLabel.Text</b>, as illustrated in Table 15-3. 
 </p>
 <p>
 	<em>Table 15-3. The values after NextButton is clicked</em>
@@ -225,14 +231,15 @@
 	</ul>
 </p>
 <h2>Watching Variables</h2>
-<p>
+<p><em>NOTE: Watching, a feature of AI1, is not yet implemented in AI2. </em>
+<!--
 	Probably the most important capability a debugger can provide is to let you examine the value of variables and properties as an app executes-in essence, making the internal memory of the computer visible to the software developer.
 </p>
 <p>
-	App Inventor lets you do just that with its Watch mechanism, shown in Figure 15-4. (The variable definition block hidden from view is for <b>currentQuestionIndex</b>.) As you are live testing on the phone or emulator, you simply right-click any variable definition block within the Blocks Editor and choose Watch.
+	App Inventor lets you do just that with its Watch mechanism. (The variable definition block hidden from view is for <b>currentQuestionIndex</b>.) As you are live testing on the phone or emulator, you simply right-click any variable definition block within the Blocks Editor and choose Watch.
 </p>
 <p>
-	<img src="{{apps2Dir}}/Engineering15/e15-4.png">
+	<img src="{{apps2Dir}}/Engineering15/e15-4.png"> 
 </p>
 <p>
 	<em>Figure 15-4. Using the Watch mechanism to view variable values as the app runs</em>
@@ -266,7 +273,7 @@
 </p>
 <p>
 	In essence, the Watch mechanism performs the pen-and-paper trace for you and lets you see the "hidden" memory of the app as it runs. It's a great way to really understand your app and discover bugs!
-</p>
+</p> --!>
 <h2>Testing Individual Blocks</h2>
 <p>
 	While the Watch mechanism allows you to examine variables during an app's execution, another tool called Do It lets you try out individual blocks <em>outside</em> the ordinary execution sequence. Right-click any block and choose Do It, and the block will be performed. If the block is an expression that returns a value, App Inventor will show that value in a box above the block. 

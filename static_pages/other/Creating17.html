@@ -15,7 +15,7 @@
 </p>
 <p>
 	With App Inventor, you'll define animation by placing objects within a Canvas component and moving those objects around the Canvas over time. In this chapter, you'll learn how the Canvas coordinate system works, how the Clock.Timer event can be used to trigger movement, how to control the speed of objects, and how to respond to events such as two objects colliding.
-</p>
+</em></p>
 </div>
 <div class="span6">
 <img src="{{apps2Dir}}/Creating17/c17.png" alt="">
@@ -23,17 +23,24 @@
 </div>
 <h2>Adding a Canvas Component to Your App</h2>
 <p>
-	You can drag a <b>Canvas</b> component into your app from the Basic palette. After dragging it out, specify the <b>Canvas</b>'s <b>Width</b> and <b>Height</b>. Often, you'll want the <b>Canvas</b> to span the width of the device screen. To do this, choose "Fill parent" when specifying the <b>Width</b>, as shown in Figure 17-1.
+	You can drag a <b>Canvas</b> component into your app from the Basic palette. After dragging it out, 
+	specify the <b>Canvas</b>'s <b>Width</b> and <b>Height</b>. Often, you'll want the <b>Canvas</b> to span 
+	the width of the device screen. To do this, choose "Fill parent" when specifying the <b>Width</b>, as shown in Figure 17-1.
+	<img src="{{apps2Dir}}/Creating17/c17-1.png" alt="">
 </p>
 <p>
 	You can do the same for the <b>Height</b>, but generally you'll set it to some number (e.g., 300 pixels) to leave room for other components above and below the <b>Canvas</b>.
 </p>
 <h2>The Canvas Coordinate System</h2>
 <p>
-	A drawing on a canvas is really a table of <em>pixels</em>, where a pixel is the tiniest possible dot of color that can appear on the phone (or other device). Each pixel has a location (or table cell) on the canvas, which is defined by an x–y coordinate system, as illustrated in Figure 17-2. In this coordinate system, x defines a location on the horizontal plane (left to right), and y defines a location on the vertical plane (up and down). 
+	A drawing on a canvas is really a table of <em>pixels</em>, where a pixel is the tiniest 
+	possible dot of color that can appear on the phone (or other device). Each pixel has a 
+	location (or table cell) on the canvas, which is defined by an x–y coordinate system, as illustrated in Figure 
+	17-2. In this coordinate system, x defines a location on the horizontal plane (left to right), and 
+	y defines a location on the vertical plane (up and down). 
 </p>
 <p>
-	<img src="{{apps2Dir}}/Creating17/c17-1.png" alt="">
+	<img src="{{apps2Dir}}/Creating17/c17-2.jpg" alt="">
 </p>
 <p>
 	<em>Figure 17-2. The Canvas coordinate system</em>
@@ -96,17 +103,32 @@
 </p>
 <h2>Speed</h2>
 <p>
-	How fast is the ball moving in the preceding example? The speed depends on both the <b>Clock</b>'s <b>TimerInterval</b> property and the parameters you specify in the <strong>MoveTo</strong> function. If the interval is set to 1,000 milliseconds, that means an event will be triggered every second. For the horizontal example shown in Figure 17-4, the ball will move 20 pixels per second. 
+	How fast is the ball moving in the preceding example? The speed depends on both the <b>Clock</b>'s <b>TimerInterval</b> property and the parameters you specify in the <strong>MoveTo</strong> function. 
+	If the interval is set to 1,000 milliseconds, that means an event will be triggered every second. 
+	For the horizontal example shown in Figure 17-4, the ball will move 20 pixels per second. 
 </p>
 <p>
-	But a <b>TimerInterval</b> of 1,000 milliseconds doesn't provide very smooth animation; the ball will only move every second, and this will appear jerky. To get smoother movement, you need a smaller interval. If the <b>TimerInterval</b> was set instead to 100 milliseconds, the ball would move 20 pixels every tenth of a second, or 200 pixels per second-a rate that will appear much smoother to anyone using your app. There's another way to change the speed instead of changing the timer interval-can you think of what that is? (<em>Hint</em>: Speed is a function of how often you move the ball and how far you move it each time.) You could also alter speed by keeping a timer interval of 1,000 milliseconds and instead changing the <strong>MoveTo</strong> operation so the ball only moves 2 pixels every time interval-2 pixels/100ms is still 20 pixels/second.
+	But a <b>TimerInterval</b> of 1,000 milliseconds doesn't provide very smooth animation; 
+	the ball will only move every second, and this will appear jerky. To get smoother movement, 
+	you need a smaller interval. If the <b>TimerInterval</b> was set instead to 100 milliseconds, the 
+	ball would move 20 pixels every tenth of a second, or 200 pixels per second-a rate that will appear 
+	much smoother to anyone using your app. There's another way to change the speed instead of changing 
+	the timer interval-can you think of what that is? (<em>Hint</em>: Speed is a function of how 
+	often you move the ball and how far you move it each time.) You could also alter speed by keeping 
+	a timer interval of 1,000 milliseconds and instead changing the <strong>MoveTo</strong> 
+	operation so the ball only moves 2 pixels every time interval-2 pixels/100ms is still 20 pixels/second.
 </p>
 <h2>High-Level Animation Functions</h2>
 <p>
-	The ability to move an object across the screen is useful for things like animated ads that slide in and out, but to build games and other animated apps, you need more complex functionality. Fortunately, App Inventor provides some high-level blocks for dealing with animation events such as an object reaching the screen's edge or two objects colliding. 
+	The ability to move an object across the screen is useful for things like animated ads that slide in and out, 
+	but to build games and other animated apps, you need more complex functionality. Fortunately, 
+	App Inventor provides some high-level blocks for dealing with animation events such as an 
+	object reaching the screen's edge or two objects colliding. 
 </p>
 <p>
-	In this context, <em>high-level block</em> means that App Inventor takes care of the <em>lower-level</em> details of determining events like when two sprites collide. You could check for such occurrences yourself using <strong>Clock.Timer</strong> events and checking the <b>X<b>,<b>Y</b>, <b>Height</b>, and <b>Width</b> properties of the sprites. Such programming would require some fairly complex logic, however. Because these events are common to many games and other apps, App Inventor provides them for you.
+	In this context, <em>high-level block</em> means that App Inventor takes care of the <em>lower-level</em>
+	 details of determining events like when two sprites collide. You could check for such occurrences yourself 
+	 using <strong>Clock.Timer</strong> events and checking the <b>X</b>,<b>Y</b>, <b>Height</b>, and <b>Width</b> properties of the sprites. Such programming would require some fairly complex logic, however. Because these events are common to many games and other apps, App Inventor provides them for you.
 </p>
 <h2>EdgeReached</h2>
 <p>
@@ -125,7 +147,7 @@
 	<strong>EdgeReached</strong> (an event that is applicable only for sprites and balls) is triggered when the <b>Ball</b> hits any edge of the canvas. This event handler, combined with the diagonal movement specified with the previously described timer event, will cause the ball to move diagonally from top left to bottom right, pop back up to the top left when it reaches the edge, and then do it all over again, forever (or until you tell it otherwise). 
 </p>
 <p>
-	Note that there is an argument, <b>edge1<b>, with the <strong>EdgeReached</strong> event. The argument specifies which edge the ball reached, using the following directional numbering scheme:
+	Note that there is an argument, <b>edge1</b>, with the <strong>EdgeReached</strong> event. The argument specifies which edge the ball reached, using the following directional numbering scheme:
 	<ul>
 	<li>North = 1</li>
 	<li>Northeast = 2</li>
