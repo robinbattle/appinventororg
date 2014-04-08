@@ -2955,6 +2955,7 @@ class AppRenderer(webapp.RequestHandler):
             'app': app,
             'userStatus': userStatus,
             'allAppsList': allAppsList,
+            'allAppsList2': allAppsList2,
             'currentAppsDir':currentAppsDir
             }
 
