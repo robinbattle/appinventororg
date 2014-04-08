@@ -4,10 +4,8 @@
 
 <h1>Working with Databases</h1>
 	<div class="row-fluid">
-		<div class="span4">
-		<img src="{{apps2Dir}}/Databases22/d22.png" alt="">
-	</div>
-	<div class="span4">
+	
+	<div class="span6">
 <p>
 	<em>Facebook has a database of every member's account information, friends list, and posts. Amazon has a database of just about everything you can buy. Google has a database of information about every page in the World Wide Web. Though not to this scale, almost every nontrivial app you can create will have a database component. 
 </p>
@@ -18,7 +16,12 @@
 <p>
 	App Inventor does the heavy lifting for you when it comes to databases (and lots of other useful things!). The language provides components that reduce database communication to simple store and get operations. You can create apps that store data directly on the Android device, and with some setup, you can create apps that share data with other devices and people by storing it in a centralized web database.</em>
 </p>
-</div> </div>
+</div> 
+	<div class="span4">
+		<img src="{{apps2Dir}}/Databases22/d22.png" alt="">
+	</div>
+
+</div>
 <p>
 	The data in variables and component properties is short-term: if the user enters some information in a form and then closes the app, that information will be gone when the app is reopened. To store information persistently, you must store it in a database. The information in databases is said to be <em>persistent</em> because even when you close the app and reopen it, the data is still available. 
 </p>
@@ -62,16 +65,27 @@
 </p>
 <h2>Retrieving Data from TinyDB </h2>
 <p>
-	You retrieve data from the database with the <strong>TinyDB.GetValue</strong> block. When you call <strong>GetValue</strong>, you request particular data by providing a tag. For the No Texting While Driving app, you can request the custom response using the same tag as we used in the <strong>StoreValue</strong>, "responseMessage." The call to <strong>GetValue</strong> returns the data, so you must plug it into a variable. 
+	You retrieve data from the database with the <strong>TinyDB.GetValue</strong> block. When you call <strong>GetValue</strong>, 
+	you request particular data by providing a tag. For the No Texting While Driving app, you can request the custom 
+	response using the same tag as we used in the <strong>StoreValue</strong>, "responseMessage." The call to 
+	<strong>GetValue</strong> returns the data, so you must plug it into a variable. 
 </p>
 <p>
-	Often, you'll retrieve data from the database when the app opens. App Inventor provides a special event handler, <strong>Screen.Initialize</strong>, which is triggered when the app starts up. The general pattern is to call <strong>GetValue</strong>, put the returned data into a variable, and then check to see if the database indeed returned some information. This check is important, because generally the first time you run the app, there is no database data yet (e.g., the first time No Texting While Driving runs, the user hasn't yet entered a custom response). 
+	Often, you'll retrieve data from the database when the app opens. App Inventor provides a special event handler,
+	 <strong>Screen.Initialize</strong>, which is triggered when the app starts up. You need to be careful to consider the case
+	 when there is no data yet in the database (e.g., the first time app is launched). 
+	 When you call <strong>GetValue</strong>, you specify a "valueIfTagNotThere" parameter. If there is no data, that value
+	 will be returned from the call. 
 </p>
 <p>
-	The blocks in Figure 22-2, for the <strong>Screen.Initialize</strong> of No Texting While Driving, are indicative of how many apps will load data on initialization. 
+	The blocks in Figure 22-2, for the <strong>Screen.Initialize</strong> of No Texting While Driving, are indicative of how 
+	many apps will load data on initialization. 
 </p>
 <p>
-	The blocks put the data returned from <strong>GetValue</strong> into the variable <b>response</b> and then check if <b>response</b> has a length greater than 0. If it does, then the database <em>did</em> return a nonempty custom response, and it should be put in the <b>ResponseLabel</b>. If the length of the value returned is 0, it means no data with a tag of "responseMessage" has been stored, so no action is necessary.
+	The blocks put the data returned from <strong>GetValue</strong> into the label <b>ResponseLabel.</b> if there is
+	data already in the database, it is placed in <b>ResponseLabel</b>. If
+	there is no data for the given tag, the "valueIfTagNotThere" value-- "I'm driving right now..." is placed in it. 
+	
 </p>
 <p>
 	<img src="{{apps2Dir}}/Databases22/d22-2.png" alt="">
@@ -90,10 +104,10 @@
 	<b>TinyWebDB</b> is the web counterpart to <b>TinyDB</b>. It allows you to write apps that store data on the Web, using a StoreValue/GetValue protocol similar to that of <b>TinyDB</b>.
 </p>
 <p>
-	By default, the <b>TinyWebDB</b> component stores data using a web database set up by the App Inventor team and accessible at ***http://appinvtinywebdb.appspot.com. That website contains a database and "serves" (responds to) web requests for storing and retrieving data. The site also provides a human-readable web interface that a database administrator (you) can use to examine the data stored there.
+	By default, the <b>TinyWebDB</b> component stores data using a web database set up by the App Inventor team and accessible at http://appinvtinywebdb.appspot.com. That website contains a database and "serves" (responds to) web requests for storing and retrieving data. The site also provides a human-readable web interface that a database administrator (you) can use to examine the data stored there.
 </p>
 <p>
-	To explore the web database, open a browser to ***http://appinvtinywebdb.appspot.com and check out some of the tag-value data stored there. 
+	To explore the web database, open a browser to http://appinvtinywebdb.appspot.com and check out some of the tag-value data stored there. 
 </p>
 <p>
 	This default database is for development only; it is limited in size and accessible to all App Inventor programmers. Because any App Inventor app can store data there, you have no assurance that another app won't overwrite your data! 
@@ -143,7 +157,7 @@
 	<img src="{{apps2Dir}}/Databases22/d22-2T.png" alt="">
 </p>
 <p>
-	The <strong>TinyWebDB.StoreValue</strong> block sends the tag-value pair over the Web to the database server at ***http://appinvtinywebdb.appspot.com. Because it's the default service, it shows lots of data from various apps, so you may or may not see your app's data in the initial window that appears. If you don't see your data, there is a /<b>getValue</b> link that allows you to search for data with a particular tag. 
+	The <strong>TinyWebDB.StoreValue</strong> block sends the tag-value pair over the Web to the database server at http://appinvtinywebdb.appspot.com. Because it's the default service, it shows lots of data from various apps, so you may or may not see your app's data in the initial window that appears. If you don't see your data, there is a /<b>getValue</b> link that allows you to search for data with a particular tag. 
 </p>
 <div class="span2">
 <img src="{{apps2Dir}}/phone.png" alt="">
@@ -294,10 +308,10 @@
 </p>
 <h2>Setting Up a Web Database </h2>
 <p>
-	As we mentioned earlier in the chapter, the default web database at ***http://appinvtiny webdb.appspot.com is intended for prototyping and testing purposes only. Before you deploy an app with real users, you need to create a database specifically for your app. 
+	As we mentioned earlier in the chapter, the default web database at http://appinvtiny webdb.appspot.com is intended for prototyping and testing purposes only. Before you deploy an app with real users, you need to create a database specifically for your app. 
 </p>
 <p>
-	You can create a web database using the instructions at ***http://appinventorapi.com/ program-an-api-python/. This site was set up by one of the authors (Wolber) and contains sample code and instructions for setting up App Inventor web databases and APIs. The instructions point you to some code that you can download and use with only a minor modification to a configuration file. The code you'll download is the same as that used for the default web database set up by App Inventor. It runs on Google's App Engine, a cloud computing service that will host your web database on Google's servers for free. By following the instructions, you can have your own private web database (that is compliant with App Inventor's protocols) up and running within minutes and begin creating web-enabled mobile apps that use it. 
+	You can create a web database using the instructions at http://appinventorapi.com/ program-an-api-python/. This site was set up by one of the authors (Wolber) and contains sample code and instructions for setting up App Inventor web databases and APIs. The instructions point you to some code that you can download and use with only a minor modification to a configuration file. The code you'll download is the same as that used for the default web database set up by App Inventor. It runs on Google's App Engine, a cloud computing service that will host your web database on Google's servers for free. By following the instructions, you can have your own private web database (that is compliant with App Inventor's protocols) up and running within minutes and begin creating web-enabled mobile apps that use it. 
 </p>
 <p>
 	<img src="{{apps2Dir}}/Databases22/d22-12.png" alt="">
@@ -318,7 +332,7 @@
 </p>
 </div>
 <div class="span6">
-	<p>In this example, the <b>ServiceURL</b> is set to ***http://usfweb service.appspot.com, a web database that one of the authors set up for his students' apps (the end of "appspot.com" is cut off in the text box in Figure 22-13). Once the <b>ServiceURL</b> is set, all <strong>TinyWebDB.StoreValue</strong> and <strong>TinyWebDB.GetValue</strong> calls will be sent to the specified URL.
+	<p>In this example, the <b>ServiceURL</b> is set to http://usfweb service.appspot.com, a web database that one of the authors set up for his students' apps (the end of "appspot.com" is cut off in the text box in Figure 22-13). Once the <b>ServiceURL</b> is set, all <strong>TinyWebDB.StoreValue</strong> and <strong>TinyWebDB.GetValue</strong> calls will be sent to the specified URL.
 </p>
 </div>
 </div>

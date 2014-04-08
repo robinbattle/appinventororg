@@ -1030,7 +1030,53 @@ class LocationHandler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/location.html')
         self.response.out.write(template.render(path, template_values))         
+
+class DrawingHandler(webapp.RequestHandler):
+    def get(self):
         
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/drawing.html')
+        self.response.out.write(template.render(path, template_values))
+
+class SpritesHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/sprites.html')
+        self.response.out.write(template.render(path, template_values))
+       
+class ResourcesHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/resources.html')
+        self.response.out.write(template.render(path, template_values)) 
+
+
         
           
 class TimedListsHandler(webapp.RequestHandler):
@@ -1400,6 +1446,21 @@ class NoTexting2Handler(webapp.RequestHandler):
         
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/notextingAI2.html')
+        self.response.out.write(template.render(path, template_values))
+
+class MakeQuiz10Handler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/MakeQuiz10.html')
         self.response.out.write(template.render(path, template_values))
 
 class PresidentsQuiz2Handler(webapp.RequestHandler):
@@ -1912,20 +1973,7 @@ class ModuleXHandler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/moduleX.html')
         self.response.out.write(template.render(path, template_values))
-class Quiz1Handler(webapp.RequestHandler):
-    def get(self):
-        
-        cacheHandler = CacheHandler()
-        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
-        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
-        
-        #user status
-        userStatus = UserStatus()
-        userStatus = userStatus.getStatus(self.request.uri)
-        
-        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/quiz1.html')
-        self.response.out.write(template.render(path, template_values))
+
 class ConditionsHandler(webapp.RequestHandler):
     def get(self):
         
@@ -3903,13 +3951,14 @@ application = webapp.WSGIApplication(
 
         # AI2
 
-        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),
-	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),('/IHaveADreamTut', IHaveADreamTutHandler), ('/TimedActivity',TimedActivityHandler), ('/TimedLists',TimedListsHandler), ('/Conditionals', ConditionalsHandler), ('/Variables', VariablesHandler), ('/recordItems', RecordingItemHandler), ('/incrementing', IncrementingVariablesHandler), ('/Walkingalist', WalkingalistHandler), ('/Events', EventsHandler), ('/Lists', ListsHandler), ('/UserListNav',UserListNavHandler), ('/Persistence',PersistenceHandler),('/FAQ',FAQHandler), ('/knowledgeMap',KnowledgeMapHandler),('/lists',ListsHandler), ('/proc',ProcHandler),('/location',LocationHandler),
-
+        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2),('/notext-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),
+	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),('/IHaveADreamTut', IHaveADreamTutHandler), ('/TimedActivity',TimedActivityHandler), ('/TimedLists',TimedListsHandler), ('/Conditionals', ConditionalsHandler), ('/Variables', VariablesHandler), ('/recordItems', RecordingItemHandler), ('/incrementing', IncrementingVariablesHandler), ('/Walkingalist', WalkingalistHandler), ('/Events', EventsHandler), ('/Lists', ListsHandler), ('/UserListNav',UserListNavHandler), ('/Persistence',PersistenceHandler),('/FAQ',FAQHandler), ('/knowledgeMap',KnowledgeMapHandler),('/lists',ListsHandler), 
+	('/proc',ProcHandler),('/location',LocationHandler),('/resources',ResourcesHandler), ('/Drawing',DrawingHandler),('/sprites',SpritesHandler),
+     ('/MakeQuiz10',MakeQuiz10Handler),
 
         # AI2 view all steps, error on 'IHaveADream'
         #('/IHaveADream', AppRenderer),
-        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),
+        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),('/notext', AppRenderer),
      
         # Comment
         ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),

@@ -2,31 +2,31 @@
 {% extends "site_base.html" %}
 {% block body %}
 
-<h1>Programming Data of Data</h1>
+<h1>Programming Lists of Data</h1>
 	<div class="row-fluid">
 		<div class="span6">
 <p>
 	<em>As you've already seen, apps handle events and make decisions; such processing is fundamental to computing. But the other fundamental part of an app is its data-the information it processes. An app's data is rarely restricted to single memory slots such as the score of a game. More often, it consists of complex, inter-related items that must be organized just as carefully as the app's functionality.
+</p>
+<p>
+	In this chapter, we'll examine the way App Inventor handles data. You'll learn the fundamentals of programming both static Data (in which the data doesn't change) and dynamic Data (in which the data is user-generated). Then you'll learn how to deal with even more complex data involving Data whose items are also Data.</em>
 </p>
 </div>
 <div class="span6">
 <img src="{{apps2Dir}}/Data19/l19.png" alt="">
 </div>
 </div>
-<p>
-	In this chapter, we'll examine the way App Inventor handles data. You'll learn the fundamentals of programming both static Data (in which the data doesn't change) and dynamic Data (in which the data is user-generated). Then you'll learn how to deal with even more complex data involving Data whose items are also Data.</em>
-</p>
+
 <p>
 	Many apps process Data of data. For example, Facebook processes your list of friends. A quiz app works with a list of questions and answers. A game might have a list of characters or all-time high scores. 
 </p>
 <p>
 	List variables work like text and number variables you've worked with, but instead of the variable representing a single named memory cell, it represents a related set of memory cells. Consider, for example, the list of phone numbers in Table 19-1.
 </p>
+
 <p>
+	<img src="{{apps2Dir}}/Data19/l19-1T.png" alt=""><br/>
 	<em>Table 19-1. A list variable represents a set of memory cells 111–2222 333–4444 555–6666</em>
-</p>
-<p>
-	<img src="{{apps2Dir}}/Data19/l19-1T.png" alt="">
 </p>
 <p>
 	The elements of a list are accessed using an <em>index</em>. An index is a position in a list, so index 1 of the list in Table 19-1 refers to 111–2222, index 2 refers to 333–4444, and index 3 refers to 555–6666. 
@@ -36,33 +36,39 @@
 </p>
 <h2>Creating a List Variable</h2>
 <p>
-	You create a list variable in the Blocks Editor using a <strong>global variable</strong> block and a make a list block. For example, suppose you were writing an app to text a list of phone numbers with one click. You create the phone numbers list in the following manner:
+	You create a list variable in the Blocks Editor using a <strong>global variable</strong> block and a make a list block. 
+	For example, suppose you were writing an app to text a list of phone numbers with one click. You create the phone numbers list in the following manner:
 	<ol>
 	<li>From the Variables Palette, drag a <strong>global variable</strong> block (Figure 19-1) into the program area.</li> 
 <p>
 	<img src="{{apps2Dir}}/Data19/l19-1.png" alt="">
 </p>
 <p>
-	<em>Figure 19-1. A def variable block</em>
+	<em>Figure 19-1. An initialize global block</em>
 </p>
-	<li>Click the text "variable" and change the name to "phoneNumbers", as shown in Figure 19-2.</li>
+	<li>Click the text "name" and change the name to "phoneNumbers", as shown in Figure 19-2.</li>
 <p>
 	<img src="{{apps2Dir}}/Data19/l19-2.png" alt="">
 </p>
 <p>
 	<em>Figure 19-2. Renaming the variable to phoneNumbers</em>
 </p>
-	<li>From the Data palette, drag out a <strong>make a list</strong> block and plug it into the definition block, as shown in Figure 19-3. This tells App Inventor that the variable will store a list of data as opposed to a single value. </li>
+	<li>From the Data palette, drag out a <strong>make a list</strong> block and plug it into the definition block, 
+	as shown in Figure 19-3. This tells App Inventor that the variable will store a list of data as 
+	opposed to a single value. You can then specify the number of slots by clicking on the blue mutator icon and
+	adding items as shown in Figure 19-3.</li>
 <p>
 	<img src="{{apps2Dir}}/Data19/l19-3.png" alt="">
 </p>
 <p>
 	<em>Figure 19-3. Defining phoneNumbers as a list using the make a list block</em>
 </p>
-	<li>Finally, drag in some <strong>text</strong> blocks, enter the desired phone numbers, and plug them into the "item" slots in the <strong>make a list</strong> block. Note that a new "item" slot opens up at the bottom of <strong>make a list</strong> each time you add a new element to the list, as shown in Figure 19-4.</li>
+	<li>Finally, drag in some <strong>text</strong> blocks, enter the desired phone numbers, and plug them into the "item" slots 
+	in the <strong>make a list</strong> block. 
 <p>
 	<img src="{{apps2Dir}}/Data19/l19-4.png" alt="">
 </p>
+</li>
 <p>
 	<em>Figure 19-4. As each item is added to the list, a new slot opens up</em>
 </p>
@@ -83,7 +89,7 @@
 	<em>Figure 19-5. Selecting the second item of a list</em>
 </p>
 <p>
-	With <strong>select list item, you plug in the list you want in the first slot, and the index you want in the second slot. The blocks in Figure 19-5 tell the app to select the second element of the list <b>phoneNumbers</b>. If you were selecting from the <b>phoneNumbers</b> list defined in Table 19-1, the result would be "333–4444."
+	With <strong>select list item</strong>, you plug in the list you want in the first slot, and the index you want in the second slot. The blocks in Figure 19-5 tell the app to select the second element of the list <b>phoneNumbers</b>. If you were selecting from the <b>phoneNumbers</b> list defined in Table 19-1, the result would be "333–4444."
 </p>
 <p>
 	Selecting an item in a list is just the first step-once you've selected the item, you can do a variety of things with it. We'll look at some examples next. 
@@ -136,13 +142,15 @@
 	<em>Figure 19-9. Using the index variable, which is initialized to 1, to track the current position in a list</em>
 </p>
 <p>
-	The user traverses to the next item (color) in the list by clicking the <b>ColorButton</b>. When he clicks, the index should be incremented and the <b>BackgroundColor</b> of the button should change to the currently selected item, as shown in Figure 19-10.
+	The user traverses to the next item (color) in the list by clicking the <b>ColorButton</b>. When he clicks, 
+	the index should be incremented and the <b>BackgroundColor</b> of the button should change to the currently 
+	selected item, as shown in Figure 19-10.
 </p>
 <p>
 	<img src="{{apps2Dir}}/Data19/l19-10.png" alt="">
 </p>
 <p>
-	<em>Figure 19-10. Letting the user traverse the color list by clicking a button-changing the button color with each click<em>
+	<em>Figure 19-10. Letting the user traverse the color list by clicking a button-changing the button color with each click</em>
 </p>
 <p>
 	Let's assume the button's background is initially set to Red in the Component Designer. The first time the button is clicked, <b>index</b> will change from its initial value of 1 to 2, and the button's background color will change to the second item in the list, Green. The second time the user clicks, the <b>index</b> will change from 2 to 3, and the background color will switch to Blue. 
@@ -189,7 +197,10 @@
 </p>
 <h2>Defining a Dynamic List </h2>
 <p>
-	Just as with a static list, you define a dynamic list with the <strong>make a list</strong> block. But with a dynamic list, you don't add any predefined items in the list definition. For example, consider a Note Taker app. You would define the dynamic list of notes with the definition in Figure 19-14.
+	When you want a list that begins empty, you define it with the <strong>create empty list</strong> block. For instance,
+	in a notetaker app, which allows the user to enter notes, 
+	you don't add any predefined items in the list definition. You would define 
+	the dynamic list of notes with the definition in Figure 19-14.
 </p>
 <p>
 	<img src="{{apps2Dir}}/Data19/l19-14.png" alt="">
@@ -315,7 +326,7 @@
 <p>
 	The answer is that the scheme works fine <em>unless</em> there is duplicate data in the list. Say the user has entered, "I'm having a great day" as both his second and tenth notes. If he clicks the remove (<b>ListPicker</b>) button and chooses the tenth item, the second will be removed instead of the tenth. <strong>position in list</strong> only returns the index for the selected item and stops there, so you never find out that the tenth item is the same and should be removed from the list as well. You'd have to include some conditional checks (see Chapter 18) to loop through the list to see if there were any other entries that also matched the selected item, and then remove those as well. 
 </p>
-<h2>Data of Data </h2>
+<h2>Lists of Lists </h2>
 <p>
 	The items of a list can be numbers, text, colors, or Boolean values (true/false). But the items of a list can also be Data. You'll commonly see such complex data structures. For example, a list of Data could be used to convert the Presidents Quiz from Chapter 8 into a multiplechoice quiz. Let's look again at the Presidents Quiz's basic structure, which is a list of questions and a list of answers, as shown in Figure 19-23.
 </p>
