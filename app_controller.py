@@ -894,7 +894,20 @@ class IHaveADreamTutHandler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/IHaveADreamTut.html')
         self.response.out.write(template.render(path, template_values))
-
+class BiblioHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/biblio.html')
+        self.response.out.write(template.render(path, template_values))
 
 class TimedActivityHandler(webapp.RequestHandler):
     def get(self):
@@ -1402,6 +1415,37 @@ class MoleMash2Handler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/molemashAI2.html')
         self.response.out.write(template.render(path, template_values))
+        
+class RobotsHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/robotRemoteAI2.html')
+        self.response.out.write(template.render(path, template_values))
+
+class AmazonHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/amazon13.html')
+        self.response.out.write(template.render(path, template_values))
+
 
 class HelloPurr2Handler(webapp.RequestHandler):
     def get(self):
@@ -1461,6 +1505,22 @@ class MakeQuiz10Handler(webapp.RequestHandler):
         
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/MakeQuiz10.html')
+        self.response.out.write(template.render(path, template_values))
+        
+class TeacherListHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        teacherList = db.GqlQuery("SELECT * FROM Account WHERE ifEducator=True");
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR,'teacherList':teacherList}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/teacherList.html')
         self.response.out.write(template.render(path, template_values))
 
 class PresidentsQuiz2Handler(webapp.RequestHandler):
@@ -3952,14 +4012,14 @@ application = webapp.WSGIApplication(
 
         # AI2
 
-        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2),('/notext-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),
+        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2),('/notext-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),('/pong-steps', NewAppRenderer_AI2),
 	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),('/IHaveADreamTut', IHaveADreamTutHandler), ('/TimedActivity',TimedActivityHandler), ('/TimedLists',TimedListsHandler), ('/Conditionals', ConditionalsHandler), ('/Variables', VariablesHandler), ('/recordItems', RecordingItemHandler), ('/incrementing', IncrementingVariablesHandler), ('/Walkingalist', WalkingalistHandler), ('/Events', EventsHandler), ('/Lists', ListsHandler), ('/UserListNav',UserListNavHandler), ('/Persistence',PersistenceHandler),('/FAQ',FAQHandler), ('/knowledgeMap',KnowledgeMapHandler),('/lists',ListsHandler), 
 	('/proc',ProcHandler),('/location',LocationHandler),('/resources',ResourcesHandler), ('/Drawing',DrawingHandler),('/sprites',SpritesHandler),
-     ('/MakeQuiz10',MakeQuiz10Handler),
+     ('/MakeQuiz10',MakeQuiz10Handler), ('/teacherList',TeacherListHandler),
 
         # AI2 view all steps, error on 'IHaveADream'
         #('/IHaveADream', AppRenderer),
-        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),('/notext', AppRenderer),
+        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),('/notext', AppRenderer),('/pong',AppRenderer),
      
         # Comment
         ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
@@ -3987,7 +4047,8 @@ application = webapp.WSGIApplication(
 
         #AI2 Chapter
         ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler), ('/PresidentsQuiz2', PresidentsQuiz2Handler), ('/MapTour2', MapTour2Handler), ('/AndroidCar2', AndroidCar2Handler), ('/BroadcastHub2', BroadcastHub2Handler), ('/Architecture2', Architecture2Handler), ('/Engineering2', Engineering2Handler), ('/Variables2', Variables2Handler), ('/Creation2', Creation2Handler), ('/Conditionals2', Conditionals2Handler), ('/Lists2', Lists2Handler), ('/Iteration2', Iteration2Handler), ('/Procedures2', Procedures2Handler), ('/Databases2', Databases2Handler), ('/Sensors2', Sensors2Handler), ('/API242', API242Handler), ('/Xylophone2', XYLoPhone2Handler),('/Ladybug2', Ladybug2Handler),       
-        ('/starterApps',StarterAppsHandler)
+        ('/starterApps',StarterAppsHandler),('/robots',RobotsHandler),('/amazonChapter',AmazonHandler),
+        ('/biblio',BiblioHandler)
     ],
     debug=True)
 
