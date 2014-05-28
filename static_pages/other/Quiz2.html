@@ -17,10 +17,10 @@
       <div class="row-fluid row-fluid-temp">
         <div class="span9">
           <h2>1.</h2>
-          <p>(10) Define the 'term variable' in the context of an app inventor app.</p>
+          <p>(10) What is a variable?</p>
          <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer</a></div>  
         <div id="demo1" class="collapse">  
-          A variable is a named memory cell, a place where information can be stored. 
+          A variable is a named memory cell where information can be stored. 
           </div>
         </div>
       </div>
@@ -28,11 +28,11 @@
       <div class="row-fluid">
         <div class="span9">
           <h2>2.</h2>
-          <p>(10) In the PaintPot app shown on the other page a variable is needed for the size of the circles but not for the size of the lines. Explain. </p>
+          <p>(10) In the PaintPot app we needed a variable to keep track of the circle size, however, we did not use one for keeping track of the line size. Why? </p>
               
           <div id="myCollapsibleExample"><a href="#demo2" data-toggle="collapse">Answer</a></div>  
         <div id="demo2" class="collapse">  
-          Canvas has a property, lineSize, that specifies the width of lines that are drawn. There is no such property for circle size, so you must define a variable to keep track of it and whether the user has chosen big (2 pixels) or small (8 pixels). In general, define a variable when you need to remember some information that is not already defined as a component property.
+          We did not make a variable to represent the line size because Canvas has a property called LineWidth. We used this property to keep track of the size of the line. We had to make a seperate variable for circle size because Canvase does not contain a property for representing the circle Size.
         </div>
        </div>
      </div>
@@ -50,21 +50,21 @@
         <div class="span9">
           <h2>4.</h2>
           <p>(10) Circle and label the event parameters and function parameters in the following blocks:</p>
-            <img src="../../assets/img/q2n4.png" height="500" width="500">
-            <p>Who specifies the event-paramters? Who specifies the function parameters?</p>
+            <img src="../../assets/img/Quiz2/Quiz2-4-1.png" height="600" width="600">
+            <br><br>
          <div id="myCollapsibleExample"><a href="#demo4" data-toggle="collapse">Answer</a></div>  
         <div id="demo4" class="collapse">  
-        <img src="../../assets/img/fixedq2n2.png" height="500" width="500">
+        <img src="../../assets/img/Quiz2/Quiz2-4-2.png" height="600" width="600">
           </div>
         </div>
       </div>
       <div class="row-fluid">
         <div class="span9">
           <h2>5.</h2>
-          <p>(10) Suppose in the Canvas.  Dragged blocks above, the 'value prevX' and 'value prevY' blocks were replaced with 'value startX' and 'value startY' blocks, respectively. As the user dragged on the screen, what would happen?
+          <p>(10) Assume we make a small modification to Canvas1's drawLine function. We decide to change x1 to be set to startX and y1 to be set to starty. How would this change the behavior of the app?
         <div id="myCollapsibleExample"><a href="#demo5" data-toggle="collapse">Answer</a></div>  
         <div id="demo5" class="collapse">  
-        Under the given conditions, all lines drawn will originate from the start point (where the user first clicked down). So instead of a series of connected line segments, you'll see a circle or part of a circle form.
+        All of the lines drawn during a dragged event will now start at the same initial clicked location and end wherever the user is currently clicking. In other words, you will have a bunch of lines coming from one point and ending in different places.
           </div>
         </div>
       </div>
@@ -76,22 +76,16 @@
           <p>(50) Consider a drawing app like PaintPot which allows the user to draw circles and lines. In this app, there are two textboxes, dotSizeText and lineWidthText, and two buttons, dotSizeButton and lineWidthButton. The user can control the size of the drawn circles and lines by modifying the textboxes and clicking on the submit buttons. Note that the sizes of the circles and lines drawn should not change until the user clicks on the respective submit buttons.
           </p>
           </div>
-        </br>
-        </br>
-        </br>
-        </br>
-        </br>
-        </br>
-      </br>
-    </br>
-        <img src="../../assets/img/quiz2q6.jpg" height="200" width="200"></br>
+        <img src="../../assets/img/Quiz2/Quiz2-6-1.png" height="250" width="250"></br>
+		<br>
+          Define the behavior for this app by drawing the completed Canvas1.Touched, DotSizeButton.Click, and LineWidthButton.Click event handlers. The needed blocks are shown below. </br>
+		<br>          
+		<img src="../../assets/img/Quiz2/Quiz2-6-2.png" height="600" width="600"></br>
 
-          Define the behavior for this app by completing the Canvas1.Touched event handler below and sketching the LineWidthButton.Click and DotSizeButton.Click event handlers. </br>
-          <img src="../../assets/img/q1.png" height="500" width="500"></br>
-
+		<br>
         <div id="myCollapsibleExample"><a href="#demo6" data-toggle="collapse">Answer</a></div>  
         <div id="demo6" class="collapse">  
-        <p><img src="../../assets/img/test.jpg" height="500" width="500"></p>
+        <p><img src="../../assets/img/Quiz2/Quiz2-6-3.png" height="600" width="600"></p>
           </div>
         </div>
       </div>
