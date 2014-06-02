@@ -1,23 +1,23 @@
 {% extends "site_base.html" %}
 {% block body %}
-    
- <h1>Quiz 7</h1>
-        
-        
-   
-          <h2>1.</h2>
-          <p>(100) Consider a music app that plays do-re-mi over and over. The music should start playing when the user clicks a "PlayButton", and continue playing until the user clicks a "StopButton". It should always start with "do.mp3" and there should be a 2 second delay between the start of each note. You can use the following blocks:</p>
-          
-          <img src="/assets/img/Quiz71.png">
-          
-         <div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer.</a></div>  
-        <div id="demo1" class="collapse">  
-          <img src="/assets/img/q7new.png"></br></br>
-         <p> The <strong>Clock.Timer</strong> event is triggered every <strong>Clock.TimerInterval</strong>.
-          In order to delay two second between notes, set the <strong>Clock.TimerInterval</strong> to 2000 (2000 milliseconds= 2 seconds). </p>
-          </div>
-            
 
- 
+<h1>Quiz 7</h1>
 
-    {% endblock %}
+
+
+<h2>1.</h2>
+<p>(100) Consider a music app that plays do-re-mi over and over. The music should start playing when the user clicks a "PlayButton", and continue playing until the user clicks a "StopButton". It should always start with "do.mp3" and there should be a 2 second delay between the start of each note. You can use the following blocks:</p>
+
+<img src="/assets/img/Quiz7/Quiz7-1-1.png" width="1125" height="276">
+
+<div id="myCollapsibleExample"><a href="#demo1" data-toggle="collapse">Answer.</a></div>  
+<div id="demo1" class="collapse">  
+  <img src="/assets/img/Quiz7/Quiz7-1-2.png" width="812" height="335">
+  <p> The <strong>Clock.Timer</strong> event is triggered every <strong>Clock.TimerInterval</strong>.
+    In order to delay two second between notes, set the <strong>Clock.TimerInterval</strong> to 2000 (2000 milliseconds= 2 seconds). </p>
+  </div>
+
+
+
+
+  {% endblock %}
