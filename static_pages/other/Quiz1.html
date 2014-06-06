@@ -49,33 +49,52 @@
                                 <li>Android is an open distribution. It is easy to publish apps on the market and, unlike with Apple (iOS) you can also publish apps on the web and distribute them over email.
                                 </li>
                             </ul>Android's open distribution is the key reason why App Inventor was developed with Android instead of iOS. It allows students to build samples and unrefined apps and share them with other students, their teacher, their family and friends, etc.
-                        </div><a type="button" class="btn btn-default btn-large" href="#q1a" data-toggle="collapse">Show Answer</a>
+                        </div><a type="button" class="btn btn-default btn-large" href="#q1a" data-toggle="collapse" onclick="showHideToggle(id)" id="q1b">Show Answer</a>
                     </div>
                     <div class="hero-unit">
                         <h1>
                             Question 2
                         </h1>
                         <p>
-                            Sketch the blocks for an app that: a. Has one button, Button1 b. The image on the button toggles between three images each time you click. When the app starts, it shows Obama, then Romney, then Clinton, then Obama again, and so on. Assume the images are named obama.jpg, romney.jpg, and clinton.jpg. You'll need blocks like the following: <img src="../../assets/img/Quiz1/obamaBlocks.png" height="135" width="561">
+                            Sketch the blocks for an app that has the following qualities:
                         </p>
+                        <ul>
+                            <li>Has one button called Button1
+                            </li>
+                            <li>The image on Button1 changes each time it is clicked
+                            </li>
+                            <li>The order of the images displayed when clicked are Obama, then Romney, then Clinton, then obama, and so on.
+                            </li>
+                        </ul>
+                        <p>
+                            You'll need the following blocks:
+                        </p><img src="../../assets/img/Quiz1/obamaBlocks.png" height="135" width="561">
                         <div id="q2a" class="collapse">
                             <p>
                                 <img src="../../assets/img/Quiz1/obamaAnswer.png" height="217" width="475">
                             </p>
-                        </div><a type="button" class="btn btn-default btn-large" href="#q2a" data-toggle="collapse">Show Answer</a>
+                        </div><a type="button" class="btn btn-default btn-large" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b">Show Answer</a>
                     </div>
                     <div class="hero-unit">
                         <h1>
                             Question 3
                         </h1>
                         <p>
-                            In the following blocks, circle and label the i) event, ii) event-handler, iii) function calls, iv) parameter <img src="../../assets/img/Quiz1/unnamedParts.png" height="116" width="268"><br>
+                            In the following blocks, circle and label the following:
+                        </p>
+                        <ul>
+                          <li>The Event</li>
+                          <li>The Event-Handler</li>
+                          <li>The Function-Calls</li>
+                          <li>The Parameter</li>
+                        </ul>
+                        <img src="../../assets/img/Quiz1/unnamedParts.png" height="116" width="268"><br>
                         </p>
                         <div id="q3a" class="collapse">
                             <p>
                                 All the blocks, together, are an "event handler". <img src="../../assets/img/Quiz1/namedParts.png" height="170" width="406">
                             </p>
-                        </div><a type="button" class="btn btn-default btn-large" href="#q3a" data-toggle="collapse">Show Answer</a>
+                        </div><a type="button" class="btn btn-default btn-large" href="#q3a" data-toggle="collapse" onclick="showHideToggle(id)" id="q3b">Show Answer</a>
                     </div>
                     <div class="hero-unit">
                         <h1>
@@ -86,24 +105,32 @@
                         </p>
                         <div id="q4a" class="collapse">
                             The parameters of a function provide the information the function needs to perform its job, e.g., how long should the phone vibrate, or how big a circle should be drawn.
-                        </div><a type="button" class="btn btn-default btn-large" href="#q4a" data-toggle="collapse">Show Answer</a>
-
-                      </div>
-
-                
+                        </div><a type="button" class="btn btn-default btn-large" href="#q4a" data-toggle="collapse" onclick="showHideToggle(id)" id="q4b">Show Answer</a>
+                    </div>
                     <div class="row-fluid">
-                      <div class="span6">
-                    <a type="button" class="btn btn-primary btn-huge btn-block" href="/QuizIndex">Previous</a>
+                        <div class="span6">
+                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/QuizIndex">Previous</a>
+                        </div>
+                        <div class="span6">
+                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz2">Next</a>
+                        </div>
                     </div>
-                    <div class="span6">
-                    <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz2">Next</a>
-                    </div>
-                    </div>
-
-                  
-                  
                 </div>
-            </div>
+            </div><script type="text/javascript">
+
+            function showHideToggle(clicked_ID) 
+            {
+            if(document.getElementById(clicked_ID).innerHTML == "Show Answer")
+            {
+            document.getElementById(clicked_ID).innerHTML = "Hide Answer";
+            }
+            else
+            {
+            document.getElementById(clicked_ID).innerHTML = "Show Answer";
+            }
+
+            }
+            </script>
         </div>{% endblock %}
     </body>
 </html>
