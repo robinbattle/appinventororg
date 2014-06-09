@@ -2,14 +2,13 @@
 <html>
     <head>
          {% extends "site_base.html" %} {% block body %}
-        <meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
         <link rel="stylesheet" type="text/css" href="../../assets/css/JordansAwesomeStyleSheet.css">
         <title>
             App Inventor Quiz 2
         </title>
     </head>
     <body>
-         <script src="/assets/js/JordansAwesomJS.js" type="text/javascript"></script>
+        <script src="/assets/js/JordansAwesomJS.js" type="text/javascript"></script>
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
@@ -20,89 +19,166 @@
                             </h1>
                         </center>
                     </div>
-                    <div class="hero-unit">
+
+
+
+                    <div class="quiz-panel-outer">
                         <h1>
-                            Question 1
+                            1.
                         </h1>
-                        <p>
-                            What is a variable?
-                        </p>
-                        <div id="q1a" class="collapse">
+                        <div class="quiz-panel-question">
                             <p>
-                                A variable is a named memory cell where information can be stored.
+                                What is a variable?
                             </p>
-                        </div><a type="button" class="btn btn-default btn-large" href="#q1a" data-toggle="collapse" onclick="showHideToggle(id)" id="q1b" name="q1b">Show Answer</a>
+                        </div>
+                        <div class="quiz-panel-inner">
+                            <div class="quiz-panel-answer">
+                                <div id="q1a" class="collapse">
+                                    <p>
+                                        A variable is a named memory cell where information can be stored.
+                                    </p>
+                                </div>
+                                <center>
+                                    <a type="button" href="#q1a" data-toggle="collapse" onclick="showHideToggle(id)" id="q1b" name="q1b">Show Answer</a>
+                                </center>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-unit">
+
+
+                    <div class="quiz-panel-outer">
                         <h1>
-                            Question 2
+                            2.
                         </h1>
-                        <p>
-                            In the PaintPot app we needed a variable to keep track of the circle size, however, we did not use one for keeping track of the line size. Why?
-                        </p>
-                        <div id="q2a" class="collapse">
+                        <div class="quiz-panel-question">
                             <p>
-                                We did not make a variable to represent the line size because Canvas has a property called LineWidth. We used this property to keep track of the size of the line. We had to make a seperate variable for circle size because Canvase does not contain a property for representing the circle Size.
+                                In the PaintPot app we needed a variable to keep track of the circle size, however, we did not use one for keeping track of the line size. Why?
                             </p>
-                        </div><a type="button" class="btn btn-default btn-large" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b" name="q2b">Show Answer</a>
+                        </div>
+                        <div class="quiz-panel-inner">
+                            <div class="quiz-panel-answer">
+                                <div id="q2a" class="collapse">
+                                    <p>
+                                        We did not make a variable to represent the line size because Canvas has a property called LineWidth. We used this property to keep track of the size of the line. We had to make a seperate variable for circle size because Canvase does not contain a property for representing the circle Size.
+                                    </p>
+                                </div>
+                                <center>
+                                    <a type="button" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b" name="q2b">Show Answer</a>
+                                </center>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-unit">
+
+
+
+
+                    <div class="quiz-panel-outer">
                         <h1>
-                            Question 3
+                            3.
                         </h1>
-                        <p>
-                            In App Inventor, how are a variable and a property similar? How are they different?
-                        </p>
-                        <div id="q3a" class="collapse">
+                        <div class="quiz-panel-question">
                             <p>
-                                Component properties and variables are both "named memory cells". They are different in that a property is part of a component, whereas a variable is a "free-agent" memory cell not associated with a particular component. So properties are named in the form &lt; componentName &gt;.&lt; propertyName &gt;, e.g., Canvas.Width, while variables are just a single name, e.g., dotsize.
+                                In App Inventor, how are a variable and a property similar? How are they different?
                             </p>
-                        </div><a type="button" class="btn btn-default btn-large" href="#q3a" data-toggle="collapse" onclick="showHideToggle(id)" id="q3b" name="q3b">Show Answer</a>
+                        </div>
+                        <div class="quiz-panel-inner">
+                            <div class="quiz-panel-answer">
+                                <div id="q3a" class="collapse">
+                                    <p>
+                                        Component properties and variables are both "named memory cells". They are different in that a property is part of a component, whereas a variable is a "free-agent" memory cell not associated with a particular component. So properties are named in the form &lt; componentName &gt;.&lt; propertyName &gt;, e.g., Canvas.Width, while variables are just a single name, e.g., dotsize.
+                                    </p>
+                                </div>
+                                <center>
+                                    <a type="button" href="#q3a" data-toggle="collapse" onclick="showHideToggle(id)" id="q3b" name="q3b">Show Answer</a>
+                                </center>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-unit">
+
+
+                    <div class="quiz-panel-outer">
                         <h1>
-                            Question 4
+                            4.
                         </h1>
-                        <p>
-                            Circle and label the event parameters and function parameters in the following blocks: <img src="../../assets/img/Quiz2/Quiz2-4-1.png" height="190" width="920">
-                        </p>
-                        <div id="q4a" class="collapse">
-                            <img src="../../assets/img/Quiz2/Quiz2-4-2.png" height="456" width="956">
-                        </div><a type="button" class="btn btn-default btn-large" href="#q4a" data-toggle="collapse" onclick="showHideToggle(id)" id="q4b" name="q4b">Show Answer</a>
-                    </div>
-                    <div class="hero-unit">
-                        <h1>
-                            Question 5
-                        </h1>
-                        <p>
-                            Assume we make a small modification to Canvas1's drawLine function. We decide to change x1 to be set to startX and y1 to be set to starty. How would this change the behavior of the app?
-                        </p>
-                        <div id="q5a" class="collapse">
+                        <div class="quiz-panel-question">
                             <p>
-                                All of the lines drawn during a dragged event will now start at the same initial clicked location and end wherever the user is currently clicking. In other words, you will have a bunch of lines coming from one point and ending in different places.
+                                Circle and label the event parameters and function parameters in the following blocks: 
+                                <img src="../../assets/img/Quiz2/Quiz2-4-1.png" height="190" width="920">
                             </p>
-                        </div><a type="button" class="btn btn-default btn-large" href="#q5a" data-toggle="collapse" onclick="showHideToggle(id)" id="q5b" name="q5b">Show Answer</a>
+                        </div>
+                        <div class="quiz-panel-inner">
+                            <div class="quiz-panel-answer">
+                                <div id="q4a" class="collapse">
+                                    <img src="../../assets/img/Quiz2/Quiz2-4-2.png" height="456" width="956">
+                                </div>
+                                <center>
+                                    <a type="button" href="#q4a" data-toggle="collapse" onclick="showHideToggle(id)" id="q4b" name="q4b">Show Answer</a>
+                                </center>
+                            </div>
+                        </div>
                     </div>
-                    <div class="hero-unit">
+
+
+
+                    <div class="quiz-panel-outer">
                         <h1>
-                            Question 6
+                            5.
                         </h1>
-                        <p>
-                            Consider a drawing app like PaintPot which allows the user to draw circles and lines. In this app, there are two textboxes, dotSizeText and lineWidthText, and two buttons, dotSizeButton and lineWidthButton. The user can control the size of the drawn circles and lines by modifying the textboxes and clicking on the submit buttons. Note that the sizes of the circles and lines drawn should not change until the user clicks on the respective submit buttons.<br>
-                            Define the behavior for this app by drawing the completed Canvas1.Touched, DotSizeButton.Click, and LineWidthButton.Click event handlers. The needed blocks are shown below. <img src="../../assets/img/Quiz2/Quiz2-6-2.png" height="360" width="869">
-                        </p>
-                        <div id="q6a" class="collapse">
-                            <img src="../../assets/img/Quiz2/Quiz2-6-3.png" height="326" width="862">
-                        </div><a type="button" class="btn btn-default btn-large" href="#q6a" data-toggle="collapse" onclick="showHideToggle(id)" id="q6b" name="q6b">Show Answer</a>
+                        <div class="quiz-panel-question">
+                            <p>
+                                Assume we make a small modification to Canvas1's drawLine function. We decide to change x1 to be set to startX and y1 to be set to starty. How would this change the behavior of the app?
+                            </p>
+                        </div>
+                        <div class="quiz-panel-inner">
+                            <div class="quiz-panel-answer">
+                                <div id="q5a" class="collapse">
+                                    <p>
+                                        All of the lines drawn during a dragged event will now start at the same initial clicked location and end wherever the user is currently clicking. In other words, you will have a bunch of lines coming from one point and ending in different places.
+                                    </p>
+                                </div>
+                                <center>
+                                    <a type="button" href="#q5a" data-toggle="collapse" onclick="showHideToggle(id)" id="q5b" name="q5b">Show Answer</a>
+                                </center>
+                            </div>
+                        </div>
                     </div>
+
+
+
+
+                    <div class="quiz-panel-outer">
+                        <h1>
+                            6.
+                        </h1>
+                        <div class="quiz-panel-question">
+                            <p>
+                                Consider a drawing app like PaintPot which allows the user to draw circles and lines. In this app, there are two textboxes, dotSizeText and lineWidthText, and two buttons, dotSizeButton and lineWidthButton. The user can control the size of the drawn circles and lines by modifying the textboxes and clicking on the submit buttons. Note that the sizes of the circles and lines drawn should not change until the user clicks on the respective submit buttons.<br>
+                                Define the behavior for this app by drawing the completed Canvas1.Touched, DotSizeButton.Click, and LineWidthButton.Click event handlers. The needed blocks are shown below. <img src="../../assets/img/Quiz2/Quiz2-6-2.png" height="360" width="869">
+                            </p>
+                        </div>
+                        <div class="quiz-panel-inner">
+                            <div class="quiz-panel-answer">
+                                <div id="q6a" class="collapse">
+                                    <img src="../../assets/img/Quiz2/Quiz2-6-3.png" height="326" width="862">
+                                </div>
+                                <center>
+                                    <a type="button" href="#q6a" data-toggle="collapse" onclick="showHideToggle(id)" id="q6b" name="q6b">Show Answer</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row-fluid">
-                        <div class="span6">
-                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz1">Previous</a>
+                        <div class="span3 pull-left">
+                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz1">Previous Quiz</a>
                         </div>
-                        <div class="span6">
-                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz3">Next</a>
+                        <div class="span3 pull-right">
+                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz3">Next Quiz</a>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>{% endblock %}
