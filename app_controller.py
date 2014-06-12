@@ -2071,6 +2071,7 @@ class Quiz1Handler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/Quiz1.html')
         self.response.out.write(template.render(path, template_values))
+
 class ConditionsHandler(webapp.RequestHandler):
     def get(self):
         
@@ -2101,6 +2102,7 @@ class Quiz2Handler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/Quiz2.html')
         self.response.out.write(template.render(path, template_values))
+
 class ConditionsHandler(webapp.RequestHandler):
     def get(self):
         
@@ -3966,6 +3968,29 @@ class EmailHandler(webapp.RequestHandler):
               )
 
 
+class QuizzesHandler(webapp.RequestHandler):
+	def get(self):
+		template_values = {
+			'url_linktext': 'Go to Quiz 1'
+		}
+		path = os.path.join(os.path.dirname(__file__),'static_pages/other/Quizzes.html')
+		self.response.out.write(template.render(path, template_values))
+
+
+class TestTemplateHandler(webapp.RequestHandler):
+	def get(self):
+
+		quiz = self.request.url.rsplit('/', 1)[1]
+
+		template_values = {
+			'message': quiz
+		}
+		path = os.path.join(os.path.dirname(__file__),'static_pages/other/DjangoTest.html')
+		self.response.out.write(template.render(path, template_values))
+	
+
+
+
 # create this global variable that represents the application and specifies which class
 # should handle each page in the site
 application = webapp.WSGIApplication(
@@ -3987,7 +4012,7 @@ application = webapp.WSGIApplication(
         ('/iterate-through-a-list', LPIteratingHandler), ('/lesson-plan-user-g', LPUserGenHandler),
         ('/lesson-plan-foreach-iteration-and', LPForeachHandler), ('/persistence-worksheet', LPPersistenceWorksheetHandler),
         ('/persistence-r', LPPersistenceFollowupHandler), ('/functions', LPFunctionsHandler),
-    ('/hellopurrLesson', HelloPurrHandler),('/paintpotLesson', PaintPotHandler),('/molemashLesson', MoleMashHandler),('/no-text-while-drivingLesson', NoTextingHandler),('/notetakerLesson', NoteTakerHandler),('/broadcaster-hub-1Lesson', BroadcastHubHandler),('/quizLesson', QuizHandler),('/shootergameLesson', ShooterHandler),('/paintPotIntro', PaintPotIntroHandler),('/structure', StructureHandler), ('/appPage', AppPageHandler),('/appInventorIntro', AppInventorIntroHandler),('/loveYouLesson', LoveYouHandler),('/loveYouWS', LoveYouWSHandler),('/raffle',RaffleHandler),('/gpsIntro', GPSHandler),('/androidWhere', AndroidWhereHandler), ('/quizIntro', QuizIntroHandler),('/userGenerated', UserGeneratedHandler), ('/tryit',TryItHandler),
+        ('/hellopurrLesson', HelloPurrHandler),('/paintpotLesson', PaintPotHandler),('/molemashLesson', MoleMashHandler),('/no-text-while-drivingLesson', NoTextingHandler),('/notetakerLesson', NoteTakerHandler),('/broadcaster-hub-1Lesson', BroadcastHubHandler),('/quizLesson', QuizHandler),('/shootergameLesson', ShooterHandler),('/paintPotIntro', PaintPotIntroHandler),('/structure', StructureHandler), ('/appPage', AppPageHandler),('/appInventorIntro', AppInventorIntroHandler),('/loveYouLesson', LoveYouHandler),('/loveYouWS', LoveYouWSHandler),('/raffle',RaffleHandler),('/gpsIntro', GPSHandler),('/androidWhere', AndroidWhereHandler), ('/quizIntro', QuizIntroHandler),('/userGenerated', UserGeneratedHandler), ('/tryit',TryItHandler),
         ('/procedures', LPCodeReuseHandler), ('/deploying-an-app-and-posting-qr-code-on-web', LPQRHandler),
         ('/module1', Module1Handler), ('/module2', Module2Handler), ('/module3', Module3Handler),
         ('/module4', Module4Handler), ('/module5', Module5Handler), ('/module6', Module6Handler),
@@ -4048,7 +4073,15 @@ application = webapp.WSGIApplication(
         #AI2 Chapter
         ('/PaintPot2', PaintPot2Handler),('/MoleMash2', MoleMash2Handler),('/HelloPurr2', HelloPurr2Handler),('/NoTexting2', NoTexting2Handler), ('/PresidentsQuiz2', PresidentsQuiz2Handler), ('/MapTour2', MapTour2Handler), ('/AndroidCar2', AndroidCar2Handler), ('/BroadcastHub2', BroadcastHub2Handler), ('/Architecture2', Architecture2Handler), ('/Engineering2', Engineering2Handler), ('/Variables2', Variables2Handler), ('/Creation2', Creation2Handler), ('/Conditionals2', Conditionals2Handler), ('/Lists2', Lists2Handler), ('/Iteration2', Iteration2Handler), ('/Procedures2', Procedures2Handler), ('/Databases2', Databases2Handler), ('/Sensors2', Sensors2Handler), ('/API242', API242Handler), ('/Xylophone2', XYLoPhone2Handler),('/Ladybug2', Ladybug2Handler),       
         ('/starterApps',StarterAppsHandler),('/robots',RobotsHandler),('/amazonChapter',AmazonHandler),
-        ('/biblio',BiblioHandler)
+        ('/biblio',BiblioHandler),
+
+		
+		# Page that contains all the quizzes
+		('/Quizzes', QuizzesHandler),
+
+
+		# Test page for learning djang
+		('/Django', TestTemplateHandler),('/Django1', TestTemplateHandler)
     ],
     debug=True)
 
@@ -4060,5 +4093,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
