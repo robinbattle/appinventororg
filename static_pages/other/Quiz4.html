@@ -13,128 +13,110 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
+
                     <div class="page-header">
-                        <center>
                             <h1>
-                                Quiz 4
+                                Simple Animation
                             </h1>
-                        </center>
                     </div>
                     <div class="quiz-panel-outer">
                         <h1>
                             1.
                         </h1>
-                        <div class="quiz-panel-question">
-                            <center>
-                                <img src="../../assets/img/Quiz4/Quiz4-1-1.png" height="187" width="636">
-                            </center>
-                            <p>
-                                Using the blocks above, sketch the blocks for making a ball move diagonally from the bottom-right corner to the top-left corner. You can assume the canvas is 300x300 and that the ball starts in the bottom-right corner. The ball should move gradually, but for this question you need not be concerned with speed or the size of the timer interval.
-                            </p>
-                        </div>
+
+                        <p>
+                            Using the blocks below, sketch the blocks for making a ball move diagonally from the bottom-right corner to the top-left corner. You can assume the canvas is 300x300 and that the ball starts in the bottom-right corner. The ball should move gradually, but for this question you need not be concerned with speed or the size of the timer interval.
+                        </p>
+
+                        <img class='pad-med' src="../../assets/img/Quiz4/Quiz4-1-1.png" height="187" width="636">
+                  
                         <div class="quiz-panel-inner">
-                            <div class="quiz-panel-answer">
-                                <div id="q1a" class="collapse">
-                                    <center>
-                                        <img src="../../assets/img/Quiz4/Quiz4-1-2.png" height="245" width="415">
-                                    </center>
-                                </div>
+                    
+                            <div id="q1a" class="collapse">
                                 <center>
-                                    <a type="button" href="#q1a" data-toggle="collapse" onclick="showHideToggle(id)" id="q1b" name="q1b">Show Answer</a>
+                                    <img src="../../assets/img/Quiz4/Quiz4-1-2.png" height="245" width="415">
                                 </center>
                             </div>
+                           
+                            <a type="button" href="#q1a" data-toggle="collapse" onclick="showHideToggle(id)" id="q1b" name="q1b">Show Answer</a>
                         </div>
                     </div>
                     <div class="quiz-panel-outer">
                         <h1>
                             2.
                         </h1>
-                        <div class="quiz-panel-question">
-                            <p>
-                                Sketch the blocks for making a ball move down at a speed of 30 pixels a second. The ball should move smoothly so specify an appropriate timer interval (you don&acirc;&euro;&trade;t need to show the blocks, just note what you will set the timer interval to in the designer). Show your math.
-                            </p>
-                        </div>
+                
+                        <p>
+                            Sketch the blocks for making a ball move down at a speed of 30 pixels a second. The ball should move smoothly so specify an appropriate timer interval (you don&acirc;&euro;&trade;t need to show the blocks, just note what you will set the timer interval to in the designer). Show your math.
+                        </p>
+                   
                         <div class="quiz-panel-inner">
-                            <div class="quiz-panel-answer">
-                                <div id="q2a" class="collapse">
-                                    <center>
-                                        <img src="../../assets/img/Quiz4/Quiz4-2-1.png" height="293" width="477">
-                                    </center><br>
-                                    <p>
-                                        With the above blocks, set the Clock2.TimerInterval to 50. Explanation: If you didn't care that the ball moved smoothly, you'd set the TimerInterval to 1000 (a second) and you'd move by 30 pixels each time. But you don't want choppy movement, so you need a smaller Clock.TimerInterval, say 50 ms. You know the Clock.Timer event will then be triggered every 50 ms. The question then is how far to move the ball each 50 ms in order to get a speed of 30 pixels/second. The equation to setup is this: x/50=30/1000, where x is the amount to move. If you cross-multiply, you get x*1000=30*50, or x=1.5.
-                                    </p>
-                                </div>
-                                <center>
-                                    <a type="button" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b" name="q2b">Show Answer</a>
-                                </center>
+                          
+                            <div id="q2a" class="collapse">
+                                
+                                <img src="../../assets/img/Quiz4/Quiz4-2-1.png" height="293" width="477">
+                                <p>
+                                    With the above blocks, set the Clock2.TimerInterval to 50. Explanation: If you didn't care that the ball moved smoothly, you'd set the TimerInterval to 1000 (a second) and you'd move by 30 pixels each time. But you don't want choppy movement, so you need a smaller Clock.TimerInterval, say 50 ms. You know the Clock.Timer event will then be triggered every 50 ms. The question then is how far to move the ball each 50 ms in order to get a speed of 30 pixels/second. The equation to setup is this: x/50=30/1000, where x is the amount to move. If you cross-multiply, you get x*1000=30*50, or x=1.5.
+                                </p>
                             </div>
+                           
+                            <a type="button" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b" name="q2b">Show Answer</a>
+                 
                         </div>
                     </div>
                     <div class="quiz-panel-outer">
                         <h1>
                             3.
                         </h1>
-                        <div class="quiz-panel-question">
-                            <p>
-                                Sketch the blocks for making a ball move horizontally, back and forth, continuously. When the ball hits the right edge it should start going left, when it hits the left edge it should start going right.
-                            </p>
-                        </div>
+                   
+                        <p>
+                            Sketch the blocks for making a ball move horizontally, back and forth, continuously. When the ball hits the right edge it should start going left, when it hits the left edge it should start going right.
+                        </p>
+                       
                         <div class="quiz-panel-inner">
-                            <div class="quiz-panel-answer">
-                                <div id="q3a" class="collapse">
-                                    <p>
-                                        Following are two solutions for this question. The key is that you need to define a variable, named "distance" in the solutions below, that "remembers" whether the ball is moving left or right. So if distance is 5, the ball is moving right, if distance is -5, it is moving left. The solutions below differ in how the variable is changed when an edge is reached.
-                                    </p>
-                                    <p>
-                                        Solution 1
-                                    </p>
-                                    <center>
-                                        <img src="../../assets/img/Quiz4/Quiz4-3-1.png" height="317" width="581">
-                                    </center>
-                                    <p>
-                                        Solution 2
-                                    </p>
-                                    <center>
-                                        <img src="../../assets/img/Quiz4/Quiz4-3-2.png" height="237" width="581">
-                                    </center>
-                                </div>
-                                <center>
-                                    <a type="button" href="#q3a" data-toggle="collapse" onclick="showHideToggle(id)" id="q3b" name="q3b">Show Answer</a>
-                                </center>
+                          
+                            <div id="q3a" class="collapse">
+                                <p>
+                                    Following are two solutions for this question. The key is that you need to define a variable, named "distance" in the solutions below, that "remembers" whether the ball is moving left or right. So if distance is 5, the ball is moving right, if distance is -5, it is moving left. The solutions below differ in how the variable is changed when an edge is reached.
+                                </p>
+                                <p>
+                                    Solution 1
+                                </p>
+                                <img src="../../assets/img/Quiz4/Quiz4-3-1.png" height="317" width="581">
+                                
+                                <p>
+                                    Solution 2
+                                </p>
+                                
+                                <img src="../../assets/img/Quiz4/Quiz4-3-2.png" height="237" width="581">
+                                
                             </div>
+                            
+                            <a type="button" href="#q3a" data-toggle="collapse" onclick="showHideToggle(id)" id="q3b" name="q3b">Show Answer</a>
+                       
+                          
                         </div>
                     </div>
                     <div class="quiz-panel-outer">
                         <h1>
                             4.
                         </h1>
-                        <div class="quiz-panel-question">
-                            <p>
-                                Modify the app in question 3 so the ball goes back and forth between the left side and the middle of the canvas.
-                            </p>
-                        </div>
+                        <p>
+                            Modify the app in question 3 so the ball goes back and forth between the left side and the middle of the canvas.
+                        </p>
+                    
                         <div class="quiz-panel-inner">
-                            <div class="quiz-panel-answer">
-                                <div id="q4a" class="collapse">
-                                    <p>
-                                        This answer can be used with either of the two above answers the only change is the if test within the Clock.Timer.
-                                    </p>
-                                    <center>
-                                        <img src="../../assets/img/Quiz4/Quiz4-4-1.png" height="336" width="585">
-                                    </center>
-                                </div>
-                                <center>
-                                    <a type="button" href="#q4a" data-toggle="collapse" onclick="showHideToggle(id)" id="q4b" name="q4b">Show Answer</a>
-                                </center>
+                        
+                            <div id="q4a" class="collapse">
+                                <p>
+                                    This answer can be used with either of the two above answers the only change is the if test within the Clock.Timer.
+                                </p>
+                            
+                                <img src="../../assets/img/Quiz4/Quiz4-4-1.png" height="336" width="585">
+                        
                             </div>
-                        </div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="span3 pull-left">
-                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz3">Previous Quiz</a>
-                        </div>
-                        <div class="span3 pull-right">
-                            <a type="button" class="btn btn-primary btn-huge btn-block" href="/Quiz5">Next Quiz</a>
+                      
+                            <a type="button" href="#q4a" data-toggle="collapse" onclick="showHideToggle(id)" id="q4b" name="q4b">Show Answer</a>
                         </div>
                     </div>
                 </div>
