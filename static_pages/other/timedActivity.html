@@ -18,28 +18,35 @@
 		  <h3>Example 1. How do you play a sound every second?</h3>
 		    <img class="thumbnail" src="../../assets/img/TimedActivity/timedSound.png" border="0"/>
 		   <p>
-			The when <span class="empfont">Clock.Timer</span> event is triggered repeatedly. Think of it like an alarm clock. 
+			When the <span class="empfont">Clock.Timer</span> event is triggered repeatedly. Think of it like an alarm clock. 
 			The <span class="empfont">Clock.TimerInterval</span> property, determines how often the sound will play. 
 			By default it is 1000 milliseconds (1 second), so if you don’t change it the 
 			sound above will play every second. You can set this property in the designer or 
 			with blocks.
 			</p>
-			
-			<strong>Question: How can you play a sound every five seconds instead of every 
-			second? </strong><a href="#howFive">answer</a>
-			<hr/>
-			<a name="moveSpaceship"></a>
 		</div>
-		<div class="span4">
-			<br/><br/><br/>
-            <iframe width="560" height="315" src="//www.youtube.com/embed/yp_CUcOPUyw" 
-             frameborder="0" allowfullscreen></iframe>
-        </div>
+		
+       </div>
+       <div class="row-fluid">	 
+        <div class="span6">
+          
+			 <a name="howfive"></a> 
+		  <h3>Example 2. How do you play a sound every 5 seconds?</h3>
+		  <p><span class="empfont">The Clock.TimerInterval</span> property determines how often the <span class="empfont">Clock.Timer</span> event triggers. 
+         By default, the timer interval is set to 1000 ms, or 1 second. If you set it to 5000, 
+         the <span class="empfont">Clock.Timer</span> event will trigger every 5 seconds. 
+         <img class="thumbnail" src="../../assets/img/TimedActivity/setInterval5000.png" border="0"/>
+         It is a bit confusing and indirect, because you typically set the <span class="empfont">TimerInterval</span> 
+         in the Designer, and the <span class="empfont">when Clock.Timer event</span> is in the blocks editor. 
+         But just realize that the timer will be triggered every “TimerInterval” milliseconds.</p>
+			</p>
+		</div>
+		
        </div>
          <div class="row-fluid">   
             <div class="span6">
             <a name="spaceship"></a> 
-			<h3>Example 2. How do you move a spaceship smoothly across the screen?</h3>
+			<h3>Example 3. How do you move a spaceship smoothly across the screen?</h3>
 			<img class="thumbnail" src="../../assets/img/TimedActivity/spaceshipmove.png" border="0"/>
 			<p>
 			The spaceship’s <span class="empfont">X</span> coordinate defines its horizontal location. On each timer 
@@ -48,22 +55,33 @@
 			will move every one second, a very choppy motion. Typically, for this type of 
 			animation, you’ll set the timer interval to something like 40 ms.
 			</p>
-
-			<strong>Question: A "moving picture" is really a sequence of
-			 pictures displayed very fast. The frame rate of a moving picture is the number 
-			 of pictures (frames) shown every second. If you set the timer interval for the 
-			 spaceship to 40 ms, what will be the frame rate for your “movie”? What is the typical 
-			 frame rate for a movie you see at the theater? </strong><a href="#fps">answer</a>
-			<hr/>
-			<p>Note: for sprite movement, you can use the sprite’s internal clock instead
-			 of a separate clock component (see details)</p>
-			 <hr/>
 			 </div>
 			 <div class="span4">
               <iframe  width="560" height="315" src="//www.youtube.com/embed/zMhx87cyZus" 
                frameborder="0" allowfullscreen></iframe>
             </div>
 		</div>
+<div class="row-fluid">   
+            <div class="span6">
+		<a name="fps"></a>
+		 <h3>Example 4. A "moving picture" is really a sequence of pictures displayed very fast. 
+		 The frame rate of a moving picture is the number of pictures (frames) shown every 
+		 second. If you set the timer interval for the spaceship to 40 ms, what will be 
+		 the frame rate for your “movie”? What is the typical frame rate for a movie you see 
+		 at the theater?</h3>
+		 <img class="thumbnail" src="../../assets/img/TimedActivity/spaceshipmove.png" border="0"/>
+		 <p>If the timer interval is set to 40 ms, the object will move every 40 ms. 
+		 So each frame-- each new picture with the spaceship in a different location-- 
+		 will appear for 40 ms. Frames per second is the number of frames that will 
+		 appear in one second (1000 ms). Since each frame is 40 ms long, you’ll end up 
+		 with 1000/40=25 frames per second.
+		 </p>
+		 <p>The standard frame rate for the film industry is 24 frames per second, 
+		 see <a href="http://en.wikipedia.org/wiki/Frame_rate">http://en.wikipedia.org/wiki/Frame_rate</a> for details.</p>
+		 </div>
+		 </div>
+
+
 		<div class="row-fluid">   
           <div class="span6">	
 			<a name="startStop"></a> 
@@ -118,36 +136,6 @@
                frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
-         <h2>Q and A</h2>
-         <a name="howFive"></a>
-         <strong>1. How can you play a sound every five seconds instead of every second?</strong>
-         <p><span class="empfont">The Clock.TimerInterval</span> property determines how often the <span class="empfont">Clock.Timer</span> event triggers. 
-         By default, the timer interval is set to 1000 ms, or 1 second. If you set it to 5000, 
-         the <span class="empfont">Clock.Timer</span> event will trigger every 5 seconds. 
-         <img class="thumbnail" src="../../assets/img/TimedActivity/setInterval5000.png" border="0"/>
-         It is a bit confusing and indirect, because you typically set the <span class="empfont">TimerInterval</span> 
-         in the Designer, and the <span class="empfont">when Clock.Timer event</span> is in the blocks editor. 
-         But just realize that the timer will be triggered every “TimerInterval” milliseconds.</p>
-         <a name="fps"></a>
-		 <strong>2. A "moving picture" is really a sequence of pictures displayed very fast. 
-		 The frame rate of a moving picture is the number of pictures (frames) shown every 
-		 second. If you set the timer interval for the spaceship to 40 ms, what will be 
-		 the frame rate for your “movie”? What is the typical frame rate for a movie you see 
-		 at the theater?</strong>
-		 <img class="thumbnail" src="../../assets/img/TimedActivity/spaceshipmove.png" border="0"/>
-		 <p>If the timer interval is set to 40 ms, the object will move every 40 ms. 
-		 So each frame-- each new picture with the spaceship in a different location-- 
-		 will appear for 40 ms. Frames per second is the number of frames that will 
-		 appear in one second (1000 ms). Since each frame is 40 ms long, you’ll end up 
-		 with 1000/40=25 frames per second.
-		 </p>
-		 <p>The standard frame rate for the film industry is 24 frames per second, 
-		 see <a href="http://en.wikipedia.org/wiki/Frame_rate">http://en.wikipedia.org/wiki/Frame_rate</a> for details.
-
-        
-		
-       
-
     </div>     
 
 
