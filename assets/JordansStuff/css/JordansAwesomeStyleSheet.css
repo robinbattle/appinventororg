@@ -54,6 +54,38 @@ z-index: 1;
 
 
 
+/* Used on Admin page*/
+.header-container {
+background:#FFFFFF;
+}
+
+/* Used on Admin page*/
+.header-container h1 {
+padding: 40px;
+}
+
+.navbar-container {
+overflow: visible;
+margin-bottom: 20px;
+background-color: #FFEEFF;
+padding: 0px 40px 0px 40px;
+}
+
+
+.content-area {
+margin-top: 10%;
+padding: 20px 20px 20px 20px;
+background-color: #EBAFFF;
+border-radius: 20px;
+min-height: 150%;
+				
+}
+
+
+
+/* End of Admin page stuff*/
+
+
 
 
 /* Used on Quiz pages */
