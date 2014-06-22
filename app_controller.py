@@ -2949,7 +2949,7 @@ class AddStepRenderer(webapp.RequestHandler):
 
 
 
-class NewAdminHandler(webapp.RequestHandler):
+class AdminDashboardHandler(webapp.RequestHandler):
     def get(self):
         
         
@@ -4004,7 +4004,7 @@ class TestTemplateHandler(webapp.RequestHandler):
 # should handle each page in the site
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
-    [('/', Home), ('/Admin', AdminHandler),('/newAdmin', NewAdminHandler),
+    [('/', Home), ('/Admin', AdminHandler), ('/newAdmin/dashboard', AdminDashboardHandler),
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
         ('/shootergame', AppRenderer), ('/no-text-while-driving', AppRenderer), ('/ladybug-chase', AppRenderer),
         ('/map-tour', AppRenderer), ('/android-where-s-my-car', AppRenderer), ('/quiz', AppRenderer),
