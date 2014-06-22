@@ -1,4 +1,12 @@
- Used for Quizes page */
+body
+{
+background-color: #ABE9FF;
+}
+
+
+/* Used for Quizes page */
+
+
 
 .j-title {
   padding: 25px 20px;
@@ -55,30 +63,73 @@ z-index: 1;
 
 
 /* Used on Admin page*/
-.header-container {
-background:#FFFFFF;
+
+.j-header {
+min-width:100%;
+background-color: white;
+float:left;
+padding: 0% 0% 2% 0%;
 }
 
-/* Used on Admin page*/
-.header-container h1 {
-padding: 40px;
+.nav-bar-mod {
+min-width:100%;
+float:right;
 }
 
-.navbar-container {
-overflow: visible;
-margin-bottom: 20px;
-background-color: #FFEEFF;
-padding: 0px 40px 0px 40px;
-}
-
-
-.content-area {
-margin-top: 10%;
-padding: 20px 20px 20px 20px;
-background-color: #EBAFFF;
+.admin-chat-box {
+background-color: #FFFFFF;
 border-radius: 20px;
-min-height: 150%;
+width: 100%;
+margin: 0 auto 20px auto;
+height: 300px;
+text-align: left;
+padding: 20px;
+overflow:auto;
+}
+
+
+
+
+.j-box {
+background-color: #E2F5FF;
+border-radius: 0px 0px 20px 20px;
+text-align:center;
+padding: 20px;
+}
+
+.j-box-button {
+margin: 0px 20px 0px 20px;
+min-width: 190px;
+min-height: 70px;
+border-radius: 20px;
+}
+
+.j-box button img {
+height:100px;
+width:100px;
+}
+
+.j-box-title {
+background-color: #00A9FF;
+border-radius: 20px 20px 0px 0px;
+color: white;
+}
+
+.j-box-title h1, h2, h3, h4, h5, h6 {
+margin: auto;
+padding: 15px 15px 15px 15px;
+}
+
+
+.dashboard-item-container {
+
 				
+}
+
+.dashboard-item {
+background-color: green;
+height: 15%;
+width: 15%;
 }
 
 

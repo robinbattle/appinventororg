@@ -2949,6 +2949,15 @@ class AddStepRenderer(webapp.RequestHandler):
 
 
 
+class NewAdminHandler(webapp.RequestHandler):
+    def get(self):
+        
+        
+        template_values = {}
+        
+        path = os.path.join(os.path.dirname(__file__),'static_pages/admin/admin_landing.html')
+        self.response.out.write(template.render(path, template_values))
+        
 
         
 class AdminHandler(webapp.RequestHandler):
@@ -3995,7 +4004,7 @@ class TestTemplateHandler(webapp.RequestHandler):
 # should handle each page in the site
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
-    [('/', Home), ('/Admin', AdminHandler),
+    [('/', Home), ('/Admin', AdminHandler),('/newAdmin', NewAdminHandler),
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
         ('/shootergame', AppRenderer), ('/no-text-while-driving', AppRenderer), ('/ladybug-chase', AppRenderer),
         ('/map-tour', AppRenderer), ('/android-where-s-my-car', AppRenderer), ('/quiz', AppRenderer),

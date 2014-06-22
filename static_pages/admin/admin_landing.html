@@ -24,7 +24,6 @@
     <div class="nav-bar-mod">
         <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle"
                     data-toggle="collapse"
@@ -34,13 +33,13 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse"
                 id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
+                    <li class="active"><a href="#">Dashboard</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Tutorial</a></li>
+                    <li><a href="#">Stats</a></li>
                     <li class="dropdown"><a href="#"
                         class="dropdown-toggle" data-toggle="dropdown">Dropdown
                             <b class="caret"></b>
@@ -56,35 +55,84 @@
                                     link</a></li>
                         </ul></li>
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control"
-                            placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown"><a href="#"
-                        class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                            <b class="caret"></b>
-                    </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul></li>
-                </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid --> </nav>
-
-
+        </nav>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class='j-box-title'>
+                    <h4>Admin Chat</h4>
+                </div>
+                <div class='j-box'>
+                    <div class='admin-chat-box'>
+                        <p>sup!</p>
+                        <hr>
+                        <p>sup!</p>
+                        <hr>
+                        <p>sup!</p>
+                        <hr>
+                        <p>sup!</p>
+                        <hr>
+                        <p>sup!</p>
+                        <hr>
+                        <p>sup!</p>
+                        <hr>
+                        <p>sup!</p>
+                        <hr>
+                    </div>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="inputMessage">Message</label> <input
+                                type="text" class="form-control"
+                                id="inputMessage"
+                                placeholder="New Message">
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+                <div class='j-box-title'>
+                    <h4>Dashboard</h4>
+                </div>
+
+                <div class='j-box'>
+                    <button type="button"
+                        class="btn btn-default j-box-button">
+                        <img
+                            src="../../assets/JordansStuff/icons/users.png">
+                        <p>User Management
+                        <p>
+                    </button>
+                    <button type="button"
+                        class="btn btn-default j-box-button">
+                        <img
+                            src="../../assets/JordansStuff/icons/tutorialmanagement.png">
+                        <p>Tutorial Management
+                        <p>
+                    </button>
+                    <button type="button"
+                        class="btn btn-default j-box-button">
+                        <img
+                            src="../../assets/JordansStuff/icons/statistics.png">
+                        <p>Site Statistics
+                        <p>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script type="text/javascript"
         src="../../assets/JordansStuff/js/bootstrap.js"></script>
