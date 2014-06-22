@@ -1,5 +1,8 @@
 
 from google.appengine.ext import db
+from google.appengine.ext import ndb
+
+
 
 #### Datastore Classes ####
 
@@ -19,52 +22,52 @@ class App(db.Model):
 
 # for the "Build It" section of a generated app page
 class Step(db.Model):
-	# appId = db.IntegerProperty() # specifies app the step belongs to
-	appId = db.StringProperty() # temporary identifier | TODO: remove this
-	number = db.IntegerProperty()
-	header = db.StringProperty()
-	copy = db.TextProperty()
-	videoPath = db.StringProperty()
-	fullscreenPath = db.StringProperty()
-	timestamp = db.DateTimeProperty(auto_now=True)
+    # appId = db.IntegerProperty() # specifies app the step belongs to
+    appId = db.StringProperty()  # temporary identifier | TODO: remove this
+    number = db.IntegerProperty()
+    header = db.StringProperty()
+    copy = db.TextProperty()
+    videoPath = db.StringProperty()
+    fullscreenPath = db.StringProperty()
+    timestamp = db.DateTimeProperty(auto_now=True)
 
 class Concept(db.Model):
-	# appId = db.IntegerProperty() # specifies app the step belongs to
-	appId = db.StringProperty() # temporary identifier | TODO: remove this
-	number = db.IntegerProperty()
-	header = db.StringProperty()
-	copy = db.TextProperty()
-	blockPath = db.StringProperty()
-	videoPath = db.StringProperty()
-	fullscreenPath = db.StringProperty()
-	timestamp = db.DateTimeProperty(auto_now=True)
+    # appId = db.IntegerProperty() # specifies app the step belongs to
+    appId = db.StringProperty()  # temporary identifier | TODO: remove this
+    number = db.IntegerProperty()
+    header = db.StringProperty()
+    copy = db.TextProperty()
+    blockPath = db.StringProperty()
+    videoPath = db.StringProperty()
+    fullscreenPath = db.StringProperty()
+    timestamp = db.DateTimeProperty(auto_now=True)
 
 class Custom(db.Model):
-	# appId = db.IntegerProperty() # specifies app the step belongs to
-	appId = db.StringProperty() # temporary identifier | TODO: remove this
-	number = db.IntegerProperty()
-	header = db.StringProperty()
-	copy = db.TextProperty()
-	blockPath = db.StringProperty()
-	videoPath = db.StringProperty()
-	fullscreenPath = db.StringProperty()
-	timestamp = db.DateTimeProperty(auto_now=True)
+    # appId = db.IntegerProperty() # specifies app the step belongs to
+    appId = db.StringProperty()  # temporary identifier | TODO: remove this
+    number = db.IntegerProperty()
+    header = db.StringProperty()
+    copy = db.TextProperty()
+    blockPath = db.StringProperty()
+    videoPath = db.StringProperty()
+    fullscreenPath = db.StringProperty()
+    timestamp = db.DateTimeProperty(auto_now=True)
 
 
 class Account(db.Model):
-        user = db.UserProperty()
-        profilePicture = db.BlobProperty()
-    	firstName = db.StringProperty(default="")
-	lastName = db.StringProperty(default="")
-	location = db.StringProperty(default="")
-	organization = db.StringProperty(default="")
-	ifEducator = db.BooleanProperty(default=False)
-	educationLevel = db.StringProperty()
-	introductionLink = db.StringProperty()
-	timestamp = db.DateTimeProperty(auto_now=True)
-	latitude = db.FloatProperty()
-	longitude = db.FloatProperty()
-	displayName= db.StringProperty()
+    user = db.UserProperty()
+    profilePicture = db.BlobProperty()
+    firstName = db.StringProperty(default="")
+    lastName = db.StringProperty(default="")
+    location = db.StringProperty(default="")
+    organization = db.StringProperty(default="")
+    ifEducator = db.BooleanProperty(default=False)
+    educationLevel = db.StringProperty()
+    introductionLink = db.StringProperty()
+    timestamp = db.DateTimeProperty(auto_now=True)
+    latitude = db.FloatProperty()
+    longitude = db.FloatProperty()
+    displayName = db.StringProperty()
 
 class DefaultAvatarImage(db.Model):
         title = db.StringProperty()
@@ -72,7 +75,7 @@ class DefaultAvatarImage(db.Model):
 
 class Position(db.Model):
         latitude = db.FloatProperty()
-	longitude = db.FloatProperty()
+        longitude = db.FloatProperty()
 
 class Comment(db.Model):
         submitter = db.ReferenceProperty(collection_name='submitter')
@@ -81,7 +84,7 @@ class Comment(db.Model):
         appId = db.StringProperty()
         replyFrom = db.ReferenceProperty(collection_name='replyFrom')
         replyTo = db.ReferenceProperty(collection_name='replyTo')
-	
+    
 class Tutorial(db.Model):
         number = db.IntegerProperty()
         title = db.StringProperty()
@@ -91,25 +94,34 @@ class Tutorial(db.Model):
         timestamp = db.DateTimeProperty(auto_now=True)
 
 class TutorialStep(db.Model):
-	# appId = db.IntegerProperty() # specifies app the step belongs to
-	tutorialId = db.StringProperty() # temporary identifier | TODO: remove this
-	number = db.IntegerProperty()
-	header = db.StringProperty()
-	copy = db.TextProperty()
-	tutorialLink = db.StringProperty()
-	timestamp = db.DateTimeProperty(auto_now=True)
+    # appId = db.IntegerProperty() # specifies app the step belongs to
+    tutorialId = db.StringProperty()  # temporary identifier | TODO: remove this
+    number = db.IntegerProperty()
+    header = db.StringProperty()
+    copy = db.TextProperty()
+    tutorialLink = db.StringProperty()
+    timestamp = db.DateTimeProperty(auto_now=True)
 
 class AdminAccount(db.Model):
         name = db.StringProperty()
         gmail = db.StringProperty()
         password = db.StringProperty()
-	
+    
 
 
-# for the "Conceptualize It" section of a generated app page	
-# class Concept(db.Model):	 
+class Message(ndb.Model):
+    """Models an individual message entry."""
+    author = ndb.UserProperty()
+    content = ndb.StringProperty(indexed=False)
+    date = ndb.DateTimeProperty(auto_now_add=True)
+
+
+
+
+# for the "Conceptualize It" section of a generated app page    
+# class Concept(db.Model):     
 
 # for the "Customize It" section of a generated app page
 # class Custom(db.Model):
 
-	
+    

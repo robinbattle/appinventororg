@@ -78,13 +78,14 @@ float:right;
 
 .admin-chat-box {
 background-color: #FFFFFF;
-border-radius: 20px;
+border-radius: 20px 0px 0px 20px;
 width: 100%;
 margin: 0 auto 20px auto;
 height: 300px;
 text-align: left;
 padding: 20px;
 overflow:auto;
+border: 1px solid #87ABB2;
 }
 
 

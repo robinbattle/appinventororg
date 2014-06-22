@@ -26,6 +26,12 @@ indexes:
   - name: appId
   - name: number
 
+- kind: Message
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc
+
 - kind: Step
   properties:
   - name: appId
