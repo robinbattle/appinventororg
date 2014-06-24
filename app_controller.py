@@ -3996,6 +3996,13 @@ class ScreenHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 	
 
+class HelloPurrMiniHandler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/HelloPurrMiniHandler.html')
+        self.response.out.write(template.render(path, template_values))
+
 
 
 # create this global variable that represents the application and specifies which class
@@ -4089,7 +4096,9 @@ application = webapp.WSGIApplication(
 
 		# Test page for learning djang
 		('/Django', TestTemplateHandler),('/Django1', TestTemplateHandler),
-    ('/screens', ScreenHandler)
+
+        # Cayla's Pages
+    ('/screens', ScreenHandler), ('/HelloPurrMini', HelloPurrMiniHandler)
     ],
     debug=True)
 
