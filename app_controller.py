@@ -1523,6 +1523,21 @@ class TeacherListHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/teacherList.html')
         self.response.out.write(template.render(path, template_values))
 
+class TeachingAIHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/teachingAI.html')
+        self.response.out.write(template.render(path, template_values))
+
 class PresidentsQuiz2Handler(webapp.RequestHandler):
     def get(self):
         
@@ -4041,6 +4056,7 @@ application = webapp.WSGIApplication(
 	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),('/IHaveADreamTut', IHaveADreamTutHandler), ('/TimedActivity',TimedActivityHandler), ('/TimedLists',TimedListsHandler), ('/Conditionals', ConditionalsHandler), ('/Variables', VariablesHandler), ('/recordItems', RecordingItemHandler), ('/incrementing', IncrementingVariablesHandler), ('/Walkingalist', WalkingalistHandler), ('/Events', EventsHandler), ('/Lists', ListsHandler), ('/UserListNav',UserListNavHandler), ('/Persistence',PersistenceHandler),('/FAQ',FAQHandler), ('/knowledgeMap',KnowledgeMapHandler),('/lists',ListsHandler), 
 	('/proc',ProcHandler),('/location',LocationHandler),('/resources',ResourcesHandler), ('/Drawing',DrawingHandler),('/sprites',SpritesHandler),
      ('/MakeQuiz10',MakeQuiz10Handler), ('/teacherList',TeacherListHandler),
+     ('/TeachingAI',TeachingAIHandler),
 
         # AI2 view all steps, error on 'IHaveADream'
         #('/IHaveADream', AppRenderer),
