@@ -4000,7 +4000,7 @@ class HelloPurrMiniHandler(webapp.RequestHandler):
     def get(self):
         template_values = {}
 
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/HelloPurrMiniHandler.html')
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/HelloPurrMini.html')
         self.response.out.write(template.render(path, template_values))
 
 
