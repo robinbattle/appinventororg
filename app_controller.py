@@ -2963,11 +2963,11 @@ class AdminDashboardHandler(webapp.RequestHandler):
         
         template_values = {"messageList" : messages }
         
-        path = os.path.join(os.path.dirname(__file__), 'static_pages/admin/admin_landing.html')
+        path = os.path.join(os.path.dirname(__file__), 'static_pages/admin/admin_dashboard.html')
         self.response.out.write(template.render(path, template_values))
         
+    # used by the admin log on the page    
     def post(self):
-        
         msg = self.request.get("inputMessage")
         user = users.get_current_user()
         
@@ -2978,8 +2978,22 @@ class AdminDashboardHandler(webapp.RequestHandler):
         
         m.put()
         
-        self.redirect("/newAdmin/dashboard#submitButton")
-        
+        self.redirect("/admin/dashboard#submitButton")
+
+class AdminTutorialsHandler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'static_pages/admin/admin_tutorials.html')
+        self.response.out.write(template.render(path, template_values))
+
+class AdminUsersHandler(webapp.RequestHandler):
+    def get(self):
+        pass
+    
+class AdminStatsHandler(webapp.RequestHandler):
+    def get(self):
+        pass
+    
         
 class AdminHandler(webapp.RequestHandler):
     def get(self):
@@ -4009,7 +4023,7 @@ class QuizzesHandler(webapp.RequestHandler):
 
 class TestTemplateHandler(webapp.RequestHandler):
 	def get(self):
-
+        
 		quiz = self.request.url.rsplit('/', 1)[1]
 
 		template_values = {
@@ -4018,14 +4032,17 @@ class TestTemplateHandler(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'static_pages/other/DjangoTest.html')
 		self.response.out.write(template.render(path, template_values))
 	
-
+class AdminPostModuleHandler(webapp.RequestHandler):
+    def post(self):
+        title = self.request.get()
+        
 
 
 # create this global variable that represents the application and specifies which class
 # should handle each page in the site
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
-    [('/', Home), ('/Admin', AdminHandler), ('/newAdmin/dashboard', AdminDashboardHandler),
+    [('/', Home), ('/Admin', AdminHandler), ('/admin/dashboard', AdminDashboardHandler), ('/admin/tutorials', AdminTutorialsHandler), ('/admin/users', AdminUsersHandler), ('/admin/stats', AdminStatsHandler), ('/admin/postmodule', AdminPostModuleHandler),
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
         ('/shootergame', AppRenderer), ('/no-text-while-driving', AppRenderer), ('/ladybug-chase', AppRenderer),
         ('/map-tour', AppRenderer), ('/android-where-s-my-car', AppRenderer), ('/quiz', AppRenderer),
@@ -4055,7 +4072,6 @@ application = webapp.WSGIApplication(
         ('/get_step_data', GetStepDataHandler), ('/get_custom_data', GetCustomDataHandler), ('/setup', SetupHandler), ('/setupAI2', SetupAI2Handler),
         ('/profile', ProfileHandler), ('/changeProfile', ChangeProfileHandler), ('/saveProfile', SaveProfile), ('/uploadPicture', UploadPictureHandler), ('/imageHandler', ImageHandler), ('/teacherMap', TeacherMapHandler),
         ('/siteSearch', SearchHandler), ('/moleMashManymo', MoleMashManymoHandler),
-
 
         # NewAppRenderer 
         ('/hellopurr-steps', NewAppRenderer), ('/paintpot-steps', NewAppRenderer), ('/molemash-steps', NewAppRenderer),

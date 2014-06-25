@@ -85,9 +85,61 @@ height: 300px;
 text-align: left;
 padding: 20px;
 overflow:auto;
-border: 1px solid #87ABB2;
+border: 1px solid #ccc;
 }
 
+
+/* A inner white box to put inside of a j-box*/
+.j-box-inner-box {
+background-color: #FFFFFF;
+border-radius: 20px;
+border: 1px solid #ccc;
+margin: 10px;
+}
+
+.fixed-height-400 {
+height: 400px;
+}
+
+.scrollable {
+overflow: auto;
+border-radius: 20px 0px 0px 20px;
+}
+
+
+.delete-module-button {
+margin: 0px;
+position: relative;
+float: right;
+top: -15px;
+right: -5px;
+background: transparent;
+}
+
+/* Used to display an individual module in a list of modules */
+.module-list-item {
+background-color: #90C2DB;
+border-radius: 20px;
+border: 1px solid #ccc;
+margin: 20px;
+min-height: 100px;
+padding: 20px;
+text-align: left;
+}
+
+.module-list-item p{
+min-height: 50px;
+}
+
+.module-list-item h2
+{
+white-space: nowrap;
+margin: 1px;
+}
+
+.highlight {
+border: 5px solid yellow;
+}
 
 
 
@@ -95,45 +147,45 @@ border: 1px solid #87ABB2;
 background-color: #E2F5FF;
 border-radius: 0px 0px 20px 20px;
 text-align:center;
-padding: 20px;
-}
-
-.j-box-button {
-margin: 0px 20px 0px 20px;
-min-width: 190px;
-min-height: 70px;
-border-radius: 20px;
-}
-
-.j-box button img {
-height:100px;
-width:100px;
-}
-
-.j-box-title {
-background-color: #00A9FF;
-border-radius: 20px 20px 0px 0px;
-color: white;
-}
-
-.j-box-title h1, h2, h3, h4, h5, h6 {
-margin: auto;
 padding: 15px 15px 15px 15px;
 }
 
 
-.dashboard-item-container {
-
-				
+.dashboard-box {
+background-color: #E2F5FF;
+border-radius: 0px 0px 20px 20px;
+text-align:center;
+padding: 0px;
 }
+
 
 .dashboard-item {
-background-color: green;
-height: 15%;
-width: 15%;
+min-width: 180px;
+min-height: 180px;
+border-radius: 20px;
+margin: 20px;
+background-image: linear-gradient(to bottom, #FFFFFF, #DDEAF3);
+border: 1px solid #B4DBE4;
 }
 
+.j-box .dashboard-item img {
+	margin-top: 5px;
+}
 
+.j-box .dashboard-item  p{
+	margin: 5px;
+}
+
+.j-box-title {
+background-color: #00BCFF;
+border-radius: 20px 20px 0px 0px;
+color: white;
+}
+
+.j-box-title  h4 {
+margin: auto;
+padding: 15px 15px 15px 15px;
+}
 
 /* End of Admin page stuff*/
 

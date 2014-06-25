@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+    href="../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
+<link rel="stylesheet"
+    href="../../assets/JordansStuff/css/JordansAwesomeStyleSheet.css"
+    type=”text/css”>
+
+<title>Admin Page</title>
+</head>
+
+<body>
+    <div class="j-header">
+        <div class="container">
+            <h1>Administration</h1>
+        </div>
+    </div>
+
+
+    <div class="nav-bar-mod">
+        <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse"
+                id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/users">Users</a></li>
+                    <li><a href="/admin/tutorials">Tutorial</a></li>
+                    <li><a href="/admin/stats">Stats</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button type="button" class="btn btn-primary"
+                            style='margin-top: 7px;'>Save
+                            Changes</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class='j-box-title'>
+                    <h4>Modules</h4>
+                </div>
+                <div class='j-box'>
+                    <div id='module-list'
+                        class='j-box-inner-box fixed-height-400 scrollable'>
+
+
+
+                    </div>
+                    <button id='newmodulebutton' type="button"
+                        class="btn btn-primary">Add a new
+                        module</button>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class='j-box-title'>
+                    <h4>Content</h4>
+                </div>
+                <div class='j-box'>
+                    <div id="content-list"
+                        class='j-box-inner-box fixed-height-400 scrollable'>
+
+                    </div>
+
+                    <button id='newcontentbutton' type="button"
+                        class="btn btn-primary " data-toggle="modal"
+                        data-target="#basicModal">Add new
+                        content</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
+        aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Content Editor</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Content creation dialogue goes in here</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript"
+        src="../../assets/JordansStuff/js/bootstrap.js"></script>
+
+    <script>
+     /*   $(".editable-saver").blur(function(){
+                alert("ID: " + $(this).parent().parent().parent().attr('id'));
+                alert($(this).attr('id') + " " + $(this).text());
+        }); */
+        
+        var newmodtemplate = "<div class=\'module-list-item\' id=\'newModule\'> <div class=\"row\"> <div class=\"col-md-3\"> <img src=\"../../assets/JordansStuff/icons/solid_green.png\" heigh=\"80\" width=\"80\"> </div> <div class=\"col-md-9\">  <button type=\"button\" class=\"delete-module-button\"><span class=\"glyphicon glyphicon-remove\"></span></button> <h2 class=\"editable-saver\" id=\'title\' contenteditable=\"true\" id=\"text\">New Title</h2> <p class=\"editable-saver\" id=\'name\' contenteditable=\"true\">New Description</p> </div> </div> ";   
+        var newmodcontenttemplate = "<div class='module-contents-container' id='newModuleContents'><p contenteditable=\"true\">Module contents will be displayed over here</p></div>";
+        
+        
+        
+        /* Used for generating the unique Module Id */
+        var numModule = 0;
+        
+        /* Adds a new module to the module list in the editor when new module button is clicked */
+        $("#newmodulebutton").click(function() {
+            if($("#module-list").children().length == 0)
+            {
+                /* Adds the first module item to the list */
+                
+                numModule++;
+                
+                $("#module-list").append(newmodtemplate);   
+                
+                /* Update its id number */
+                $("#newModule").attr('id', numModule);
+              
+                /* Adds a new empty div container to the contents panel with the same id */
+                
+                $("#content-list").append(newmodcontenttemplate);
+                
+                /* Update corresponding content id number */
+                
+                $("#newModuleContents").attr('id', 'a' + numModule);
+                
+
+                $('#a' + numModule).hide();
+                
+            }
+            else
+            {
+                numModule++;
+                                
+                lastItem = $("#module-list").children().last();
+                lastItem.after(newmodtemplate);
+                
+                /* Update Id number */
+                $("#newModule").attr('id', numModule);
+                
+                
+                $("#content-list").children().last().after(newmodcontenttemplate);
+                
+                /* Update corresponding content id number */
+                $("#newModuleContents").attr('id', 'a' + numModule);
+                
+                $('#a' + numModule).hide();
+            } 
+        });
+        
+        
+        /* Detects clicks on module-list-item and highlights current selected one
+         * and updates what is shown in the contents panel
+         */        
+            $(document).on('click', '.module-list-item', function(e) {
+            e.preventDefault();
+            $(".module-list-item").removeClass('highlight');
+            $(this).addClass('highlight');
+            var selectedItem = $(this);
+            
+            /*
+             * Now we do the same for the contents panel
+             */
+             
+             $(".module-contents-container").hide();
+             
+             id = $(this).attr('id');
+             $('#a' + id).show();   
+        });        
+                
+        
+        /* Confirmation dialogue */
+        (function($){$.fn.confirm=function(options){if(typeof options==="undefined"){options={}}this.click(function(e){e.preventDefault();var newOptions=$.extend({button:$(this)},options);$.confirm(newOptions,e)});return this};$.confirm=function(options,e){if($(".confirmation-modal").length>0)return;var dataOptions={};if(options.button){var dataOptionsMapping={title:"title",text:"text","confirm-button":"confirmButton","cancel-button":"cancelButton","confirm-button-class":"confirmButtonClass"};$.each(dataOptionsMapping,function(attributeName,optionName){var value=options.button.data(attributeName);if(value){dataOptions[optionName]=value}})}var settings=$.extend({},$.confirm.options,{confirm:function(){var url=e&&("string"===typeof e&&e||e.currentTarget&&e.currentTarget.attributes["href"].value);if(url){if(options.post){var form=$('<form method="post" class="hide" action="'+url+'"></form>');$("body").append(form);form.submit()}else{window.location=url}}},cancel:function(o){},button:null},dataOptions,options);var modalHeader="";if(settings.title!==""){modalHeader="<div class=modal-header>"+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+'<h4 class="modal-title">'+settings.title+"</h4>"+"</div>"}var modalHTML='<div class="confirmation-modal modal fade" tabindex="-1" role="dialog">'+'<div class="modal-dialog">'+'<div class="modal-content">'+modalHeader+'<div class="modal-body">'+settings.text+"</div>"+'<div class="modal-footer">'+'<button class="confirm btn '+settings.confirmButtonClass+'" type="button" data-dismiss="modal">'+settings.confirmButton+"</button>"+'<button class="cancel btn btn-default" type="button" data-dismiss="modal">'+settings.cancelButton+"</div>"+"</div>"+"</div>"+"</div>"+"</div>";var modal=$(modalHTML);modal.on("shown.bs.modal",function(){modal.find(".btn-primary:first").focus()});modal.on("hidden.bs.modal",function(){modal.remove()});modal.find(".confirm").click(function(){settings.confirm(settings.button)});modal.find(".cancel").click(function(){settings.cancel(settings.button)});$("body").append(modal);modal.modal("show")};$.confirm.options={text:"Are you sure?",title:"",confirmButton:"Yes",cancelButton:"Cancel",post:false,confirmButtonClass:"btn-primary"}})(jQuery);
+        
+         $(".confirm").confirm();
+        
+        
+        
+        /* Delete module button listener */
+        $(document).on('click', '.delete-module-button', function()
+        {
+            module = $(this).parent().parent().parent();
+            $.confirm({
+                text: "Are you sure you want to delete this module? (This will delete the modules contents as well!)",
+                confirm: function(button) {
+                    /* Remove module and associated contents */
+                    
+                    id = module.attr('id');
+                    
+                    $("#" + id).remove();
+                    $("#a" + id).remove();
+                },
+                cancel: function(button) {
+                    // do nothing
+                }
+            });
+            
+        } );
+        
+
+        
+        
+        
+    </script>
+</body>
