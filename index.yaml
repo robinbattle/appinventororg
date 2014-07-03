@@ -21,6 +21,11 @@ indexes:
   - name: timestamp
     direction: desc
 
+- kind: Content
+  ancestor: yes
+  properties:
+  - name: c_index
+
 - kind: Custom
   properties:
   - name: appId
@@ -31,6 +36,11 @@ indexes:
   properties:
   - name: date
     direction: desc
+
+- kind: Module
+  ancestor: yes
+  properties:
+  - name: m_index
 
 - kind: Step
   properties:

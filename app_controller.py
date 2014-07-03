@@ -26,7 +26,7 @@ from datastore import AdminAccount
 from datastore import App
 from datastore import Comment
 from datastore import Custom
-from datastore import Message
+from datastore import Message, Module, Content
 from datastore import Position
 from datastore import Step
 from datastore import Tutorial
@@ -2980,12 +2980,41 @@ class AdminDashboardHandler(webapp.RequestHandler):
         
         self.redirect("/admin/dashboard#submitButton")
 
-class AdminTutorialsHandler(webapp.RequestHandler):
+class AdminModuleHandler(webapp.RequestHandler):
     def get(self):
-        template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'static_pages/admin/admin_tutorials.html')
-        self.response.out.write(template.render(path, template_values))
+        modules_query = Module.query(
+            ancestor=ndb.Key(Module, "moduleAncestor")).order(Module.m_index)
+        modules = modules_query.fetch()        
 
+        contents_query = Content.query(
+            ancestor=ndb.Key(Module, "contentAncestor")).order(Content.c_index)
+        contents = contents_query.fetch()               
+        
+        logging.info("modules >>>>>>> " + str(modules))
+        logging.info("contents >>>>>>> " + str(contents))
+        
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'static_pages/admin/admin_modules.html')
+        self.response.out.write(template.render(path, template_values))
+        
+    def post(self):
+        
+        new_title = self.request.get("InputTitle")
+        new_description = self.request.get("InputDescription")
+        new_icon = self.request.get("InputFile")
+        
+        
+           
+        m = Module(parent=ndb.Key(Module, "moduleAncestor"))
+        
+        m.m_title = new_title
+        m.m_description = new_description
+        m.m_icon = new_icon
+        
+        logging.info("New Module  >>> " + str(m))
+
+
+       
 class AdminUsersHandler(webapp.RequestHandler):
     def get(self):
         pass
@@ -4042,7 +4071,7 @@ class AdminPostModuleHandler(webapp.RequestHandler):
 # should handle each page in the site
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
-    [('/', Home), ('/Admin', AdminHandler), ('/admin/dashboard', AdminDashboardHandler), ('/admin/tutorials', AdminTutorialsHandler), ('/admin/users', AdminUsersHandler), ('/admin/stats', AdminStatsHandler), ('/admin/postmodule', AdminPostModuleHandler),
+    [('/', Home), ('/Admin', AdminHandler), ('/admin/dashboard', AdminDashboardHandler), ('/admin/modules', AdminModuleHandler), ('/admin/users', AdminUsersHandler), ('/admin/stats', AdminStatsHandler), ('/admin/postmodule', AdminPostModuleHandler),
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
         ('/shootergame', AppRenderer), ('/no-text-while-driving', AppRenderer), ('/ladybug-chase', AppRenderer),
         ('/map-tour', AppRenderer), ('/android-where-s-my-car', AppRenderer), ('/quiz', AppRenderer),

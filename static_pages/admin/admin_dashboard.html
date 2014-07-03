@@ -4,11 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-    href="../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
-<link rel="stylesheet"
-    href="../../assets/JordansStuff/css/JordansAwesomeStyleSheet.css"
-    type=”text/css”>
+<link rel="stylesheet" href="../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
+<link rel="stylesheet" href="../../assets/JordansStuff/css/JordansAwesomeStyleSheet.css" type=”text/css”>
 
 <title>Admin Page</title>
 </head>
@@ -25,36 +22,16 @@
         <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle"
-                    data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> <span
-                        class="icon-bar"></span> <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse"
-                id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a
-                        href="/admin/dashboard">Dashboard</a></li>
+                    <li class="active"><a href="/admin/dashboard">Dashboard</a></li>
                     <li><a href="/admin/users">Users</a></li>
                     <li><a href="/admin/tutorials">Tutorial</a></li>
                     <li><a href="/admin/stats">Stats</a></li>
-                    <li class="dropdown"><a href="#"
-                        class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                            <b class="caret"></b>
-                    </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated
-                                    link</a></li>
-                        </ul></li>
                 </ul>
             </div>
         </div>
@@ -71,24 +48,19 @@
                 <div class='j-box'>
                     <div class='admin-chat-box'>
 
-                        {% for m in messageList %} <strong>{{m.author}}
-                        </strong> @ {{m.date}}<br> <br> {{m.content}}
+                        {% for m in messageList %} <strong>{{m.author}} </strong> @ {{m.date}}<br> <br> {{m.content}}
 
                         <hr>
                         {% endfor %}
                     </div>
-                    <form action="/admin/dashboard" method="post">
-                        <div class="form-group">
-                            <label for="inputMessage">Message</label> <input
-                                type="text" class="form-control"
-                                name="inputMessage"
-                                placeholder="New Message">
-                        </div>
-                        <button id="submitButton" type="submit"
-                            class="btn btn-primary">Submit</button>
-                    </form>
-
-
+                    <div class='j-center'>
+                        <form action="/admin/dashboard" method="post">
+                            <div class="form-group">
+                                <label for="inputMessage">Message</label> <input type="text" class="form-control" name="inputMessage" placeholder="New Message">
+                            </div>
+                            <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -99,17 +71,11 @@
                 </div>
 
                 <div class='dashboard-box'>
-                    <a href="/admin/users"
-                        class="btn btn-default dashboard-item"> <img
-                        src="../../assets/JordansStuff/icons/users.png">
+                    <a href="/admin/users" class="btn btn-default dashboard-item"> <img src="../../assets/JordansStuff/icons/users.png">
                         <p>User Management</p>
-                    </a> <a href="/admin/tutorials"
-                        class="btn btn-default dashboard-item"> <img
-                        src="../../assets/JordansStuff/icons/tutorialmanagement.png">
+                    </a> <a href="/admin/tutorials" class="btn btn-default dashboard-item"> <img src="../../assets/JordansStuff/icons/tutorialmanagement.png">
                         <p>Tutorial Management</p>
-                    </a> <a href="/admin/stats"
-                        class="btn btn-default dashboard-item"> <img
-                        src="../../assets/JordansStuff/icons/statistics.png">
+                    </a> <a href="/admin/stats" class="btn btn-default dashboard-item"> <img src="../../assets/JordansStuff/icons/statistics.png">
                         <p>Site Statistics</p>
                     </a>
                 </div>
@@ -118,6 +84,5 @@
         </div>
     </div>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript"
-        src="../../assets/JordansStuff/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../assets/JordansStuff/js/bootstrap.js"></script>
 </body>

@@ -3,9 +3,7 @@ from google.appengine.ext import db
 from google.appengine.ext import ndb
 
 
-
 #### Datastore Classes ####
-
 class App(db.Model):
     number = db.IntegerProperty()
     title = db.StringProperty()
@@ -110,13 +108,24 @@ class AdminAccount(db.Model):
 
 
 class Message(ndb.Model):
-    """Models an individual message entry."""
     author = ndb.UserProperty()
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 
+class Module(ndb.Model):
+    m_title = ndb.StringProperty()
+    m_description = ndb.StringProperty()
+    m_icon = ndb.StringProperty()
+    m_content_keys = ndb.KeyProperty(repeated=True) # points to its content
+    m_index = ndb.IntegerProperty()
 
+class Content(ndb.Model):
+    c_title = ndb.StringProperty()
+    c_description = ndb.StringProperty()
+    c_icon = ndb.StringProperty()
+    c_module_key = ndb.KeyProperty() # points to the module its associated with
+    c_index = ndb.IntegerProperty()
 
 # for the "Conceptualize It" section of a generated app page    
 # class Concept(db.Model):     

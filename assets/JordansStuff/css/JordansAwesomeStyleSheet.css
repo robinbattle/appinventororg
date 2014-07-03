@@ -4,8 +4,94 @@ background-color: #ABE9FF;
 }
 
 
-/* Used for Quizes page */
 
+/* New and Improved Module Admin Page */
+
+
+.module-list {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 20px 20px 20px 20px;
+	background-color: white;
+	border-radius: 20px;
+}
+
+
+.module-list-item {
+	background-color: #fff2ee;
+	color: #444;
+	display: table;
+	min-height: 40px;
+	padding: 25px 20px;
+	display: block;
+	border-radius: 20px;
+	margin-left: -40px;
+}
+
+
+.module-list-separator {
+border-top: 1px solid #ddd;
+margin: -1px 20px;
+position: relative;
+z-index: 200;
+}
+
+.j-topper {
+	margin-top: 13%;				
+				
+}
+
+
+/* End New and Improved Module Admin Page */
+
+
+.j-top-fixed {
+	top: 0;
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 1030;
+	margin-bottom: 200px;
+}
+
+.module-list ul {
+	list-style-type: none;
+}
+
+.module-list ul li {
+	background-color: #fff2ee;
+	color: #444;
+	padding: 15px;
+	border-radius: 20px;
+	margin-bottom: 10px;
+	margin-left: -40px;
+	width: 670px;
+    height: 128px;
+}
+
+.module-list ul li img {
+				
+}
+
+#original_items, #cloned_items {
+    list-style: none;
+    
+}
+
+#original_items li {
+    position: relative;
+    z-index: 5;
+}
+
+
+
+#cloned_items li {
+    position: absolute;
+    z-index: 1;
+}
+
+/* Used for Quizes page */
 
 
 .j-title {
@@ -42,11 +128,11 @@ border-radius: 20px;
 
 
 
-.topic-list .topic-list-item .topic-info {
-font-size: 15px;
+.topic-info h1, p {
 font-weight: normal;
-line-height: 22px;
 -webkit-font-smoothing: antialiased;
+margin-left: 40px;
+margin-top: 0px;
 }
 
 
@@ -68,7 +154,7 @@ z-index: 1;
 min-width:100%;
 background-color: white;
 float:left;
-padding: 0% 0% 2% 0%;
+padding: 0% 0% 0% 0%;
 }
 
 .nav-bar-mod {
@@ -108,24 +194,13 @@ border-radius: 20px 0px 0px 20px;
 
 
 .delete-module-button {
-margin: 0px;
 position: relative;
-float: right;
-top: -15px;
-right: -5px;
+left: -10px;
 background: transparent;
+padding: 5px;
 }
 
 /* Used to display an individual module in a list of modules */
-.module-list-item {
-background-color: #90C2DB;
-border-radius: 20px;
-border: 1px solid #ccc;
-margin: 20px;
-min-height: 100px;
-padding: 20px;
-text-align: left;
-}
 
 .module-list-item p{
 min-height: 50px;
@@ -143,11 +218,30 @@ border: 5px solid yellow;
 
 
 
+.module-content-list {
+				
+				
+}
+
+.module-content-list-item {
+background-color: #90C2DB;
+border-radius: 20px;
+border: 1px solid #ccc;
+margin: 20px;
+min-height: 100px;
+padding: 20px;
+text-align: left;			
+}
+
+
 .j-box {
 background-color: #E2F5FF;
 border-radius: 0px 0px 20px 20px;
-text-align:center;
 padding: 15px 15px 15px 15px;
+}
+
+.j-center {
+text-align: center;
 }
 
 
