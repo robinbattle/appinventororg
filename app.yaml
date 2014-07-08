@@ -14,6 +14,8 @@ handlers:
   static_dir: quizly
 - url: /starterApps
   static_dir: starterApps
+- url: /bookFiles
+  static_dir: bookFiles
 - url: /screensteps
   static_dir: screensteps
 - url: /apps/amazon
