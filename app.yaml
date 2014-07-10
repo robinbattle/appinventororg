@@ -29,7 +29,13 @@ handlers:
 - url: /older
   static_dir: older
 - url: /tutorial_files
-  static_dir: tutorial_files    
+  static_dir: tutorial_files
+- url: /bookChapters/images
+  static_dir: images
+- url: /bookChapters/includes
+  static_dir: includes
+- url: /bookChapters/theme
+  static_dir: theme    
 - url: /
   script: app_controller.py
 - url: /Admin
@@ -37,12 +43,6 @@ handlers:
   login: admin
 - url: /.*
   script: app_controller.py
-- url: /bookChapters/images
-  static_dir: images
-- url: /bookChapters/includes
-  static_dir: includes
-  - url: /bookChapters/theme
-  static_dir: theme
    
 
 
