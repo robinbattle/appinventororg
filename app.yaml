@@ -37,6 +37,12 @@ handlers:
   login: admin
 - url: /.*
   script: app_controller.py
+- url: /bookChapters/images
+  static_dir: images
+- url: /bookChapters/includes
+  static_dir: includes
+  - url: /bookChapters/theme
+  static_dir: theme
    
 
 

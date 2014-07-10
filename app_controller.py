@@ -4022,7 +4022,7 @@ class Chapter1Handler(webapp.RequestHandler):
     def get(self):
         template_values = {}
 
-        path = os.path.join(os.path.dirname(__file__),'static_pages/other/chapter1.html')
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch01.html')
         self.response.out.write(template.render(path, template_values))
 
 
