@@ -4018,6 +4018,12 @@ class HelloPurrMiniHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/HelloPurrMini.html')
         self.response.out.write(template.render(path, template_values))
 
+class Chapter1Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/chapter1.html')
+        self.response.out.write(template.render(path, template_values))
 
 
 # create this global variable that represents the application and specifies which class
@@ -4108,8 +4114,8 @@ application = webapp.WSGIApplication(
 		
 		# Page that contains all the quizzes
 		('/Quizzes', QuizzesHandler),
-
-
+#HTML file change
+        ('/Chapter1', Chapter1Handler),
 		# Test page for learning djang
 		('/Django', TestTemplateHandler),('/Django1', TestTemplateHandler),
 
