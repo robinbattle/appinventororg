@@ -22,20 +22,20 @@ handlers:
   static_dir: amazon  
 - url: /assets
   static_dir: assets
-- url: /images
-  static_dir: images
+#- url: /images
+#  static_dir: images
 - url: /assets/css
   static_dir: assets/css
 - url: /older
   static_dir: older
 - url: /tutorial_files
   static_dir: tutorial_files
-- url: /bookChapters/images
-  static_dir: images
-- url: /bookChapters/includes
-  static_dir: includes
-- url: /bookChapters/theme
-  static_dir: theme    
+- url: /images
+  static_dir: bookChapters/images
+- url: /includes
+  static_dir: bookChapters/includes
+- url: /theme
+  static_dir: bookChapters/theme    
 - url: /
   script: app_controller.py
 - url: /Admin
