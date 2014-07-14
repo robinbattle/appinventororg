@@ -4018,7 +4018,174 @@ class HelloPurrMiniHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/HelloPurrMini.html')
         self.response.out.write(template.render(path, template_values))
 
+class Chapter1Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
 
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch01.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter2Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch02.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter3Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch03.html')
+        self.response.out.write(template.render(path, template_values))
+
+
+class Chapter4Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch04.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter5Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch05.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter6Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch06.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter7Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch07.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter8Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch08.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter9Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch09.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter10Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch10.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter11Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch11.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter12Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch12.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter13Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch13.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter14Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch14.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter15Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch15.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter16Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch16.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter17Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch17.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter18Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch18.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter19Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch19.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter20Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch20.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter21Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch21.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter22Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch22.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter23Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch23.html')
+        self.response.out.write(template.render(path, template_values))
+
+class Chapter24Handler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+
+        path = os.path.join(os.path.dirname(__file__),'bookChapters/ch24.html')
+        self.response.out.write(template.render(path, template_values))
 
 # create this global variable that represents the application and specifies which class
 # should handle each page in the site
@@ -4108,8 +4275,8 @@ application = webapp.WSGIApplication(
 		
 		# Page that contains all the quizzes
 		('/Quizzes', QuizzesHandler),
-
-
+        #HTML bookChapters
+        ('/Chapter1', Chapter1Handler), ('/Chapter2', Chapter2Handler), ('/Chapter3', Chapter3Handler), ('/Chapter4', Chapter4Handler), ('/Chapter5', Chapter5Handler), ('/Chapter6', Chapter6Handler), ('/Chapter7', Chapter7Handler), ('/Chapter8', Chapter8Handler), ('/Chapter9', Chapter9Handler), ('/Chapter10', Chapter10Handler), ('/Chapter11', Chapter11Handler), ('/Chapter12', Chapter12Handler), ('/Chapter13', Chapter13Handler), ('/Chapter14', Chapter14Handler), ('/Chapter15', Chapter15Handler), ('/Chapter16', Chapter16Handler), ('/Chapter17', Chapter17Handler), ('/Chapter18', Chapter18Handler), ('/Chapter19', Chapter19Handler), ('/Chapter20', Chapter20Handler), ('/Chapter21', Chapter21Handler), ('/Chapter22', Chapter22Handler), ('/Chapter23', Chapter23Handler), ('/Chapter24', Chapter24Handler),
 		# Test page for learning djang
 		('/Django', TestTemplateHandler),('/Django1', TestTemplateHandler),
 

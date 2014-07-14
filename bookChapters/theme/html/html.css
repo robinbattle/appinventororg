@@ -1,0 +1,24 @@
+table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+thead tr th {
+  word-spacing: 10px 50px;
+  text-align: left;
+  background-color: black;
+  border-spacing:10px 50px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+td { 
+  word-spacing: 10px 50px;
+  height: 20px;
+  border-spacing:10px 50px 10px 50px;
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+}
