@@ -4,7 +4,7 @@
         {% extends "site_base.html" %} {% block body %}
         <link rel="stylesheet" type="text/css" href="../../assets/css/JordansAwesomeStyleSheet.css">
         <title>
-            App Inventor Quiz 4
+            Quiz 4: Animated Movement using the Clock Timer
         </title>
     </head>
     <body>
@@ -16,8 +16,17 @@
 
                     <div class="page-header">
                             <h1>
-                                Quiz 4. Animated Movement
+                                Quiz 4. Animated Movement using the Clock Timer
                             </h1>
+                            <p>There are two ways to move objects over time with App Inventor: using a Clock component and the Clock.Timer
+                            event to trigger movement, or using the Ball and ImageSprite components' internal properties. The following
+                            questions ask you to use the first method based on the Clock component.
+                            </p>
+                            
+                            Here are some blocks you can use to answer the questions in the quiz (you are welcome to use others
+                            including any number blocks, variable blocks, or mathematical operators.
+                            
+                            <img class='pad-med' src="../../assets/img/Quiz4/Quiz4-1-1.png" height="187" width="636">
                     </div>
                     <div class="quiz-panel-outer">
                         <h1>
@@ -25,10 +34,11 @@
                         </h1>
 
                         <p>
-                            Using the blocks below, sketch the blocks for making a ball move diagonally from the bottom-right corner to the top-left corner. You can assume the canvas is 300x300 and that the ball starts in the bottom-right corner. The ball should move gradually, but for this question you need not be concerned with speed or the size of the timer interval.
+                           Sketch the blocks for making a ball move diagonally from the bottom-right corner to the top-left 
+                           corner. You can assume the ball starts in the bottom-right corner. The ball should move gradually, but for this question you need not be concerned with speed or the size of the timer interval.
                         </p>
 
-                        <img class='pad-med' src="../../assets/img/Quiz4/Quiz4-1-1.png" height="187" width="636">
+                        
                   
                         <div class="quiz-panel-inner">
                     
@@ -47,7 +57,7 @@
                         </h1>
                 
                         <p>
-                            Sketch the blocks for making a ball move down at a speed of 30 pixels a second. The ball should move smoothly so specify an appropriate timer interval (you don&acirc;&euro;&trade;t need to show the blocks, just note what you will set the timer interval to in the designer). Show your math.
+                            Sketch the blocks for making a ball move down at a speed of 30 pixels a second. The ball should move smoothly so specify an appropriate timer interval (you do not need to show the blocks, just note what you will set the timer interval to in the designer). Show your math.
                         </p>
                    
                         <div class="quiz-panel-inner">
@@ -56,7 +66,13 @@
                                 
                                 <img src="../../assets/img/Quiz4/Quiz4-2-1.png" height="293" width="477">
                                 <p>
-                                    With the above blocks, set the Clock2.TimerInterval to 50. Explanation: If you didn't care that the ball moved smoothly, you'd set the TimerInterval to 1000 (a second) and you'd move by 30 pixels each time. But you don't want choppy movement, so you need a smaller Clock.TimerInterval, say 50 ms. You know the Clock.Timer event will then be triggered every 50 ms. The question then is how far to move the ball each 50 ms in order to get a speed of 30 pixels/second. The equation to setup is this: x/50=30/1000, where x is the amount to move. If you cross-multiply, you get x*1000=30*50, or x=1.5.
+                                    Either in the Designer or in the blocks (as shown), set the Clock2.TimerInterval to 50. If you didn't care 
+                                    that the ball moved smoothly, you could set the TimerInterval to 1000 (a second) and you'd
+                                     move by 30 pixels each time. But you don't want choppy movement, so you need a smaller 
+                                     Clock.TimerInterval like 50 ms. You know the Clock.Timer event will then be triggered
+                                      every 50 ms. The question then is how far to move the ball each 50 ms in order to get 
+                                      a speed of 30 pixels/second. The equation to setup is this: x/50=30/1000, where x is the 
+                                      amount to move. If you cross-multiply, you get x*1000=30*50, or x=1.5.
                                 </p>
                             </div>
                            
@@ -102,7 +118,9 @@
                             4.
                         </h1>
                         <p>
-                            Modify the app in question 3 so the ball goes back and forth between the left side and the middle of the canvas.
+                            Modify the app in question 3 so the ball goes back and forth between the
+                             left edge of the Canvas and <em>the middle of the canvas</em>. Assume the
+                             ball starts near the left edge (but not on it).
                         </p>
                     
                         <div class="quiz-panel-inner">
