@@ -1,5 +1,0 @@
-{% extends "site_base.html" %}
-{% extends "ch01.html" %}
-{% block body %}
-
-{% endblock %}
