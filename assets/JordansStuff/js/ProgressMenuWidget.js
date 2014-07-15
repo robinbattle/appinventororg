@@ -1,0 +1,1 @@
+/* The following javascript code is used by the Progress menu widget */

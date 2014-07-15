@@ -1,0 +1,72 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
+<link rel="stylesheet" href="../../assets/JordansStuff/css/AdminStyles.css" type=”text/css”>
+</head>
+<body>
+    <div class='container-fluid'>
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class='row subject-box-outer bg-yellow'>
+                    <div class='col-md-12'>
+                        <div class='subject-box-inner'>
+                            <h1>Module Administration</h1>
+                            <h4>Add, edit, and delete Modules</h4>
+                            <p keyid='{{current_module.key}}' class='hidden'></p>
+                        </div>
+                    </div>
+                </div>
+                <div class='row form-box bg-red'>
+                    <div class='col-md-12'>
+                        <form role="form" id="NewModuleForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="ModuleTitle">Title</label> <input type="text" class="form-control" id="ModuleTitle" placeholder="New Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="ModuleDescription">Description</label> <input type="text" class="form-control" id="ModuleDescription" placeholder="New Description">
+                            </div>
+                            <div class="form-group">
+                                <label for="ModuleIcon">Icon</label> <input type="file" id="ModuleIcon">
+                            </div>
+                            <button type="submit" class="btn btn-default">Create it!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-6 item-list-box'>
+                <ul id="sortable">
+                    {% for m in mlist %}
+                    <li id='noDrag' keyid='{{ m.key.id }}' class='item-box'>
+                        <div class='module-icon'>
+                            <img src=' {{ m.m_icon }}' height='100' width='100'>
+                        </div>
+                        <div class='module-title noclick'>
+                            <h1 id="saveable" contenteditable="true">{{ m.m_title }}</h1>
+                        </div>
+                        <div class='module-description noclick'>
+                            <p id="saveable" contenteditable="true">{{ m.m_description }}</p>
+                        </div>
+                        <div class='module-btns hidden noclick'>
+                            <button id="movemodulebtn" type="button" class="btn btn-default module-button">
+                                <span class="glyphicon glyphicon glyphicon-resize-vertical"></span>
+                            </button>
+                            <button id="deletemodulebtn" type="button" class="btn btn-default module-button">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+
+
+                    </li> {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="../../assets/JordansStuff/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../../assets/JordansStuff/js/AdminModules.js"></script>
+
+</body>
+</html>

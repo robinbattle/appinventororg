@@ -2980,44 +2980,252 @@ class AdminDashboardHandler(webapp.RequestHandler):
         
         self.redirect("/admin/dashboard#submitButton")
 
+class AdminContentHandler(webapp.RequestHandler):
+    def get(self):
+        keyid = self.request.get("keyid")
+        
+        # retrieve the module and it contents from the keyid
+        
+        current_module_key = ndb.Key('ModuleSet', 'MAINSET', Module, long(keyid))
+        contents = Content.query(ancestor = current_module_key).order(Content.c_index).fetch()
+        
+        logging.info(contents)
+        
+        template_values = {"current_module" : current_module_key.get(),
+                           "contentList" : contents
+                           }
+        path = os.path.join(os.path.dirname(__file__), 'Pages/Admin/contents.html')
+        
+        self.response.out.write(template.render(path, template_values))
+        
+
+class AdminUpdateContentHandler2(webapp.RequestHandler):
+    def post(self):
+        content_keyid = self.request.get("s_content_keyid")
+        module_keyid = self.request.get("s_module_keyid")
+        title = self.request.get("s_title")
+        description = self.request.get("s_description")
+        
+
+        content = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid), Content, long(content_keyid)).get()
+        
+        content.c_title = title
+        content.c_description = description
+        content.put()
+        
+
+class AdminUpdateContentOrderHandler2(webapp.RequestHandler):
+    def post(self):
+        orderArray = self.request.get('s_resultArray').split(",")
+        logging.info(orderArray)
+        module_keyid = self.request.get("s_mod_keyid") 
+        
+        logging.info("mod_keyid: " + str(module_keyid))
+        logging.info("result array: " + str(orderArray))
+        
+        x = 0;
+        while(x < len(orderArray) - 1):
+            # retrieve corresponding content and update index
+            content = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid), Content, long(orderArray[x + 1])).get()
+            content.c_index = int(orderArray[x])
+            content.put()
+            x+=2
+
+class AdminDeleteContentHandler2(webapp.RequestHandler):
+    def post(self):
+        content_keyid = self.request.get("s_content_keyid")
+        module_keyid = self.request.get("s_module_keyid") 
+        ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid), Content, long(content_keyid)).delete()
+        
+class AdminDeleteModuleHandler2(webapp.RequestHandler):
+    def post(self):
+        keyid = self.request.get("keyid")
+        ndb.Key('ModuleSet', 'MAINSET', Module, long(keyid)).delete()
+        
+class AdminUpdateModuleHandler2(webapp.RequestHandler):
+    def post(self):
+        """ Does not support updating icons yet """
+        title = self.request.get("s_title")
+        description = self.request.get("s_description")
+        keyid = self.request.get("s_keyid")
+        module = ndb.Key('ModuleSet', 'MAINSET', Module, long(keyid)).get()
+        module.m_title = title;
+        module.m_description = description;
+        module.put();
+
+class AdminUpdateModuleOrderHandler2(webapp.RequestHandler):
+    def post(self):
+        orderArray = self.request.get('s_array').split(",")
+        
+        logging.info(orderArray)
+        x = 0;
+        while(x < len(orderArray) - 1):
+            # retrieve corresponding module and update index
+            module = ndb.Key('ModuleSet', 'MAINSET', Module, long(orderArray[x + 1])).get()
+            module.m_index = int(orderArray[x])
+            module.put()
+            x+=2
+        
+class AdminCreateContentHandler2(webapp.RequestHandler):
+    def post(self):        
+        title = self.request.get("s_title")
+        description = self.request.get("s_description")
+        target = str(self.request.get("s_target"))
+        type = str(self.request.get("s_type"))
+        keyid = url = str(self.request.get("s_keyid"))
+               
+        # compute icon
+        if(type == "Quiz"):
+            icon = "../../assets/JordansStuff/icons/quiz_icon.png"
+        elif(type == "Nugget"):
+            icon = "../../assets/JordansStuff/icons/nugget_icon.png"
+        elif(type == "App"):
+            icon = "../../assets/JordansStuff/icons/app_icon.png"
+        
+        
+        # retrieve the module
+        new_content = Content(parent = ndb.Key('ModuleSet', 'MAINSET', Module, long(keyid)))
+        
+        new_content.c_title = title
+        new_content.c_description = description
+        new_content.c_url = target
+        new_content.c_type = type
+        new_content.c_icon = icon
+        
+        # store it to the datastore
+        new_content.put()
+
+class AdminCreateModuleHandler2(webapp.RequestHandler):
+    def post(self):        
+        # retrieve incoming data
+        title = self.request.get("title")
+        description = self.request.get("description")
+        icon = str(self.request.get("icon"))
+        
+        # create a new module and store it to the data store
+        # for now all modules share a common ancestor key
+        
+        module_ancestor_key = ndb.Key('ModuleSet', 'MAINSET')
+        
+        new_module = Module(parent=module_ancestor_key, m_title=title, m_description=description, m_icon=icon)
+        
+        new_module.put()
+
+        
+class AdminModuleHandler2(webapp.RequestHandler):
+    def get(self):
+        # ancestor query all of the modules that belong to the main set
+        mlist = Module.query(ancestor=ndb.Key('ModuleSet', 'MAINSET')).order(Module.m_index).fetch()
+        
+        template_values = {"mlist" : mlist}
+        path = os.path.join(os.path.dirname(__file__), 'Pages/Admin/modules.html')
+        self.response.out.write(template.render(path, template_values))
+        
+
 class AdminModuleHandler(webapp.RequestHandler):
     def get(self):
+        
+        modules = Module.query(ancestor=ndb.Key(ModuleSet, "MAINSET")).order(Module.m_date).fetch()
+        
+        logging.info("MODULES CURRENTLY IN THE MAINSET: " + str(modules))
+        
         modules_query = Module.query(
-            ancestor=ndb.Key(Module, "moduleAncestor")).order(Module.m_index)
+            ancestor=ndb.Key(Module, "moduleAncestor")).order(Module.m_date)
         modules = modules_query.fetch()        
 
-        contents_query = Content.query(
-            ancestor=ndb.Key(Module, "contentAncestor")).order(Content.c_index)
-        contents = contents_query.fetch()               
-        
         logging.info("modules >>>>>>> " + str(modules))
-        logging.info("contents >>>>>>> " + str(contents))
         
-        template_values = {}
+        template_values = {"moduleList" : modules}
         path = os.path.join(os.path.dirname(__file__), 'static_pages/admin/admin_modules.html')
         self.response.out.write(template.render(path, template_values))
         
     def post(self):
         
-        new_title = self.request.get("InputTitle")
-        new_description = self.request.get("InputDescription")
-        new_icon = self.request.get("InputFile")
+        s_title = self.request.get("title")
+        s_description = self.request.get("description")
+        s_icon = str(self.request.get("icon"))
+        s_keyId = self.request.get("keyId")
+        s_delFlag = self.request.get("delFlag")
         
+        logging.info("icon recieved: " + str(s_icon))
         
-           
-        m = Module(parent=ndb.Key(Module, "moduleAncestor"))
+        if s_delFlag == "true":
+            
+            # check if module should be deleted
+            if s_keyId != "-1":
+                
+                msg = Message(parent=ndb.Key(Message, "msgAncestor"))
         
-        m.m_title = new_title
-        m.m_description = new_description
-        m.m_icon = new_icon
+                msg.content = "Deleted module: " + s_title
+                msg.author = users.get_current_user()
         
-        logging.info("New Module  >>> " + str(m))
+                msg.put()
+                
+                ndb.Key('Module', 'moduleAncestor', 'Module', long(s_keyId)).delete()
+                  
+            else:
+                msg = Message(parent=ndb.Key(Message, "msgAncestor"))
+                msg.content = "Deleted module: " + s_title
+                msg.author = users.get_current_user()
+                
+                msg.put()
+        else: 
+            # check if module should be created or updated
+            if s_keyId != "-1":
+                logging.info("must update this module in the datastore")
+                
+                module = ndb.Key('Module', 'moduleAncestor', 'Module', long(s_keyId)).get()
+                
+                if module.m_title != s_title:
+                    msg = Message(parent=ndb.Key(Message, "msgAncestor"))
+                    msg.content = "Changed module title: " + module.m_title + " to " + s_title
+                    msg.author = users.get_current_user()       
+                    msg.put()
+               
+               
+                if module.m_description != s_description:
+                    msg = Message(parent=ndb.Key(Message, "msgAncestor"))
+                    msg.content = "Changed module description: " + module.m_description + " to " + s_description
+                    msg.author = users.get_current_user()       
+                    msg.put()
 
+
+                if module.m_icon != s_icon:
+                    msg = Message(parent=ndb.Key(Message, "msgAncestor"))
+                    msg.content = "Changed module icon: " + module.m_icon + " to " + s_icon
+                    msg.author = users.get_current_user()       
+                    msg.put()
+                              
+                
+                
+                module.m_title = s_title;
+                module.m_description = s_description
+                module.m_icon = s_icon
+                module.put()
+            else:
+                logging.info("must create a new entity in the datastore")
+                
+                msg = Message(parent=ndb.Key(Message, "msgAncestor"))
+                msg.content = "Created module: " + s_title
+                msg.author = users.get_current_user()       
+                msg.put()
+                
+                m = Module(parent=ndb.Key(Module, "moduleAncestor"))
+                m.m_title = s_title
+                m.m_description = s_description
+                m.m_icon = s_icon                
+                m.put()         
 
        
 class AdminUsersHandler(webapp.RequestHandler):
     def get(self):
-        pass
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'static_pages/admin/admin_users.html')
+        self.response.out.write(template.render(path, template_values))
+
+    def post(self):
+        avatar = self.request.get('img')
+        logging.info("file recieved: " + str(avatar))
     
 class AdminStatsHandler(webapp.RequestHandler):
     def get(self):
@@ -4049,29 +4257,70 @@ class QuizzesHandler(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'static_pages/other/Quizzes.html')
 		self.response.out.write(template.render(path, template_values))
 
-
-class TestTemplateHandler(webapp.RequestHandler):
-	def get(self):
+class ModuleMenuHandler(webapp.RequestHandler):
+    def get(self):
+        modules = Module.query(ancestor = ndb.Key('ModuleSet', 'MAINSET')).order(Module.m_index).fetch()
+        template_values = {
+            'modules': modules
+        }
+        path = os.path.join(os.path.dirname(__file__), 'Pages/ContentSystem/ModuleMenu.html')
+        self.response.out.write(template.render(path, template_values))
         
-		quiz = self.request.url.rsplit('/', 1)[1]
 
-		template_values = {
-			'message': quiz
-		}
-		path = os.path.join(os.path.dirname(__file__), 'static_pages/other/DjangoTest.html')
-		self.response.out.write(template.render(path, template_values))
-	
-class AdminPostModuleHandler(webapp.RequestHandler):
-    def post(self):
-        title = self.request.get()
+class ContentMenuHandler(webapp.RequestHandler):
+    def get(self):       
+        moduleid = self.request.get("moduleid")
         
+        # retrieve the module and it contents from the keyid 
+        current_module_key = ndb.Key('ModuleSet', 'MAINSET', Module, long(moduleid))
+        
+        contents = Content.query(ancestor = current_module_key).order(Content.c_index).fetch()
+        
+
+        template_values = {"current_module" : current_module_key.get(),
+                           "contentList" : contents
+                           } 
+        
+        path = os.path.join(os.path.dirname(__file__), 'Pages/ContentSystem/ContentMenu.html')
+        self.response.out.write(template.render(path, template_values))
+    
+class ContentDisplayHandler(webapp.RequestHandler):
+    def get(self):
+        content_keyid = self.request.get("contentid")
+        module_keyid = self.request.get("moduleid")
+        content = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid), Content, long(content_keyid)).get()
+        module = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid)).get()
+        contents = Content.query(ancestor = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid))).order(Content.c_index).fetch()
+        
+        template_values = {"current_content" : content,
+                           "current_module" : module,
+                           "contents" : contents
+                           } 
+        path = os.path.join(os.path.dirname(__file__), 'Pages/ContentSystem/ContentDisplay.html')
+        self.response.out.write(template.render(path, template_values))
+
+
+
 
 
 # create this global variable that represents the application and specifies which class
 # should handle each page in the site
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
-    [('/', Home), ('/Admin', AdminHandler), ('/admin/dashboard', AdminDashboardHandler), ('/admin/modules', AdminModuleHandler), ('/admin/users', AdminUsersHandler), ('/admin/stats', AdminStatsHandler), ('/admin/postmodule', AdminPostModuleHandler),
+    [('/', Home), 
+        
+        # Admin pages
+        ('/Admin', AdminHandler), ('/admin/dashboard', AdminDashboardHandler), ('/admin/updatecontentorder', AdminUpdateContentOrderHandler2),
+        ('/admin/updatemoduleorder', AdminUpdateModuleOrderHandler2), ('/admin/modules', AdminModuleHandler2),
+        ('/admin/createcontent', AdminCreateContentHandler2 ), ('/admin/createmodule', AdminCreateModuleHandler2),
+        ('/admin/updatemodule', AdminUpdateModuleHandler2), ('/admin/updatecontent', AdminUpdateContentHandler2),
+        ('/admin/deletemodule', AdminDeleteModuleHandler2), ('/admin/users', AdminUsersHandler), ('/admin/deletecontent', AdminDeleteContentHandler2),
+        ('/admin/stats', AdminStatsHandler), ('/admin/content', AdminContentHandler),
+        
+        
+        #TutorialSystem
+        ('/modules', ModuleMenuHandler), ('/modules/content', ContentMenuHandler), ('/modules/content/display', ContentDisplayHandler),
+        
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
         ('/shootergame', AppRenderer), ('/no-text-while-driving', AppRenderer), ('/ladybug-chase', AppRenderer),
         ('/map-tour', AppRenderer), ('/android-where-s-my-car', AppRenderer), ('/quiz', AppRenderer),
@@ -4152,14 +4401,9 @@ application = webapp.WSGIApplication(
 
 		
 		# Page that contains all the quizzes
-		('/Quizzes', QuizzesHandler),
-
-
-		# Test page for learning djang
-		('/Django', TestTemplateHandler), ('/Django1', TestTemplateHandler)
+		('/Quizzes', QuizzesHandler)
     ],
     debug=True)
-
 
 
 

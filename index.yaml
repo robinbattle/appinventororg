@@ -40,6 +40,17 @@ indexes:
 - kind: Module
   ancestor: yes
   properties:
+  - name: m_date
+
+- kind: Module
+  ancestor: yes
+  properties:
+  - name: m_date
+    direction: desc
+
+- kind: Module
+  ancestor: yes
+  properties:
   - name: m_index
 
 - kind: Step

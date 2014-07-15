@@ -1,0 +1,145 @@
+.subject-box-outer {
+    height: 100%;
+    background-color: #46a8bf;
+}
+
+.subject-box-title {
+    line-height: 1;
+    font-size: 52px;
+    max-width: 500px;
+    color: white;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 20px;
+    font-weight: 900;
+}
+
+.subject-box-description {
+    font-size: 15px;
+    line-height: 22px;
+    color: white;
+    font-weight: 500;
+}
+
+.subject-box-inner {
+    width: 50%;
+    margin: auto;
+    margin-top: 40%;
+}
+
+.item-list-box {
+    background-color: white;
+    padding: 40px 20px 40px 50px;
+    height: 100%;
+    overflow: auto;
+    padding: 70px 20px 40px 10px;
+}
+
+.item-box {
+    background-color: white;
+    min-height: 150px;
+    padding: 20px 20px;
+    list-style-type: none;
+    cursor: pointer;
+    min-height: 40px;
+}
+
+.item-seperator {
+    position: relative;
+    border-top: 1px solid #ddd;
+    margin: -1px 20px;
+    z-index: 420;
+}
+
+.module-title {
+    font-size: 18px;
+    color: #1c758a;
+    margin-left: 27%;
+}
+
+.module-description {
+    margin-left: 27%;
+}
+
+.module-icon {
+    position: absolute;
+    float: left;
+}
+
+.hover {
+    background-color: #eeeeee
+}
+
+.progress-menu-container {
+    background-color: #eeeeee;
+    height: 100%;
+}
+
+.progress-menu-text-box {
+    border-bottom: 1px solid #cccccc;
+    padding: 40px 40px 20px 40px;
+}
+
+.progress-menu-module-box-inner {
+    width: 80%;
+    margin: auto;
+}
+
+
+.progress-current {
+    background-color: white;
+}
+
+.progress-hover {
+    background-color: #1c758a;
+    color: white;
+}
+
+.progress-menu-icon {
+    float: left;
+}
+
+.progress-menu-item {
+    text-align: center;
+    padding: 8% 5% 8% 5%;
+    cursor: pointer;
+    
+}
+
+.progress-menu-module-link {
+    color: #46a8bf;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    right: 5%;
+}
+
+.progress-menu-module-link:hover,.progress-menu-module-link:focus {
+    color: #2a6496;
+    text-decoration: none;
+}
+
+.progress-menu-module-link-icon {
+    position: relative;
+    right: 5%;
+    margin: 0px;
+}
+
+
+
+.content-nav-link {
+    color: #ffffff;
+    opacity: .6;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.content-nav-link:hover,.content-nav-link:focus {
+    color: #2a6496;
+    text-decoration: none;
+}
+
+.menu-spacer {
+    margin-top: 10%;
+}
