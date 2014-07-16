@@ -17,6 +17,11 @@
                         <h1>
                             Quiz 5. Location, Maps, and URLs
                         </h1>
+                        <p>
+                            Here are some blocks you can use to answer the questions in the quiz (you are welcome to use others
+                            including any number blocks, variable blocks, or mathematical operators.
+                            </p>
+                            <img class='pad-med' src="../../assets/img/Quiz5/quiz5blocks.png" height="187" width="636">
                     </div>
                     <div class="quiz-panel-outer">
                         <h1>
@@ -54,7 +59,7 @@
                             </li>
                         </ul>
                         <p>
-                            The app should send the text when it gets a new GPS reading and the phone has moved at least 30 meters.
+                            The app should send the text when it gets a new GPS reading and the phone has moved at least 30 meters. Keep in mind that you may use any text blocks necessary.
                         </p>
                         
                         <div class="quiz-panel-inner">
@@ -70,67 +75,35 @@
                             <a type="button" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b" name="q2b">Show Answer</a>
                         </div>
                     </div>
-                    <div class="quiz-panel-outer">
-                        <h1>
-                            2.
-                        </h1>
-
-                            <p>
-                                Sketch the blocks for an app that, as the person holding the phone moves, periodically sends a text to the numbers 111-1111 and 222-2222. The texts sent should contain:
-                            </p>
-                            <ul>
-                                <li>a. the text "Suzy's current address is:
-                                </li>
-                                <li>b. the device's current address (street address)
-                                </li>
-                                <li>c. a link to a google map page showing the current address
-                                </li>
-                            </ul>
-                            <p>
-                                The app should send the text when it gets a new GPS reading and the phone has moved at least 30 meters.
-                            </p>
-          
-                        <div class="quiz-panel-inner">
-     
-                            <div id="q2a" class="collapse">
-                                <center>
-                                    <img src="../../assets/img/Quiz5/Quiz5-2.png" height="288" width="582">
-                                </center>
-                                <p>
-                                    The LocationSensor.LocationChanged event handler is triggered periodically, when the app first gets a reading and as the device is moved. By setting the DistanceInterval, you can make it so that the event is triggered only after the device is moved a certain distance (30 meters in this case).
-                                </p>
-                            </div>
-                           
-                            <a type="button" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b" name="q2b">Show Answer</a>
                    
-                   
-                        </div>
-                    </div>
                     <div class="quiz-panel-outer">
                         <h1>
                             3.
                         </h1>
-             
                         <p>
-                            Sketch the blocks for an app that, as the person holding the phone moves, periodically sends a text to the numbers 111-1111 and 222-2222. The texts sent should contain:
-                        </p>
-                        <ul>
-                            <li>a. the text "Suzy's current address is:
-                            </li>
-                            <li>b. the device's current address (street address)
-                            </li>
-                            <li>c. a link to a google map page showing the current address
-                            </li>
-                        </ul>
-                        <p>
-                            Consider a Mole Mash game and suppose you want to keep a high score. a. Explain why you'd want to code the high score as persistent data. b. Think about how high score might work and explain where in the code (blocks) you would call TinyDB.StoreValue to store the high score persistently? c. Where in the code (blocks) would you call TinyDB.GetValue to bring the high score into the app?.
+                            Consider a Mole Mash game and suppose you want to keep a high score. 
+                            <ol>
+                                <li>Explain why you'd want to code the high score as persistent data.
+                                </li>
+                                <li>Think about how high score might work and explain where in the code (blocks) you would call TinyDB.StoreValue to store the high score persistently? 
+                                </li>
+                                <li>Where in the code (blocks) would you call TinyDB.GetValue to bring the high score into the app?.
+                                </li>
+                            </ol>
                             </p>
                     
                         <div class="quiz-panel-inner">
                         
                                 <div id="q3a" class="collapse">
                                     <p>
-                                        a. Persistent data lives on even after the app is closed. For a game, you want the high score over time (successive games) to be saved. b. You want to store the high score in the database when a game ends and the new score is larger than the previous high score. The game might be over on a Clock.Timer event, when the time has ran out. So in that event you'd ask if the score is higher than the previous high score, and if so call the TinyDB.StoreValue to update the database. c. You could call TinyDB.GetValue to bring in the previous high score in Screen.Initialize, when the app begins. Alternatively, you could call it only right when you need it, say when you need to compare a new score with it.
+                                        <ol>
+                                        <li>Persistent data lives on even after the app is closed. For a game, you want the high score over time (successive games) to be saved. 
+                                        </li>
+                                        <li>You want to store the high score in the database when a game ends and the new score is larger than the previous high score. The game might be over on a Clock.Timer event, when the time has ran out. So in that event you'd ask if the score is higher than the previous high score, and if so call the TinyDB.StoreValue to update the database. 
+                                        </li>
+                                        <li>You could call TinyDB.GetValue to bring in the previous high score in Screen.Initialize, when the app begins. Alternatively, you could call it only right when you need it, say when you need to compare a new score with it.
+                                        </li>
+                                    </ol>
                                     </p>
                                 </div>                            
                                 <a type="button" href="#q3a" data-toggle="collapse" onclick="showHideToggle(id)" id="q3b" name="q3b">Show Answer</a>

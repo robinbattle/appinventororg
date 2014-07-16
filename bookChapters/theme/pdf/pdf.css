@@ -317,11 +317,13 @@ figure div.border-box {
 
 figure figcaption { 
    font-size: 9pt; 
-   margin-top: 0;}
+   margin-top: 0;
+ }
 
 figure img { 
   text-align: center;
-  max-width: 100%;}
+  max-width: 100%;
+}
 
 /* --------------------------------------------------------------------- */
 /* ------------------------------- Lists ------------------------------- */
@@ -330,9 +332,12 @@ figure img {
 ul, ol { 	
 	font-size: 10.2pt;
 	font-family: "MyriadPro", sans-serif;
-	font-weight: normal;}
+	font-weight: normal;
+}
 
-ul li, ol li { margin-bottom: 5pt;}
+ul li, ol li { 
+  margin-bottom: 5pt;
+}
 
 /* --------------------------------------------------------------------- */
 /* ------------------------------- Tables ------------------------------ */
@@ -353,7 +358,8 @@ thead tr th {
 
 td { 
   border: 0.25pt solid cmyk(0%,0%,0%,100%);
-  padding: 0.1em 0.3em 0.1em 0.3em;}
+  padding: 0.1em 0.3em 0.1em 0.3em;
+}
 
 /* --------------------------------------------------------------------- */
 /* ---------------------------- Admonitions ---------------------------- */
@@ -372,7 +378,8 @@ div[data-type="warning"] {
 
 div[data-type="note"]:before,
 div[data-type="tip"]:before,
-div[data-type="warning"]:before { content: none;}
+div[data-type="warning"]:before { content: none;
+}
 
 
 div[data-type="note"] h5,
@@ -399,20 +406,31 @@ div[data-type="tip"] h5:before{
   margin-left: -0.88in;
 }
 
-div[data-type="tip"] h5:before {content: url("../../images/block.png");}
-div[data-type="note"] h5:before {content: url("../../images/phone.png");}
+div[data-type="tip"] h5:before {
+  content: url("../../images/block.png");
+}
+div[data-type="note"] h5:before {
+  content: url("../../images/phone.png");
+}
 
 /* --------------------------------------------------------------------- */
 /* ------------------------------- Index ------------------------------- */
 /* --------------------------------------------------------------------- */
 
-section[data-type="index"] { page: index }
+section[data-type="index"] { 
+  page: index 
+}
 
 
 @page index {
-  @top-left { font-family: "MyriadPro-SemiboldCond"; color: cmyk(62%,27%,100%,9%); }
-  @top-center { font-family: "MyriadPro-SemiboldCond"; }
-  @top-right { font-family: "MyriadPro-SemiboldCond"; color: cmyk(62%,27%,100%,9%); }
+  @top-left { 
+    font-family: "MyriadPro-SemiboldCond"; color: cmyk(62%,27%,100%,9%); 
+  }
+  @top-center {
+    font-family: "MyriadPro-SemiboldCond"; 
+}
+  @top-right { 
+    font-family: "MyriadPro-SemiboldCond"; color: cmyk(62%,27%,100%,9%); }
 }
 
 
@@ -423,12 +441,19 @@ section[data-type="index"] { page: index }
 	padding-top: 0.2in;
   bleed: 12pt;
 
-  @top-left { content: counter(page); width: 15pt;}
-  @top-center { content:"Index"; }	
-  @bottom-left { content: none;}
+  @top-left { 
+    content: counter(page); width: 15pt;
+  }
+  @top-center { 
+    content:"Index"; 
+  }	
+  @bottom-left { 
+    content: none;
+  }
   @left-middle { 
     background-color: cmyk(31%,11%,52%,0%);
-    margin-left: -12pt;}
+    margin-left: -12pt;
+  }
   @left-top {
     border-left: 0;
     margin: 0;}
