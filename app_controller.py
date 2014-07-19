@@ -26,7 +26,7 @@ from datastore import AdminAccount
 from datastore import App
 from datastore import Comment
 from datastore import Custom
-from datastore import Message, Module, Content
+from datastore import Message, Module, Content, Course
 from datastore import Position
 from datastore import Step
 from datastore import Tutorial
@@ -1962,7 +1962,7 @@ class Module2Handler(webapp.RequestHandler):
         userStatus = userStatus.getStatus(self.request.uri)
         
         template_values = { 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
-        path = os.path.join(os.path.dirname(__file__), 'static_pages/other/module2.html')
+        path = os.path.join(os.path.dirname(__file__), 'Pages/ContentSystem/Content/module2.html')
         self.response.out.write(template.render(path, template_values))
 
 class Module3Handler(webapp.RequestHandler):
@@ -3425,7 +3425,7 @@ class NewAppRenderer_AI2(webapp.RequestHandler):
             'comments': comments,
             'currentAppsDir':APPS2DIR
             }
-
+        
         path = os.path.join(os.path.dirname(__file__), 'static_pages/other/app_base_new.html')
         self.response.out.write(template.render(path, template_values))
 
@@ -4303,11 +4303,93 @@ class ContentDisplayHandler(webapp.RequestHandler):
 
 
 
+
+
+# handles content
+# url must be of the form: "/ModuleSet/Module/Content"
+# each field specifies where the content is located
+class unifiedContentHandler(webapp.RequestHandler):
+    def get(self):
+        
+        url = self.request.url.split("/")
+        if len(url) > 6:
+            logging.error(self.request.url + " is not of the format /ModuleSet/Module/Content")
+        else:        
+            url = url[3:]
+            ModuleSet = url[0]
+            Module = url[1]
+            Content = url[2]
+        
+            logging.info(ModuleSet + " " + Module + " " + Content)
+
+            # look up corresponding content by name of content
+
+
+
+
+
+class testHandler(webapp.RequestHandler):
+    def get(self, product_id=''):
+        url = self.request.url
+        self.response.out.write('Congratulations! the testHandler has been called!<br>product_id: ' + product_id)
+        
+
+
+class AdminCourseDisplayHandler(webapp.RequestHandler):
+    """Generates and renders the admin courses page"""
+    def get(self):
+        # ancestor query all of the courses that belong to the main set
+        courseList = Course.query(ancestor=ndb.Key('Courses', 'MAINSET')).order(Course.c_index).fetch()
+        
+        template_values = {"courseList" : courseList}
+
+        path = os.path.join(os.path.dirname(__file__), 'CourseSystem/Editor/pages/courses_editor.html')
+        self.response.out.write(template.render(path, template_values))
+    
+class AdminCoursesCreateHandler(webapp.RequestHandler):
+    """Creates a new course"""
+    def post(self):
+        # retrieve data from the request
+        title = self.request.get("title")
+        description = self.request.get("description")
+        icon = str(self.request.get("icon"))
+  
+  
+        # root ancestor of all courses
+        course_ancestor_key = ndb.Key('Courses', 'MAINSET')
+  
+        # create the new Course entity and store it in the datastore
+        new_course = Course(parent=course_ancestor_key, c_title = title, c_description = description, c_icon = icon)
+        
+        new_course.put()
+        
+        
+        
+    
+class AdminCoursesDeleteHandler(webapp.RequestHandler):
+    """Deletes a course"""
+    def post(self):
+        pass
+    
+class AdminCoursesRenameHandler(webapp.RequestHandler):
+    """Renames a course"""
+    def post(self):
+        pass
+
+
+class AdminCoursesReorderHandler(webapp.RequestHandler):
+    """Saves order of the courses"""
+    def post(self):
+        pass
+        
+        
 # create this global variable that represents the application and specifies which class
 # should handle each page in the site
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
     [('/', Home), 
+     
+        ('/AI2/Functions/Quiz1', unifiedContentHandler),
         
         # Admin pages
         ('/Admin', AdminHandler), ('/admin/dashboard', AdminDashboardHandler), ('/admin/updatecontentorder', AdminUpdateContentOrderHandler2),
@@ -4401,7 +4483,22 @@ application = webapp.WSGIApplication(
 
 		
 		# Page that contains all the quizzes
-		('/Quizzes', QuizzesHandler)
+		('/Quizzes', QuizzesHandler),
+        
+        
+        ################################
+        #TODO: DELETE PRACTICE HANDLERS#
+        ################################
+        webapp.Route(r'/testing/<product_id:\d+>', handler=testHandler, name='product'),
+        
+        
+        #################
+        #NEW ADMIN PAGES#
+        #################
+        ('/admin/courses', AdminCourseDisplayHandler), ('/admin/createcourse', AdminCoursesCreateHandler)
+        
+
+        
     ],
     debug=True)
 

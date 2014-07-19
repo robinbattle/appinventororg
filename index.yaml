@@ -26,6 +26,11 @@ indexes:
   properties:
   - name: c_index
 
+- kind: Course
+  ancestor: yes
+  properties:
+  - name: c_index
+
 - kind: Custom
   properties:
   - name: appId

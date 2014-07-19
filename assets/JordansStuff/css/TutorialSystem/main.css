@@ -42,7 +42,6 @@
     padding: 20px 20px;
     list-style-type: none;
     cursor: pointer;
-    min-height: 40px;
 }
 
 .item-seperator {
@@ -142,4 +141,14 @@
 
 .menu-spacer {
     margin-top: 10%;
+}
+
+
+
+
+.content-box {
+    padding-top: 70px;
+    height: 100%;
+    overflow: auto;
+    
 }

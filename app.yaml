@@ -6,6 +6,13 @@ threadsafe: no
 
 handlers:
 
+# only allow admins to access CourseSystem Editor
+- url: /CourseSystem/Editor/
+  static_dir: CourseSystem/Editor
+  login: admin
+  
+  
+
 - url: /apps
   static_dir: apps
 - url: /apps2
@@ -35,6 +42,6 @@ handlers:
   login: admin
 - url: /.*
   script: app_controller.py
-   
+
 
 

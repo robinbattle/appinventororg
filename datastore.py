@@ -113,7 +113,6 @@ class Message(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 
-
 class Module(ndb.Model):
     """ Represents a single Module """
     m_title = ndb.StringProperty()
@@ -129,6 +128,23 @@ class Content(ndb.Model):
     c_url = ndb.StringProperty()  # the url of the content
     c_index = ndb.IntegerProperty()
     c_icon = ndb.StringProperty()  # this is a path to the icon that represents it, it is determined by the type
+    
+    
+    
+class ContentMapping(ndb.Model):
+    module_key = ndb.KeyProperty()
+    content_key = ndb.KeyProperty()
+    index = ndb.IntegerProperty()
+
+
+
+class Course(ndb.Model):
+    """Represents a single course"""
+    c_title = ndb.StringProperty()
+    c_description = ndb.StringProperty()
+    c_icon = ndb.BlobProperty(indexed=False)
+    c_index = ndb.IntegerProperty()
+
 
 # for the "Conceptualize It" section of a generated app page    
 # class Concept(db.Model):     

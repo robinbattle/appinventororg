@@ -3,7 +3,6 @@
 <head>
 <link rel="stylesheet" href="../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
 <link rel="stylesheet" href="../../assets/JordansStuff/css/AdminStyles.css" type=”text/css”>
-
 </head>
 <body>
     <div class='container-fluid'>
@@ -12,30 +11,23 @@
                 <div class='row subject-box-outer bg-yellow'>
                     <div class='col-md-12'>
                         <div class='subject-box-inner'>
-                            <h1>{{current_module.m_title}}</h1>
-                            <hr>
-                            <h2>Add, edit, and delete Content</h2>
-                            <p id='idholder' keyid='{{current_module.key.id}}' class='hidden'></p>
+                            <h1>Module Administration</h1>
+                            <h4>Add, edit, and delete Modules</h4>
+                            <p keyid='{{current_module.key}}' class='hidden'></p>
                         </div>
                     </div>
                 </div>
-                <div class='row form-box'>
+                <div class='row form-box bg-red'>
                     <div class='col-md-12'>
-                        <form role="form" id="NewContentForm">
+                        <form role="form" id="NewModuleForm" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="ContentTitle">Title</label> <input type="text" class="form-control" id="ContentTitle" placeholder="New Title">
+                                <label for="ModuleTitle">Title</label> <input type="text" class="form-control" id="ModuleTitle" placeholder="New Title">
                             </div>
                             <div class="form-group">
-                                <label for="ContentDescription">Description</label> <input type="text" class="form-control" id="ContentDescription" placeholder="New Description">
+                                <label for="ModuleDescription">Description</label> <input type="text" class="form-control" id="ModuleDescription" placeholder="New Description">
                             </div>
                             <div class="form-group">
-                                <label for="ContentURL">URL</label> <input type="text" class="form-control" id="ContentURL" placeholder="New URL">
-                            </div>
-                            <div class="form-group">
-                                <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" value="Quiz">Quiz
-                                </label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" value="App">App
-                                </label> <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" value="Nugget">Nugget
-                                </label>
+                                <label for="ModuleIcon">Icon</label> <input type="file" id="ModuleIcon">
                             </div>
                             <button type="submit" class="btn btn-default">Create it!</button>
                         </form>
@@ -44,13 +36,16 @@
             </div>
             <div class='col-md-6 item-list-box'>
                 <ul id="sortable">
-                    {% for content in contentList %}
-                    <li href="{{content.c_url}}" id='noDrag' keyid='{{content.key.id}}' class='item-box'>
-                        <div class='content-title noclick'>
-                            <h1 id="saveable" contenteditable="true">{{content.c_title}}</h1>
+                    {% for m in mlist %}
+                    <li id='noDrag' keyid='{{ m.key.id }}' class='item-box'>
+                        <div class='module-icon'>
+                            <img src=' {{ m.m_icon }}' height='100' width='100'>
                         </div>
-                        <div class='content-description noclick'>
-                            <p id="saveable" contenteditable="true">{{content.c_description}}</p>
+                        <div class='module-title noclick'>
+                            <h1 id="saveable" contenteditable="true">{{ m.m_title }}</h1>
+                        </div>
+                        <div class='module-description noclick'>
+                            <p id="saveable" contenteditable="true">{{ m.m_description }}</p>
                         </div>
                         <div class='module-btns hidden noclick'>
                             <button id="movemodulebtn" type="button" class="btn btn-default module-button">
@@ -60,16 +55,18 @@
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
+
+
                     </li> {% endfor %}
                 </ul>
             </div>
         </div>
     </div>
 
-
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script type="text/javascript" src="../../assets/JordansStuff/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../../assets/JordansStuff/js/AdminContents.js"></script>
+    <script type="text/javascript" src="../../assets/JordansStuff/js/AdminModules.js"></script>
+
 </body>
 </html>
