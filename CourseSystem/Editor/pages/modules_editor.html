@@ -1,23 +1,22 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
-<link rel="stylesheet" href="../../assets/JordansStuff/css/AdminStyles.css" type=”text/css”>
+<link rel="stylesheet" href="/../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
+<link rel="stylesheet" href="/CourseSystem/Editor/assets/css/EditorStyles.css" type=”text/css”>
 </head>
 <body>
     <div class='container-fluid'>
         <div class='row'>
             <div class='col-md-6'>
-                <div class='row subject-box-outer bg-yellow'>
+                <div class='row subject-box-top-half-outer'>
                     <div class='col-md-12'>
-                        <div class='subject-box-inner'>
-                            <h1>Module Administration</h1>
+                        <div class='subject-box-top-half-inner' course_Title='{{course.c_title}}'>
+                            <h1>{{course.c_title}} {Administration}</h1>
                             <h4>Add, edit, and delete Modules</h4>
-                            <p keyid='{{current_module.key}}' class='hidden'></p>
                         </div>
                     </div>
                 </div>
-                <div class='row form-box bg-red'>
+                <div class='row form-box'>
                     <div class='col-md-12'>
                         <form role="form" id="NewModuleForm" enctype="multipart/form-data">
                             <div class="form-group">
@@ -36,27 +35,25 @@
             </div>
             <div class='col-md-6 item-list-box'>
                 <ul id="sortable">
-                    {% for m in mlist %}
+                    {% for m in moduleList %}
                     <li id='noDrag' keyid='{{ m.key.id }}' class='item-box'>
-                        <div class='module-icon'>
+                        <div class='item-box-icon'>
                             <img src=' {{ m.m_icon }}' height='100' width='100'>
                         </div>
-                        <div class='module-title noclick'>
+                        <div class='item-box-title noclick'>
                             <h1 id="saveable" contenteditable="true">{{ m.m_title }}</h1>
                         </div>
-                        <div class='module-description noclick'>
+                        <div class='item-box-description noclick'>
                             <p id="saveable" contenteditable="true">{{ m.m_description }}</p>
                         </div>
-                        <div class='module-btns hidden noclick'>
-                            <button id="movemodulebtn" type="button" class="btn btn-default module-button">
+                        <div class='item-box-btns hidden noclick'>
+                            <button id="movemodulebtn" type="button" class="btn btn-default item-box-button">
                                 <span class="glyphicon glyphicon glyphicon-resize-vertical"></span>
                             </button>
-                            <button id="deletemodulebtn" type="button" class="btn btn-default module-button">
+                            <button id="deletemodulebtn" type="button" class="btn btn-default item-box-button">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
-
-
                     </li> {% endfor %}
                 </ul>
             </div>
@@ -66,7 +63,7 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script type="text/javascript" src="../../assets/JordansStuff/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../../assets/JordansStuff/js/AdminModules.js"></script>
+    <script type="text/javascript" src="/CourseSystem/Editor/assets/js/modules_editor.js"></script>
 
 </body>
 </html>

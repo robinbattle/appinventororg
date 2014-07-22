@@ -2987,7 +2987,7 @@ class AdminContentHandler(webapp.RequestHandler):
         # retrieve the module and it contents from the keyid
         
         current_module_key = ndb.Key('ModuleSet', 'MAINSET', Module, long(keyid))
-        contents = Content.query(ancestor = current_module_key).order(Content.c_index).fetch()
+        contents = Content.query(ancestor=current_module_key).order(Content.c_index).fetch()
         
         logging.info(contents)
         
@@ -3029,7 +3029,7 @@ class AdminUpdateContentOrderHandler2(webapp.RequestHandler):
             content = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid), Content, long(orderArray[x + 1])).get()
             content.c_index = int(orderArray[x])
             content.put()
-            x+=2
+            x += 2
 
 class AdminDeleteContentHandler2(webapp.RequestHandler):
     def post(self):
@@ -3064,7 +3064,7 @@ class AdminUpdateModuleOrderHandler2(webapp.RequestHandler):
             module = ndb.Key('ModuleSet', 'MAINSET', Module, long(orderArray[x + 1])).get()
             module.m_index = int(orderArray[x])
             module.put()
-            x+=2
+            x += 2
         
 class AdminCreateContentHandler2(webapp.RequestHandler):
     def post(self):        
@@ -3084,7 +3084,7 @@ class AdminCreateContentHandler2(webapp.RequestHandler):
         
         
         # retrieve the module
-        new_content = Content(parent = ndb.Key('ModuleSet', 'MAINSET', Module, long(keyid)))
+        new_content = Content(parent=ndb.Key('ModuleSet', 'MAINSET', Module, long(keyid)))
         
         new_content.c_title = title
         new_content.c_description = description
@@ -4259,7 +4259,7 @@ class QuizzesHandler(webapp.RequestHandler):
 
 class ModuleMenuHandler(webapp.RequestHandler):
     def get(self):
-        modules = Module.query(ancestor = ndb.Key('ModuleSet', 'MAINSET')).order(Module.m_index).fetch()
+        modules = Module.query(ancestor=ndb.Key('ModuleSet', 'MAINSET')).order(Module.m_index).fetch()
         template_values = {
             'modules': modules
         }
@@ -4274,7 +4274,7 @@ class ContentMenuHandler(webapp.RequestHandler):
         # retrieve the module and it contents from the keyid 
         current_module_key = ndb.Key('ModuleSet', 'MAINSET', Module, long(moduleid))
         
-        contents = Content.query(ancestor = current_module_key).order(Content.c_index).fetch()
+        contents = Content.query(ancestor=current_module_key).order(Content.c_index).fetch()
         
 
         template_values = {"current_module" : current_module_key.get(),
@@ -4290,7 +4290,7 @@ class ContentDisplayHandler(webapp.RequestHandler):
         module_keyid = self.request.get("moduleid")
         content = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid), Content, long(content_keyid)).get()
         module = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid)).get()
-        contents = Content.query(ancestor = ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid))).order(Content.c_index).fetch()
+        contents = Content.query(ancestor=ndb.Key('ModuleSet', 'MAINSET', Module, long(module_keyid))).order(Content.c_index).fetch()
         
         template_values = {"current_content" : content,
                            "current_module" : module,
@@ -4329,22 +4329,13 @@ class unifiedContentHandler(webapp.RequestHandler):
 
 
 class testHandler(webapp.RequestHandler):
-    def get(self, product_id=''):
+    def get(self, course_Title=''):
         url = self.request.url
-        self.response.out.write('Congratulations! the testHandler has been called!<br>product_id: ' + product_id)
+        self.response.out.write('Congratulations! the testHandler has been called!<br>course_Title: ' + course_Title)
         
 
 
-class AdminCourseDisplayHandler(webapp.RequestHandler):
-    """Generates and renders the admin courses page"""
-    def get(self):
-        # ancestor query all of the courses that belong to the main set
-        courseList = Course.query(ancestor=ndb.Key('Courses', 'MAINSET')).order(Course.c_index).fetch()
-        
-        template_values = {"courseList" : courseList}
 
-        path = os.path.join(os.path.dirname(__file__), 'CourseSystem/Editor/pages/courses_editor.html')
-        self.response.out.write(template.render(path, template_values))
     
 class AdminCoursesCreateHandler(webapp.RequestHandler):
     """Creates a new course"""
@@ -4353,54 +4344,202 @@ class AdminCoursesCreateHandler(webapp.RequestHandler):
         title = self.request.get("title")
         description = self.request.get("description")
         icon = str(self.request.get("icon"))
-  
-  
-        # root ancestor of all courses
-        course_ancestor_key = ndb.Key('Courses', 'MAINSET')
+        
+        # root ancestor of all courses, for now the ADMINSET are the courses created by the admins
+        course_ancestor_key = ndb.Key('Courses', 'ADMINSET')
   
         # create the new Course entity and store it in the datastore
-        new_course = Course(parent=course_ancestor_key, c_title = title, c_description = description, c_icon = icon)
+        new_course = Course(parent=course_ancestor_key, c_title=title, c_description=description, c_icon=icon)
         
         new_course.put()
-        
-        
         
     
 class AdminCoursesDeleteHandler(webapp.RequestHandler):
     """Deletes a course"""
     def post(self):
-        pass
+        keyid = self.request.get("keyid")
+        ndb.Key('Courses', 'ADMINSET', Course, long(keyid)).delete()
     
-class AdminCoursesRenameHandler(webapp.RequestHandler):
+class AdminCoursesUpdateHandler(webapp.RequestHandler):
     """Renames a course"""
     def post(self):
-        pass
+        keyid = self.request.get("s_keyid")
+        title = self.request.get("s_title")
+        description = self.request.get("s_description")
+        course = ndb.Key('Courses', 'ADMINSET', Course, long(keyid)).get()
+        course.c_title = title
+        course.c_description = description
+        course.put()
 
 
-class AdminCoursesReorderHandler(webapp.RequestHandler):
+class AdminCoursesUpdateOrderHandler(webapp.RequestHandler):
     """Saves order of the courses"""
     def post(self):
-        pass
+        logging.info("Course Reorder handler called!")
+        orderArray = self.request.get("s_resultArray").split(",")
+        logging.info("recieved: " + str(orderArray))
+        
+        x = 0;
+        while(x < len(orderArray) - 1):
+            # retrieve corresponding course entity and update index
+            course = ndb.Key('Courses', 'ADMINSET', Course, long(orderArray[x + 1])).get()
+            course.c_index = int(orderArray[x])
+            course.put()
+            x += 2
+
+
+        
+class AdminModuleCreateHandler(webapp.RequestHandler):    
+    def post(self, course_Title=""):
+        title = self.request.get("title")
+        description = self.request.get("description")
+        icon = str(self.request.get("icon"))
+        
+        # retrieve id of course title, if it exists
+        x = Course.query(ancestor = ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        courseId = x[0].key.id()
+        
+        new_module = Module(parent=ndb.Key('Courses', 'ADMINSET', Course, long(courseId)), m_title=title, m_description=description, m_icon=icon)        
+        new_module.put()        
+        
+
+
+        
+        
+        
+class AdminModuleDeleteHandler(webapp.RequestHandler):
+    def post(self, course_Title=""):
+        logging.info("YOU DID IT!")
+        pass      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class AdminCourseDisplayHandler(webapp.RequestHandler):
+    """Generates and renders the admin courses page"""
+    def get(self):
+        # ancestor query all of the courses that belong to the ADMINSET
+        # For now, all courses created belong to the adminset, we could change this in the future
+        # and have multiple sets of courses, adding on another layer of abstraction in the menu system
+        # the only reason I could see doing this is too allow users to create their own courses
+        courseList = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+        template_values = {"courseList" : courseList}
+        path = os.path.join(os.path.dirname(__file__), 'CourseSystem/Editor/pages/courses_editor.html')
+        self.response.out.write(template.render(path, template_values))  
+
+class AdminModuleDisplayHandler(webapp.RequestHandler):
+    def get(self, course_Title=''):
+        # retrieve corresponding module entities
+        # (if they exist (course_Title might not correspond to an existing entity))
+        # and render the module editor page
+        # if no entities are found, a page telling the user the bad news :( is displayed
+        
+        # retrieve the key of the course entity with the course_title
+        x = Course.query(ancestor = ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        
+        if len(x) == 0:
+            self.response.out.write("<h1>Their is no course called " + course_Title + " ya dingus!</h1>")
+        else:
+            courseId = x[0].key.id()
+            moduleList = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, courseId)).fetch()
+        
+            template_values = {"moduleList" : moduleList, "course" : x[0]}
+                  
+            path = os.path.join(os.path.dirname(__file__), 'CourseSystem/Editor/pages/modules_editor.html')
+            self.response.out.write(template.render(path, template_values))
+        
+class AdminContentsDisplayHandler(webapp.RequestHandler):
+    def get(self, module_Title="", course_Title=""):
+        # retrieve corresponding contents entities
+        # (if they exist (course_Title and or module_Title might not correspond to an existing entity))
+        # and render the contents editor page
+        # if no entities are found, a page telling the user the bad news :( is displayed
+        
+        # retrieve the key of the course entity with the course_title
+        x = Course.query(ancestor = ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        
+        if len(x) == 0:
+            self.response.out.write("<h1>Their is no course called " + course_Title + " ya dingus!</h1>")    
+        else:
+            course_entity = x[0]
+            # course exists, attempt to look up module title entity
+            x = Module.query(ancestor = ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_title == module_Title).fetch()
+            if len(x) == 0:
+                self.response.out.write("<h1>Their is no module called " + module_Title + " ya dingus!</h1>") 
+            else:
+                # module and course exist, look up contents
+                module_entity = x[0]
+                contents = Content.query(ancestor = ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()), Module, long(module_entity.key.id()))).fetch()
+                self.response.out.write("CONTENTS DISPLAY<br>" + course_Title + "<br> " + module_Title + "<br>" + str(contents))
+                
+ 
+class AdminContentDisplayHandler(webapp.RequestHandler):
+    def get(self, module_Title="", course_Title="", content_Title=""):
+        # retrieve corresponding content entity
+        # (if it exists (course_Title and or module_Title and or content_Title 
+        # might not correspond to an existing entity))
+        # and render the content editor page
+        # if no entity is found, a page telling the user the bad news :( is displayed
+        
+        
+        # retrieve the key of the course entity with the course_title
+        x = Course.query(ancestor = ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        
+        if len(x) == 0:
+            self.response.out.write("<h1>Their is no course called " + course_Title + " ya dingus!</h1>")    
+        else:
+            course_entity = x[0]
+            # course exists, attempt to look up module title entity
+            x = Module.query(ancestor = ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_title == module_Title).fetch()
+            if len(x) == 0:
+                self.response.out.write("<h1>Their is no module called " + module_Title + " ya dingus!</h1>") 
+            else:
+                # module and course exist, attempt to look up content
+                module_entity = x[0]
+                content = Content.query(ancestor = ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()), Module, long(module_entity.key.id()))).filter(Content.c_title == content_Title).fetch()
+                
+                if len(content) == 0:
+                    self.response.out.write("<h1>Their is no content called " + content_Title + " ya dingus!</h1>") 
+                else:
+                    # everything was found! display the page
+                    content = content[0]
+                    self.response.out.write("CONTENTS DISPLAY<br>" + course_Title + "<br> " + module_Title + "<br>" + str(content))
+        
+        
+        
+        
+        
         
         
 # create this global variable that represents the application and specifies which class
 # should handle each page in the site
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
-    [('/', Home), 
+    [('/', Home),
      
         ('/AI2/Functions/Quiz1', unifiedContentHandler),
         
         # Admin pages
         ('/Admin', AdminHandler), ('/admin/dashboard', AdminDashboardHandler), ('/admin/updatecontentorder', AdminUpdateContentOrderHandler2),
         ('/admin/updatemoduleorder', AdminUpdateModuleOrderHandler2), ('/admin/modules', AdminModuleHandler2),
-        ('/admin/createcontent', AdminCreateContentHandler2 ), ('/admin/createmodule', AdminCreateModuleHandler2),
+        ('/admin/createcontent', AdminCreateContentHandler2), ('/admin/createmodule', AdminCreateModuleHandler2),
         ('/admin/updatemodule', AdminUpdateModuleHandler2), ('/admin/updatecontent', AdminUpdateContentHandler2),
         ('/admin/deletemodule', AdminDeleteModuleHandler2), ('/admin/users', AdminUsersHandler), ('/admin/deletecontent', AdminDeleteContentHandler2),
         ('/admin/stats', AdminStatsHandler), ('/admin/content', AdminContentHandler),
         
         
-        #TutorialSystem
+        # TutorialSystem
         ('/modules', ModuleMenuHandler), ('/modules/content', ContentMenuHandler), ('/modules/content/display', ContentDisplayHandler),
         
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
@@ -4487,17 +4626,39 @@ application = webapp.WSGIApplication(
         
         
         ################################
-        #TODO: DELETE PRACTICE HANDLERS#
+        # TODO: DELETE PRACTICE HANDLERS#
         ################################
-        webapp.Route(r'/testing/<product_id:\d+>', handler=testHandler, name='product'),
+        webapp.Route(r'/testing/<product_id:.+>', handler=testHandler, name='product'),
         
         
-        #################
-        #NEW ADMIN PAGES#
-        #################
-        ('/admin/courses', AdminCourseDisplayHandler), ('/admin/createcourse', AdminCoursesCreateHandler)
+        ##################
+        #SEMI ADMIN PAGES#
+        ##################
         
-
+        # course editor stuff
+        ('/admin/createcourse', AdminCoursesCreateHandler),
+        ('/admin/deletecourse', AdminCoursesDeleteHandler), ('/admin/updatecourseorder', AdminCoursesUpdateOrderHandler),
+        ('/admin/updatecourse', AdminCoursesUpdateHandler),
+        
+        # module editor stuff
+        webapp.Route(r'/admin/courses/<course_Title:(?<=courses\/)[^\/]+(?=\/createmodule$)>/createmodule', handler=AdminModuleCreateHandler, name='course_Title'),
+        webapp.Route(r'/admin/courses/<course_Title:(?<=courses\/)[^\/]+(?=\/deletemodule$)>/deletemodule', handler=AdminModuleDeleteHandler, name='course_Title'),
+         
+        
+        #######################################
+        #NEW AND BETTER COURSE EDITOR HANDLERS#
+        #######################################
+        
+        
+              
+        # Editor Display Handlers
+        ('/admin/courses', AdminCourseDisplayHandler), # courses menu
+        webapp.Route(r'/admin/courses/<course_Title>', handler=AdminModuleDisplayHandler), # modules menu
+        webapp.Route(r'/admin/courses/<course_Title>/<module_Title>', handler=AdminContentsDisplayHandler), # contents menu
+        webapp.Route(r'/admin/courses/<course_Title>/<module_Title>/<content_Title>', handler=AdminContentDisplayHandler), # contents menu
+        
+        
+        # Modifier Handlers
         
     ],
     debug=True)

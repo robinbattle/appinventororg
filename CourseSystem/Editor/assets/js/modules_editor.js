@@ -1,12 +1,13 @@
 /**
  * The following is used on the Admin Modules page!
+ * 
+ * 
+ * XXX STATUS: IN PROGRESS
  */
 
-/**
- * Retrieves data from the new content form, and then submits it to the server.
- */
 
 
+// XXX: DONE
 /**
  * Retrieves data from new module form, validates it, and then submits it the
  * server.
@@ -26,19 +27,40 @@ $("#NewModuleForm").submit(function(event) {
 		return function(e) {
 			dataURL = e.target.result;
 
-			$.post("/admin/createmodule", {
+			$.post("/admin/courses/" + $('.subject-box-top-half-inner').attr('course_Title') + "/createmodule", {
 				title : new_title,
 				description : new_description,
 				icon : dataURL,
 			}, function(data, status) {
-				window.location = "/admin/modules";
+				window.location = "/admin/courses/" + $('.subject-box-top-half-inner').attr('course_Title');
 			});
 		};
 	})(file);
 
-	reader.readAsDataURL(file);
+	validated = true;
+	errorString = "Missing required fields\n\n";
+
+	if (file == undefined) {
+		errorString += "\tYou must select an icon!\n";
+		validated = false;
+	}
+
+	if (new_title == "") {
+		errorString += "\tYou must enter a title!\n";
+		validated = false;
+	}
+
+	if (validated) {
+		reader.readAsDataURL(file);
+	} else {
+		alert(errorString)
+	}
 });
 
+
+
+
+// XXX DONE
 $(document).ready(function() {
 
 	var insideNoClick = false;
@@ -48,22 +70,28 @@ $(document).ready(function() {
 		if (insideNoClick == true) {
 			// alert("NO LINK!");
 		} else {
-			window.location = "/admin/content?keyid=" + $(this).attr('keyid');
-
+			moduleTitle = $(this).find('h1').text();
+			courseTitle = $('.subject-box-top-half-inner').attr('course_Title')
+			window.location = "/admin/courses/" + courseTitle  + "/" + moduleTitle;
 		}
 	});
-
+	
+	
+	// XXX DONE
 	/* Highlight item boxes on hover */
 	$(".item-box").mouseover(function() {
 		$(this).addClass('hover');
-		$(this).find(".module-btns").removeClass('hidden');
+		$(this).find(".item-box-btns").removeClass('hidden');
 	});
 
 	$(".item-box").mouseout(function() {
 		$(this).removeClass('hover');
-		$(this).find(".module-btns").addClass('hidden');
+		$(this).find(".item-box-btns").addClass('hidden');
 	});
 
+	
+	
+	/// XXX DONE
 	/* Move module button */
 	$(document).on('mouseover', '#movemodulebtn', function() {
 		$(this).parent().parent().attr('id', '');
@@ -73,15 +101,22 @@ $(document).ready(function() {
 		$(this).parent().parent().attr('id', 'noDrag');
 	});
 
+	
+	
+	
+	
+	// TODO: IMPLEMENT
 	/* Delete module button */
 	$(document).on('click', '#deletemodulebtn', function() {
 
+		
 		s_keyid = $(this).parent().parent().attr('keyid');
-
-		$.post("/admin/deletemodule", {
+		
+		course_Title = $('.subject-box-top-half-inner').attr('course_title');
+		$.post("/admin/courses/" + course_Title + "/deletemodule", {
 			keyid : s_keyid
 		}, function(data, status) {
-			window.location = "/admin/modules";
+			window.location = "/admin/courses/" + course_Title;
 		});
 	});
 

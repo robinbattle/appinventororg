@@ -1,8 +1,8 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="../../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
-<link rel="stylesheet" href="../css/EditorStyles.css" type=”text/css”>
+<link rel="stylesheet" href="/assets/JordansStuff/css/bootstrap.css" type=”text/css”>
+<link rel="stylesheet" href="/CourseSystem/Editor/assets/css/EditorStyles.css" type=”text/css”>
 <title>Courses Editor</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
                 <div class='row subject-box-top-half-outer'>
                     <div class='col-md-12'>
                         <div class='subject-box-top-half-inner'>
-                            <h1>Courses Administration</h1>
+                            <h1>Courses {Administration}</h1>
                             <h4>Add, edit, and delete a Course</h4>
                         </div>
                     </div>
@@ -48,10 +48,10 @@
                             <p id="saveable" contenteditable="true">{{ course.c_description }}</p>
                         </div>
                         <div class='item-box-btns hidden noclick'>
-                            <button id="moveitembtn" type="button" class="btn btn-default item-box-button">
+                            <button id="movecoursebtn" type="button" class="btn btn-default item-box-button">
                                 <span class="glyphicon glyphicon glyphicon-resize-vertical"></span>
                             </button>
-                            <button id="deleteitembtn" type="button" class="btn btn-default item-box-button">
+                            <button id="deletecoursebtn" type="button" class="btn btn-default item-box-button">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -63,8 +63,7 @@
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script type="text/javascript" src="../../../assets/JordansStuff/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../js/courses_editor.js"></script>
-
+    <script type="text/javascript" src="../assets/JordansStuff/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../CourseSystem/Editor/assets/js/courses_editor.js"></script>
 </body>
 </html>

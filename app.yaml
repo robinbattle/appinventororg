@@ -6,13 +6,19 @@ threadsafe: no
 
 handlers:
 
-# only allow admins to access CourseSystem Editor
-- url: /CourseSystem/Editor/
-  static_dir: CourseSystem/Editor
-  login: admin
-  
-  
 
+- url: /admin/.*
+  script: app_controller.py
+  login: admin
+
+- url: /CourseSystem/Editor/assets
+  static_dir: CourseSystem/Editor/assets
+  login: admin
+
+
+  
+- url: /assets
+  static_dir: assets  
 - url: /apps
   static_dir: apps
 - url: /apps2
@@ -25,8 +31,7 @@ handlers:
   static_dir: screensteps
 - url: /apps/amazon
   static_dir: amazon  
-- url: /assets
-  static_dir: assets
+
 - url: /images
   static_dir: images
 - url: /assets/css
@@ -42,6 +47,7 @@ handlers:
   login: admin
 - url: /.*
   script: app_controller.py
+
 
 
 
