@@ -129,14 +129,6 @@ class Content(ndb.Model):
     c_index = ndb.IntegerProperty()
     c_icon = ndb.StringProperty()  # this is a path to the icon that represents it, it is determined by the type
     
-    
-    
-class ContentMapping(ndb.Model):
-    module_key = ndb.KeyProperty()
-    content_key = ndb.KeyProperty()
-    index = ndb.IntegerProperty()
-
-
 
 class Course(ndb.Model):
     """Represents a single course"""

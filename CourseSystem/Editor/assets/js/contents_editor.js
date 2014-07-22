@@ -1,5 +1,5 @@
 /*
- *	The following is used on the admin content page! 
+ *	The following is used on the contents editor page! 
  * 
  * 
  */
@@ -10,23 +10,51 @@
 
 $("#NewContentForm").submit(function(event) {
 	event.preventDefault();
-
+	
 	title = $("#ContentTitle").val();
 	description = $("#ContentDescription").val();
 	target = $("#ContentURL").val();
-	type = $('input:radio[name=inlineRadioOptions]:checked').val();
-	keyid = $('#idholder').attr('keyid');
+	content_type = $('input:radio[name=inlineRadioOptions]:checked').val();
+	course_id = $('.subject-box-top-half-inner').attr('course_id')
+	module_id = $('.subject-box-top-half-inner').attr('module_id')
 
-	// submit it!
-	$.post("/admin/createcontent", {
-		s_title : title,
-		s_description : description,
-		s_target : target,
-		s_type : type,
-		s_keyid : keyid
-	}, function(data, status) {
-		window.location = "/admin/content?keyid=" + keyid;
-	});
+	
+	
+	validated = true;
+	errorString = "Missing required fields\n\n";
+
+	if (title == "") {
+		errorString += "\tYou must enter a title!\n";
+		validated = false;
+	}
+	
+	if (target == "") {
+		errorString += "\tYou must enter a url!\n";
+		validated = false;
+	}
+	
+	if (content_type == undefined) {
+		errorString += "\tYou must choose a type!\n";
+		validated = false;
+	}
+
+
+	if (validated) {
+		// submit it!
+		$.post("/admin/course_system/create/Content", {
+			s_title : title,
+			s_description : description,
+			s_target : target,
+			s_content_type : content_type,
+			s_course_id : course_id,
+			s_module_id : module_id
+		}, function(data, status) {
+			location.reload()
+		});
+	} else {
+		alert(errorString)
+	}
+	
 });
 
 $(document).ready(function() {
@@ -56,14 +84,17 @@ $(document).ready(function() {
 
 	/* Delete content button */
 	$(document).on('click', '#deletemodulebtn', function() {
-		content_keyid = $(this).parent().parent().attr('keyid');
-		module_keyid = $("#idholder").attr('keyid');
-
-		$.post("/admin/deletecontent", {
-			s_content_keyid : content_keyid,
-			s_module_keyid : module_keyid,
+		s_content_id = $(this).parent().parent().attr('keyid');
+		s_module_id = $('.subject-box-top-half-inner').attr("module_id")
+		s_course_id = $('.subject-box-top-half-inner').attr("course_id")
+		
+		$.post("/admin/course_system/delete/Content", {
+			content_id : s_content_id,
+			module_id : s_module_id,
+			course_id : s_course_id
 		}, function(data, status) {
-			window.location = "/admin/content?keyid=" + module_keyid;
+			location.reload(true)
+			
 		});
 	});
 

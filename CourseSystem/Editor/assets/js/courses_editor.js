@@ -7,9 +7,6 @@
  */
 
 $(document).ready(function() {
-
-	
-	
 	// if insideNoClick is true the click will not link
 	var insideNoClick = false;
 	
@@ -47,13 +44,12 @@ $(document).ready(function() {
 		reader.onload = (function(theFile) {
 			return function(e) {
 				dataURL = e.target.result;
-
-				$.post("/admin/createcourse", {
+				$.post("/admin/course_system/create/Course", {
 					title : new_title,
 					description : new_description,
 					icon : dataURL,
 				}, function(data, status) {
-					window.location = "/admin/courses";
+					location.reload(true);
 				});
 			};
 		})(file);
@@ -107,10 +103,10 @@ $(document).ready(function() {
 	$(document).on('click', '#deletecoursebtn', function() {
 		s_keyid = $(this).parent().parent().attr('keyid');
 
-		$.post("/admin/deletecourse", {
-			keyid : s_keyid
+		$.post("/admin/course_system/delete/Course", {
+			course_id : s_keyid
 		}, function(data, status) {
-			window.location = "/admin/courses";
+			location.reload(true);
 		});
 
 	});

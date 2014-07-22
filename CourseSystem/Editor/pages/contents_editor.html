@@ -1,20 +1,18 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="../../../assets/JordansStuff/css/bootstrap.css" type=”text/css”>
-<link rel="stylesheet" href="../css/EditorStyles.css" type=”text/css”>
+<link rel="stylesheet" href="/assets/JordansStuff/css/bootstrap.css" type=”text/css”>
+<link rel="stylesheet" href="/CourseSystem/Editor/assets/css/EditorStyles.css" type=”text/css”>
 </head>
 <body>
     <div class='container-fluid'>
         <div class='row'>
             <div class='col-md-6'>
-                <div class='row subject-box-top-half-outer bg-yellow'>
+                <div class='row subject-box-top-half-outer'>
                     <div class='col-md-12'>
-                        <div class='subject-box-top-half-inner'>
-                            <h1>{{current_module.m_title}}</h1>
-                            <hr>
+                        <div class='subject-box-top-half-inner' course_id='{{course.key.id}}' module_id='{{module.key.id}}'>
+                            <h1>{{module.m_title}} {Administration}</h1>
                             <h2>Add, edit, and delete Content</h2>
-                            <p id='idholder' keyid='{{current_module.key.id}}' class='hidden'></p>
                         </div>
                     </div>
                 </div>
@@ -28,7 +26,7 @@
                                 <label for="ContentDescription">Description</label> <input type="text" class="form-control" id="ContentDescription" placeholder="New Description">
                             </div>
                             <div class="form-group">
-                                <label for="ContentURL">URL</label> <input type="text" class="form-control" id="ContentURL" placeholder="New URL">
+                                <label for="ContentURL">URL (path to content page)</label> <input type="text" class="form-control" id="ContentURL" placeholder="New URL">
                             </div>
                             <div class="form-group">
                                 <label class="radio-inline"> <input type="radio" name="inlineRadioOptions" value="Quiz">Quiz
@@ -64,11 +62,9 @@
             </div>
         </div>
     </div>
-
-
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script type="text/javascript" src="../../../assets/JordansStuff/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../js/courses_editor.js"></script>
+    <script type="text/javascript" src="/../assets/JordansStuff/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/../CourseSystem/Editor/assets/js/contents_editor.js"></script>
 </body>
 </html>

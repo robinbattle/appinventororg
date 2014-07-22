@@ -27,12 +27,13 @@ $("#NewModuleForm").submit(function(event) {
 		return function(e) {
 			dataURL = e.target.result;
 
-			$.post("/admin/courses/" + $('.subject-box-top-half-inner').attr('course_Title') + "/createmodule", {
+			$.post("/admin/course_system/create/Module", {
 				title : new_title,
+				course_id : $('.subject-box-top-half-inner').attr('course_id'),
 				description : new_description,
 				icon : dataURL,
 			}, function(data, status) {
-				window.location = "/admin/courses/" + $('.subject-box-top-half-inner').attr('course_Title');
+				location.reload(true);
 			});
 		};
 	})(file);
@@ -109,14 +110,17 @@ $(document).ready(function() {
 	/* Delete module button */
 	$(document).on('click', '#deletemodulebtn', function() {
 
-		
-		s_keyid = $(this).parent().parent().attr('keyid');
+		s_module_id = $(this).parent().parent().attr('keyid');
+		s_course_id = $('.subject-box-top-half-inner').attr('course_id');
 		
 		course_Title = $('.subject-box-top-half-inner').attr('course_title');
-		$.post("/admin/courses/" + course_Title + "/deletemodule", {
-			keyid : s_keyid
+		
+		
+		$.post("/admin/course_system/delete/Module", {
+			module_id : s_module_id,
+			course_id : s_course_id
 		}, function(data, status) {
-			window.location = "/admin/courses/" + course_Title;
+			location.reload(true)
 		});
 	});
 
