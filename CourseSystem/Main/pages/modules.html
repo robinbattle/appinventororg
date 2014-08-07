@@ -1,0 +1,15 @@
+{% extends "new_base1.html" %} {% block bodycontent %}
+<div class="jumbotron">
+    <h1>{{course.c_title}}</h1>
+    <p>{{course.c_description}}</p>
+</div>
+
+<div class='item-box-container'>
+    {% for module in moduleList %} <a href='/courses/{{course.c_title}}/{{module.m_title}}'>
+        <div class='item-box'>
+            <div class='item-box-title'>{{module.m_title}}</div>
+        </div>
+    </a> {% endfor %}
+</div>
+{% endblock %}
+

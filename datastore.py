@@ -126,9 +126,7 @@ class Content(ndb.Model):
     c_description = ndb.StringProperty()
     c_type = ndb.StringProperty()
     c_url = ndb.StringProperty()  # the url of the content
-    c_index = ndb.IntegerProperty()
-    c_icon = ndb.StringProperty()  # this is a path to the icon that represents it, it is determined by the type
-    
+    c_index = ndb.IntegerProperty()    
 
 class Course(ndb.Model):
     """Represents a single course"""
@@ -136,6 +134,8 @@ class Course(ndb.Model):
     c_description = ndb.StringProperty()
     c_icon = ndb.BlobProperty(indexed=False)
     c_index = ndb.IntegerProperty()
+
+
 
 
 # for the "Conceptualize It" section of a generated app page    

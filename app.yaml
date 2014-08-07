@@ -10,12 +10,15 @@ handlers:
 - url: /admin/.*
   script: app_controller.py
   login: admin
-
+  
 - url: /CourseSystem/Editor/assets
   static_dir: CourseSystem/Editor/assets
   login: admin
-
-
+  
+- url: /assets/admin
+  static_dir: assets/admin
+  login: admin
+  
   
 - url: /assets
   static_dir: assets  
@@ -42,9 +45,7 @@ handlers:
   static_dir: tutorial_files    
 - url: /
   script: app_controller.py
-- url: /Admin
-  script: app_controller.py
-  login: admin
+
 - url: /.*
   script: app_controller.py
 

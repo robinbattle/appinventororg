@@ -1,0 +1,39 @@
+ {% extends "admin_base.html" %} {% block bodycontent %}
+
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='progress-menu-container'>
+            <div class='progress-menu-text-box'>
+                <a href='/admin/courses/{{current_course.c_title}}/{{current_module.m_title}}' class='progress-menu-module-link'><span
+                    class="glyphicon glyphicon-chevron-left progress-menu-module-link-icon"></span>{{current_module.m_title}} </a>
+                <h3 class='progress-menu-module-title'>{{ current_module.m_title}}</h3>
+            </div>
+            <div class=progress-menu-item-container>
+
+                {% for content in contents %}
+                <div class='progress-menu-item'>
+                    <div class='progress-menu-item-left'>
+                        <img src='' height=10% width='10%'>
+                    </div>
+                    <div class='progress-menu-item-right'>{{content.c_title}}</div>
+
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class='content-display-box' style='padding: 3%;'></div>
+    </div>
+</div>
+
+
+<script>
+        $( document ).ready(function() {
+            $('.content-display-box').load('{{content.c_url}}');
+        });    
+    </script>
+
+<script type="text/javascript" src="/assets/JordansStuff/js/TutorialSystem/main.js"></script>
+
+{% endblock %}
+

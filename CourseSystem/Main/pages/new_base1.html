@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/assets/JordansStuff/css/bootstrap.css" type=”text/css”>
+<link rel="stylesheet" href="/assets/css/jbase.css" type=”text/css”>
+<title>{{title}}</title>
+</head>
+<body>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+    <div class='banner-wrapper'>
+
+        <div class='top-banner'>
+            <div class='banner-logo'>
+                <a href='/test/home'> <img class='banner-logo-icon' src='/assets/img/testbanner.png' width='400px' height='100px'>
+                </a>
+            </div>
+
+            <input type="text" class="form-control search-box" placeholder="Search">
+        </div>
+
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default global-navbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                {% for course in courses %}
+
+                                <li><a href="/courses/{{course.c_title}}">{{course.c_title}}</a></li> {% endfor %}
+                                <li class="divider"></li>
+                                <li><a href="/courses">More Courses</a></li>
+
+                            </ul></li>
+                        <li><a href="#">Build</a></li>
+                        <li><a href="#">Teach</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+
+    <div class='not-header-wrapper'>
+    
+        <div class='side-bar' id='itembox' current_content_title='{{content.c_title}}' current_module_title='{{current_module.m_title}}'>
+            <h4>{{current_course.c_title}}</h4>
+            <ul class="nav">
+                {% for key, values in moduleContentMapping.items %}
+                
+                <div class='module-content-wrapper'>
+                    
+                    <div class='side-bar-item'>
+                        <span class='arrow glyphicon glyphicon-chevron-right'></span>
+                        <div class='item-text'>{{key}}</div>
+                    </div>
+                    
+                    <ul class='nav sub-items-wrapper'>
+                        {% for v in values %} {% if v != "null" %}
+                        <div class='side-bar-sub-item'>
+                            <div class='side-bar-sub-item-connector-box'>
+                                {% if v.c_type == "App" %} <img class='neon-icon' src='/assets/img/appinventor-Jigsaw.jpg' height='30px' width='30px'> {% endif %} {% if v.c_type == "Quiz" %} <img
+                                    class='neon-icon' src='/assets/img/bird.png' height='30px' width='30px'> {% endif %} {% if v.c_type == "Nugget" %} <img class='neon-icon'
+                                    src='/assets/img/kitty.png' height='30px' width='30px'> {% endif %}
+
+                                <div class='connector'></div>
+                            </div>
+                            <div class='side-bar-sub-item-title-box'>
+                                <div class='side-bar-sub-item-title'>{{v.c_title }}</div>
+                            </div>
+                        </div>
+                        {% endif %} {% endfor %}
+                    </ul>
+
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        <div class='content-area'>{% block bodycontent %} {% endblock %}</div>
+
+    </div>
+
+    <script type="text/javascript" src="/assets/JordansStuff/js/bootstrap.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        // The following is basicly only relavent on the content display page
+        // the height calculator might have applications elsewhere
+        
+        // get the height of the not header right
+        desiredHeight = $('body').height() - $(".banner-wrapper").height();    
+        $('.not-header-wrapper').height(desiredHeight);        
+    });
+    
+    </script>
+
+
+</body>
+</html>

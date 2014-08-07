@@ -1,0 +1,14 @@
+ {% extends "new_base1.html" %} {% block bodycontent %}
+
+
+<div class='content-display-box'></div>
+
+<script type="text/javascript" src="/assets/js/CourseSystem/LeftSideBar.js"></script>
+
+<script>
+        $( document ).ready(function() {
+            $('.content-display-box').load('{{content.c_url}}');
+        });    
+</script>
+
+{% endblock %}
