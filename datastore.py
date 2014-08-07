@@ -131,6 +131,7 @@ class Content(ndb.Model):
 class Course(ndb.Model):
     """Represents a single course"""
     c_title = ndb.StringProperty()
+    c_url_title = ndb.StringProperty()
     c_description = ndb.StringProperty()
     c_icon = ndb.BlobProperty(indexed=False)
     c_index = ndb.IntegerProperty()

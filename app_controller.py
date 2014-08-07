@@ -2965,18 +2965,17 @@ class AddStepRenderer(webapp.RequestHandler):
 
 
 class AdminDashboardHandler(webapp.RequestHandler):    
-    def get(self): 
-        messages_query = Message.query(
-            ancestor=ndb.Key(Message, "msgAncestor")).order(-Message.date)
-        messages = messages_query.fetch()
-        
-                     
+    def get(self):                      
         userStatus = UserStatus().getStatus(self.request.uri)
         
-        
-        template_values = {"messageList" : messages,
+        # look up all the courses for the global navbar
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+                    
+        template_values = {
                            'stylesheets' : ['/assets/admin/css/admin.css'],
-                           'userStatus' : userStatus
+                           'userStatus' : userStatus,
+                           'courses' : courses,
+                           'title' : 'Admin Dashboard'
                            }
         
         path = os.path.join(os.path.dirname(__file__), 'pages/admin/admin_dashboard.html')
@@ -4446,13 +4445,17 @@ class AdminCourseDisplayHandler(webapp.RequestHandler):
         # For now, all courses created belong to the adminset, we could change this in the future
         # and have multiple sets of courses, adding on another layer of abstraction in the menu system
         # the only reason I could see doing this is too allow users to create their own courses
-        courseList = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
-        title = 'Course Administration'
+        userStatus = UserStatus().getStatus(self.request.uri)
         
-        template_values = {"courseList" : courseList,
-                           'title' : title,
+        # look up all the courses for the global navbar and the display
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+        
+        template_values = {"courses" : courses,
                            'stylesheets' : ['/assets/admin/css/editor.css'],
-                           'scripts' : ['/assets/admin/js/courses_editor.js']}
+                           'scripts' : ['/assets/admin/js/courses_editor.js'],
+                           'title' : 'Courses Admin',
+                           'userStatus' : userStatus
+                           }
         
         
         path = os.path.join(os.path.dirname(__file__), 'pages/admin/courses_editor.html')
@@ -4628,12 +4631,16 @@ class AdminCourseSystemCreateHandler(webapp.RequestHandler):
         if kind == "Course":
             # retrieve data from the request
             title = self.request.get("title")
+            url_title = self.request.get('new_url_title')
+            logging.info(url_title)
             description = self.request.get("description")
             icon = str(self.request.get("icon"))
+            last_index = int(self.request.get("last_index"))
+            new_index = last_index + 1
             # root ancestor of all courses, for now the ADMINSET are the courses created by the admins
             course_ancestor_key = ndb.Key('Courses', 'ADMINSET')
             # create the new Course entity and store it in the datastore
-            new_course = Course(parent=course_ancestor_key, c_title=title, c_description=description, c_icon=icon)
+            new_course = Course(parent=course_ancestor_key, c_title=title, c_description=description, c_icon=icon, c_index=new_index, c_url_title=url_title)
             new_course.put()
         elif kind == "Module":
             title = self.request.get("title")
@@ -4792,9 +4799,15 @@ class CoursesHandler(webapp.RequestHandler):
         # retreive all of the courses
         courses = Course.query(ancestor = ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
         
+
+        userStatus = UserStatus().getStatus(self.request.uri)
+                       
+        
         template_values = {'courses' : courses,
                            'stylesheets' : ['/assets/css/coursesystem.css'],
-                           'scripts' : ['/assets/js/coursesystem.js']
+                           'scripts' : ['/assets/js/coursesystem.js'],
+                           'userStatus': userStatus,
+                           'title' : 'Courses'
                            }
         
         path = os.path.join(os.path.dirname(__file__), 'pages/courses.html')
@@ -4811,7 +4824,8 @@ class testhomehandler(webapp.RequestHandler):
         # retrieve all of the courses
         courses = Course.query(ancestor = ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
         
-        template_values = {'courses': courses, 'title' : 'App Inventor'}
+        template_values = {'courses': courses,
+                           'title' : 'App Inventor'}
         
         path = os.path.join(os.path.dirname(__file__), 'Pages/home.html')
         self.response.out.write(template.render(path, template_values))
@@ -4859,15 +4873,19 @@ class ModulesHandler(webapp.RequestHandler):
                 contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(courseId), Module, long(module.key.id()))).order(Content.c_index).fetch()
                 for mod_content in contents:                     
                     moduleContentMapping[str(module.m_title)].append(mod_content)
+             
+
+            userStatus = UserStatus().getStatus(self.request.uri)
                        
- 
+        
             template_values = {"title" : x[0].c_title ,
                                "modules" : modules,
                                "course" : x[0],
                                "courses" : courses,
                                'moduleContentMapping' : moduleContentMapping,
                                'stylesheets' : ['/assets/css/coursesystem.css'],
-                               'scripts' : ['/assets/js/coursesystem.js']
+                               'scripts' : ['/assets/js/coursesystem.js'],
+                               'userStatus': userStatus
                                 }
                   
             path = os.path.join(os.path.dirname(__file__), 'pages/modules.html')
@@ -5028,6 +5046,7 @@ class Homehandler(webapp.RequestHandler):
         
         template_values = {'courses' : courses,
                            'userStatus': userStatus,
+                           'title' : 'App Inventor'
                            }
         
         path = os.path.join(os.path.dirname(__file__), 'pages/home.html')

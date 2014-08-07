@@ -2,6 +2,21 @@
  *	The following is used on the admin courses editor page!
  */
 
+function titleToUrl(title) {	
+	// translate title in to pretty url version
+	urlPrettyTitle = ""
+	for(i = 0; i < title.length; i++) {
+		console.log(title[i] + ' ' + title.charCodeAt(i))
+		if(title.charCodeAt(i) == 32) {
+			urlPrettyTitle += '.'
+		} else {
+			urlPrettyTitle += title[i]
+		}
+	}
+	
+	return urlPrettyTitle
+}
+
 function handleFileSelect(evt) {
 	files = evt.target.files;
 	if (files.length == 0) {
@@ -82,14 +97,13 @@ $(document).ready(function() {
 	/*
 	 * Clickable item boxes that take you to corresponding content page
 	 */
-	$(document).on('click', '.item-box', function() {
+	$(document).on('click', '.course-box', function() {
 		if (insideNoClick == true) {
 			// alert("NO LINK!");
 		} else {
 			title = $(this).find('h1').text();
 			
 			// translate title in to pretty url version
-			
 			urlPrettyTitle = ""
 			for(i = 0; i < title.length; i++) {
 				console.log(title[i] + ' ' + title.charCodeAt(i))
@@ -104,6 +118,9 @@ $(document).ready(function() {
 		}
 	});
 
+	
+	
+	
 	// XXX Done
 	/*
 	 * Handles the creation of new courses, The data from the course creation
@@ -113,13 +130,23 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		new_title = $("#CourseTitle").val();
+		
+		s_new_url_title = titleToUrl(new_title);
 
 		new_description = $("#CourseDescription").val();
 		file = $('#CourseIcon').get(0).files[0];
 
+		s_last_index = $('#sortable').children().last().attr('index');
+		
+		// check if s_last_index is undefined
+		if(! s_last_index) {
+			s_last_index = 1;
+		}
+		
 		var reader = new FileReader();
 		var dataURL = null;
 
+		
 		// Closure to capture the file information.
 		reader.onload = (function(theFile) {
 			return function(e) {
@@ -128,6 +155,8 @@ $(document).ready(function() {
 					title : new_title,
 					description : new_description,
 					icon : dataURL,
+					last_index : s_last_index,
+					new_url_title : s_new_url_title
 				}, function(data, status) {
 					location.reload(true);
 				});
@@ -156,13 +185,13 @@ $(document).ready(function() {
 
 	// XXX DONE
 	/* Highlight item boxes on hover */
-	$(".item-box").mouseover(function() {
+	$(".course-box").mouseover(function() {
 		$(this).addClass('hover');
 		$(this).find(".item-box-btns").removeClass('hidden');
 	});
 
 	// XXX DONE
-	$(".item-box").mouseout(function() {
+	$(".course-box").mouseout(function() {
 		$(this).removeClass('hover');
 		$(this).find(".item-box-btns").addClass('hidden');
 	});
@@ -229,8 +258,5 @@ $(document).ready(function() {
 		});
 	}
 
-	// TODO IMPLEMENT ICON CHANGER ON CLICK
-
-	// TODO IMPLEMENT CLICK COURSE LINKS TO MODULE EDITOR PAGE
 
 });

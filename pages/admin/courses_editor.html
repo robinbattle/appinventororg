@@ -1,19 +1,17 @@
 {% extends "templates/site_base.html" %} {% block blockstart %}
+
+<div class="jumbotron jumbotron-wherami ">
+    <div class='jumbotron-wherami-text'>Courses</div>
+</div>
+<a href='/admin/dashboard' class='back-to-courses-link'><span class="glyphicon glyphicon-chevron-left"></span> Dashboard</a>
+
 <div class='container-fluid'>
     <div class='row'>
-        <div class='col-md-6'>
-        
-        
-            <div class='row subject-box-top-half-outer'>
-                <div class='col-md-12'>
-                    <div class='subject-box-top-half-inner'>
-                        <h1>Courses {Administration}</h1>
-                        <h4>Add, edit, and delete a Course</h4>
-                    </div>
-                </div>
-            </div>
-            <div class='row form-box'>
-                <div class='col-md-12'>
+        <div class='col-md-4'>
+            <div class='row'>
+                <div class='col-md-12 new-course-form-box'>
+
+                    <h3 id='newcourseformtitle'>Create A New Course</h3>
                     <form role="form" id="NewCourseForm" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="CourseTitle">Title</label> <input type="text" class="form-control" id="CourseTitle" placeholder="New Title">
@@ -28,33 +26,39 @@
                     </form>
                 </div>
             </div>
+
+
+
         </div>
-        <div class='col-md-6 item-list-box'>
-            <ul id="sortable">
-                {% for course in courseList %}
-                <li id='noDrag' keyid='{{ course.key.id }}' class='item-box'>
-                    <div class='item-box-icon'>
-                        <img src=' {{ course.c_icon }}' height='100' width='100'>
-                    </div>
-                    <div class='item-box-title noclick'>
-                        <h1>{{ course.c_title }}</h1>
-                    </div>
-                    <div class='item-box-description noclick'>
-                        <p>{{ course.c_description }}</p>
-                    </div>
-                    <div class='item-box-btns hidden noclick'>
-                        <button id="editcoursebtn" data-toggle="modal" data-target="#editModal" type="button" class="btn btn-default item-box-button">
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </button>
-                        <button id="movecoursebtn" type="button" class="btn btn-default item-box-button">
-                            <span class="glyphicon glyphicon glyphicon-resize-vertical"></span>
-                        </button>
-                        <button id="deletecoursebtn" type="button" class="btn btn-default item-box-button">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </div>
-                </li> {% endfor %}
-            </ul>
+        <div class='col-md-8'>
+            <div class='course-edit-box'>
+                <ul id="sortable">
+                    {% for course in courses %}
+                    <li id='noDrag' keyid='{{ course.key.id }}' class='row course-box' index='{{course.c_index}}'>
+                        <div class='col-md-3 course-view-box-setting-left'>
+                            <img class='course-view-box-icon' src='{{course.c_icon}}' height='100px' width='100px'>
+                        </div>
+                        <div class='col-md-9 course-view-box-setting-right'>
+                            <h1>{{course.c_title}}</h1>
+                            <p>{{course.c_description}}</p>
+                        </div>
+
+
+                        <div class='item-box-btns hidden noclick'>
+                            <button id="editcoursebtn" data-toggle="modal" data-target="#editModal" type="button" class="btn btn-default item-box-button">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </button>
+                            <button id="movecoursebtn" type="button" class="btn btn-default item-box-button">
+                                <span class="glyphicon glyphicon glyphicon-resize-vertical"></span>
+                            </button>
+                            <button id="deletecoursebtn" type="button" class="btn btn-default item-box-button">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+
+                    </li> {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -107,5 +111,4 @@
 
 
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script type="text/javascript" src="/CourseSystem/Editor/assets/js/courses_editor.js"></script>
 {% endblock %}

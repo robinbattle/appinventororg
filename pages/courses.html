@@ -7,15 +7,24 @@
 
 <div class='container-fluid'>
     <div class='row'>
-        <div class='col-md-12'>        
+        <div class='col-md-12 courses-view-settings'>
             {% for course in courses %}
-            <div course_title='{{course.c_title}}' class='course-box'>
-                <h1>{{course.c_title}}</h1>
+            <div course_title='{{course.c_title}}' class='row course-box'>
+                <div class='col-md-3 course-view-box-setting-left'>
+                    <img class='course-view-box-icon' src='{{course.c_icon}}' height='100px' width='100px'>
+                </div>
+                <div class='col-md-9 course-view-box-setting-right'>
+                    <div class='course-view-box-info'>
+                        <h1>{{course.c_title}}</h1>
+                        <p>{{course.c_description}}</p>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
+
 
 
 

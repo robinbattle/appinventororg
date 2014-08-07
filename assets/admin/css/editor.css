@@ -1,3 +1,13 @@
+/* Revamped admin pages */
+.new-course-form-box {
+    padding-left: 50px;
+    padding-right: 20px;
+}
+
+#newcourseformtitle{ 
+    line-height: 70px;
+}
+
 /*
  * The following styles are used on Admin pages!
  */
@@ -17,20 +27,22 @@
     color: white;
 }
 
-.item-list-box {
-    background-color: white;
-    padding: 40px 20px 40px 50px;
-    height: 100%;
-    overflow: auto;
-    padding: 40px 20px 40px 10px;
+.course-edit-box {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.course-box {
+    list-style-type: none;
+    cursor: pointer;
+    position: relative;
+    border-radius: 10px;
 }
 
 .item-box {
     background-color: white;
     min-height: 150px;
     padding: 20px 20px;
-    list-style-type: none;
-    cursor: pointer;
     position: relative;
 }
 

@@ -204,6 +204,11 @@ body {
     padding-right: 20%;
 }
 
+.courses-view-settings {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 .course-view-box-settings {
     margin-bottom: 20px;
     min-height: 150px;
@@ -237,6 +242,7 @@ body {
 .course-view-box-icon {
     float: left;
     display: inline;
+    margin-right: 90px;
 }
 
 .course-view-box-description {
@@ -363,6 +369,7 @@ body {
 .jumbotron-wherami {
     padding: 0;
     background-color: #65665F;
+    margin-bottom: 10px;
 }
 
 .jumbotron-wherami-text {
@@ -376,4 +383,15 @@ body {
 .courses-holder {
     padding-left: 20%;
     padding-right: 20%;
+}
+
+.back-to-courses-link {
+    cursor: pointer;
+    color: gray;
+    margin-left: 50px;
+}
+
+.back-to-courses-link:hover {
+    color: #978FBA;
+    text-decoration: none;
 }
