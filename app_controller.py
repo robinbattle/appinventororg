@@ -4233,7 +4233,7 @@ application = webapp.WSGIApplication(
 
         # AI2
 
-        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2),('/notext-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),('/pong-steps', NewAppRenderer_AI2),('/stockMarket-steps', NewAppRenderer_AI2),
+        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2),('/notext-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),('/pong-steps', NewAppRenderer_AI2),('/stockMarket-steps', NewAppRenderer_AI2),('/logo-steps', NewAppRenderer_AI2),
 	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),('/IHaveADreamTut', IHaveADreamTutHandler), ('/TimedActivity',TimedActivityHandler), ('/TimedLists',TimedListsHandler), ('/Conditionals', ConditionalsHandler), ('/Variables', VariablesHandler), ('/recordItems', RecordingItemHandler), ('/incrementing', IncrementingVariablesHandler), ('/Walkingalist', WalkingalistHandler), ('/Events', EventsHandler), ('/Lists', ListsHandler), ('/UserListNav',UserListNavHandler), ('/Persistence',PersistenceHandler),('/FAQ',FAQHandler), ('/knowledgeMap',KnowledgeMapHandler),('/lists',ListsHandler), 
 	('/proc',ProcHandler),('/location',LocationHandler),('/resources',ResourcesHandler), ('/Drawing',DrawingHandler),('/sprites',SpritesHandler),
      ('/MakeQuiz10',MakeQuiz10Handler), ('/teacherList',TeacherListHandler),
@@ -4241,7 +4241,7 @@ application = webapp.WSGIApplication(
 
         # AI2 view all steps, error on 'IHaveADream'
         #('/IHaveADream', AppRenderer),
-        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),('/notext', AppRenderer),('/pong',AppRenderer),('/stockMarket',AppRenderer),
+        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),('/notext', AppRenderer),('/pong',AppRenderer),('/stockMarket',AppRenderer),('/logo',AppRenderer),
      
         # Comment
         ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
