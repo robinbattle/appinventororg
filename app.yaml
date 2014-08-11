@@ -1,4 +1,4 @@
-application: jappinventor
+application: appinventororg
 version: 1
 runtime: python27
 api_version: 1
@@ -6,18 +6,15 @@ threadsafe: no
 
 handlers:
 
-
 - url: /admin/.*
   script: app_controller.py
   login: admin
-  
+- url: /CourseSystem/Editor/assets
+  static_dir: CourseSystem/Editor/assets
+  login: admin
 - url: /assets/admin
   static_dir: assets/admin
   login: admin
-  
-  
-- url: /assets
-  static_dir: assets  
 - url: /apps
   static_dir: apps
 - url: /apps2
@@ -29,8 +26,9 @@ handlers:
 - url: /screensteps
   static_dir: screensteps
 - url: /apps/amazon
-  static_dir: amazon  
-
+  static_dir: amazon
+- url: /assets
+  static_dir: assets
 - url: /images
   static_dir: images
 - url: /assets/css
@@ -41,10 +39,5 @@ handlers:
   static_dir: tutorial_files    
 - url: /
   script: app_controller.py
-
 - url: /.*
   script: app_controller.py
-
-
-
-

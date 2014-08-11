@@ -238,8 +238,8 @@ margin-right:-20px;
           <b class="caret"></b>  
     </a>  
     <ul class="dropdown-menu">  
-      <li><a href="/knowledgeMap">How Do I?</a></li>  
-      <li><a href="/course-in-a-box">Course-in-a-box</a></li>
+      <li><a href="/FAQ">How Do I?</a></li>  
+      <li><a href="/course-in-a-box2">Course-in-a-box</a></li>
       <li><a href="/Quizzes">Quizzes</a></li> 
     </ul>  
   </li>  
@@ -253,8 +253,9 @@ margin-right:-20px;
           <b class="caret" style="color:white"></b>  
     </a>  
     <ul class="dropdown-menu">  
-     <li><a href="/course-in-a-box">Course-in-a-box</a></li>  
-  <li><a href="http://www.appinventor.org/teacherMap">Teacher Map</a></li>  
+     <li><a href="/course-in-a-box2">Course-in-a-box</a></li>  
+     <li><a href="/TeachingAI">Teaching Ideas</a></li> 
+  <li><a href="http://www.appinventor.org/teacherMap">Who's Teaching AI?</a></li>  
   <li><a href="https://groups.google.com/forum/#!forum/app-inventor-instructors">Teacher Forum</a></li>  
   <li><a href="/resources">Resources</a></li> 
     </ul>  
@@ -360,15 +361,13 @@ margin-right:-20px;
                     <li><a href="/quizquestions" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;Quizzes&nbsp;</a></li></div>
 
 end of temporarily hidden -->
- <li class="nav-header" style="color:white; font-size:15px">How do I?</li>
- <li><a href="/knowledgeMap" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;Knowledge Map</a></li>
-			  <li><a href="/FAQ" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;Nugget List</a></li>
+ <li class="nav-header" style="color:white; font-size:15px">Learn</li>
+ 			   <li><a href="/course-in-a-box2" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;Course-in-a-Box</a></li>
+			  <li><a href="/FAQ" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;How do I? FAQ</a></li>
+  			  <li><a href="/book2" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;AI2 Book preview</a></li>
+			  <li><a href="/book" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;AI Classic Book</a></li>
 			  
-			  <li class="nav-header" style="color:white; font-size:15px">Book</li>
-  			  <li><a href="/book2" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;AI2 translation</a></li>
-			  <li><a href="/book" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;AI Classic</a></li>
-			  
-			  <li class="nav-header" style="color:white; font-size:15px">Apps (AI2)</li>
+  <li class="nav-header" style="color:white; font-size:15px">Apps (AI2)</li>
                     {% for app in allAppsList2 %}
                   <li><a href="/{{ app.appId }}-steps" style="color:#0072e4; font-weight:bold;">&nbsp;&nbsp;{{ app.title }}</a></li>
                     {% endfor %}
