@@ -1,17 +1,18 @@
-{% extends "admin_base.html" %} {% block bodycontent %}
+{% extends "templates/site_base.html" %} {% block blockstart %}
+
+
+
+<div class="jumbotron jumbotron-wherami ">
+    <div class='jumbotron-wherami-text'>{{course.c_title}}</div>
+</div>
+<a href='/admin/courses' class='back-to-courses-link'><span class="glyphicon glyphicon-chevron-left"></span> All Courses</a>
 <div class='container-fluid'>
     <div class='row'>
-        <div class='col-md-6'>
-            <div class='row subject-box-top-half-outer'>
-                <div class='col-md-12'>
-                    <div class='subject-box-top-half-inner' course_Title='{{course.c_title}}' course_id='{{course.key.id}}'>
-                        <h1>{{course.c_title}} {Administration}</h1>
-                        <h4>Add, edit, and delete Modules</h4>
-                    </div>
-                </div>
-            </div>
-            <div class='row form-box'>
-                <div class='col-md-12'>
+        <div class='col-md-4'>
+            <div class='row'>
+                <div class='col-md-12 new-course-form-box'>
+                    <h3 id='newcourseformtitle'>Create A New Module</h3>
+
                     <form role="form" id="NewModuleForm" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="ModuleTitle">Title</label> <input type="text" class="form-control" id="ModuleTitle" placeholder="New Title">
@@ -27,14 +28,14 @@
                 </div>
             </div>
         </div>
-        <div class='col-md-6 item-list-box'>
+        <div class='col-md-8 item-list-box'>
             <ul id="sortable">
-                {% for m in moduleList %}
-                <li id='noDrag' keyid='{{ m.key.id }}' class='item-box'>
+                {% for m in modules %}
+                <li id='noDrag' keyid='{{ m.key.id }}' class='module-edit-box'>
                     <div class='item-box-icon'>
                         <img src=' {{ m.m_icon }}' height='100' width='100'>
                     </div>
-                    <div class='item-box-title'>
+                    <div class='module-edit-box-title'>
                         <h1>{{ m.m_title }}</h1>
                     </div>
                     <div class='item-box-description'>
@@ -95,7 +96,8 @@
     </div>
 </div>
 
+<!-- Hacky solution, fix later -->
+<div class='subject-box-top-half-inner' style='display: none;' course_Title='{{course.c_title}}' course_id='{{course.key.id}}'></div>
 
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script type="text/javascript" src="/CourseSystem/Editor/assets/js/modules_editor.js"></script>
 {% endblock %}

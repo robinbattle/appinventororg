@@ -36,9 +36,10 @@ $("#NewContentForm").submit(function(event) {
 	description = $("#new_content_description").val();
 	content_type = $('input:radio[name=inlineRadioOptions]:checked').val();
 	file_path = $("#new_content_file_path").val();
+	
+	// need better way to get course and module id
 	course_id = $('.subject-box-top-half-inner').attr('course_id')
 	module_id = $('.subject-box-top-half-inner').attr('module_id')
-	
 	
 	if(file_path == "") {
 		// TODO: ADD BETTER FILEPATH VALIDATION
@@ -100,12 +101,12 @@ $(document).ready(function() {
 	});
 
 	/* Highlight item boxes on hover */
-	$(".item-box").mouseover(function() {
+	$(".module-edit-box").mouseover(function() {
 		$(this).addClass('hover');
 		$(this).find(".item-box-btns").removeClass('hidden');
 	});
 
-	$(".item-box").mouseout(function() {
+	$(".module-edit-box").mouseout(function() {
 		$(this).removeClass('hover');
 		$(this).find(".item-box-btns").addClass('hidden');
 	});

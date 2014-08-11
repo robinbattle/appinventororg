@@ -4,7 +4,7 @@
     padding-right: 20px;
 }
 
-#newcourseformtitle{ 
+#newcourseformtitle {
     line-height: 70px;
 }
 
@@ -218,4 +218,22 @@
 
 .hover-opacify {
     opacity: 0.2;
+}
+
+.module-edit-box {
+    background-color: white;
+    min-height: 150px;
+    padding: 20px 20px;
+    position: relative;
+    list-style: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.module-edit-box:hover {
+    background-color: #eeeeee
+}
+
+.module-edit-box-title {
+    margin-left: 30%;
 }

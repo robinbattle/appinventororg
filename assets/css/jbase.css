@@ -242,6 +242,11 @@ body {
 .course-view-box-icon {
     float: left;
     display: inline;
+
+}
+
+
+.margin-right-90 {
     margin-right: 90px;
 }
 

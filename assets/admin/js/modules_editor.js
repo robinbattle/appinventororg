@@ -101,6 +101,11 @@ $("#NewModuleForm").submit(function(event) {
     file = $('#ModuleIcon').get(0).files[0];
     var reader = new FileReader();
     var dataURL = null;
+    
+    
+    
+    alert
+    
     // Closure to capture the file information.
     reader.onload = (function(theFile) {
         return function(e) {
@@ -139,7 +144,7 @@ $(document).ready(function() {
     /*
 	 * Clickable item boxes that take you to corresponding content page
 	 */
-    $(document).on('click', '.item-box', function() {
+    $(document).on('click', '.module-edit-box', function() {
         if (insideNoClick == true) {
             // alert("NO LINK!");
         } else {
@@ -150,11 +155,11 @@ $(document).ready(function() {
     });
     // XXX DONE
     /* Highlight item boxes on hover */
-    $(".item-box").mouseover(function() {
+    $(".module-edit-box").mouseover(function() {
         $(this).addClass('hover');
         $(this).find(".item-box-btns").removeClass('hidden');
     });
-    $(".item-box").mouseout(function() {
+    $(".module-edit-box").mouseout(function() {
         $(this).removeClass('hover');
         $(this).find(".item-box-btns").addClass('hidden');
     });

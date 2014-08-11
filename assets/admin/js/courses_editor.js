@@ -55,6 +55,9 @@ $('#edit_icon_btn').mouseout(function() {
 $('#updateCourse').click(function() {
 	// gather the data from the editModal
 	title = $('#edit_course_title').val();
+	
+	url_title = titleToUrl(title);
+	
 	description = $('#edit_course_description').val();
 	icon = $('#edit_icon_img').attr('src');
 	course_id = $('#editModal').attr('course_id');
@@ -67,6 +70,7 @@ $('#updateCourse').click(function() {
 			s_title : title,
 			s_description : description,
 			s_icon : icon,
+			s_url_title : url_title
 		}, function(data, status) {
 			location.reload(true);
 		});
@@ -119,9 +123,6 @@ $(document).ready(function() {
 	});
 
 	
-	
-	
-	// XXX Done
 	/*
 	 * Handles the creation of new courses, The data from the course creation
 	 * form is retrieved and sent to the server for storage in the datastore.

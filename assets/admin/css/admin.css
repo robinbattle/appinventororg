@@ -20,3 +20,19 @@
     background-image: linear-gradient(to bottom, #FFFFFF, #DDEAF3);
     border: 1px solid #B4DBE4;
 }
+
+/* Stylings used in the course system editor */
+.back-nav-link {
+    cursor: pointer;
+    color: gray;
+    margin-left: 50px;
+}
+
+.new-something-form-box {
+    padding-left: 50px;
+    padding-right: 20px;
+}
+
+.new-something-form-box-title {
+    line-height: 70px;
+}
