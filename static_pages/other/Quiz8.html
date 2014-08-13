@@ -1,14 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-    <head>
-        {% extends "site_base.html" %} {% block body %}
-        <link rel="stylesheet" type="text/css" href="../../assets/css/JordansAwesomeStyleSheet.css">
+
+        <link rel="stylesheet" type="text/css" href="/assets/JordansStuff/css/JordansAwesomeStyleSheet.css">
         <title>
             App Inventor Quiz 8
         </title>
     </head>
     <body>
-         <script src="/assets/js/JordansAwesomJS.js" type="text/javascript">
+         <script src="/assets/JordansStuff/js/JordansAwesomeJS.js" type="text/javascript">
 </script>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -21,7 +18,7 @@
                             Here are some blocks you can use to answer the questions in the quiz (you are welcome to use others
                             including any number blocks, variable blocks, or mathematical operators).
                             </p>
-                            <img class='pad-med' src="../../assets/img/Quiz8/quiz8blocks.png" height="187" width="636">
+                            <img class='pad-med' src="/assets/img/Quiz8/quiz8blocks.png" height="187" width="636">
 
                     </div>
                     <div class="quiz-panel-outer">
@@ -37,7 +34,7 @@
                         <div class="quiz-panel-inner">
          
                             <div id="q1a" class="collapse">
-                                <img src="../../assets/img/Quiz8/Quiz8-1.png" height="214" width="518">
+                                <img src="/assets/img/Quiz8/Quiz8-1.png" height="214" width="518">
                             </div>
                      
                             <a type="button" href="#q1a" data-toggle="collapse" onclick="showHideToggle(id)" id="q1b" name="q1b">Show Answer</a>
@@ -55,12 +52,12 @@
                             Note that Factorial (1) = 1 and Factorial (0)=1<br>
                             Your job is to show the blocks for an app in which the user enters a number in a textbox and the app calculates factorial and shows the result in a label. Assume the Button is named FactorialButton, the TextBox is NumberTextBox and the label is ResultLabel. Keep in mind that you may use any number blocks you need.
                         </p>
-                        <img src="../../assets/img/Quiz8/Quiz8-2-1.png" height="171" width="335">
+                        <img src="/assets/img/Quiz8/Quiz8-2-1.png" height="171" width="335">
                  
                         <div class="quiz-panel-inner">
                     
                             <div id="q2a" class="collapse">
-                                <img src="../../assets/img/Quiz8/Quiz8-2-2.png" height="246" width="609">
+                                <img src="/assets/img/Quiz8/Quiz8-2-2.png" height="246" width="609">
                             </div>
                            
                             <a type="button" href="#q2a" data-toggle="collapse" onclick="showHideToggle(id)" id="q2b" name="q2b">Show Answer</a>
@@ -88,9 +85,7 @@
                     
                         </div>
                     </div>
-                    {% endblock %}
                 </div>
             </div>
         </div>
-    </body>
-</html>
+

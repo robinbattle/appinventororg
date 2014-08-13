@@ -1,5 +1,4 @@
-{% extends "site_base.html" %}
-{% block body %}
+
 <title>Timed Lists</title>
     <h2>Timed Lists: How do you process each item of a list, pausing in between?</h2>
           <p>
@@ -16,7 +15,7 @@
 			 
 			 <a name="playNotes"></a> 
 		  <h3>Example 1. How do you play a list of musical notes?</h3>
-		    <img class="thumbnail" src="../../assets/img/TimedLists/playNotes.png" border="0"/>
+		    <img class="thumbnail" src="/assets/img/TimedLists/playNotes.png" border="0"/>
 		   <p>
 			For this example, assume three short sound clips, “do.mp3”, “re.mp3”, 
 			and “mi.mp3”, have been uploaded as media for the app. The goal is to play 
@@ -71,7 +70,7 @@
             <div class="span6">
             <a name="spaceship"></a> 
 			<h3>Example 2. How do you sign the word “code” using American Sign Langage (ASL)?</h3>
-			<img class="thumbnail" src="../../assets/img/TimedLists/allSigns.png" border="0"/>
+			<img class="thumbnail" src="/assets/img/TimedLists/allSigns.png" border="0"/>
 			<p>
 			In this example, you have four images that you want to display one after 
 			the other with a short pause in between. The techniques is called key 
@@ -80,7 +79,7 @@
 			rapidly sequencing through the various parts of his stride).
 
 			</p>
-			<img class="thumbnail" src="../../assets/img/TimedLists/aslSigns.png" border="0"/>
+			<img class="thumbnail" src="/assets/img/TimedLists/aslSigns.png" border="0"/>
 			<p>
 			The solution is based on a <span class="empfont">Clock.Timer</span> event. When the user clicks the 
 			<span class="empfont">PlayButton</span> to initiate the activity, the app shows the first picture, 
@@ -99,6 +98,3 @@
             </div>
 		</div>
 		
-
-
-{% endblock %}

@@ -1,23 +1,12 @@
-{% extends "site_base.html" %}
-{% block body %}
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
     <section data-type="chapter" data-pdf-bookmark="Chapter 2. PaintPot" id="paintpot">
 <h1>PaintPot</h1>
 
-<figure class="floatRight" id="paint_app"><img alt="PaintPot" src="images/pp.png"/></figure>
+<figure class="floatRight" id="paint_app"><img alt="PaintPot" src="/assets/img/bookChapters/pp.png"/></figure>
 
 <p><em>This tutorial introduces the Canvas component for creating simple, two-dimensional (2D) graphics. You’ll build PaintPot, an app that lets the user draw on the screen in different colors, and then update it so the user can take a picture and draw on that instead. On a historical note, PaintPot was one of the first programs developed to demonstrate the potential of personal computers, as far back as the 1970s. Back then, making something like this simple drawing app was a very complex undertaking, and the results were pretty unpolished. But now with App Inventor, anyone can quickly put together a fairly cool drawing app, which is a great starting point for building 2D games.</em></p>
 
-<figure class="floatLeft" id="paintpot_app"><img alt="The PaintPot app" src="images/pp2-1.png"/>
+<figure class="floatLeft" id="paintpot_app"><img alt="The PaintPot app" src="/assets/img/bookChapters/pp2-1.png"/>
 <figcaption>The PaintPot app</figcaption>
 </figure>
 
@@ -86,7 +75,7 @@
 	<li>Similarly, make two more buttons for blue and green, named <strong>BlueButton</strong> and <strong>GreenButton</strong>, placing them under the red button vertically. Check your work up to this point against <a data-type="xref" href="#viewer_showing_the_three_buttons_created">Figure 2-2</a>.</li>
 </ol>
 
-<figure id="viewer_showing_the_three_buttons_created"><img alt="The Viewer showing the three buttons created" src="images/pp2-2.png"/>
+<figure id="viewer_showing_the_three_buttons_created"><img alt="The Viewer showing the three buttons created" src="/assets/img/bookChapters/pp2-2.png"/>
 <figcaption>The Viewer showing the three buttons created</figcaption>
 </figure>
 
@@ -110,7 +99,7 @@
 	<li>Move the three buttons one by one into the <strong>HorizontalArrangement</strong> component. <em>Hint</em>: You’ll see a blue vertical line that shows where the piece you’re dragging will go.</li>
 </ol>
 
-<figure id="three_buttons_within_a_horizontal_arrang"><img alt="The three buttons within a horizontal arrangement" src="images/pp2-3.png"/>
+<figure id="three_buttons_within_a_horizontal_arrang"><img alt="The three buttons within a horizontal arrangement" src="/assets/img/bookChapters/pp2-3.png"/>
 <figcaption>The three buttons within a horizontal arrangement</figcaption>
 </figure>
 
@@ -139,7 +128,7 @@
 	<li>Set the <strong>PaintColor</strong> of the DrawingCanvas to red so that when the user starts the app but hasn’t clicked on a button yet, his drawings will be red. Check to see that what you’ve built looks like <a data-type="xref" href="#drawingcanvas_component_has_a_background">Figure 2-4</a>.</li>
 </ol>
 
-<figure id="drawingcanvas_component_has_a_background"><img alt="The DrawingCanvas component has a BackgroundImage of the kitty picture" src="images/pp2-4.png"/>
+<figure id="drawingcanvas_component_has_a_background"><img alt="The DrawingCanvas component has a BackgroundImage of the kitty picture" src="/assets/img/bookChapters/pp2-4.png"/>
 <figcaption>The DrawingCanvas component has a BackgroundImage of the kitty picture</figcaption>
 </figure>
 </section>
@@ -156,7 +145,7 @@
 
 <p>You’ve now completed the steps to set the appearance of your app as shown in <a data-type="xref" href="#complete_user_interface_for_paintpot">Figure 2-5</a>.</p>
 
-<figure id="complete_user_interface_for_paintpot"><img alt="The complete user interface for PaintPot" src="images/pp2-5.png"/>
+<figure id="complete_user_interface_for_paintpot"><img alt="The complete user interface for PaintPot" src="/assets/img/bookChapters/pp2-5.png"/>
 <figcaption>The complete user interface for PaintPot</figcaption>
 </figure>
 
@@ -184,7 +173,7 @@
 	<li>
 	<p>In the Blocks Editor, select the drawer for the <strong>DrawingCanvas</strong>, and drag the <strong>DrawingCanvas.Touched</strong> block to the workspace. The block has parameters for <strong>x</strong>, <strong>y</strong>, and <strong>touchedSprite</strong>, as shown in <a data-type="xref" href="#event_comes_with_information_about_where">Figure 2-6</a>. These parameters provide information about the location of the touch.</p>
 
-	<figure id="event_comes_with_information_about_where"><img alt="The event comes with information about where the screen is touched" src="images/pp2-6.png"/>
+	<figure id="event_comes_with_information_about_where"><img alt="The event comes with information about where the screen is touched" src="/assets/img/bookChapters/pp2-6.png"/>
 	<figcaption>The event comes with information about where the screen is touched</figcaption>
 	</figure>
 
@@ -197,7 +186,7 @@
 	<li>
 	<p>Drag out a <strong>DrawingCanvas.DrawCircle</strong> command from the DrawingCanvas drawer and place it within the <strong>DrawingCanvas.Touched</strong> event handler, as shown in <a data-type="xref" href="#when_the_user_touches_the_canvascomma_th">Figure 2-7</a>.</p>
 
-	<figure id="when_the_user_touches_the_canvascomma_th"><img alt="When the user touches the canvas, the app draws a circle" src="images/pp2-7.png"/>
+	<figure id="when_the_user_touches_the_canvascomma_th"><img alt="When the user touches the canvas, the app draws a circle" src="/assets/img/bookChapters/pp2-7.png"/>
 	<figcaption>When the user touches the canvas, the app draws a circle</figcaption>
 	</figure>
 
@@ -210,14 +199,14 @@
 	<p><em>You ca</em><em>n access the event parameter values by mousing over them in the “when” block as shown in <a data-type="xref" href="#to_access_an_event_parametercomma_drag_o">Figure 2-8</a>.</em></p>
 	</div>
 
-	<figure id="to_access_an_event_parametercomma_drag_o"><img alt="To access an event parameter, drag out a “get” block reference from the DrawingCanvas.Touched component." src="images/pp2-mouseOver.png"/>
+	<figure id="to_access_an_event_parametercomma_drag_o"><img alt="To access an event parameter, drag out a “get” block reference from the DrawingCanvas.Touched component." src="/assets/img/bookChapters/pp2-mouseOver.png"/>
 	<figcaption>Mouse over an event parameter to drag out a “get” block for obtaining the value.</figcaption>
 	</figure>
 	</li>
 	<li>
 	<p>Drag “get” blocks out for the <strong>x</strong> and <strong>y</strong> values and plug them into the sockets in the <strong>DrawingCanvas.DrawCircle</strong> block as shown in <a data-type="xref" href="#app_knows_where_to_draw_left_parenthesis">Figure 2-9</a>.</p>
 
-	<figure id="app_knows_where_to_draw_left_parenthesis"><img alt="The app knows where to draw (x,y), but we still need to specify how big the circle should be" src="images/pp2-9.png"/>
+	<figure id="app_knows_where_to_draw_left_parenthesis"><img alt="The app knows where to draw (x,y), but we still need to specify how big the circle should be" src="/assets/img/bookChapters/pp2-9.png"/>
 	<figcaption>The app knows where to draw (x,y), but we still need to specify how big the circle should be</figcaption>
 	</figure>
 	</li>
@@ -230,7 +219,7 @@
 <p><em>If you type a “5” in the Blocks Editor and hit Return, a number block with a “5” in it will appear. This features is called typeblocking: if you start typing, the Blocks Editor shows a list of blocks whose names match what you are typing; if you type a number, it creates a number block.</em></p>
 </div>
 
-<figure id="when_the_user_touches_the_drawingcanvasc"><img alt="When the user touches the DrawingCanvas, a circle of radius 5 will be drawn at (x,y)" src="images/pp2-10.png"/>
+<figure id="when_the_user_touches_the_drawingcanvasc"><img alt="When the user touches the DrawingCanvas, a circle of radius 5 will be drawn at (x,y)" src="/assets/img/bookChapters/pp2-10.png"/>
 <figcaption>When the user touches the DrawingCanvas, a circle of radius 5 will be drawn at the location of the touch (x,y).</figcaption>
 </figure>
 
@@ -266,14 +255,14 @@
 		<li><strong>draggedSprite</strong>: a boolean, it will be true if the user drags directly on an image sprite. We won’t use this argument in this tutorial.</li>
 	</ul>
 
-	<figure id="dragged_event_has_even_more_arguments_th"><img alt="A Dragged event has even more arguments than Touched" src="images/pp2-11.png"/>
+	<figure id="dragged_event_has_even_more_arguments_th"><img alt="A Dragged event has even more arguments than Touched" src="/assets/img/bookChapters/pp2-11.png"/>
 	<figcaption>A Dragged event has even more arguments than Touched</figcaption>
 	</figure>
 	</li>
 	<li>
 	<p>From the DrawingCanvas drawer, drag the <strong>DrawingCanvas.DrawLine</strong> block into the <strong>DrawingCanvas.Dragged</strong> block, as shown in <a data-type="xref" href="#adding_the_capability_to_draw_lines">Figure 2-12</a>.</p>
 
-	<figure id="adding_the_capability_to_draw_lines"><img alt="Adding the capability to draw lines" src="images/pp2-12.png"/>
+	<figure id="adding_the_capability_to_draw_lines"><img alt="Adding the capability to draw lines" src="/assets/img/bookChapters/pp2-12.png"/>
 	<figcaption>Adding the capability to draw lines</figcaption>
 	</figure>
 
@@ -282,7 +271,7 @@
 	<li>Drag out “get” blocks for the arguments you need. A <strong>get prevX</strong> and <strong>get prevY</strong> should be plugged into the x1 and y1 slots, respectively. A <strong>get currentX</strong> and <strong>get currentY</strong> should be plugged into the x2 and y2 slots, respectively, as shown in <a data-type="xref" href="#as_the_user_dragscomma_the_app_will_draw">Figure 2-13</a>.</li>
 </ol>
 
-<figure id="as_the_user_dragscomma_the_app_will_draw"><img alt="As the user drags, the app will draw a line from the previous spot to the current one" src="images/pp2-13.png"/>
+<figure id="as_the_user_dragscomma_the_app_will_draw"><img alt="As the user drags, the app will draw a line from the previous spot to the current one" src="/assets/img/bookChapters/pp2-13.png"/>
 <figcaption>As the user drags, the app will draw a line from the previous spot to the current one</figcaption>
 </figure>
 
@@ -309,7 +298,7 @@
 	<li>The final button to set up is <strong>WipeButton</strong>. Drag out a <strong>WipeButton.Click</strong> from the WipeButton drawer. From the DrawingCanvas drawer, drag out <strong>DrawingCanvas.Clear</strong> and place it in the <strong>WipeButton.Click</strong> block. Confirm that your blocks show up as they do in <a data-type="xref" href="#clicking_the_color_buttons_changes_the_d">Figure 2-14</a>.</li>
 </ol>
 
-<figure id="clicking_the_color_buttons_changes_the_d"><img alt="Clicking the color buttons changes the DrawingCanvas’s PaintColor; clicking Wipe clears the screen" src="images/pp2-14.png"/>
+<figure id="clicking_the_color_buttons_changes_the_d"><img alt="Clicking the color buttons changes the DrawingCanvas’s PaintColor; clicking Wipe clears the screen" src="/assets/img/bookChapters/pp2-14.png"/>
 <figcaption>Clicking the color buttons changes the DrawingCanvas’s PaintColor; clicking Wipe clears the screen</figcaption>
 </figure>
 
@@ -335,7 +324,7 @@
 
 <p>The blocks should look like <a data-type="xref" href="#when_the_picture_is_takencomma_itapostro">Figure 2-15</a>.</p>
 
-<figure id="when_the_picture_is_takencomma_itapostro"><img alt="When the picture is taken, it’s set as the DrawingCanvas’s background image" src="images/pp2-15.png"/>
+<figure id="when_the_picture_is_takencomma_itapostro"><img alt="When the picture is taken, it’s set as the DrawingCanvas’s background image" src="/assets/img/bookChapters/pp2-15.png"/>
 <figcaption>When the picture is taken, it’s set as the DrawingCanvas’s background image</figcaption>
 </figure>
 
@@ -355,7 +344,7 @@
 
 <p>To use different values for the radius argument, the app needs to know which one we want to apply. We have to tell it to use a specific value, and it has to store (or remember) that value somehow so it can keep using it. When your app needs to remember something that’s not a property, you can define a <em>variable</em>. A variable is a <em>memory cell</em>; you can think of it like a bucket in which you can store data that can vary, such as the current dot size (for more information about variables, see <a data-type="xref" href="ch16.html#programming_your_appapostrophes_memory">Chapter 16</a> in the App Inventor book).</p>
 
-<figure id="paintpot_app_with_an_quotation_markannot"><img alt="The PaintPot app with an “annotated” picture of Professor Wolber" src="images/pp2-16.png"/>
+<figure id="paintpot_app_with_an_quotation_markannot"><img alt="The PaintPot app with an “annotated” picture of Professor Wolber" src="/assets/img/bookChapters/pp2-16.png"/>
 <figcaption>The PaintPot app with an “annotated” picture of Professor Wolber</figcaption>
 </figure>
 
@@ -366,7 +355,7 @@
 	<li>Notice that the <strong>initialize global dotSize to</strong> block has an open slot. This is where you can specify the initial value for the variable, or the value that it defaults to when the app begins. (This is often referred to as “initializing a variable” in programming terms.) For this app, initialize the <strong>dotSize</strong> to 2 by creating a number <strong>2</strong> block and plugging it into <strong>initialize global dotSize to</strong>, as shown in <a data-type="xref" href="#initializing_the_variable_dotsize_with_a">Figure 2-17</a>.</li>
 </ol>
 
-<figure id="initializing_the_variable_dotsize_with_a"><img alt="Initializing the variable dotSize with a value of 2" src="images/pp2-17.png"/>
+<figure id="initializing_the_variable_dotsize_with_a"><img alt="Initializing the variable dotSize with a value of 2" src="/assets/img/bookChapters/pp2-17.png"/>
 <figcaption>Initializing the variable dotSize with a value of 2</figcaption>
 </figure>
 </section>
@@ -381,7 +370,7 @@
 	<li>Go to the <strong>DrawingCanvas.Touched</strong> event handler and drag the number <strong>5</strong> block out of the r slot and place it into the trash. Then replace it with the <strong>get global dotSize</strong> block (see <a data-type="xref" href="#now_the_size_of_each_circle_is_dependent">Figure 2-18</a>). When the user touches the DrawingCanvas, the app will now determine the radius from the variable <strong>dotSize</strong>.</li>
 </ol>
 
-<figure id="now_the_size_of_each_circle_is_dependent"><img alt="Now the size of each circle is dependent on what is stored in the variable dotSize" src="images/pp2-18.png"/>
+<figure id="now_the_size_of_each_circle_is_dependent"><img alt="Now the size of each circle is dependent on what is stored in the variable dotSize" src="/assets/img/bookChapters/pp2-18.png"/>
 <figcaption>Now the size of each circle is dependent on what is stored in the variable dotSize</figcaption>
 </figure>
 </section>
@@ -402,7 +391,7 @@
 <p><em>The “global” in</em> <strong>get</strong> <em>and</em> <strong>set global dotSize</strong> <em>to refers to the fact that the variable can be used in all the event handlers of the program (globally). In App Inventor, you can also define variables that are “local” to a particular part of the program (see Chapter 21 for details).</em></p>
 </div>
 
-<figure id="clicking_the_buttons_changes_the_dotsize"><img alt="Clicking the buttons changes the dotSize; successive touches will draw at that size" src="images/pp2-19.png"/>
+<figure id="clicking_the_buttons_changes_the_dotsize"><img alt="Clicking the buttons changes the dotSize; successive touches will draw at that size" src="/assets/img/bookChapters/pp2-19.png"/>
 <figcaption>Clicking the buttons changes the dotSize; successive touches will draw at that size</figcaption>
 </figure>
 
@@ -419,7 +408,7 @@
 
 <p><a data-type="xref" href="#final_set_of_blocks_for_paintpot">Figure 2-20</a> illustrates our completed PaintPot app.</p>
 
-<figure id="final_set_of_blocks_for_paintpot"><img alt="The final set of blocks for PaintPot" src="images/pp2-20.png"/>
+<figure id="final_set_of_blocks_for_paintpot"><img alt="The final set of blocks for PaintPot" src="/assets/img/bookChapters/pp2-20.png"/>
 <figcaption>The final set of blocks for PaintPot</figcaption>
 </figure>
 </section>
@@ -451,6 +440,3 @@
 <p>This chapter showed how the DrawingCanvas component can be used for a painting program. You can also use it to program animations such as those you’d find in 2D games. To learn more, check out the Ladybug Chase game in <a data-type="xref" href="ch05.html#ladybug_chase">Chapter 5</a> and the discussion of animation in <a data-type="xref" href="ch17.html#creating_animated_apps">Chapter 17</a>.</p>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}

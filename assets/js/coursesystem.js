@@ -50,6 +50,8 @@ $('.vertical-content-nav-bar-item').click (function() {
 		newUrl = document.URL + "/" + $(this).attr('module_title') + "/" + wordToPrettyURL($(this).attr('content_title'));
 		window.location = newUrl;
 	} else {
+		alert(wordToPrettyURL($(this).attr('title')));
+
 		window.location = wordToPrettyURL($(this).attr('title'));
 	}
 });

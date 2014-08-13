@@ -1,21 +1,10 @@
-{% extends "site_base.html" %}
-{% block body %}
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
     <section data-type="chapter" data-pdf-bookmark="Chapter 17. Creating Animated Apps" id="creating_animated_apps">
 <h1>Creating Animated Apps</h1>
 
 <p><em>This chapter discusses methods for creating apps with simple animations-objects that move. You’ll learn the basics of creating two-dimensional games with App Inventor and become comfortable with image sprites and handling events like two objects colliding.</em></p>
 
-<div class="informalfigure"><img alt="Creating Animated Apps" src="images/c17.png"/></div>
+<div class="informalfigure"><img alt="Creating Animated Apps" src="/assets/img/bookChapters/c17.png"/></div>
 
 <p>When you see an object moving smoothly along the computer screen, what you’re really seeing is a quick succession of images with the object in a slightly different place each time. It’s an illusion not much different from “flipbooks,” in which you see a moving picture by flipping quickly through the pages (or how animated films are made!).</p>
 
@@ -26,7 +15,7 @@
 
 <p>You can drag a <strong>Canvas</strong> component into your app from the Drawing and Animation palette. After dragging it out, specify the <strong>Canvas</strong>’s <strong>Width</strong> and <strong>Height</strong>. Often, you’ll want the <strong>Canvas</strong> to span the width of the device screen. To do this, choose “Fill parent” when specifying the <strong>Width</strong>, as shown in <a data-type="xref" href="#width">???</a>.</p>
 
-<div class="informalfigure" id="width"><img alt="Width" src="images/c17-1.png"/></div>
+<div class="informalfigure" id="width"><img alt="Width" src="/assets/img/bookChapters/c17-1.png"/></div>
 
 <p>You can do the same for the <strong>Height</strong>, but generally you’ll set it to some number (e.g., 300 pixels) to leave room for other components above and below the <strong>Canvas</strong>.</p>
 </section>
@@ -36,7 +25,7 @@
 
 <p>A drawing on a canvas is really a grid of <em>pixels</em>, where a pixel is the tiniest possible dot of color that can appear on the phone (or other device). Each pixel’s location is defined by an x–y coordinate system, as illustrated in <a data-type="xref" href="#canvas_coordinate_system-id00133">Figure 17-1</a>. In this coordinate system, x defines a location on the horizontal plane (left to right), and y defines a location on the vertical plane (up and down).</p>
 
-<figure id="canvas_coordinate_system-id00133"><img alt="The Canvas coordinate system" src="images/c17-2.png"/>
+<figure id="canvas_coordinate_system-id00133"><img alt="The Canvas coordinate system" src="/assets/img/bookChapters/c17-2.png"/>
 <figcaption>The Canvas coordinate system</figcaption>
 </figure>
 
@@ -46,7 +35,7 @@
 
 <p>Each cell of the canvas holds a pixel defining the color that should appear there. The <strong>Canvas</strong> component provides the <strong>Canvas.DrawLine</strong> and <strong>Canvas.DrawCircle</strong> blocks for painting pixels. You first set the <strong>Canvas.PaintColor</strong> property to the color you want and then call one of the Draw blocks to draw in that color. With <strong>DrawCircle</strong>, you can paint circles of any radius, but if you set the radius to 1, as shown in <a data-type="xref" href="#drawcircle_with_radius_1_paints_an_indiv">Figure 17-2</a>, you’ll paint an individual pixel.</p>
 
-<figure id="drawcircle_with_radius_1_paints_an_indiv"><img alt="DrawCircle with radius 1 paints an individual pixel with each touch" src="images/c17-3.png"/>
+<figure id="drawcircle_with_radius_1_paints_an_indiv"><img alt="DrawCircle with radius 1 paints an individual pixel with each touch" src="/assets/img/bookChapters/c17-3.png"/>
 <figcaption>DrawCircle with radius 1 paints an individual pixel with each touch</figcaption>
 </figure>
 
@@ -72,7 +61,7 @@
 
 <p>To show a sprite moving over time, you’ll use the <strong>MoveTo</strong> function found in both the <strong>ImageSprite</strong> and <strong>Ball</strong> components. For example, to move a ball <em>horizontally</em> across the screen, you’d use blocks like those in <a data-type="xref" href="#moving_the_ball_horizontally_across_the">Figure 17-3</a>.</p>
 
-<figure id="moving_the_ball_horizontally_across_the"><img alt="Moving the ball horizontally across the screen" src="images/c17-4.png"/>
+<figure id="moving_the_ball_horizontally_across_the"><img alt="Moving the ball horizontally across the screen" src="/assets/img/bookChapters/c17-4.png"/>
 <figcaption>Moving the ball horizontally across the screen</figcaption>
 </figure>
 
@@ -80,7 +69,7 @@
 
 <p>To move an object down, you’d modify just the <strong>Ball1.Y</strong> coordinate and leave <strong>Ball1.X </strong>the same. If you wanted to move the ball diagonally, you’d add an offset to both the X and Y coordinates, as shown in <a data-type="xref" href="#offsetting_both_the_x_and_y_coordinates">Figure 17-4</a>.</p>
 
-<figure id="offsetting_both_the_x_and_y_coordinates"><img alt="Offsetting both the x and y coordinates to move the ball diagonally" src="images/c17-5.png"/>
+<figure id="offsetting_both_the_x_and_y_coordinates"><img alt="Offsetting both the x and y coordinates to move the ball diagonally" src="/assets/img/bookChapters/c17-5.png"/>
 <figcaption>Offsetting both the X and Y coordinates to move the ball diagonally</figcaption>
 </figure>
 </section>
@@ -108,7 +97,7 @@
 
 <p>If you instead wanted the object to reappear at the top-left corner each time it reached the bottom or right edge, you could define a response to the <strong>Ball.EdgeReached</strong> event, as  shown in <a data-type="xref" href="#making_the_ball_reappear_at_the_top-left">Figure 17-5</a>.</p>
 
-<figure id="making_the_ball_reappear_at_the_top-left"><img alt="Making the ball reappear at the top-left corner when it reaches an edge" src="images/c17-6.png"/>
+<figure id="making_the_ball_reappear_at_the_top-left"><img alt="Making the ball reappear at the top-left corner when it reaches an edge" src="/assets/img/bookChapters/c17-6.png"/>
 <figcaption>Making the ball reappear at the top-left corner when it reaches an edge</figcaption>
 </figure>
 
@@ -135,19 +124,19 @@
 
 <p>Consider a game, for instance, in which an object changes colors and plays an explosion sound when it hits another object. <a data-type="xref" href="#making_the_ball_change_color_and_play_an">Figure 17-6</a> shows the blocks for such an event handler.</p>
 
-<figure id="making_the_ball_change_color_and_play_an"><img alt="Making the ball change color and play an explosion sound when it hits another object" src="images/c17-7.png"/>
+<figure id="making_the_ball_change_color_and_play_an"><img alt="Making the ball change color and play an explosion sound when it hits another object" src="/assets/img/bookChapters/c17-7.png"/>
 <figcaption>Making the ball change color and play an explosion sound when it hits another object</figcaption>
 </figure>
 
 <p><strong>NoLongerCollidingWith</strong> provides the opposite event of <strong>CollidedWith</strong>. It is triggered only when two objects have come together and then separated. So, for your game, you might include blocks as shown in <a data-type="xref" href="#changing_the_color_back_and_stopping_the">Figure 17-7</a>.</p>
 
-<figure id="changing_the_color_back_and_stopping_the"><img alt="Changing the color back and stopping the explosion noise when the objects separate" src="images/c17-8.png"/>
+<figure id="changing_the_color_back_and_stopping_the"><img alt="Changing the color back and stopping the explosion noise when the objects separate" src="/assets/img/bookChapters/c17-8.png"/>
 <figcaption>Changing the color back and stopping the explosion noise when the objects separate</figcaption>
 </figure>
 
 <p>Note that both <strong>CollidedWith</strong> and <strong>NoLongerCollidingWith</strong> have an argument, <strong>other. other</strong> specifies the particular object you collided with (or separated from). This allows you to perform operations only when the object (e.g., <strong>Ball1</strong>) interacts with a particular other object, as shown in <a data-type="xref" href="#only_perform_the_response_if_ball1_hit_i">Figure 17-8</a>.</p>
 
-<figure id="only_perform_the_response_if_ball1_hit_i"><img alt="Only perform the response if Ball1 hit ImageSprite1" src="images/c17-9.png"/>
+<figure id="only_perform_the_response_if_ball1_hit_i"><img alt="Only perform the response if Ball1 hit ImageSprite1" src="/assets/img/bookChapters/c17-9.png"/>
 <figcaption>Only perform the response if Ball1 hit ImageSprite1</figcaption>
 </figure>
 
@@ -163,7 +152,7 @@
 
 <p>By default, the <strong>Clock</strong> component’s <strong>timerEnabled</strong> property is checked. You can disable it dynamically by setting it to false in an event handler. The event handler in <a data-type="xref" href="#stopping_the_timer_the_first_time_the_bu">Figure 17-9</a>, for example, would stop the activity of a <strong>Clock</strong> timer on the first click.</p>
 
-<figure id="stopping_the_timer_the_first_time_the_bu"><img alt="Stopping the timer the first time the button is clicked" src="images/c17-10.png"/>
+<figure id="stopping_the_timer_the_first_time_the_bu"><img alt="Stopping the timer the first time the button is clicked" src="/assets/img/bookChapters/c17-10.png"/>
 <figcaption>Stopping the timer the first time the button is clicked</figcaption>
 </figure>
 
@@ -173,7 +162,7 @@
 
 <p>This event handler stops the timer on first click, and resets the button so that it says “Start” instead of “Stop.” The second time the user clicks the button, the <strong>TimerEnabled</strong> is false, so the “else” part is executed. In this case, the timer is enabled, which gets the object moving again, and the button text is switched back to “Stop.” For more information about <strong>ifelse</strong> blocks, see <a data-type="xref" href="ch18.html#programming_your_app_to_make_decisions_c">Chapter 18</a>, and for examples of interactive animations that use the orientation sensor, see <a data-type="xref" href="ch05.html#ladybug_chase">Chapter 5</a> and <a data-type="xref" href="ch23.html#reading_and_responding_to_sensors">Chapter 23</a>.</p>
 
-<figure id="adding_an_ifelse_so_that_clicking_the_bu"><img alt="Adding an ifelse so that clicking the button starts and stops the movement of the ball" src="images/c17-11.png"/>
+<figure id="adding_an_ifelse_so_that_clicking_the_bu"><img alt="Adding an ifelse so that clicking the button starts and stops the movement of the ball" src="/assets/img/bookChapters/c17-11.png"/>
 <figcaption>Adding an ifelse so that clicking the button starts and stops the movement of the ball</figcaption>
 </figure>
 </section>
@@ -187,7 +176,7 @@
 
 <p>To illustrate, let’s reconsider the example that moved a ball diagonally. The Heading property of a sprite or ball has a range of 360 degrees, as seen in <a data-type="xref" href="#heading_property_has_a_range_of_360_degr">Figure 17-11</a>.</p>
 
-<figure id="heading_property_has_a_range_of_360_degr"><img alt="The Heading property has a range of 360 degrees" src="images/c17-12new.png"/>
+<figure id="heading_property_has_a_range_of_360_degr"><img alt="The Heading property has a range of 360 degrees" src="/assets/img/bookChapters/c17-12new.png"/>
 <figcaption>The Heading property has a range of 360 degrees</figcaption>
 </figure>
 
@@ -199,7 +188,7 @@
 
 <p>Suppose, for instance, that you wanted to move a ball back-and-forth from the top-left to the bottom-right of the canvas. In the Designer, you might initialize the ball’s <strong>Speed </strong>to 5 and <strong>Interval</strong> to 100, and then set the <strong>Heading</strong> property to 315. You’d then add the <strong>Ball1.EdgeReached</strong> event handler, shown in <a data-type="xref" href="#changing_the_ballapostrophes_direction_w">Figure 17-12</a>, to change the ball’s direction when it reaches either edge.</p>
 
-<figure id="changing_the_ballapostrophes_direction_w"><img alt="Changing the ball’s direction when it reaches either edge" src="images/c17-13.png"/>
+<figure id="changing_the_ballapostrophes_direction_w"><img alt="Changing the ball’s direction when it reaches either edge" src="/assets/img/bookChapters/c17-13.png"/>
 <figcaption>Changing the ball’s direction when it reaches either edge</figcaption>
 </figure>
 </section>
@@ -214,6 +203,3 @@
 <p>With either method, you can also take advantage of high-level functionality for handling events for handling collisions.</p>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}

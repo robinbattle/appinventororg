@@ -1,21 +1,10 @@
-{% extends "site_base.html" %}
-{% block body %}
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
     <section data-type="chapter" data-pdf-bookmark="Chapter 14. Understanding an App’s Architecture" id="understanding_an_appapostrophes_architec">
 <h1>Understanding an App’s Architecture</h1>
 
 <p><em>This chapter examines the structure of an app from a programmer’s perspective. It begins with the traditional analogy that an app is like a recipe and then proceeds to reconceptualize an app as a set of components that respond to events. The chapter also examines how apps can ask questions, repeat, remember, and talk to the Web, all of which will be described in more detail in later chapters.</em></p>
 
-<div class="informalfigure"><img alt="Understanding an App" src="images/a14.png"/></div>
+<div class="informalfigure"><img alt="Understanding an App" src="/assets/img/bookChapters/a14.png"/></div>
 
 <p>Many people can tell you what an app is from a user’s perspective, but understanding what it is from a programmer’s perspective is more complicated. Apps have an internal structure that you must understand in order to create them effectively.</p>
 
@@ -23,7 +12,7 @@
 
 <p><a data-type="xref" href="#internal_architecture_of_an_app_inventor">Figure 14-1</a> provides an overview of this app architecture. In this chapter, we’ll explore this architecture in detail.</p>
 
-<figure id="internal_architecture_of_an_app_inventor"><img alt="Alt Text" class="iimagesa14-1newpng" src="images/a14-1new.png"/>
+<figure id="internal_architecture_of_an_app_inventor"><img alt="Alt Text" class="iimagesa14-1newpng" src="/assets/img/bookChapters/a14-1new.png"/>
 <figcaption>The internal architecture of an App Inventor app</figcaption>
 </figure>
 
@@ -54,7 +43,7 @@
 
 <p>A typical app might start a bank transaction (A), perform some computations and modify a customer’s account (B), and then print out the new balance on the screen (C).</p>
 
-<figure id="traditional_software_follows_a_linear_se"><img alt="Traditional software follows a linear sequence of instructions\" src="images/a14-3.png"/>
+<figure id="traditional_software_follows_a_linear_se"><img alt="Traditional software follows a linear sequence of instructions\" src="/assets/img/bookChapters/a14-3.png"/>
 <figcaption>Traditional software follows a linear sequence of instructions\</figcaption>
 </figure>
 </section>
@@ -66,7 +55,7 @@
 
 <p>Modern apps are better conceptualized as event-response machines. The apps do include “recipes”--sequences of instructions--but each recipe is only performed in response to some event, as shown in <a data-type="xref" href="#app_as_multiple_recipes_hooked_to_events">Figure 14-3</a>.</p>
 
-<figure id="app_as_multiple_recipes_hooked_to_events"><img alt="An app as multiple recipes hooked to events" src="images/a14-4.png"/>
+<figure id="app_as_multiple_recipes_hooked_to_events"><img alt="An app as multiple recipes hooked to events" src="/assets/img/bookChapters/a14-4.png"/>
 <figcaption>An app as multiple recipes hooked to events</figcaption>
 </figure>
 
@@ -74,13 +63,13 @@
 
 <p>Many events are initiated by the end user, but some are not. An app can react to events that happen within the phone, such as changes to its orientation sensor and the clock (i.e., the passing of time), and events created by things outside the phone, such as a text or call from another phone, or data arriving from the Web, as shown in <a data-type="xref" href="#app_can_respond_to_both_internal_and_ext">Figure 14-4</a>.</p>
 
-<figure id="app_can_respond_to_both_internal_and_ext"><img alt="An app can respond to both internal and external events" src="images/a14-5.png"/>
+<figure id="app_can_respond_to_both_internal_and_ext"><img alt="An app can respond to both internal and external events" src="/assets/img/bookChapters/a14-5.png"/>
 <figcaption>An app can respond to both internal and external events</figcaption>
 </figure>
 
 <p>One reason App Inventor programming is intuitive is that it’s based directly on this event-response paradigm; event handlers are primitives in the language (in many languages, this is not the case). You begin defining a behavior by dragging out an <em>event block</em>, which has the form, “When &lt;event&gt; do”. For example, consider an app, SpeakIt, that responds to button clicks by speaking the text the user has entered in a textbox aloud. This application could be programmed with a single event handler, shown in <a data-type="xref" href="#event_handler_for_a_speakit_app">Figure 14-5</a>.</p>
 
-<figure id="event_handler_for_a_speakit_app"><img alt="An event handler for a SpeakIt app" src="images/a14-6.png"/>
+<figure id="event_handler_for_a_speakit_app"><img alt="An event handler for a SpeakIt app" src="/assets/img/bookChapters/a14-6.png"/>
 <figcaption>An event handler for a SpeakIt app</figcaption>
 </figure>
 
@@ -88,7 +77,7 @@
 
 <p>With App Inventor, all activity occurs in response to an event. Your app shouldn’t contain blocks outside of an event’s “when-do” block. For instance, the blocks in <a data-type="xref" href="#floating_blocks_wonapostrophet_do_anythi">Figure 14-6</a> don’t make sense floating alone.</p>
 
-<figure id="floating_blocks_wonapostrophet_do_anythi"><img alt="Floating blocks won’t do anything outside an event handler" src="images/a14-7.png"/>
+<figure id="floating_blocks_wonapostrophet_do_anythi"><img alt="Floating blocks won’t do anything outside an event handler" src="/assets/img/bookChapters/a14-7.png"/>
 <figcaption>Floating blocks won’t do anything outside an event handler</figcaption>
 </figure>
 </section>
@@ -166,7 +155,7 @@
 
 <p>For instance, in the game MoleMash (<a data-type="xref" href="ch03.html#molemash">Chapter 3</a>), the <strong>MoveMole</strong> procedure is called at the start of the app to randomly place the mole, as shown in <a data-type="xref" href="#using_a_screen1dotinitialize_event_block">Figure 14-7</a>.</p>
 
-<figure id="using_a_screen1dotinitialize_event_block"><img alt="Using a Screen1.Initialize event block to move the mole when the app begins" src="images/a14-8.png"/>
+<figure id="using_a_screen1dotinitialize_event_block"><img alt="Using a Screen1.Initialize event block to move the mole when the app begins" src="/assets/img/bookChapters/a14-8.png"/>
 <figcaption>Using a Screen1.Initialize event block to move the mole when the app begins</figcaption>
 </figure>
 </section>
@@ -176,7 +165,7 @@
 
 <p>Some activity in an app is triggered by the passing of time. You can think of an animation as an object that moves when triggered by a <em>timer event</em>. App Inventor has a <strong>Clock</strong> component that can be used to trigger timer events. For instance, if you wanted a ball on the screen to move 10 pixels horizontally at a set time interval, your blocks would look like <a data-type="xref" href="#using_a_timer_event_block_to_move_a_ball">Figure 14-8</a>.</p>
 
-<figure id="using_a_timer_event_block_to_move_a_ball"><img alt="Using a timer event block to move a ball whenever Clock1.Timer fires" src="images/a14-9.png"/>
+<figure id="using_a_timer_event_block_to_move_a_ball"><img alt="Using a timer event block to move a ball whenever Clock1.Timer fires" src="/assets/img/bookChapters/a14-9.png"/>
 <figcaption>Using a timer event block to move a ball whenever Clock1.Timer fires</figcaption>
 </figure>
 </section>
@@ -186,7 +175,7 @@
 
 <p>Activity involving graphical objects (sprites) within canvases will trigger events. So you can program games and other interactive animations by specifying what should occur on events such as an object reaching the edge of the canvas, or two objects colliding, as in <a data-type="xref" href="#collided_with">Figure 14-9</a>. For more information, see <a data-type="xref" href="ch17.html#creating_animated_apps">Chapter 17</a>.</p>
 
-<figure id="collided_with"><img alt="CollidedWith event" src="images/a14-collide.png"/>
+<figure id="collided_with"><img alt="CollidedWith event" src="/assets/img/bookChapters/a14-collide.png"/>
 <figcaption>When the FlyingSaucer sprite hits another object, play a sound.</figcaption>
 </figure>
 </section>
@@ -196,7 +185,7 @@
 
 <p>When your phone receives location information from GPS satellites, an event is triggered. Likewise, when your phone receives a text, an event is triggered (<a class="xref " data-type="xref" href="#texting1dotmessagereceived_event_is_trig">Figure 14-10</a>).</p>
 
-<figure id="texting1dotmessagereceived_event_is_trig"><img alt="The Texting1.MessageReceived event is triggered whenever a text is received" src="images/a14-10.png"/>
+<figure id="texting1dotmessagereceived_event_is_trig"><img alt="The Texting1.MessageReceived event is triggered whenever a text is received" src="/assets/img/bookChapters/a14-10.png"/>
 <figcaption>The Texting1.MessageReceived event is triggered whenever a text is received</figcaption>
 </figure>
 
@@ -212,7 +201,7 @@
 
 <p>In the diagram, when the event occurs, the app performs operation A and then checks a condition. Function B1 is performed if the condition is true. If the condition is false, the app instead performs B2. In either case, the app continues on to perform function C.</p>
 
-<figure id="event_handler_can_branch_based_on_the_an"><img alt="An event handler can branch based on the answer to a conditional question" src="images/a14-11.png"/>
+<figure id="event_handler_can_branch_based_on_the_an"><img alt="An event handler can branch based on the answer to a conditional question" src="/assets/img/bookChapters/a14-11.png"/>
 <figcaption>An event handler can branch based on the answer to a conditional question</figcaption>
 </figure>
 
@@ -222,7 +211,7 @@
 
 <p>Conditional blocks are discussed in detail in <a data-type="xref" href="ch18.html#programming_your_app_to_make_decisions_c">Chapter 18</a>.</p>
 
-<figure id="using_an_if_block_to_report_a_win_once_t"><img alt="Using an if block to report a win once the player reaches 100 points" src="images/a14-12.png"/>
+<figure id="using_an_if_block_to_report_a_win_once_t"><img alt="Using an if block to report a win once the player reaches 100 points" src="/assets/img/bookChapters/a14-12.png"/>
 <figcaption>Using an if block to report a win once the player reaches 100 points</figcaption>
 </figure>
 </section>
@@ -232,7 +221,7 @@
 
 <p>In addition to asking questions and branching based on the answer, a response to an event can also repeat operations multiple times. App Inventor provides a number of blocks for repeating, including the <strong>foreach</strong> and the <strong>while do</strong>. Both enclose other blocks. All the blocks within <strong>foreach</strong> are performed once for each item in a list. For instance, if you wanted to text the same message to a list of phone numbers, you could use the blocks in <a data-type="xref" href="#blocks_within_the_foreach_block_are_repe">Figure 14-13</a>.</p>
 
-<figure id="blocks_within_the_foreach_block_are_repe"><img alt="The blocks within the foreach block are repeated for each item in the list" src="images/a14-repeat.png"/>
+<figure id="blocks_within_the_foreach_block_are_repe"><img alt="The blocks within the foreach block are repeated for each item in the list" src="/assets/img/bookChapters/a14-repeat.png"/>
 <figcaption>The blocks within the foreach block are repeated for each item in the list PhoneNumbers.</figcaption>
 </figure>
 
@@ -263,6 +252,3 @@
 <p>An app creator must view his app both from an end-user perspective and from the inside-out perspective of a programmer. With App Inventor, you design how an app looks and then you design its behavior--the set of event handlers that make an app behave as you want. You build these event handlers by assembling and configuring blocks representing events, functions, conditional branches, repeat loops, web calls, database operations, and more, and then test your work by actually running the app on your phone. After you write a few programs, the mapping between the internal structure of an app and its physical manifestation becomes clear. When that happens, you’re a programmer!</p>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}
