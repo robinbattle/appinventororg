@@ -4506,7 +4506,7 @@ class AdminModuleDisplayHandler(webapp.RequestHandler):
                                'stylesheets' : ['/assets/admin/css/editor.css'],
                                'scripts' : ['/assets/admin/js/modules_editor.js'], 
                               }
-                  
+            
             path = os.path.join(os.path.dirname(__file__), 'pages/admin/modules_editor.html')
             self.response.out.write(template.render(path, template_values))
         
