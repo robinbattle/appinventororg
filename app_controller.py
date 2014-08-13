@@ -4785,6 +4785,106 @@ class AdminDashboardHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'pages/admin/admin_dashboard.html')
         self.response.out.write(template.render(path, template_values))        
 
+class AdminExportCoursesHandler(webapp.RequestHandler):
+    def get(self):
+        userStatus = UserStatus().getStatus(self.request.uri)
+        
+        # look up all the courses for the global navbar
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+                
+        
+        template_values = {
+                           'stylesheets' : ['/assets/admin/css/admin.css'],
+                           'userStatus' : userStatus,
+                           'courses' : courses,
+                           'title' : 'Admin Dashboard'
+                           }       
+        
+        path = os.path.join(os.path.dirname(__file__), 'pages/admin/export_courses.html')
+        self.response.out.write(template.render(path, template_values))        
+
+class AdminImportCoursesHandler(webapp.RequestHandler):
+    def get(self):
+        userStatus = UserStatus().getStatus(self.request.uri)
+        
+        # look up all the courses for the global navbar
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+                
+        template_values = {
+                           'stylesheets' : ['/assets/admin/css/admin.css'],
+                           'userStatus' : userStatus,
+                           'courses' : courses,
+                           'title' : 'Admin Dashboard',
+                           'scripts' : ['/assets/admin/js/import.js'], 
+                           }       
+        
+        path = os.path.join(os.path.dirname(__file__), 'pages/admin/import_courses.html')
+        self.response.out.write(template.render(path, template_values))      
+        
+    def post(self):
+        importFileContents = self.request.get("s_File_Contents")
+        i = 0
+        splitContent = importFileContents.split('\n')
+        while i < len(splitContent) - 1:
+            logging.info("course_Title: " + splitContent[i])
+            i+=1
+            logging.info("course_URL_Title: " + splitContent[i])
+            i+=1            
+            logging.info("course_Description: " + splitContent[i])
+            i+=1                                                      
+            logging.info("course_Icon: " + " long data.....")
+            i+=1                                                      
+            logging.info("course_Index: " + splitContent[i])
+            i+=1        
+            while splitContent[i] != "**********":
+                logging.info("module_Title: " + splitContent[i])
+                i+=1
+                logging.info("module_Description: " + splitContent[i])
+                i+=1                
+                logging.info("module_Icon: " + " lonng data....")
+                i+=1
+                logging.info("module_Index: " + splitContent[i])
+                i+=1
+                while splitContent[i] != "*****":
+                    logging.info("content_Title: " + splitContent[i])
+                    i+=1
+                    logging.info("content_Description: " + splitContent[i])
+                    i+=1              
+                    logging.info("content_Type: " + splitContent[i])
+                    i+=1    
+                    logging.info("content_URL: " + splitContent[i])
+                    i+=1
+                    logging.info("content_Index: " + splitContent[i])
+                    i+=1
+                i+=1
+            i+=1           
+        self.response.out.write("420")
+        
+          
+
+
+class AdminSerialViewHandler(webapp.RequestHandler):
+    """ Creates a serialized output of the courses and content on the site, this page is intended to be 
+        downloaded by the user via the course export page. """
+    def get(self):
+        output = ""
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+        # for every course
+        for course in courses:
+            output += course.c_title + "\n" + course.c_url_title + "\n" + course.c_description + "\n" + course.c_icon + "\n" + str(course.c_index) + "\n"
+            # for every module
+            modules = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()))).order(Module.m_index).fetch()
+            for module in modules:
+                output += module.m_title + "\n" + module.m_description + "\n" + module.m_icon + "\n" + str(module.m_index) + "\n"    
+                # for every content
+                contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id()))).order(Content.c_index).fetch()
+                for content in contents:
+                    output += content.c_title + "\n" + content.c_description + "\n" + content.c_type + "\n" + content.c_url + "\n" + str(content.c_index) + "\n"
+                output += "*****\n"
+            output += "**********\n"        
+        
+        self.response.out.write(output)
+        
 
 ####################################
 #       End Jordan's Classes       #
@@ -4921,8 +5021,14 @@ application = webapp.WSGIApplication(
         webapp.Route(r'/admin/course_system/reorder/<kind>', handler=AdminCourseSystemReorderHandler),
         webapp.Route(r'/admin/course_system/update/<kind>', handler=AdminCourseSystemUpdateHandler),     
         
-        # admin pages
-        ('/admin/apps', AdminHandler), ('/admin/dashboard', AdminDashboardHandler),
+        # more admin pages
+        ('/admin/dashboard', AdminDashboardHandler),
+        ('/admin/apps', AdminHandler),
+        ('/admin/exportcourses', AdminExportCoursesHandler),
+        ('/admin/importcourses', AdminImportCoursesHandler),
+        ('/admin/serialview', AdminSerialViewHandler),
+        
+        
         
         ########################
         #  END Jordan's Pages  #

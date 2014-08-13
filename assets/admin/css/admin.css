@@ -36,3 +36,19 @@
 .new-something-form-box-title {
     line-height: 70px;
 }
+
+
+.export-container, .import-container {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.export-container a {
+    margin-top: 20px;
+}
+
+
+.hidden_input {
+    height: 0px;
+    width: 0px;
+}
