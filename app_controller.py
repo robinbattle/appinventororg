@@ -4858,7 +4858,8 @@ class AdminImportCoursesHandler(webapp.RequestHandler):
                     i+=1
                 i+=1
             i+=1           
-        self.response.out.write("420")
+        
+        self.response.out.write("")
         
           
 
