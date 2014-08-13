@@ -1,14 +1,9 @@
 import logging
 import os
-import datetime
 import collections
 try: import simplejson as json
 except ImportError: import json
-import wsgiref.handlers
-import cgi
 from google.appengine.ext import ndb
-import urllib2, json
-from google.appengine.api import urlfetch
 
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
@@ -17,25 +12,18 @@ from google.appengine.api import memcache
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from datetime import datetime
-from time import time
 from datastore import App
 from datastore import Step
 from datastore import Custom
 from datastore import Account
 from datastore import Comment
-from datastore import Position
 from datastore import Tutorial
 from datastore import TutorialStep
-from datastore import AdminAccount
 from datastore import Module, Content, Course
 import gdata.analytics.client
-import gdata.sample_util
 import datetime
-from datetime import date
 from geopy import geocoders
 from google.appengine.api import mail
-import locale
 
 APPSDIR='/apps'
 APPS2DIR='/apps2'
