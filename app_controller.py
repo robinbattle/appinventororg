@@ -4810,9 +4810,7 @@ class AdminDashboardHandler(webapp.RequestHandler):
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
     [
-        # ('/', Home), # commented out for now to show new home page
-        
-        ('/Admin', AdminHandler),
+    # ('/', Home), uncomment to show old home page
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
         ('/shootergame', AppRenderer), ('/no-text-while-driving', AppRenderer), ('/ladybug-chase', AppRenderer),
         ('/map-tour', AppRenderer), ('/android-where-s-my-car', AppRenderer), ('/quiz', AppRenderer),
