@@ -4822,45 +4822,78 @@ class AdminImportCoursesHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))      
         
     def post(self):
+        """ For now this wipes this completely replaces the current contents of the datastore 
+        with the imported file. """
+        
+        
+        # delete everything in the current datastore
+        
+        keysToDelete = []
+        
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+        # for every course
+        for course in courses:
+            # for every module
+            modules = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()))).order(Module.m_index).fetch()
+            for module in modules:
+                # for every content
+                contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id()))).order(Content.c_index).fetch()
+                for content in contents:
+                    keysToDelete += [content.key]
+                keysToDelete += [module.key]
+            keysToDelete += [course.key]
+             
+        ndb.delete_multi(keysToDelete)
+        
         importFileContents = self.request.get("s_File_Contents")
         i = 0
         splitContent = importFileContents.split('\n')
         while i < len(splitContent) - 1:
-            logging.info("course_Title: " + splitContent[i])
+            course_Title = splitContent[i]
             i+=1
-            logging.info("course_URL_Title: " + splitContent[i])
+            course_URL_Title = splitContent[i]
             i+=1            
-            logging.info("course_Description: " + splitContent[i])
+            course_Description = splitContent[i]
             i+=1                                                      
-            logging.info("course_Icon: " + " long data.....")
+            course_Icon = splitContent[i]
             i+=1                                                      
-            logging.info("course_Index: " + splitContent[i])
-            i+=1        
+            course_Index = splitContent[i]
+            i+=1     
+            
+            
+            course = Course(parent = ndb.Key('Courses', 'ADMINSET'), c_title = course_Title, c_url_title = course_URL_Title, c_description = course_Description, c_icon = str(course_Icon), c_index = int(course_Index))
+            course.put()
+                        
             while splitContent[i] != "**********":
-                logging.info("module_Title: " + splitContent[i])
+                module_Title = splitContent[i]
                 i+=1
-                logging.info("module_Description: " + splitContent[i])
+                module_Description = splitContent[i]
                 i+=1                
-                logging.info("module_Icon: " + " lonng data....")
+                module_Icon = splitContent[i]
                 i+=1
-                logging.info("module_Index: " + splitContent[i])
+                module_Index = splitContent[i]
                 i+=1
+                
+                module = Module(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id())), m_title = module_Title, m_description = module_Description, m_icon = str(module_Icon), m_index = int(module_Index))
+                module.put()
+                
                 while splitContent[i] != "*****":
-                    logging.info("content_Title: " + splitContent[i])
+                    content_Title = splitContent[i]
                     i+=1
-                    logging.info("content_Description: " + splitContent[i])
+                    content_Description = splitContent[i]
                     i+=1              
-                    logging.info("content_Type: " + splitContent[i])
+                    content_Type =  splitContent[i]
                     i+=1    
-                    logging.info("content_URL: " + splitContent[i])
+                    content_URL = splitContent[i]
                     i+=1
-                    logging.info("content_Index: " + splitContent[i])
+                    content_Index = splitContent[i]
                     i+=1
+                   
+                    content = Content(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id())), c_title = content_Title, c_description = content_Description, c_type = content_Type, c_url = content_URL , c_index = int(content_Index))
+                    content.put()
+                    
                 i+=1
-            i+=1           
-        
-        self.response.out.write("")
-        
+            i+=1
           
 
 

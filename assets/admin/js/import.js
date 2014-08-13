@@ -20,7 +20,7 @@ $(document).ready(function() {
 			$.post("/admin/importcourses", {
 				s_File_Contents : reader.result,
 			}, function(data, status) {
-				alert(data);
+				alert(status);
 			});
 		}
 		reader.readAsText(file);

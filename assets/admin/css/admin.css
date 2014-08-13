@@ -21,6 +21,11 @@
     border: 1px solid #B4DBE4;
 }
 
+.dashboard-item p {
+    margin-top: 20px;
+    font-weight: 900;
+}
+
 /* Stylings used in the course system editor */
 .back-nav-link {
     cursor: pointer;
