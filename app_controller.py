@@ -1,14 +1,9 @@
 import logging
 import os
-import datetime
 import collections
 try: import simplejson as json
 except ImportError: import json
-import wsgiref.handlers
-import cgi
 from google.appengine.ext import ndb
-import urllib2, json
-from google.appengine.api import urlfetch
 
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
@@ -17,25 +12,18 @@ from google.appengine.api import memcache
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from datetime import datetime
-from time import time
 from datastore import App
 from datastore import Step
 from datastore import Custom
 from datastore import Account
 from datastore import Comment
-from datastore import Position
 from datastore import Tutorial
 from datastore import TutorialStep
-from datastore import AdminAccount
 from datastore import Module, Content, Course
 import gdata.analytics.client
-import gdata.sample_util
 import datetime
-from datetime import date
 from geopy import geocoders
 from google.appengine.api import mail
-import locale
 
 APPSDIR='/apps'
 APPS2DIR='/apps2'
@@ -4518,7 +4506,7 @@ class AdminModuleDisplayHandler(webapp.RequestHandler):
                                'stylesheets' : ['/assets/admin/css/editor.css'],
                                'scripts' : ['/assets/admin/js/modules_editor.js'], 
                               }
-                  
+            
             path = os.path.join(os.path.dirname(__file__), 'pages/admin/modules_editor.html')
             self.response.out.write(template.render(path, template_values))
         
@@ -4797,6 +4785,140 @@ class AdminDashboardHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'pages/admin/admin_dashboard.html')
         self.response.out.write(template.render(path, template_values))        
 
+class AdminExportCoursesHandler(webapp.RequestHandler):
+    def get(self):
+        userStatus = UserStatus().getStatus(self.request.uri)
+        
+        # look up all the courses for the global navbar
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+                
+        
+        template_values = {
+                           'stylesheets' : ['/assets/admin/css/admin.css'],
+                           'userStatus' : userStatus,
+                           'courses' : courses,
+                           'title' : 'Admin Dashboard'
+                           }       
+        
+        path = os.path.join(os.path.dirname(__file__), 'pages/admin/export_courses.html')
+        self.response.out.write(template.render(path, template_values))        
+
+class AdminImportCoursesHandler(webapp.RequestHandler):
+    def get(self):
+        userStatus = UserStatus().getStatus(self.request.uri)
+        
+        # look up all the courses for the global navbar
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+                
+        template_values = {
+                           'stylesheets' : ['/assets/admin/css/admin.css'],
+                           'userStatus' : userStatus,
+                           'courses' : courses,
+                           'title' : 'Admin Dashboard',
+                           'scripts' : ['/assets/admin/js/import.js'], 
+                           }       
+        
+        path = os.path.join(os.path.dirname(__file__), 'pages/admin/import_courses.html')
+        self.response.out.write(template.render(path, template_values))      
+        
+    def post(self):
+        """ For now this wipes this completely replaces the current contents of the datastore 
+        with the imported file. """
+        
+        
+        # delete everything in the current datastore
+        
+        keysToDelete = []
+        
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+        # for every course
+        for course in courses:
+            # for every module
+            modules = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()))).order(Module.m_index).fetch()
+            for module in modules:
+                # for every content
+                contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id()))).order(Content.c_index).fetch()
+                for content in contents:
+                    keysToDelete += [content.key]
+                keysToDelete += [module.key]
+            keysToDelete += [course.key]
+             
+        ndb.delete_multi(keysToDelete)
+        
+        importFileContents = self.request.get("s_File_Contents")
+        i = 0
+        splitContent = importFileContents.split('\n')
+        while i < len(splitContent) - 1:
+            course_Title = splitContent[i]
+            i+=1
+            course_URL_Title = splitContent[i]
+            i+=1            
+            course_Description = splitContent[i]
+            i+=1                                                      
+            course_Icon = splitContent[i]
+            i+=1                                                      
+            course_Index = splitContent[i]
+            i+=1     
+            
+            
+            course = Course(parent = ndb.Key('Courses', 'ADMINSET'), c_title = course_Title, c_url_title = course_URL_Title, c_description = course_Description, c_icon = str(course_Icon), c_index = int(course_Index))
+            course.put()
+                        
+            while splitContent[i] != "**********":
+                module_Title = splitContent[i]
+                i+=1
+                module_Description = splitContent[i]
+                i+=1                
+                module_Icon = splitContent[i]
+                i+=1
+                module_Index = splitContent[i]
+                i+=1
+                
+                module = Module(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id())), m_title = module_Title, m_description = module_Description, m_icon = str(module_Icon), m_index = int(module_Index))
+                module.put()
+                
+                while splitContent[i] != "*****":
+                    content_Title = splitContent[i]
+                    i+=1
+                    content_Description = splitContent[i]
+                    i+=1              
+                    content_Type =  splitContent[i]
+                    i+=1    
+                    content_URL = splitContent[i]
+                    i+=1
+                    content_Index = splitContent[i]
+                    i+=1
+                   
+                    content = Content(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id())), c_title = content_Title, c_description = content_Description, c_type = content_Type, c_url = content_URL , c_index = int(content_Index))
+                    content.put()
+                    
+                i+=1
+            i+=1
+          
+
+
+class AdminSerialViewHandler(webapp.RequestHandler):
+    """ Creates a serialized output of the courses and content on the site, this page is intended to be 
+        downloaded by the user via the course export page. """
+    def get(self):
+        output = ""
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+        # for every course
+        for course in courses:
+            output += course.c_title + "\n" + course.c_url_title + "\n" + course.c_description + "\n" + course.c_icon + "\n" + str(course.c_index) + "\n"
+            # for every module
+            modules = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()))).order(Module.m_index).fetch()
+            for module in modules:
+                output += module.m_title + "\n" + module.m_description + "\n" + module.m_icon + "\n" + str(module.m_index) + "\n"    
+                # for every content
+                contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id()))).order(Content.c_index).fetch()
+                for content in contents:
+                    output += content.c_title + "\n" + content.c_description + "\n" + content.c_type + "\n" + content.c_url + "\n" + str(content.c_index) + "\n"
+                output += "*****\n"
+            output += "**********\n"        
+        
+        self.response.out.write(output)
+        
 
 ####################################
 #       End Jordan's Classes       #
@@ -4810,7 +4932,7 @@ class AdminDashboardHandler(webapp.RequestHandler):
 application = webapp.WSGIApplication(
     # MainPage handles the home page load
     [
-	# ('/', Home), uncomment to show old home page
+    # ('/', Home), uncomment to show old home page
         ('/hellopurr', AppRenderer), ('/paintpot', AppRenderer), ('/molemash', AppRenderer),
         ('/shootergame', AppRenderer), ('/no-text-while-driving', AppRenderer), ('/ladybug-chase', AppRenderer),
         ('/map-tour', AppRenderer), ('/android-where-s-my-car', AppRenderer), ('/quiz', AppRenderer),
@@ -4933,8 +5055,14 @@ application = webapp.WSGIApplication(
         webapp.Route(r'/admin/course_system/reorder/<kind>', handler=AdminCourseSystemReorderHandler),
         webapp.Route(r'/admin/course_system/update/<kind>', handler=AdminCourseSystemUpdateHandler),     
         
-        # admin pages
-        ('/admin/apps', AdminHandler), ('/admin/dashboard', AdminDashboardHandler),
+        # more admin pages
+        ('/admin/dashboard', AdminDashboardHandler),
+        ('/admin/apps', AdminHandler),
+        ('/admin/exportcourses', AdminExportCoursesHandler),
+        ('/admin/importcourses', AdminImportCoursesHandler),
+        ('/admin/serialview', AdminSerialViewHandler),
+        
+        
         
         ########################
         #  END Jordan's Pages  #

@@ -21,6 +21,11 @@
     border: 1px solid #B4DBE4;
 }
 
+.dashboard-item p {
+    margin-top: 20px;
+    font-weight: 900;
+}
+
 /* Stylings used in the course system editor */
 .back-nav-link {
     cursor: pointer;
@@ -35,4 +40,20 @@
 
 .new-something-form-box-title {
     line-height: 70px;
+}
+
+
+.export-container, .import-container {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.export-container a {
+    margin-top: 20px;
+}
+
+
+.hidden_input {
+    height: 0px;
+    width: 0px;
 }
