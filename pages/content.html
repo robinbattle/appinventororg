@@ -15,13 +15,13 @@
 
             {% for c in contents %}
             <div content_ID='{{c.c_identifier}}' class='vertical-content-nav-bar-item'>
-                {% if c.c_type == "App" %} <img class='vertical-content-nav-bar-item-icon' src='/assets/img/appinventor-Jigsaw.jpg' height='28px' width='28px'>
+                {% if c.c_type == "App" %} <img class='vertical-content-nav-bar-item-icon' src='/assets/img/ModuleIcons/video.png' height='28px' width='28px'>
                 {% endif %} 
                 {% if c.c_type == "Quiz" %} 
-                <img class='vertical-content-nav-bar-item-icon' src='/assets/img/bird.png' height='28px' width='28px'>
+                <img class='vertical-content-nav-bar-item-icon' src='/assets/img/ModuleIcons/question.png' height='28px' width='28px'>
                 {% endif %} 
                 {% if c.c_type == "Nugget" %}
-                <img  class='vertical-content-nav-bar-item-icon' src='/assets/img/kitty.png' height='28px' width='28px'>
+                <img  class='vertical-content-nav-bar-item-icon' src='/assets/img/ModuleIcons/light.png' height='28px' width='28px'>
                 {% endif %}
 
                 <div class='vertical-content-nav-bar-item-text'>{{c.c_title}}</div>
