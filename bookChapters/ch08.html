@@ -1,15 +1,4 @@
-{% extends "site_base.html" %}
-{% block body %}
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
     <section data-type="chapter" data-pdf-bookmark="Chapter 8. Presidents Quiz" id="presidents_quiz">
 <h1>Presidents Quiz</h1>
 
@@ -17,7 +6,7 @@
 
 <p><em>In the previous chapters, you’ve been introduced to some fundamental programming concepts. Now you’re ready for something more challenging. You’ll find that this chapter requires a conceptual leap in terms of programming skills and abstract thinking. In particular, you’ll use two list variables to store the data--in this case, the quiz questions and answers--and you’ll use an index variable to track where the user is in the quiz. When you finish, you’ll be armed with the knowledge to create quiz apps and many other apps that require list processing.</em></p>
 
-<div class="informalfigure"><img alt="Presidents Quiz" src="images/pq.png"/></div>
+<div class="informalfigure"><img alt="Presidents Quiz" src="/assets/img/bookChapters/pq.png"/></div>
 
 <p>This chapter assumes you’re familiar with the basics of App Inventor: using the Component Designer to build the user interface, and using the Blocks Editor to specify event handlers and program the component behavior. If you are not familiar with these fundamentals, be sure to review the previous chapters before continuing.</p>
 
@@ -35,7 +24,7 @@
 	<li>Switching an image to show a different picture for each quiz question.</li>
 </ul>
 
-<figure id="presidents_quiz_running_in_the_emulator"><img alt="The Presidents Quiz running in the emulator" src="images/pq8-1.png"/>
+<figure id="presidents_quiz_running_in_the_emulator"><img alt="The Presidents Quiz running in the emulator" src="/assets/img/bookChapters/pq8-1.png"/>
 <figcaption><em>The Presidents Quiz in action</em></figcaption>
 </figure>
 </section>
@@ -53,7 +42,7 @@
 
 <p>The Presidents Quiz app has a simple interface for displaying the questions and allowing the user to answer. You can build the components from the snapshot of the Component Designer shown in <a data-type="xref" href="#presidents_quiz_in_the_designer">Figure 8-2</a>.</p>
 
-<figure id="presidents_quiz_in_the_designer"><em><img alt="The Presidents Quiz in the Designer" src="images/pq8-2.png"/> </em>
+<figure id="presidents_quiz_in_the_designer"><em><img alt="The Presidents Quiz in the Designer" src="/assets/img/bookChapters/pq8-2.png"/> </em>
 
 <figcaption><em>The Presidents Quiz in the Designer</em></figcaption>
 </figure>
@@ -283,7 +272,7 @@ To start, you’ll define two list variables based on the items listed in <a dat
 	</tbody>
 </table>
 
-<figure id="lists_for_the_quiz"><img alt="The lists for the quiz" src="images/pq8-3.png"/>
+<figure id="lists_for_the_quiz"><img alt="The lists for the quiz" src="/assets/img/bookChapters/pq8-3.png"/>
 <figcaption>The lists for the quiz</figcaption>
 </figure>
 </section>
@@ -328,7 +317,7 @@ To start, you’ll define two list variables based on the items listed in <a dat
 	</tbody>
 </table>
 
-<figure id="initiating_the_index_blocks_with_a_value"><img alt="Initiating the index blocks with a value of 1" src="images/pq8-4.png"/>
+<figure id="initiating_the_index_blocks_with_a_value"><img alt="Initiating the index blocks with a value of 1" src="/assets/img/bookChapters/pq8-4.png"/>
 <figcaption>Initiating the index variable with a value of 1</figcaption>
 </figure>
 </section>
@@ -418,7 +407,7 @@ To start, you’ll define two list variables based on the items listed in <a dat
 
 <p>The <strong>Screen1.Initialize</strong> event is triggered when the app begins. As shown in <a data-type="xref" href="#selecting_the_first_question">Figure 8-5</a>, the first item of the variable <strong>QuestionList</strong> is selected and placed into <strong>QuestionLabel.Text</strong>. So, when the app begins, the user will see the first question.</p>
 
-<figure id="selecting_the_first_question"><img alt="Selecting the first question" src="images/pq8-5.png"/>
+<figure id="selecting_the_first_question"><img alt="Selecting the first question" src="/assets/img/bookChapters/pq8-5.png"/>
 <figcaption>Selecting the first question</figcaption>
 </figure>
 
@@ -435,7 +424,7 @@ To start, you’ll define two list variables based on the items listed in <a dat
 
 <p>Now program the behavior of the <strong>NextButton</strong>. You’ve already defined the <strong>currentQuestionIndex</strong> to remember which question the user is on. When the user clicks the <strong>NextButton</strong>, the app needs to increment (add one to) the <strong>currentQuestionIndex</strong> (i.e., change it from 1 to 2 or from 2 to 3, and so on). You’ll then use the resulting value of <strong>currentQuestionIndex</strong> to select the new question to display. As a challenge, see if you can build these blocks on your own. When you’re finished, compare your results against <a data-type="xref" href="#moving_to_the_next_question">Figure 8-6</a>.</p>
 
-<figure id="moving_to_the_next_question"><img alt="Moving to the next question" src="images/pq8-next1.png"/>
+<figure id="moving_to_the_next_question"><img alt="Moving to the next question" src="/assets/img/bookChapters/pq8-next1.png"/>
 <figcaption>Moving to the next question</figcaption>
 </figure>
 
@@ -541,7 +530,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p>The blocks should appear in the following manner:</p>
 
-<figure id="checking_if_the_last_left_parenthesisthi"><img alt="Checking if the last (third) question has been reached" src="images/pq8-8.png"/>
+<figure id="checking_if_the_last_left_parenthesisthi"><img alt="Checking if the last (third) question has been reached" src="/assets/img/bookChapters/pq8-8.png"/>
 <figcaption>Checking if the last (third) question has been reached</figcaption>
 </figure>
 
@@ -564,7 +553,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p>If your blocks for the <strong>NextButton</strong> work, pat yourself on the back--you are on your way to becoming a programmer! But what if you added a new question (and answer) to the quiz? Would your blocks still work? To explore this, first add a fourth question to <strong>QuestionList</strong> and a fourth answer into <strong>AnswerList</strong>, as shown in <a data-type="xref" href="#adding_an_item_to_both_lists">Figure 8-8</a>.</p>
 
-<figure id="adding_an_item_to_both_lists"><img alt="Adding an item to both lists" src="images/pq8-9.png"/>
+<figure id="adding_an_item_to_both_lists"><img alt="Adding an item to both lists" src="/assets/img/bookChapters/pq8-9.png"/>
 <figcaption>Adding an item to both lists</figcaption>
 </figure>
 
@@ -616,7 +605,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p>The <strong>if</strong> test now compares the <strong>currentQuestionIndex</strong> to the length of the <strong>QuestionList</strong>, as shown in <a data-type="xref" href="#selecting_the_currentquestionindexth_pic">Figure 8-11</a>. So, if <strong>currentQuestionIndex</strong> is 5, and the length of the <strong>QuestionList</strong> is 4, then the <strong>currentQuestionIndex</strong> will be set back to 1. Note that, because the blocks no longer refer to 3 or any specific number, the behavior will work no matter how many items are in the list.</p>
 
-<figure id="checking_for_the_end_of_the_list_in_a_ge"><img alt="Checking for the end of the list in a generic way" src="images/pq8-10.png"/>
+<figure id="checking_for_the_end_of_the_list_in_a_ge"><img alt="Checking for the end of the list in a generic way" src="/assets/img/bookChapters/pq8-10.png"/>
 <figcaption>Checking if the index is larger than length of list (instead of 3)</figcaption>
 </figure>
 
@@ -632,7 +621,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p>Now that you’ve programmed all the behaviors for moving through the questions (and you’ve made your code smarter and more flexible by making it more abstract), your next task is to get the images working properly, too. Right now, the app shows the same image no matter what question is being asked. You can change this so an image pertaining to each question appears when the user clicks the <strong>NextButton</strong>. Earlier, you added four pictures as media for the project. Now, you’ll create a third list, <strong>PictureList</strong>, with the image filenames as its items. You’ll also modify the <strong>NextButton.Click</strong> event handler to switch the picture each time, just as you switch the question text  (If you’re already thinking about using the <strong>currentQuestionIndex</strong> here, you’re on the right track!) First, create a <strong>PictureList</strong> and initialize it with the names of the image files. Be sure that the names are exactly the same as the filenames you loaded into the Media section of the project. <a data-type="xref" href="#picturelist_with_image_filenames_as_item">Figure 8-10</a> shows how the blocks for the <strong>PictureList</strong> should look.</p>
 
-<figure id="picturelist_with_image_filenames_as_item"><img alt="The PictureList with image filenames as items" src="images/pq8-11.png"/>
+<figure id="picturelist_with_image_filenames_as_item"><img alt="The PictureList with image filenames as items" src="/assets/img/bookChapters/pq8-11.png"/>
 <figcaption>The PictureList with image filenames as items</figcaption>
 </figure>
 
@@ -699,7 +688,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p>The <strong>currentQuestionIndex</strong> serves as the index for both the <strong>QuestionList</strong> and the <strong>PictureList</strong>. As long as you’ve set up your lists properly such that the first question corresponds to the first picture, the second to the second, and so on, the single index can serve both lists, as shown in <a data-type="xref" href="#selecting_the_currentquestionindexth_pic">Figure 8-11</a>. For instance, the first picture, roosChurch.gif, is a picture of President Franklin Delano Roosevelt (sitting with British Prime Minister Winston Churchill), and “Roosevelt” is the answer to the first question.</p>
 
-<figure id="selecting_the_currentquestionindexth_pic"><img alt="Selecting the currentQuestionIndexth picture each time" src="images/pq8-12.png"/>
+<figure id="selecting_the_currentquestionindexth_pic"><img alt="Selecting the currentQuestionIndexth picture each time" src="/assets/img/bookChapters/pq8-12.png"/>
 <figcaption>Selecting the currentQuestionIndexth picture each time</figcaption>
 </figure>
 
@@ -853,7 +842,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p>As shown in <a data-type="xref" href="#checking_the_answer">Figure 8-12</a>, the <strong>if else</strong> test asks whether the answer the user entered (<strong>AnswerText.Text</strong>) is equal to the<em> currentQuestionIndexth</em> item in the <strong>AnswerList</strong>. If <strong>currentQuestionIndex</strong> is 1, the app will compare the user’s answer with the first item in <strong>Answe</strong><strong>rList</strong>, “Roosevelt.” If <strong>currentQuestionIndex</strong> is 2, the app will compare the user’s answer with the second answer in the list, “Carter,” and so on. If the test result is positive, the “then” branch is executed and the <strong>RightWrongLabel</strong> is set to “correct!” If the test is false, the “else” branch is  executed and the <strong>RightWrongLabel</strong> is set to “incorrect!”</p>
 
-<figure id="checking_the_answer"><img alt="Checking the answer" src="images/pq8-13.png"/>
+<figure id="checking_the_answer"><img alt="Checking the answer" src="/assets/img/bookChapters/pq8-13.png"/>
 <figcaption>Checking the answer</figcaption>
 </figure>
 
@@ -863,7 +852,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 <p>Try answering one of the questions. It should report whether or not you answered the question exactly as specified in the <strong>AnswerList</strong>. Test with both a correct and incorrect answer. You’ll likely notice that for an answer to be marked as correct, it has to be an exact match and case-specific  to what you entered in the <strong>AnswerList</strong>. Be sure to also test that things work on successive questions.</p>
 </div>
 
-<figure id="presidents_quiza"><img alt="U.S. Presidents Quiz" src="images/pq8-14.png"/>
+<figure id="presidents_quiza"><img alt="U.S. Presidents Quiz" src="/assets/img/bookChapters/pq8-14.png"/>
 <figcaption>The quiz in action with the previous answer appearing when it shouldn’t.</figcaption>
 </figure>
 
@@ -930,7 +919,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p>As shown in <a data-type="xref" href="#picturelist_with_image_filenames-id00072">Figure 8-14</a>, when the user clicks the <strong>NextButton</strong>, he is moving on to the next question, so the top two rows of the event handler blank out the <strong>RightWrongLabel</strong> and the <strong>AnswerText</strong>.</p>
 
-<figure id="picturelist_with_image_filenames-id00072"><img alt="The PictureList with image filenames as items" src="images/pq8-15.png"/>
+<figure id="picturelist_with_image_filenames-id00072"><img alt="The PictureList with image filenames as items" src="/assets/img/bookChapters/pq8-15.png"/>
 <figcaption>The PictureList with image filenames as items</figcaption>
 </figure>
 
@@ -947,7 +936,7 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 
 <p><a data-type="xref" href="#blocks_for_the_presidents_quiz">Figure 8-15</a> shows the final block configuration for the Presidents Quiz.</p>
 
-<figure id="blocks_for_the_presidents_quiz"><img alt="The blocks for the Presidents Quiz" src="images/pq8-16.png"/> <img alt="The blocks for the Presidents Quiz" src="images/pq8-17.png"/>
+<figure id="blocks_for_the_presidents_quiz"><img alt="The blocks for the Presidents Quiz" src="/assets/img/bookChapters/pq8-16.png"/> <img alt="The blocks for the Presidents Quiz" src="/assets/img/bookChapters/pq8-17.png"/>
 <figcaption>The blocks for the Presidents Quiz</figcaption>
 </figure>
 </section>
@@ -977,6 +966,3 @@ The app needs to ask a question when the <strong style="line-height: 1.5em;">Nex
 </ul>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}

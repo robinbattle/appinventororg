@@ -1,15 +1,4 @@
-{% extends "site_base.html" %}
-{% block body %}
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
     <section data-type="chapter" data-pdf-bookmark="Chapter 19. Programming Lists of Data" id="programming_lists_of_data">
 <h1>Programming Lists of Data</h1>
 
@@ -17,13 +6,13 @@
 
 <p><em>In this chapter, we’ll examine the way App Inventor handles data. You’ll learn the fundamentals of programming both static information, in which the data doesn’t change, and dynamic information, e.g. data entered by the end-user. You’ll learn how to work with lists, and then you’ll explore a more complex data structure involving lists of lists and a multiple-choice quiz app.</em></p>
 
-<div class="informalfigure"><img alt="Programming Lists of Data" src="images/l19.png"/></div>
+<div class="informalfigure"><img alt="Programming Lists of Data" src="/assets/img/bookChapters/l19.png"/></div>
 
 <p>Many apps process lists of data. For example, Facebook processes your list of friends and lists of status reports. A quiz app works with a list of questions and answers. A game might have a list of characters or all-time high scores.</p>
 
 <p>You specify list data in App Inventor with a variable, but instead of naming a single memory cell with the variable. you name  a set of related set of memory cells. You specify that a variable is multi-item using either the <strong>make a list</strong> or <strong>create empty list</strong> blocks. For instance, the variable phoneNumbers in <a data-type="xref" href="#as_each_item_is_added_to_the_listcomma_a">Figure 19-1</a> defines a list of three items.</p>
 
-<figure id="as_each_item_is_added_to_the_listcomma_a"><img alt="As each item is added to the list, a new slot opens up" src="images/l19-4.png"/>
+<figure id="as_each_item_is_added_to_the_listcomma_a"><img alt="As each item is added to the list, a new slot opens up" src="/assets/img/bookChapters/l19-4.png"/>
 <figcaption>phoneNumbers now names three memory cells initialized with the numbers shown.</figcaption>
 </figure>
 
@@ -32,7 +21,7 @@
 
 <p>You create a list variable in the Blocks Editor using an <strong>initalize global variable</strong> block and then plugging in a <strong>make a list</strong> block.  The <strong>make a list </strong>block is found in the Lists drawer and it has only two slots. But you can  specify the number of slots you want in the list by clicking on the blue mutator icon and adding items as shown in <a data-type="xref" href="#defining_phonenumbers_as_a_list_using_th">Figure 19-2</a>.</p>
 
-<figure id="defining_phonenumbers_as_a_list_using_th"><img alt="Defining phoneNumbers as a list using the make a list block" src="images/l19-3.png"/>
+<figure id="defining_phonenumbers_as_a_list_using_th"><img alt="Defining phoneNumbers as a list using the make a list block" src="/assets/img/bookChapters/l19-3.png"/>
 <figcaption>Click the blue icon on <strong>make a list </strong>to change the number of items.</figcaption>
 </figure>
 
@@ -44,7 +33,7 @@
 
 <p>As your app runs, you’ll need to select items from the list, e.g., a particular question as the user traverses a quiz or a particular phone number chosen from a list. Items of a list are accessed using an index, i.e., specifying a position in the list. If a list has three items, you can access the items with indices 1, 2, and 3. The select list item block is used to grab a particular item, as shown in <a data-type="xref" href="#selecting_the_second_item_of_a_list">Figure 19-3</a>.</p>
 
-<figure id="selecting_the_second_item_of_a_list"><img alt="Selecting the second item of a list" src="images/l19-5.png"/>
+<figure id="selecting_the_second_item_of_a_list"><img alt="Selecting the second item of a list" src="/assets/img/bookChapters/l19-5.png"/>
 <figcaption>Selecting the second item of a list</figcaption>
 </figure>
 
@@ -58,13 +47,13 @@
 
 <p>The previous section showed how to select the 2nd item of a list, but how do you select the <em>next</em> item? When you traverse a list, the item number you’re selecting changes each time; it’s your <em>current</em> position in the list. Therefore, you need to define a variable to represent that current position. “index” is the common name for such a variable, and it is usually initialized to 1 (the first position in the list), as shown in <a data-type="xref" href="#initializing_the_variable_index_to_1">Figure 19-4</a>.</p>
 
-<figure id="initializing_the_variable_index_to_1"><img alt="Initializing the variable index to 1" src="images/l19-6.png"/>
+<figure id="initializing_the_variable_index_to_1"><img alt="Initializing the variable index to 1" src="/assets/img/bookChapters/l19-6.png"/>
 <figcaption>Initializing the variable index to 1</figcaption>
 </figure>
 
 <p>When the user does something to move to the next item, you <em>increment</em> the index variable by adding a value of 1 to it, and then select from the list using that incremented value. <a data-type="xref" href="#incrementing_the_index_value_and_using_t">Figure 19-5</a> shows the blocks for doing this.</p>
 
-<figure id="incrementing_the_index_value_and_using_t"><img alt="Incrementing the index value and using the incremented value to select the next list item" src="images/l19-7.png"/>
+<figure id="incrementing_the_index_value_and_using_t"><img alt="Incrementing the index value and using the incremented value to select the next list item" src="/assets/img/bookChapters/l19-7.png"/>
 <figcaption>Incrementing the index value and using the incremented value to select the next list item</figcaption>
 </figure>
 </section>
@@ -78,7 +67,7 @@
 
 <p>Our first step is to define a list variable for the <strong>colors</strong> list and initialize it with some paint colors as items, as depicted in <a data-type="xref" href="#initializing_the_list_colors_with_a_list">Figure 19-6</a>.</p>
 
-<figure id="initializing_the_list_colors_with_a_list"><img alt="Initializing the list colors with a list of paint colors" src="images/l19-8.png"/>
+<figure id="initializing_the_list_colors_with_a_list"><img alt="Initializing the list colors with a list of paint colors" src="/assets/img/bookChapters/l19-8.png"/>
 <figcaption>Initializing the list colors with a list of paint colors</figcaption>
 </figure>
 
@@ -86,7 +75,7 @@
 
 <p>The user traverses to the next color in the list by clicking the <strong>ColorButton</strong>. On each click, the index should be incremented and the <strong>BackgroundColor</strong> of the button should change to the currently selected item, as shown in <a data-type="xref" href="#letting_the_user_traverse_the_color_list">Figure 19-7</a>.</p>
 
-<figure id="letting_the_user_traverse_the_color_list"><img alt="Letting the user traverse the color list by clicking a button-changing the button color with each click" src="images/l19-10.png"/>
+<figure id="letting_the_user_traverse_the_color_list"><img alt="Letting the user traverse the color list by clicking a button-changing the button color with each click" src="/assets/img/bookChapters/l19-10.png"/>
 <figcaption>Letting the user traverse the color list by clicking a button-changing the button color with each click</figcaption>
 </figure>
 
@@ -96,13 +85,13 @@
 
 <p>If you said there would be an error, you’re right! <strong>index</strong> will become 4 and the app will try to select the fourth item in the list, but the list only has three items. The app will <em>force close</em>, or quit, and the user will see an error message like the one in <a data-type="xref" href="#error_message_displayed_when_the_app_tri">Figure 19-8</a>.</p>
 
-<figure id="error_message_displayed_when_the_app_tri"><img alt="The error message displayed when the app tries to select the fourth item from a three-item list" src="images/l19-11.png"/>
+<figure id="error_message_displayed_when_the_app_tri"><img alt="The error message displayed when the app tries to select the fourth item from a three-item list" src="/assets/img/bookChapters/l19-11.png"/>
 <figcaption>The error message displayed when the app tries to select the fourth item from a three-item list</figcaption>
 </figure>
 
 <p>Obviously, that message is not something you want your app’s users to see. To avoid that problem, add an <strong>if</strong> block to check whether the last color in the list has been reached. If it has, the <strong>index</strong> can be changed back to 1 so that the first color is again displayed, as shown in <a data-type="xref" href="#using_the_if_test_to_check_for_whether_t">Figure 19-9</a>.</p>
 
-<figure id="using_the_if_test_to_check_for_whether_t"><img alt="Using the if test to check for whether the index value is larger than the length of the list, and reset it to 1 if the test returns true" src="images/l19-12.png"/>
+<figure id="using_the_if_test_to_check_for_whether_t"><img alt="Using the if test to check for whether the index value is larger than the length of the list, and reset it to 1 if the test returns true" src="/assets/img/bookChapters/l19-12.png"/>
 <figcaption>Using a conditional (if) test to check for whether the index value is larger than the length of the list, and reset it to 1 if the test returns true</figcaption>
 </figure>
 
@@ -112,7 +101,7 @@
 
 <p>If you changed the first color in your list from Red to some other color, the app won’t work correctly unless you also remembered to change the initial <strong>Button.BackgroundColor</strong> you set in the Component Designer. The way to eliminate this code dependency is to set the initial <strong>ColorButton.BackgroundColor</strong> to <em>the first color in the list </em>rather than to a specific color. Since this change involves behavior that happens when your app first opens, you do this in the <strong>Screen.Initialize</strong> event handler that is invoked when an app is launched, as illustrated in <a data-type="xref" href="#setting_the_backgroundcolor_of_the_butto">Figure 19-10</a>.</p>
 
-<figure id="setting_the_backgroundcolor_of_the_butto"><img alt="Setting the BackgroundColor of the button to the first color in the list when the app is launched" src="images/l19-13.png"/>
+<figure id="setting_the_backgroundcolor_of_the_butto"><img alt="Setting the BackgroundColor of the button to the first color in the list when the app is launched" src="/assets/img/bookChapters/l19-13.png"/>
 <figcaption>Setting the BackgroundColor of the button to the first color in the list when the app is launched</figcaption>
 </figure>
 </section>
@@ -128,7 +117,7 @@
 
 <p>Apps such as a note taker begin with an empty list. When you want a list that begins empty, you define it with the <strong>create empty list</strong> block, as in <a data-type="xref" href="#blocks_to_define_a_dynamic_list_donapost">Figure 19-11</a>.</p>
 
-<figure id="blocks_to_define_a_dynamic_list_donapost"><img alt="The blocks to define a dynamic list don’t contain any predefined items" src="images/l19-14.png"/>
+<figure id="blocks_to_define_a_dynamic_list_donapost"><img alt="The blocks to define a dynamic list don’t contain any predefined items" src="/assets/img/bookChapters/l19-14.png"/>
 <figcaption>The blocks to define a dynamic list don’t contain any predefined items</figcaption>
 </figure>
 </section>
@@ -138,13 +127,13 @@
 
 <p>The first time someone launches the app, the <strong>notes</strong> list is empty. But when the user enters some data in a form and clicks Submit, new notes will be added to the list. The form might be as simple as the one shown in <a data-type="xref" href="#using_a_form_to_add_new_items_to_the_not">Figure 19-12</a>.</p>
 
-<figure id="using_a_form_to_add_new_items_to_the_not"><img alt="Using a form to add new items to the notes list" src="images/l19-15.png"/>
+<figure id="using_a_form_to_add_new_items_to_the_not"><img alt="Using a form to add new items to the notes list" src="/assets/img/bookChapters/l19-15.png"/>
 <figcaption>Using a form to add new items to the notes list</figcaption>
 </figure>
 
 <p>When the user enters a note and clicks the Submit button, the app calls the <strong>add items to list</strong> function to add the newly entered item to the list, as shown in <a data-type="xref" href="#calling_add_items_to_list_to_add_the_new">Figure 19-13</a>.</p>
 
-<figure id="calling_add_items_to_list_to_add_the_new"><img alt="Calling add items to list to add the new note when the user clicks the SubmitButton" src="images/l19-16.png"/>
+<figure id="calling_add_items_to_list_to_add_the_new"><img alt="Calling add items to list to add the new note when the user clicks the SubmitButton" src="/assets/img/bookChapters/l19-16.png"/>
 <figcaption>Calling add items to list to add the new note when the user clicks the SubmitButton</figcaption>
 </figure>
 
@@ -160,13 +149,13 @@
 
 <p>The simplest way to display a list in your app’s user interface is to use the same method you use for displaying numbers and text: put the list in the <strong>Text</strong> property of a <strong>Label</strong> component, as illustrated in <a data-type="xref" href="#displaying_the_list_to_the_user_within_t">Figure 19-14</a>.</p>
 
-<figure id="displaying_the_list_to_the_user_within_t"><img alt="Displaying the list to the user within the Text property of the NotesListLabel" src="images/l19-17.png"/>
+<figure id="displaying_the_list_to_the_user_within_t"><img alt="Displaying the list to the user within the Text property of the NotesListLabel" src="/assets/img/bookChapters/l19-17.png"/>
 <figcaption>Displaying the list to the user by placing it in a label.</figcaption>
 </figure>
 
 <p>Unfortunately, this simple method of displaying a list isn’t very elegant; it puts the list within parentheses, with each item separated by a space and not necessarily on the same line. For instance, if the user entered, “Will I ever finish this book?” as the first note, and “I forget what my son looks like!” as the second, the app would display the notes list as shown in <a data-type="xref" href="#note_taker">???</a>.</p>
 
-<div class="informalfigure" id="note_taker"><img alt="Note Taker" src="images/l19-18.png"/></div>
+<div class="informalfigure" id="note_taker"><img alt="Note Taker" src="/assets/img/bookChapters/l19-18.png"/></div>
 In Chapter 20, you’ll learn a more sophisticated way to display a list.</section>
 
 <section data-type="sect1" data-pdf-bookmark="Removing an Item from a List" id="removing_an_item_from_a_list">
@@ -174,7 +163,7 @@ In Chapter 20, you’ll learn a more sophisticated way to display a list.</secti
 
 <p>You can remove an item from a list with the <strong>remove list item</strong> block, shown in <a data-type="xref" href="#removing_an_item_from_a_list-id00136">Figure 19-15</a>.</p>
 
-<figure id="removing_an_item_from_a_list-id00136"><img alt="Removing an item from a list" src="images/l19-19.png"/>
+<figure id="removing_an_item_from_a_list-id00136"><img alt="Removing an item from a list" src="/assets/img/bookChapters/l19-19.png"/>
 <figcaption>Removing an item from a list</figcaption>
 </figure>
 
@@ -218,13 +207,13 @@ In Chapter 20, you’ll learn a more sophisticated way to display a list.</secti
 
 <p>The <strong>ListPicker.BeforePicking</strong> event is triggered when the user clicks the <strong>ListPicker</strong>’s associated button but before the choices are listed. In the <strong>ListPicker.BeforePicking</strong> event handler, you’ll set the <strong>ListPicker.Elements</strong> property to a list variable so that the data in the list will appear. For the Note Taker app, you’d set <strong>Elements</strong> to the <strong>notes</strong> variable that contains your list of notes, as shown in <a data-type="xref" href="#elements_property_of_listpicker1_is_set">Figure 19-16</a>.</p>
 
-<figure id="elements_property_of_listpicker1_is_set"><img alt="The Elements property of ListPicker1 is set to the list contained in notes" src="images/l19-20.png"/>
+<figure id="elements_property_of_listpicker1_is_set"><img alt="The Elements property of ListPicker1 is set to the list contained in notes" src="/assets/img/bookChapters/l19-20.png"/>
 <figcaption>The Elements property of ListPicker1 is set to the list contained in notes</figcaption>
 </figure>
 
 <p>With these blocks, the items of the list notes will appear in the <strong>ListPicker</strong>. If there were two notes, it would appear as shown in <a data-type="xref" href="#list_of_notes_appears_in_the_listpicker">Figure 19-17</a>.</p>
 
-<figure id="list_of_notes_appears_in_the_listpicker"><img alt="The list of notes appears in the ListPicker" src="images/l19-21.png"/>
+<figure id="list_of_notes_appears_in_the_listpicker"><img alt="The list of notes appears in the ListPicker" src="/assets/img/bookChapters/l19-21.png"/>
 <figcaption>The list of notes appears in the ListPicker</figcaption>
 </figure>
 
@@ -232,7 +221,7 @@ In Chapter 20, you’ll learn a more sophisticated way to display a list.</secti
 
 <p>Your goal in this example is to remove an item from the list, however, and the <strong>remove item from list</strong> block expects an index, not an item. The <strong>Selection</strong> property of the <strong>ListPicker</strong> is the actual data (the note), not the index. So you need to use the <strong>SelectionIndex</strong> property instead as it tells you the index of the chosen item. It should be set as the index of the remove list item block, as shown in <a data-type="xref" href="#using_the_position_in_list_block_to_find">Figure 19-18</a>.</p>
 
-<figure id="using_the_position_in_list_block_to_find"><img alt="Using the position in list block to find the index of the item to remove" src="images/l19-22new.png"/>
+<figure id="using_the_position_in_list_block_to_find"><img alt="Using the position in list block to find the index of the item to remove" src="/assets/img/bookChapters/l19-22new.png"/>
 <figcaption>Removing an item from a list based on the user’s selection in ListPicker</figcaption>
 </figure>
 </section>
@@ -242,7 +231,7 @@ In Chapter 20, you’ll learn a more sophisticated way to display a list.</secti
 
 <p>The items of a list can be of any type, including numbers, text, colors, or boolean values (true/false). But the items of a list can also, themselves, be lists. Such complex data structures are common. For example, a list of lists could be used to convert the Presidents Quiz from <a data-type="xref" href="ch08.html#presidents_quiz">Chapter 8</a> into a multiple-choice quiz. Let’s look again at the Presidents Quiz’s basic structure, which is a list of questions and a list of answers, as shown in <a data-type="xref" href="#list_of_questions_and_a_list_of_answers">Figure 19-19</a>.</p>
 
-<figure id="list_of_questions_and_a_list_of_answers"><img alt="A list of questions and a list of answers" src="images/l19-23.png"/>
+<figure id="list_of_questions_and_a_list_of_answers"><img alt="A list of questions and a list of answers" src="/assets/img/bookChapters/l19-23.png"/>
 <figcaption>A list of questions and a list of answers</figcaption>
 </figure>
 
@@ -250,7 +239,7 @@ In Chapter 20, you’ll learn a more sophisticated way to display a list.</secti
 
 <p>To make the quiz multiple choice, you’d need to keep an additional list, one which stores the choices for each answer to each question. You specify such data by placing three <strong>make a list</strong> blocks within an inner <strong>make a list</strong> block, as demonstrated in <a data-type="xref" href="#list_of_data_is_formed_by_inserting_make">Figure 19-20</a>.</p>
 
-<figure id="list_of_data_is_formed_by_inserting_make"><img alt="A list of Data is formed by inserting make a list blocks as items within an outer make a list block" src="images/l19-24.png"/>
+<figure id="list_of_data_is_formed_by_inserting_make"><img alt="A list of Data is formed by inserting make a list blocks as items within an outer make a list block" src="/assets/img/bookChapters/l19-24.png"/>
 <figcaption>A list of lists is formed by inserting <strong>make a list</strong> blocks as items within an inner <strong>make a list</strong> block</figcaption>
 </figure>
 
@@ -258,19 +247,19 @@ In Chapter 20, you’ll learn a more sophisticated way to display a list.</secti
 
 <p>As with the Note Taker app, you could use a <strong>ListPicker</strong> to present the choices to the user. If the index were named <strong>currentQuestionIndex</strong>, the <strong>ListPicker.BeforePicking</strong> event would appear as shown in <a data-type="xref" href="#using_the_list_picker_to_present_the_lis">Figure 19-21</a>.</p>
 
-<figure id="using_the_list_picker_to_present_the_lis"><img alt="Using the List Picker to present the list of choices to the user" src="images/l19-25.png"/>
+<figure id="using_the_list_picker_to_present_the_lis"><img alt="Using the List Picker to present the list of choices to the user" src="/assets/img/bookChapters/l19-25.png"/>
 <figcaption>Using the List Picker to present one of the list of answers to the user</figcaption>
 </figure>
 
 <p>These blocks would take the current sublist of <strong>answerChoices</strong> and let the user choose from it. So, if <strong>currentQuestionIndex</strong> were 1, the <strong>ListPicker</strong> would show a list like the one in <a data-type="xref" href="#answer_choices_presented_to_the_user_for">Figure 19-22</a>.</p>
 
-<figure id="answer_choices_presented_to_the_user_for"><img alt="The answer choices presented to the user for the second question" src="images/l19-listPicker.png"/>
+<figure id="answer_choices_presented_to_the_user_for"><img alt="The answer choices presented to the user for the second question" src="/assets/img/bookChapters/l19-listPicker.png"/>
 <figcaption>The answer choices presented to the user for the first question</figcaption>
 </figure>
 
 <p>When the user chooses, you check the answer with the blocks shown in <a data-type="xref" href="#checking_whether_the_user_chose_the_corr">Figure 19-23</a>.</p>
 
-<figure id="checking_whether_the_user_chose_the_corr"><img alt="Checking whether the user chose the correct answer" src="images/l19-27.png"/>
+<figure id="checking_whether_the_user_chose_the_corr"><img alt="Checking whether the user chose the correct answer" src="/assets/img/bookChapters/l19-27.png"/>
 <figcaption>Checking whether the user chose the correct answer</figcaption>
 </figure>
 
@@ -289,6 +278,3 @@ In Chapter 20, you’ll learn a more sophisticated way to display a list.</secti
 <p>While you think about how you’ll tackle that, understand that our exploration of lists isn’t done. In the next chapter, we’ll continue the discussion and focus on list iteration with a twist: applying functions to each item in a list.</p>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}

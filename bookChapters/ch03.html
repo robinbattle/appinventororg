@@ -1,20 +1,10 @@
 
 
-{% extends "site_base.html" %}
-{% block body %}
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
+
     <section data-type="chapter" data-pdf-bookmark="Chapter 3. MoleMash" id="molemash">
 <h1>MoleMash</h1>
 
-<figure class="floatLeft" style="width: 50%;" id="molemash"><img alt="MoleMash" src="images/mm.png"/></figure>
+<figure class="floatLeft" style="width: 50%;" id="molemash"><img alt="MoleMash" src="/assets/img/bookChapters/mm.png"/></figure>
 <p><em>This chapter shows you how to create MoleMash, a game inspired by the arcade classic Whac-A-Mole</em>™<em>, in which mechanical critters pop briefly out of holes, and players score points by whacking them with a mallet. MoleMash was created by a member of the App Inventor team, nominally to test the sprite functionality (which she implemented), but really because she is a fan of the game.</em></p>
 
 
@@ -33,7 +23,7 @@
 	<li>Pressing the Reset button resets the counts of hits and misses.</li>
 </ul>
 
-<figure id="molemash_user_interface"><img alt="The MoleMash user interface" src="images/mm3-1a.png"/>
+<figure id="molemash_user_interface"><img alt="The MoleMash user interface" src="/assets/img/bookChapters/mm3-1a.png"/>
 <figcaption>The MoleMash user interface</figcaption>
 </figure>
 </section>
@@ -263,7 +253,7 @@
 
 <p>Your screen should now look something like <a data-type="xref" href="#component_designer_view_of_the_quotation">Figure 3-2</a> (although your mole may be in a different position).</p>
 
-<figure id="component_designer_view_of_the_quotation"><img alt="The Component Designer view of the “action” components" src="images/mm3-2.png"/>
+<figure id="component_designer_view_of_the_quotation"><img alt="The Component Designer view of the “action” components" src="/assets/img/bookChapters/mm3-2.png"/>
 <figcaption>The Component Designer view of the “action” components</figcaption>
 </figure>
 </section>
@@ -296,7 +286,7 @@
 
 <p>Your screen should now look like something like <a class="xref " data-type="xref" href="#component_designer_view_of_all_the_molem">Figure 3-3</a>.</p>
 
-<figure id="component_designer_view_of_all_the_molem"><img alt="The Component Designer view of all the MoleMash components" src="images/mm3-3.png"/>
+<figure id="component_designer_view_of_all_the_molem"><img alt="The Component Designer view of all the MoleMash components" src="/assets/img/bookChapters/mm3-3.png"/>
 <figcaption>The Component Designer view of all the MoleMash components</figcaption>
 </figure>
 </section>
@@ -326,11 +316,11 @@
 
 <p>To randomly place the mole, we will want to select an x coordinate in the range from 0 to <em>Canvas1.Width</em> – <em>Mole.Width</em>. Similarly, we will want the y coordinate to be in the range from 0 to <em>Canvas1.Height</em> – <em>Mole.Height</em>. We can generate a random number through the built-in procedure <em>random integer</em>, found in the Math drawer. You will need to change the default “from” parameter from 1 to 0 and replace the “to” parameters, as shown in <a class="xref " data-type="xref" href="#movemole_procedurecomma_which_places_the">Figure 3-5</a>.</p>
 
-<figure id="positions_of_the_mole_on_the_screencomma"><img alt="Positions of the mole on the screen, with coordinate, height, and width information; x coordinates and widths are shown in blue, while y coordinates and heights are shown in orange" src="images/mm3-4.png"/>
+<figure id="positions_of_the_mole_on_the_screencomma"><img alt="Positions of the mole on the screen, with coordinate, height, and width information; x coordinates and widths are shown in blue, while y coordinates and heights are shown in orange" src="/assets/img/bookChapters/mm3-4.png"/>
 <figcaption>Positions of the mole on the screen, with coordinate, height, and width information; x coordinates and widths are shown in blue, while y coordinates and heights are shown in orange</figcaption>
 </figure>
 
-<figure id="movemole_procedurecomma_which_places_the"><img alt="The MoveMole procedure, which places the mole in a random location" src="images/mm3-5.png"/>
+<figure id="movemole_procedurecomma_which_places_the"><img alt="The MoveMole procedure, which places the mole in a random location" src="/assets/img/bookChapters/mm3-5.png"/>
 <figcaption>The MoveMole procedure, which places the mole in a random location</figcaption>
 </figure>
 
@@ -367,7 +357,7 @@
 	<li>Click the Procedures drawer, where you’ll see a <strong>call MoveMole</strong> block. (It’s pretty cool that you’ve created a new block, isn’t it?!) Drag it out, putting it in <strong>Screen1.Initialize</strong>, as shown in <a data-type="xref" href="#calling_the_movemole_procedure_when_the">Figure 3-6</a>.</li>
 </ol>
 
-<figure id="calling_the_movemole_procedure_when_the"><img alt="Calling the MoveMole procedure when the application starts" src="images/mm3-6.png"/>
+<figure id="calling_the_movemole_procedure_when_the"><img alt="Calling the MoveMole procedure when the application starts" src="/assets/img/bookChapters/mm3-6.png"/>
 <figcaption>Calling the MoveMole procedure when the application starts</figcaption>
 </figure>
 </section>
@@ -382,7 +372,7 @@
 	<li>Click the Procedures drawer and drag a <strong>call MoveMole</strong> block into the <strong>Clock1.Timer</strong> block, as shown in <a class="xref " data-type="xref" href="#calling_the_movemole_procedure_w-id00011">Figure 3-7</a>.</li>
 </ol>
 
-<figure id="calling_the_movemole_procedure_w-id00011"><img alt="Calling the MoveMole procedure when the timer goes off (every second)" src="images/mm3-7.png"/>
+<figure id="calling_the_movemole_procedure_w-id00011"><img alt="Calling the MoveMole procedure when the timer goes off (every second)" src="/assets/img/bookChapters/mm3-7.png"/>
 <figcaption>Calling the MoveMole procedure when the timer goes off (every second)</figcaption>
 </figure>
 
@@ -394,7 +384,7 @@
 
 <p>As you may recall, you created two labels, <strong>HitsCountsLabel</strong> and <strong>MissesCountsLabel</strong>, which had initial values of 0. We’d like to increment the numbers in these labels whenever the user successfully touches the mole (a hit) or taps the screen without touching the mole (a miss). To do so, we will use the <strong>Canvas1.Touched</strong> block, which indicates that the canvas was touched, the x and y coordinates of where it was touched (which we don’t need to know), and whether a sprite was touched (which we do need to know). <a data-type="xref" href="#incrementing_the_number_of_hits_left_par">Figure 3-8</a> shows the code you will create.</p>
 
-<figure id="incrementing_the_number_of_hits_left_par"><img alt="Incrementing the number of hits (HitsCountLabel) or misses (MissesCountLabel) when Canvas1 is touched" src="images/mm3-8.png"/>
+<figure id="incrementing_the_number_of_hits_left_par"><img alt="Incrementing the number of hits (HitsCountLabel) or misses (MissesCountLabel) when Canvas1 is touched" src="/assets/img/bookChapters/mm3-8.png"/>
 <figcaption>Incrementing the number of hits (HitsCountLabel) or misses (MissesCountLabel) when Canvas1 is touched</figcaption>
 </figure>
 
@@ -450,7 +440,7 @@
 
 <p>What we need is a <strong>ResetButton.Click </strong>block that sets the values of <strong>HitsCountLabel.Text</strong> and <strong>MissesCountLabel.Text</strong> to 0. Create the blocks shown in <a data-type="xref" href="#resetting_the_number_of_hits_left_parent">Figure 3-9</a>.</p>
 
-<figure id="resetting_the_number_of_hits_left_parent"><img alt="Resetting the number of Hits (HitsCountLabel) and Misses (MissesCountLabel) when the Reset button is pressed" src="images/mm3-9.png"/>
+<figure id="resetting_the_number_of_hits_left_parent"><img alt="Resetting the number of Hits (HitsCountLabel) and Misses (MissesCountLabel) when the Reset button is pressed" src="/assets/img/bookChapters/mm3-9.png"/>
 <figcaption>Resetting the number of Hits (HitsCountLabel) and Misses (MissesCountLabel) when the Reset button is pressed</figcaption>
 </figure>
 
@@ -468,7 +458,7 @@
 
 <p>We said earlier that we want the device to vibrate when the mole is touched, which we can do with the <strong>Sound1.Vibrate</strong> block, as shown in <a data-type="xref" href="#making_the_device_vibrate_briefly_left_p">Figure 3-10</a>.</p>
 
-<figure id="making_the_device_vibrate_briefly_left_p"><img alt="Making the device vibrate briefly (for 100 milliseconds) when the mole is touched" src="images/mm3-10.png"/>
+<figure id="making_the_device_vibrate_briefly_left_p"><img alt="Making the device vibrate briefly (for 100 milliseconds) when the mole is touched" src="/assets/img/bookChapters/mm3-10.png"/>
 <figcaption>Making the device vibrate briefly (for 100 milliseconds) when the mole is touched</figcaption>
 </figure>
 
@@ -485,7 +475,7 @@
 
 <p><a data-type="xref" href="#complete_molemash_application">Figure 3-11</a> illustrates the blocks for the complete MoleMash app.</p>
 
-<figure id="complete_molemash_application"><img alt="The complete MoleMash application" src="images/mm3-11.png"/>
+<figure id="complete_molemash_application"><img alt="The complete MoleMash application" src="/assets/img/bookChapters/mm3-11.png"/>
 <figcaption>The complete MoleMash application</figcaption>
 </figure>
 </section>
@@ -521,6 +511,3 @@
 <p>You’ll learn more techniques for games, including detecting collisions between moving <strong>ImageSprite</strong> components, in <a data-type="xref" href="ch05.html#ladybug_chase">Chapter 5</a>.</p>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}

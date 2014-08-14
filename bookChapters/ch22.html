@@ -1,15 +1,4 @@
-{% extends "site_base.html" %}
-{% block body %}
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
     <section data-type="chapter" data-pdf-bookmark="Chapter 22. Working with Databases" id="working_with_databases">
 <h1>Working with Databases</h1>
 
@@ -19,7 +8,7 @@
 
 <p><em>App Inventor does the heavy lifting for you when it comes to databases (and lots of other useful things!). The language provides components that reduce database communication to simple store and get operations. You can create apps that store data directly on the Android device, and with some setup, you can create apps that share data with other devices and people by storing it in a centralized web database.</em></p>
 
-<div class="informalfigure"><img alt="Working with Databases" src="images/d22.png"/></div>
+<div class="informalfigure"><img alt="Working with Databases" src="/assets/img/bookChapters/d22.png"/></div>
 
 <p>The data stored in variables and component properties is short-term: if the user enters some information in a form and then closes the app before that information has been stored in a database, that information will be gone when the app is reopened. To store information <em>persistently</em>, you must store it in a database. The information in databases is said to be <em>persistent</em> because even when you close the app and reopen it, the data is still available.</p>
 
@@ -34,7 +23,7 @@
 
 <p>You transfer data to long-term memory with the <strong>TinyDB.StoreValue</strong> block, as shown in <a data-type="xref" href="#tinydbdotstorevalue_block_stores_data_to">Figure 22-1</a>, which comes from the No Texting While Driving app.</p>
 
-<figure id="tinydbdotstorevalue_block_stores_data_to"><img alt="The TinyDB.StoreValue block stores data to the device’s long-term memory" src="images/d22-1.png"/>
+<figure id="tinydbdotstorevalue_block_stores_data_to"><img alt="The TinyDB.StoreValue block stores data to the device’s long-term memory" src="/assets/img/bookChapters/d22-1.png"/>
 <figcaption>The TinyDB.StoreValue block stores data to the device’s long-term memory</figcaption>
 </figure>
 
@@ -78,7 +67,7 @@
 
 <p>The blocks put the data returned from <strong>GetValue</strong> into the label <strong>ResponseLabel.</strong> if there is data already in the database, it is placed in <strong>ResponseLabel</strong>. If there is no data for the given tag, the “valueIfTagNotThere” value, “I’m driving right now, I’ll text you later” in this case, is placed in <strong>ResponseLabel</strong>.</p>
 
-<figure id="template_for_loading_database_data_when"><img alt="A template for loading database data when the app launches" src="images/d22-2.png"/>
+<figure id="template_for_loading_database_data_when"><img alt="A template for loading database data when the app launches" src="/assets/img/bookChapters/d22-2.png"/>
 <figcaption>When the app launches, you’ll often retrieve database information.</figcaption>
 </figure>
 </section>
@@ -107,7 +96,7 @@
 	<li>For the sake of simplicity, the issue being voted on is determined outside the app, such as in a classroom setting in which the teacher announces the issue and asks everyone to vote electronically. (Note that this example could be extended to allow users to prompt votes by posting issues to vote on from within the app.)</li>
 </ul>
 
-<figure id="voting_app_that_stores_votes_to_tinywebd"><img alt="A Voting app that stores votes to TinyWebDB" src="images/d22-3.png"/>
+<figure id="voting_app_that_stores_votes_to_tinywebd"><img alt="A Voting app that stores votes to TinyWebDB" src="/assets/img/bookChapters/d22-3.png"/>
 <figcaption>A Voting app that stores votes to TinyWebDB</figcaption>
 </figure>
 
@@ -116,7 +105,7 @@
 
 <p>The <strong>TinyWebDB.StoreValue</strong> block works the same as <strong>TinyDB.StoreValue</strong>, only the data is stored on the Web. For our voting sample, assume the user can enter a vote in a text box named <strong>VoteTextBox</strong> and click a button named <strong>VoteButton</strong> to submit the vote. To store the vote to the web database so others can see it, we’ll code the <strong>VoteButton.Click</strong> event handler like the example in <a data-type="xref" href="#using_the_votebuttondotclick_event_handl">Figure 22-4</a>.</p>
 
-<figure id="using_the_votebuttondotclick_event_handl"><img alt="Using the VoteButton.Click event handler to store a vote to the database" src="images/d22-4.png"/>
+<figure id="using_the_votebuttondotclick_event_handl"><img alt="Using the VoteButton.Click event handler to store a vote to the database" src="/assets/img/bookChapters/d22-4.png"/>
 <figcaption>When the user enters a vote, store it to the web database</figcaption>
 </figure>
 
@@ -152,11 +141,11 @@
 
 <p>With <strong>TinyWebDB</strong>, a call to <strong>GetValue</strong> only <em>requests</em> the data, and then you process it later in a <strong>TinyWebDB.GotValue</strong> event handler. <strong>TinyWebDB.GetValue</strong> should really be called “RequestValue” because it just makes the request to the web database and doesn’t actually “get” a value from it right away. To see this more clearly, check out the difference between the <strong>TinyDB.GetValue</strong> block (<a data-type="xref" href="#tinydbdotgetvalue_block">Figure 22-5</a>) and the <strong>TinyWebDB.GetValue</strong> block (<a data-type="xref" href="#tinywebdbdotgetvalue_block">Figure 22-6</a>).</p>
 
-<figure id="tinydbdotgetvalue_block"><img alt="The TinyDB.GetValue block" src="images/d22-5.png"/>
+<figure id="tinydbdotgetvalue_block"><img alt="The TinyDB.GetValue block" src="/assets/img/bookChapters/d22-5.png"/>
 <figcaption>The TinyDB.GetValue block</figcaption>
 </figure>
 
-<figure id="tinywebdbdotgetvalue_block"><img alt="The TinyWebDB.GetValue block" src="images/d22-6.png"/>
+<figure id="tinywebdbdotgetvalue_block"><img alt="The TinyWebDB.GetValue block" src="/assets/img/bookChapters/d22-6.png"/>
 <figcaption>The TinyWebDB.GetValue block</figcaption>
 </figure>
 
@@ -172,13 +161,13 @@
 
 <p>The simplest scheme for retrieving list data is to request the data when the app launches, in the <strong>Screen.Initialize</strong> event, as shown in <a data-type="xref" href="#requesting_data_in_the_screen1dotinitial">Figure 22-7</a>. (In this example, we’ll just call the database with the tag for “voterlist.”)</p>
 
-<figure id="requesting_data_in_the_screen1dotinitial"><img alt="Requesting data in the Screen1.Initialize event" src="images/d22-7.png"/>
+<figure id="requesting_data_in_the_screen1dotinitial"><img alt="Requesting data in the Screen1.Initialize event" src="/assets/img/bookChapters/d22-7.png"/>
 <figcaption>Requesting data in the Screen1.Initialize event</figcaption>
 </figure>
 
 <p>When the list of voters arrives from the web database, the <strong>TinyWebDB1.GotValue</strong> event handler will be triggered. <a data-type="xref" href="#using_the_gotvalue_event_handler_to_proc">Figure 22-8</a> shows some blocks for processing the returned list.</p>
 
-<figure id="using_the_gotvalue_event_handler_to_proc"><img alt="Using the GotValue event handler to process the returned list" src="images/d22-8.png"/>
+<figure id="using_the_gotvalue_event_handler_to_proc"><img alt="Using the GotValue event handler to process the returned list" src="/assets/img/bookChapters/d22-8.png"/>
 <figcaption>Using the GotValue event handler to process the returned list</figcaption>
 </figure>
 
@@ -201,7 +190,7 @@
 
 <p><a data-type="xref" href="#in_this_more_complex_schemecomma_getvalu">Figure 22-9</a> shows the blocks for this more complicated scheme for requesting the database data.</p>
 
-<figure id="in_this_more_complex_schemecomma_getvalu"><img alt="In this more complex scheme, GetValue is called after getting the user’s email" src="images/d22-9.png"/>
+<figure id="in_this_more_complex_schemecomma_getvalu"><img alt="In this more complex scheme, GetValue is called after getting the user’s email" src="/assets/img/bookChapters/d22-9.png"/>
 <figcaption>In this more complex scheme, GetValue is called after getting the user’s email instead of in Screen.Initialize.</figcaption>
 </figure>
 
@@ -218,7 +207,7 @@
 
 <p>The blocks first ask if a non-empty voter list came back from the database by calling <strong>is a list?</strong>. If so, the data is put into the variable <strong>voterList</strong>. Remember, <strong>voterList</strong> will have emails for everyone who has used this app. But we don’t know if this particular user is in the list yet, so we have to check. If the user is not yet in the list, he is added with <strong>add item to list</strong>, and the updated list is stored to the web database.</p>
 
-<figure id="using_the_gotvalue_blocks_to_process_the"><img alt="Using the GotValue blocks to process the data returned from the database and perform different actions based on what is returned" height="auto" src="images/d22-10.png" width="120%"/>
+<figure id="using_the_gotvalue_blocks_to_process_the"><img alt="Using the GotValue blocks to process the data returned from the database and perform different actions based on what is returned" height="auto" src="/assets/img/bookChapters/d22-10.png" width="120%"/>
 <figcaption>Using the GotValue blocks to process the data returned from the database and perform different actions based on what is returned</figcaption>
 </figure>
 
@@ -270,7 +259,7 @@
 
 <p>When the user clicks on the <strong>ViewVotes</strong> button, the app should retrieve all votes from the database and display them. Supposing the voter list has already been retrieved into the variable <strong>voterList</strong>, we can use a <strong>foreach</strong> to request the vote of each person in the list, as shown in <a data-type="xref" href="#using_a_foreach_block_to_request_the_vot">Figure 22-11</a>.</p>
 
-<figure id="using_a_foreach_block_to_request_the_vot"><img alt="Using a foreach block to request the vote of each person in the list" src="images/d22-11new.png"/>
+<figure id="using_a_foreach_block_to_request_the_vot"><img alt="Using a foreach block to request the vote of each person in the list" src="/assets/img/bookChapters/d22-11new.png"/>
 <figcaption>Using a foreach block to request the vote of each person in the list</figcaption>
 </figure>
 
@@ -282,7 +271,7 @@
 
 <p><a data-type="xref" href="#tinywebdbdotgotvalue_event_handler">Figure 22-12</a> shows the entire TinyWebDB.GotValue event handler.</p>
 
-<figure id="tinywebdbdotgotvalue_event_handler"><img alt="The TinyWebDB.GotValue event handler" height="120%" src="images/d22-12.png" width="auto"/>
+<figure id="tinywebdbdotgotvalue_event_handler"><img alt="The TinyWebDB.GotValue event handler" height="120%" src="/assets/img/bookChapters/d22-12.png" width="auto"/>
 <figcaption>The TinyWebDB.GotValue event handler</figcaption>
 </figure>
 </section>
@@ -306,6 +295,3 @@
 <p>App Inventor makes it easy to store data persistently through its <strong>TinyDB</strong> and <strong>TinyWebDB</strong> components. Data is always stored as a tag-value pair, with the tag identifying the data for later retrieval. Use <strong>TinyDB</strong> when it is appropriate to store data directly on the device. When data needs to be shared across phones (e.g., for a multiplayer game or a voting app), you’ll need to use <strong>TinyWebDB</strong> instead. <strong>TinyWebDB</strong> is more complicated because you need to set up a callback procedure (the <strong>GotValue</strong> event handler), as well as a web database service.</p>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}

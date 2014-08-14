@@ -1,5 +1,4 @@
-{% extends "site_base.html" %}
-{% block body %}
+
 <title>Drawing</title>
   
 <h2>How do you animate sprites?</h2>
@@ -11,7 +10,7 @@
           
 			 <a name="canvas"></a> 
 		  <h3>Example 1. How do you move a sprite down, smoothly, at 100 pixels a second</h3>
-		    <img class="thumbnail" src="../../assets/img/sprites/moveDown.png" border="0"/>
+		    <img class="thumbnail" src="/assets/img/sprites/moveDown.png" border="0"/>
 		   <p>An ImageSprite's speed, pixels/second, is actually determined by two properties.
 		   The Interval property specifies how often the sprite will be moved-- it is similar
 		   to the TimerInterval property of the Clock component. The Speed property specifies
@@ -22,7 +21,7 @@
 		   A Sprite's Heading property specifies the direction it moves. As shown below,
 		   a Heading of 270 degrees will move the sprite down.
 		   
-			<img class="thumbnail" src="../../assets/img/sprites/headingEdge.png" border="0"/>
+			<img class="thumbnail" src="/assets/img/sprites/headingEdge.png" border="0"/>
 			</p>
 			
 			
@@ -37,7 +36,7 @@
             <div class="span6">
            
 			<h3>Example 2. How do you make a ball bounce?</h3>
-			<img class="thumbnail" src="../../assets/img/sprites/bounce.png" border="0"/>
+			<img class="thumbnail" src="/assets/img/sprites/bounce.png" border="0"/>
 			<p>
 			App Inventor provides a Bounce block that causes a ball to bounce off the edge
 			of a canvas. You typically use Bounce within the EdgeReached event handler, as
@@ -61,4 +60,3 @@
 		
        
 
-{% endblock %}

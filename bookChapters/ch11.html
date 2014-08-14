@@ -1,15 +1,4 @@
 
-{% extends "site_base.html" %}
-{% block body %}
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>atlas book skeleton</title>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
-    <link rel="stylesheet" type="text/css" href="theme/html/html.css"/>
-  </head>
-  <body data-type="book">
     <section data-type="chapter" data-pdf-bookmark="Chapter 11. Broadcast Hub" id="broadcast_hub">
 <h1>Broadcast Hub</h1>
 
@@ -17,7 +6,7 @@
 
 <p><em>FrontlineSMS software serves as a hub for SMS text communication within a group. People who don’t have Internet access but do have mobile connectivity can send in a special code to join the group, after which they receive broadcast messages from the hub. For places with no Internet access, the broadcast hub can serve as a vital connection to the outside world.</em></p>
 
-<div class="floatRight"><em><img alt="Broadcast Hub" src="images/bh.png"/></em></div>
+<div class="floatRight"><em><img alt="Broadcast Hub" src="/assets/img/bookChapters/bh.png"/></em></div>
 
 <p><em>In this chapter, you’ll create a broadcast hub app that works similarly to FrontlineSMS but runs on an Android phone. Having the hub itself on a mobile device means the administrator can be on the move, something that is especially important in controversial situations like election monitoring and healthcare negotiations.</em></p>
 
@@ -173,7 +162,7 @@
 
 <p><a data-type="xref" href="#broadcast_hub_in_the_components_designer">Figure 11-1</a> shows the app layout in the Component Designer.</p>
 
-<figure id="broadcast_hub_in_the_components_designer"><img alt="Broadcast Hub in the Components Designer" src="images/bh11-1.png"/>
+<figure id="broadcast_hub_in_the_components_designer"><img alt="Broadcast Hub in the Components Designer" src="/assets/img/bookChapters/bh11-1.png"/>
 <figcaption>Broadcast Hub in the Components Designer</figcaption>
 </figure>
 </section>
@@ -277,7 +266,7 @@
 
 <p>If you completed the No Texting While Driving app in <a data-type="xref" href="ch04.html#no_texting_while_driving">Chapter 4</a>, these blocks should look familiar. <strong>Texting1.MessageReceived</strong> is triggered when the phone receives any text message. As shown in <a data-type="xref" href="#sending_the_invite_message_back_after_re">Figure 11-2</a>, the blocks within the event handler set the <strong>PhoneNumber</strong> and <strong>Message</strong> of the <strong>Texting1</strong> component and then send the message.</p>
 
-<figure id="sending_the_invite_message_back_after_re"><img alt="Sending the invite message back after receiving a text" src="images/bh11-2.png"/>
+<figure id="sending_the_invite_message_back_after_re"><img alt="Sending the invite message back after receiving a text" src="/assets/img/bookChapters/bh11-2.png"/>
 <figcaption>Sending the invite message back after receiving a text</figcaption>
 </figure>
 
@@ -293,7 +282,7 @@
 
 <p>Now let’s create the blocks for the second behavior: when the text message “joinFMDT” is received, add the sender to the broadcast list. First, you’ll need to define a list variable, <strong>BroadcastList</strong>, to store the phone numbers that register. From the Variables drawer, drag out a <strong>initialize global</strong> block and name it “BroadcastList”. Initialize it to an empty list with a <strong>create</strong><strong> a list</strong> block from the Lists drawer, as shown in <a data-type="xref" href="#broadcastlist_variable_for_storing_the_l">Figure 11-3</a> (we’ll add the functionality to build this list shortly).</p>
 
-<figure id="broadcastlist_variable_for_storing_the_l"><img alt="The BroadcastList variable for storing the list of registered numbers" src="images/bh11-3.png"/>
+<figure id="broadcastlist_variable_for_storing_the_l"><img alt="The BroadcastList variable for storing the list of registered numbers" src="/assets/img/bookChapters/bh11-3.png"/>
 <figcaption>The BroadcastList variable for storing the list of registered numbers</figcaption>
 </figure>
 
@@ -437,7 +426,7 @@
 
 <p>The first row of blocks shown in <a data-type="xref" href="#if_the_incoming_message_is_quotation_mar">Figure 11-4</a> sets <strong>Texting1.PhoneNumber</strong> to the phone number of the message that was just received; we know we’re going to respond to the sender, so this sets that up. The app then asks if the <strong>messageText</strong> was the special code, “joinFMDT.” If so, the sender’s phone number is added to the <strong>BroadcastList</strong>, and a congratulations message is sent. If the <strong>messageText</strong> is something other than “joinFMDT,”” the reply message repeats the invitation message. After the <strong>ifelse</strong> block, the reply message is sent (bottom row of the blocks).</p>
 
-<figure id="if_the_incoming_message_is_quotation_mar"><img alt="If the incoming message is “joinFMDT”, add the sender to BroadcastList" src="images/bh11-4.png"/>
+<figure id="if_the_incoming_message_is_quotation_mar"><img alt="If the incoming message is “joinFMDT”, add the sender to BroadcastList" src="/assets/img/bookChapters/bh11-4.png"/>
 <figcaption>If the incoming message is “joinFMDT”, add the sender to BroadcastList</figcaption>
 </figure>
 
@@ -584,7 +573,7 @@
 
 <p>The message is broadcast using a <strong>for each</strong> (within the outer <strong>then</strong> clause). The <strong>for each</strong> loops through and sends the message to each item in the <strong>BroadcastList</strong>. As the <strong>for each</strong> repeats, each succeeding phone number from the <strong>BroadcastList</strong> is stored in <strong>item</strong> (<strong>item</strong> is a variable placeholder for the current item being processed in the <strong>for each</strong>). The blocks within the <strong>foreach</strong> set <strong>Texting.PhoneNumber</strong> to the current item and then send the message. For more information on how <strong>foreach</strong> works, see <a data-type="xref" href="ch20.html#iteration_blocks_iteration">Chapter 20</a>.</p>
 
-<figure id="now_we_check_if_the_sender_is_already_in"><img alt="Now we check if the sender is already in the group and broadcast the message if so" src="images/bh11-5.png"/>
+<figure id="now_we_check_if_the_sender_is_already_in"><img alt="Now we check if the sender is already in the group and broadcast the message if so" src="/assets/img/bookChapters/bh11-5.png"/>
 <figcaption>The blocks check if the sender is already in the group and broadcasts the message if so</figcaption>
 </figure>
 
@@ -731,7 +720,7 @@
 
 <p>The <strong>foreach</strong> in <strong>displayBroadcastList</strong> successively adds a phone number to the end of the label, as shown in <a data-type="xref" href="#displaying_the_phone_numbers_with_a_newl">Figure 11-6</a>, placing a newline character (\n) between each item to place each number on a new line.</p>
 
-<figure id="displaying_the_phone_numbers_with_a_newl"><img alt="Displaying the phone numbers with a newline between each" src="images/bh11-6.png"/>
+<figure id="displaying_the_phone_numbers_with_a_newl"><img alt="Displaying the phone numbers with a newline between each" src="/assets/img/bookChapters/bh11-6.png"/>
 <figcaption>Displaying the phone numbers with a newline between each</figcaption>
 </figure>
 
@@ -739,7 +728,7 @@
 
 <p><a data-type="xref" href="#calling_the_displaybroadcastlist_procedu">Figure 11-7</a> shows how the relevant blocks within the Texting1.MessageReceived event handler should look.</p>
 
-<figure id="calling_the_displaybroadcastlist_procedu"><img alt="Calling the displayBroadcastList procedure" src="images/bh11-7.png"/>
+<figure id="calling_the_displaybroadcastlist_procedu"><img alt="Calling the displayBroadcastList procedure" src="/assets/img/bookChapters/bh11-7.png"/>
 <figcaption>Calling the displayBroadcastList procedure</figcaption>
 </figure>
 
@@ -844,7 +833,7 @@
 
 <p>After broadcasting the received message to all of the numbers in <strong>BroadcastList</strong>, the app now modifies the <strong>LogLabel</strong> to add a report of the just-broadcasted text, as shown in <a data-type="xref" href="#adding_a_new_broadcast_message_to_the_lo">Figure 11-8</a>. Note that the message is added to the beginning of the list instead of the end, so the more recent message sent to the group shows up at the top.</p>
 
-<figure id="adding_a_new_broadcast_message_to_the_lo"><img alt="Adding a new broadcast message to the log" src="images/bh11-8.png"/>
+<figure id="adding_a_new_broadcast_message_to_the_lo"><img alt="Adding a new broadcast message to the log" src="/assets/img/bookChapters/bh11-8.png"/>
 <figcaption>Adding a new broadcast message to the log</figcaption>
 </figure>
 
@@ -926,7 +915,7 @@ message from: 555-6666 broadcast</blockquote>
 
 <p>When a “joinFMDT” text comes in and the new member’s phone number is added to the list, <strong>TinyDB1.StoreValue</strong> is called to store the <strong>BroadcastList</strong> to the database. The tag (a text object named “broadcastList”) is used so that you can later retrieve the data. As shown in <a data-type="xref" href="#calling_tinydb_to_store_the_broadcastlis">Figure 11-9</a>, the value that gets called by <strong>StoreValue</strong> is the variable <strong>BroadcastList</strong>.</p>
 
-<figure id="calling_tinydb_to_store_the_broadcastlis"><img alt="Calling TinyDB to store the BroadcastList" src="images/bh11-9.png"/>
+<figure id="calling_tinydb_to_store_the_broadcastlis"><img alt="Calling TinyDB to store the BroadcastList" src="/assets/img/bookChapters/bh11-9.png"/>
 <figcaption>Calling TinyDB to store the BroadcastList</figcaption>
 </figure>
 </section>
@@ -998,7 +987,7 @@ When the app begins, the <strong>Screen1.Initialize</strong> event is triggered,
 
 <p>When the app begins, the <strong>Screen1.Initialize</strong> event is triggered. The blocks shown in <a data-type="xref" href="#loading_the_broadcastlist_from_the_datab">Figure 11-10</a>  request the data from the database with <strong>TinyDB1.GetValue</strong>.  </p>
 
-<figure id="loading_the_broadcastlist_from_the_datab"><img alt="Loading the BroadcastList from the database" src="images/bh11-10.png"/>
+<figure id="loading_the_broadcastlist_from_the_datab"><img alt="Loading the BroadcastList from the database" src="/assets/img/bookChapters/bh11-10.png"/>
 <figcaption>Loading the BroadcastList from the database</figcaption>
 </figure>
 You call <strong>TinyDB.GetValue</strong>, using the same tag you used to store the list (“broadcastList”). In the general case, the previously stored list of phone numbers will be returned and placed in the variable <strong>BroadcastList</strong>. But <strong>TinyDB.GetValue </strong>provides a slot, <strong>valueIfTagNotThere</strong>, for specifying what the block should return if there is not yet data in the database for that tag, as will happen the first time this app is run. In this case, an empty list is returned.
@@ -1018,7 +1007,7 @@ You call <strong>TinyDB.GetValue</strong>, using the same tag you used to store
 
 <p><a data-type="xref" href="#complete_app">Figure 11-11</a> illustrates the blocks in the completed Broadcast Hub app.</p>
 
-<figure id="complete_app"><img alt="The complete app" src="images/bh11-11a.png"/> <img alt="The complete app" src="images/bh11-11b.png"/>
+<figure id="complete_app"><img alt="The complete app" src="/assets/img/bookChapters/bh11-11a.png"/> <img alt="The complete app" src="/assets/img/bookChapters/bh11-11b.png"/>
 <figcaption>The complete app</figcaption>
 </figure>
 </section>
@@ -1051,6 +1040,3 @@ You call <strong>TinyDB.GetValue</strong>, using the same tag you used to store
 </ul>
 </section>
 </section>
-  </body>
-</html>
-{% endblock %}
