@@ -1,5 +1,5 @@
-application: jappinventororg
-version: 1
+application: appinventororg
+version: jordan
 runtime: python27
 api_version: 1
 threadsafe: no

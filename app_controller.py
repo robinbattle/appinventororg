@@ -25,6 +25,7 @@ import datetime
 from geopy import geocoders
 from google.appengine.api import mail
 
+
 APPSDIR='/apps'
 APPS2DIR='/apps2'
 
@@ -2065,6 +2066,26 @@ class QuizQuestionsHandler(webapp.RequestHandler):
 #Quizzes Begin
 class Quiz1Handler(webapp.RequestHandler):
     def get(self):
+        # redirect test
+        if self.request.get('flag') == 'true':
+            logging.info("do not redirect!")
+        else:
+            # look up a content that uses this url
+            logging.info(self.request.path)
+            results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
+            if len(results) == 0:
+                logging.info("Could not find a content to redirect too!")
+            else:
+                content = results[0]
+                # build the url
+                content_id = content.c_identifier
+                module_id = content.key.parent().get().m_identifier
+                course_id = content.key.parent().parent().get().c_identifier
+                redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
+                
+                
+                self.redirect(redirectURL)
+            
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2096,6 +2117,23 @@ class ConditionsHandler(webapp.RequestHandler):
 
 class Quiz2Handler(webapp.RequestHandler):
     def get(self):
+        # redirect test
+        if self.request.get('flag') == 'true':
+            logging.info("do not redirect!")
+        else:
+            # look up a content that uses this url
+            logging.info(self.request.path)
+            results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
+            if len(results) == 0:
+                logging.info("Could not find a content to redirect too!")
+            else:
+                content = results[0]
+                # build the url
+                content_id = content.c_identifier
+                module_id = content.key.parent().get().m_identifier
+                course_id = content.key.parent().parent().get().c_identifier
+                redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
+                self.redirect(redirectURL)
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2126,7 +2164,24 @@ class ConditionsHandler(webapp.RequestHandler):
 ###END OF QUIZ 2###
 class Quiz3Handler(webapp.RequestHandler):
     def get(self):
-        
+        # redirect test
+        if self.request.get('flag') == 'true':
+            logging.info("do not redirect!")
+        else:
+            # look up a content that uses this url
+            logging.info(self.request.path)
+            results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
+            if len(results) == 0:
+                logging.info("Could not find a content to redirect too!")
+            else:
+                content = results[0]
+                # build the url
+                content_id = content.c_identifier
+                module_id = content.key.parent().get().m_identifier
+                course_id = content.key.parent().parent().get().c_identifier
+                redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
+                self.redirect(redirectURL)
+                        
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
         allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
@@ -5039,17 +5094,12 @@ application = webapp.WSGIApplication(
         ('/admin/importcourses', AdminImportCoursesHandler),
         ('/admin/serialview', AdminSerialViewHandler),
         
-        
-        
         ########################
         #  END Jordan's Pages  #
         ########################
         
     ],
     debug=True)
-
-
-
 
 def main():
     run_wsgi_app(application)
