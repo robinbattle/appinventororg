@@ -2,21 +2,6 @@
  *	The following is used on the admin courses editor page!
  */
 
-function titleToUrl(title) {	
-	// translate title in to pretty url version
-	urlPrettyTitle = ""
-	for(i = 0; i < title.length; i++) {
-		console.log(title[i] + ' ' + title.charCodeAt(i))
-		if(title.charCodeAt(i) == 32) {
-			urlPrettyTitle += '.'
-		} else {
-			urlPrettyTitle += title[i]
-		}
-	}
-	
-	return urlPrettyTitle
-}
-
 function handleFileSelect(evt) {
 	files = evt.target.files;
 	if (files.length == 0) {
@@ -56,11 +41,11 @@ $('#updateCourse').click(function() {
 	// gather the data from the editModal
 	title = $('#edit_course_title').val();
 	
-	url_title = titleToUrl(title);
-	
 	description = $('#edit_course_description').val();
 	icon = $('#edit_icon_img').attr('src');
 	course_id = $('#editModal').attr('course_id');
+	identifier = $('#edit_course_identifier').val();
+	
 	// post it to the server and refresh the page
 	if (title == "") {
 		alert("title cannot be empty!")
@@ -70,7 +55,7 @@ $('#updateCourse').click(function() {
 			s_title : title,
 			s_description : description,
 			s_icon : icon,
-			s_url_title : url_title
+			s_identifier : identifier
 		}, function(data, status) {
 			location.reload(true);
 		});
@@ -91,6 +76,8 @@ $(document).on('click', '#editcoursebtn', function() {
 	$('#edit_icon_img').attr('src', course_root.find('img').attr('src'));
 	// set some sneaky modal attributes for later XP
 	$('#editModal').attr('course_id', course_root.attr('keyid'));
+	$('#edit_course_identifier').val(course_root.attr('identifier'));
+	
 });
 
 $(document).ready(function() {
@@ -105,20 +92,7 @@ $(document).ready(function() {
 		if (insideNoClick == true) {
 			// alert("NO LINK!");
 		} else {
-			title = $(this).find('h1').text();
-			
-			// translate title in to pretty url version
-			urlPrettyTitle = ""
-			for(i = 0; i < title.length; i++) {
-				console.log(title[i] + ' ' + title.charCodeAt(i))
-				if(title.charCodeAt(i) == 32) {
-					urlPrettyTitle += '.'
-				} else {
-					urlPrettyTitle += title[i]
-				}
-			}
-			
-			window.location = "courses/" + urlPrettyTitle;
+			window.location = "courses/" + $(this).attr('identifier');
 		}
 	});
 
@@ -127,17 +101,17 @@ $(document).ready(function() {
 	 * Handles the creation of new courses, The data from the course creation
 	 * form is retrieved and sent to the server for storage in the datastore.
 	 */
-	$("#NewCourseForm").submit(function(event) {
-		event.preventDefault();
-
-		new_title = $("#CourseTitle").val();
+	$("#createCoursebtn").click(function(event) {		
 		
-		s_new_url_title = titleToUrl(new_title);
+		new_title = $("#CourseTitle").val();
 
 		new_description = $("#CourseDescription").val();
 		file = $('#CourseIcon').get(0).files[0];
 
 		s_last_index = $('#sortable').children().last().attr('index');
+		
+		
+		new_identifier = $("#CourseIdentifier").val();
 		
 		// check if s_last_index is undefined
 		if(! s_last_index) {
@@ -157,12 +131,12 @@ $(document).ready(function() {
 					description : new_description,
 					icon : dataURL,
 					last_index : s_last_index,
-					new_url_title : s_new_url_title
+					s_identifier : new_identifier
 				}, function(data, status) {
 					location.reload(true);
 				});
 			};
-		})(file);
+		})(file);	
 
 		validated = true;
 		errorString = "Missing required fields\n\n";

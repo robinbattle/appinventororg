@@ -1,15 +1,18 @@
+
 .course-box {
-    margin-bottom: 10px;
-    min-height: 150px;
-    border-radius: 5px;
     cursor: pointer;
     padding: 20px;
+    border: 1px #2d2d2d solid;
+    border-color: rgba(1, 1, 1, 0.1);
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px rgba(1, 1, 1, 0.1);
+    margin-bottom: 25px;
+    min-height: 150px;
 }
 
 .course-box:hover {
     background-color: #efefef
 }
-
 
 .vertical-content-nav-bar {
     padding-left: 0px;

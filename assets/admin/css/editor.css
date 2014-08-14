@@ -30,15 +30,23 @@
 .course-edit-box {
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 80px;
 }
 
 .course-box {
     list-style-type: none;
     cursor: pointer;
     position: relative;
-    border-radius: 10px;
+    border: 1px #2d2d2d solid;
+    border-color: rgba(1, 1, 1, 0.1);
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px rgba(1, 1, 1, 0.1);
+    margin-bottom: 25px;
+    min-height: 150px;
 }
 
+}
 .item-box {
     background-color: white;
     min-height: 150px;
@@ -64,11 +72,11 @@
 }
 
 .content-title {
-    margin-left: 10%;
+    margin-left: 30%;
 }
 
 .content-description {
-    margin-left: 10%;
+    margin-left: 30%;
 }
 
 .hover {
@@ -195,8 +203,8 @@
 }
 
 #edit_icon {
-    position: absolute;
-    left: 200%;
+    height: 0;
+    width: 0;
 }
 
 #edit_icon_btn {
@@ -226,8 +234,12 @@
     padding: 20px 20px;
     position: relative;
     list-style: none;
-    border-radius: 10px;
     cursor: pointer;
+    border: 1px #2d2d2d solid;
+    border-color: rgba(1, 1, 1, 0.1);
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px rgba(1, 1, 1, 0.1);
+    margin-bottom: 25px;
 }
 
 .module-edit-box:hover {
@@ -236,4 +248,32 @@
 
 .module-edit-box-title {
     margin-left: 30%;
+}
+
+.editor-sidebar {
+    padding-left: 40;
+    width: 10%;
+}
+
+.editor-item-area {
+    width: 90%;
+}
+
+.new-course-button {
+    z-index: 1000;
+    height: 80px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.new-course-button-container {
+    padding-left: 0px;
+}
+
+.warning {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 0px;
 }
