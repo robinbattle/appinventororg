@@ -7,15 +7,16 @@
 
 <div class='container-fluid'>
     <div class='row'>
-        <div class='col-md-12'>
+        <div class='col-md-1 editor-sidebar'>
             <button type="button" data-toggle="modal" data-target="#newCourseModal" class="btn btn-primary new-course-button">
-                <span class="glyphicon glyphicon-plus"></span> Create New Course
+                <span class="glyphicon glyphicon-plus"></span> Create
             </button>
-
+        </div>
+        <div class='col-md-11 editor-item-area'>
             <div class='course-edit-box'>
                 <ul id="sortable">
                     {% for course in courses %}
-                    <li id='noDrag' keyid='{{ course.key.id }}' identifier='{{course.c_identifier}}' class='row course-box' index='{{course.c_index}}'>
+                    <li id='noDrag' keyid='{{ course.key.id }}' identifier='{{course.c_identifier}}' class='course-box' index='{{course.c_index}}'>
                         <div class='col-md-3 course-view-box-setting-left'>
                             <img class='course-view-box-icon margin-right-90' src='{{course.c_icon}}' height='100px' width='100px'>
                         </div>
@@ -68,9 +69,9 @@
                     <label for="edit_course_description">Description</label> <input type="text" class="form-control" id="edit_course_description" value="Description">
                 </div>
                 <div class="form-group">
-                    <label for="edit_course_identifier">URL Identifier <div class="help-block warning">Caution! Changing the identifier may cause broken external URLS</div></label>
-                    
-                    <input type="text" class="form-control" id="edit_course_identifier" placeholder="Identifier">
+                    <label for="edit_course_identifier">URL Identifier
+                        <div class="help-block warning">Caution! Changing the identifier may cause broken external URLS</div>
+                    </label> <input type="text" class="form-control" id="edit_course_identifier" placeholder="Identifier">
                 </div>
                 <div class="form-group">
                     <label for="edit_icon_btn">Icon</label>

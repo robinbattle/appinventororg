@@ -378,10 +378,10 @@ body {
 }
 
 .jumbotron-wherami-text {
-    color: white;
-    line-height: 74px;
+    color: #A5CCC4;
+    line-height: 40px;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 20px;
     padding-left: 55px;
 }
 

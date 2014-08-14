@@ -4224,21 +4224,13 @@ class CoursesHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 class ModulesHandler(webapp.RequestHandler):
-    def get(self, course_Title=''):
-        # translate url pretty title to real title
-        course_Title = course_Title.replace('.', ' ')
-        
-        
-        # retrieve corresponding module entities
-        # (if they exist (course_Title might not correspond to an existing entity))
-        # and render the module editor page
-        # if no entities are found, a page telling the user the bad news :( is displayed
+    def get(self, course_ID=''):
         
         # retrieve all of the courses for the top horizontal navbar
         courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
         
-        # retrieve the key of the course entity with the course_title
-        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        # retrieve the course entity with the course_ID
+        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_identifier == course_ID).fetch()
         
         if len(x) == 0:
             template_values = {}
@@ -4249,28 +4241,25 @@ class ModulesHandler(webapp.RequestHandler):
             courseId = x[0].key.id()
             modules = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, courseId)).order(Module.m_index).fetch()
             
-            
-            
             # construct dictionary of courses to modules mapping
                     
             moduleContentMapping = collections.OrderedDict()
             # iterate over all the modules in the current course
-             
-            
                     
             for module in modules:
                 # initialize key in mapping
                 moduleContentMapping[str(module.m_title)] = [module.m_icon]
                 moduleContentMapping[str(module.m_title)].append(module.m_description)
+                moduleContentMapping[str(module.m_title)].append(module.m_identifier)
                 # now look up the content associated with this module
                 contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(courseId), Module, long(module.key.id()))).order(Content.c_index).fetch()
                 for mod_content in contents:                     
                     moduleContentMapping[str(module.m_title)].append(mod_content)
              
 
+
             userStatus = UserStatus().getStatus(self.request.uri)
                        
-        
             template_values = {"title" : x[0].c_title ,
                                "modules" : modules,
                                "course" : x[0],
@@ -4332,23 +4321,11 @@ class ContentsHandler(webapp.RequestHandler):
                 self.response.out.write(template.render(path, template_values))
                
 class ContentHandler(webapp.RequestHandler):
-    def get(self, module_Title="", course_Title="", content_Title=""):
+    def get(self, course_ID="", module_ID="", content_ID=""):
         # retrieve corresponding content entity
-        # (if it exists (course_Title and or module_Title and or content_Title 
-        # might not correspond to an existing entity))
-        # and render the content editor page
-        # if no entity is found, a page telling the user the bad news :( is displayed
-        
-        
-                
-        # translate url pretty title to real title
-        course_Title = course_Title.replace('.', ' ')
-        module_Title = module_Title.replace('.', ' ')
-        content_Title = content_Title.replace('.', ' ')
-        
         
         # retrieve the key of the course entity with the course_title
-        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_identifier == course_ID).fetch()
         
         if len(x) == 0:
             template_values = {}
@@ -4357,7 +4334,7 @@ class ContentHandler(webapp.RequestHandler):
         else:
             course_entity = x[0]
             # course exists, attempt to look up module title entity
-            x = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_title == module_Title).fetch()
+            x = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_identifier == module_ID).fetch()
             if len(x) == 0:
                 template_values = {}
                 path = os.path.join(os.path.dirname(__file__), 'pages/pagenotfound.html')
@@ -4366,7 +4343,7 @@ class ContentHandler(webapp.RequestHandler):
                 # module and course exist, attempt to look up content
                 module_entity = x[0]
                 
-                content = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()), Module, long(module_entity.key.id()))).filter(Content.c_title == content_Title).fetch()
+                content = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()), Module, long(module_entity.key.id()))).filter(Content.c_identifier == content_ID).fetch()
                 
                 if len(content) == 0:
                     template_values = {}
@@ -4423,7 +4400,7 @@ class ContentHandler(webapp.RequestHandler):
                            'stylesheets' : ['/assets/css/coursesystem.css'],
                            'scripts' : ['/assets/js/coursesystem.js']
                            }
-                            
+                    
                     path = os.path.join(os.path.dirname(__file__), 'pages/content.html')
                     self.response.out.write(template.render(path, template_values))  
         
@@ -4604,8 +4581,6 @@ class AdminContentDisplayHandler(webapp.RequestHandler):
                         next_module_entity = "null"
                     else:
                         next_module_entity = next_module_entity[0]
-                    
-                    
                     
                     # render the template
                     template_values = {"current_content" : content,
@@ -4841,20 +4816,22 @@ class AdminImportCoursesHandler(webapp.RequestHandler):
         splitContent = importFileContents.split('\n')
         while i < len(splitContent) - 1:
             course_Title = splitContent[i]
-            i+=1
-            course_URL_Title = splitContent[i]
-            i+=1            
+            i+=1      
             course_Description = splitContent[i]
             i+=1                                                      
             course_Icon = splitContent[i]
             i+=1                                                      
             course_Index = splitContent[i]
+            i+=1
+            course_Identifier = splitContent[i]
             i+=1     
             
+            if course_Index == 'None':
+                courses_Index = 0
             
-            course = Course(parent = ndb.Key('Courses', 'ADMINSET'), c_title = course_Title, c_url_title = course_URL_Title, c_description = course_Description, c_icon = str(course_Icon), c_index = int(course_Index))
+            course = Course(parent = ndb.Key('Courses', 'ADMINSET'), c_title = course_Title, c_description = course_Description, c_icon = str(course_Icon), c_index = int(course_Index), c_identifier = course_Identifier)
             course.put()
-                        
+                
             while splitContent[i] != "**********":
                 module_Title = splitContent[i]
                 i+=1
@@ -4864,8 +4841,13 @@ class AdminImportCoursesHandler(webapp.RequestHandler):
                 i+=1
                 module_Index = splitContent[i]
                 i+=1
+                module_Identifier = splitContent[i]
+                i+=1    
                 
-                module = Module(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id())), m_title = module_Title, m_description = module_Description, m_icon = str(module_Icon), m_index = int(module_Index))
+                if module_Index == 'None':
+                        module_Index = 0
+                
+                module = Module(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id())), m_title = module_Title, m_description = module_Description, m_icon = str(module_Icon), m_index = int(module_Index), m_identifier = module_Identifier)
                 module.put()
                 
                 while splitContent[i] != "*****":
@@ -4879,10 +4861,14 @@ class AdminImportCoursesHandler(webapp.RequestHandler):
                     i+=1
                     content_Index = splitContent[i]
                     i+=1
-                   
-                    content = Content(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id())), c_title = content_Title, c_description = content_Description, c_type = content_Type, c_url = content_URL , c_index = int(content_Index))
-                    content.put()
+                    content_Identifier = splitContent[i]
+                    i+=1    
                     
+                    if content_Index == 'None':
+                        content_Index = 0
+                   
+                    content = Content(parent = ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id())), c_title = content_Title, c_description = content_Description, c_type = content_Type, c_url = content_URL , c_index = int(content_Index), c_identifier = content_Identifier)
+                    content.put() 
                 i+=1
             i+=1
           
@@ -4896,15 +4882,15 @@ class AdminSerialViewHandler(webapp.RequestHandler):
         courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
         # for every course
         for course in courses:
-            output += course.c_title + "\n" + course.c_url_title + "\n" + course.c_description + "\n" + course.c_icon + "\n" + str(course.c_index) + "\n"
+            output += course.c_title + "\n" + course.c_description + "\n" + course.c_icon + "\n" + str(course.c_index) + "\n" + course.c_identifier + "\n"
             # for every module
             modules = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()))).order(Module.m_index).fetch()
             for module in modules:
-                output += module.m_title + "\n" + module.m_description + "\n" + module.m_icon + "\n" + str(module.m_index) + "\n"    
+                output += module.m_title + "\n" + module.m_description + "\n" + module.m_icon + "\n" + str(module.m_index) + "\n" + module.m_identifier + "\n"
                 # for every content
                 contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id()))).order(Content.c_index).fetch()
                 for content in contents:
-                    output += content.c_title + "\n" + content.c_description + "\n" + content.c_type + "\n" + content.c_url + "\n" + str(content.c_index) + "\n"
+                    output += content.c_title + "\n" + content.c_description + "\n" + content.c_type + "\n" + content.c_url  + "\n" + str(content.c_index) + "\n" + content.c_identifier + "\n"
                 output += "*****\n"
             output += "**********\n"        
         
@@ -5026,13 +5012,13 @@ application = webapp.WSGIApplication(
         ('/courses', CoursesHandler),
         
         # modules page
-        webapp.Route(r'/courses/<course_Title>', ModulesHandler),
+        webapp.Route(r'/courses/<course_ID>', ModulesHandler),
         
         # contents page
         webapp.Route(r'/courses/<course_Title>/<module_Title>', ContentsHandler),
         
         # content display page
-        webapp.Route(r'/courses/<course_Title>/<module_Title>/<content_Title>', ContentHandler),
+        webapp.Route(r'/courses/<course_ID>/<module_ID>/<content_ID>', ContentHandler),
           
         # Editor Display Handlers
         ('/admin/courses', AdminCourseDisplayHandler),  # courses menu

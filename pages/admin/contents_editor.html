@@ -6,17 +6,29 @@
 <a href='/admin/courses/{{course.c_identifier}}' class='back-to-courses-link'><span class="glyphicon glyphicon-chevron-left"></span> All Modules</a>
 <div class='container-fluid'>
     <div class='row'>
-        <div class='col-md-12'>
-
+        <div class='col-md-1 editor-sidebar'>
             <button type="button" data-toggle="modal" data-target="#newContentModal" class="btn btn-primary new-course-button">
-                <span class="glyphicon glyphicon-plus"></span> Create New Content
+                <span class="glyphicon glyphicon-plus"></span> Create
             </button>
-
-            <div class='item-list-box'>
+        </div>
+        <div class='col-md-11 editor-item-area'>
+            <div class='course-edit-box'>
                 <ul id="sortable">
                     {% for content in contents %}
                     <li href="{{content.c_url}}" identifier='{{content.c_identifier}}' id='noDrag' keyid='{{content.key.id}}' content_type='{{content.c_type}}' content_url='{{content.c_url}}'
                         class='module-edit-box'>
+                        <div class='item-box-icon'>
+                            {% if content.c_type == "App" %} <img class='vertical-content-nav-bar-item-icon' src='/assets/img/appinventor-Jigsaw.jpg' height='100px' width='100px'>
+                            {% endif %} 
+                            {% if content.c_type == "Quiz" %} 
+                            <img class='vertical-content-nav-bar-item-icon' src='/assets/img/bird.png' height='100px' width='`100px'>
+                            {% endif %} 
+                            {% if content.c_type == "Nugget" %}
+                            <img  class='vertical-content-nav-bar-item-icon' src='/assets/img/kitty.png' height='100px' width='100px'>
+                            {% endif %}       
+                        </div>
+                        
+                        
                         <div class='content-title'>
                             <h1>{{content.c_title}}</h1>
                         </div>
