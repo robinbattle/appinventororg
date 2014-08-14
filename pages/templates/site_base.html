@@ -50,10 +50,37 @@
                                     <li><a href="/courses/{{course.c_url_title}}">{{course.c_title}}</a></li> 
                                 {% endfor %}
                             </ul></li>
-                        <li><a href="#">Build</a></li>
-                        <li><a href="#">Teach</a></li>
-                        <li><a href="#">About</a></li>
-                        
+                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Teach <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                               <li><a href="/TeachingAI">Teaching Ideas</a></li> 
+                               <li><a href="/teacherMap">Who's Teaching AI?</a></li> 
+                               <li><a href="https://groups.google.com/forum/#!forum/app-inventor-instructors" TARGET="_blank">Teacher Forum</a></li>
+                                <li><a href="/resources">Teaching Resources</a></li>   
+                            </ul></li>
+                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Book <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                               <li><a href="/book2">App Inventor 2 Book</a></li> 
+                               <li><a href="/book">App Inventor Classic Book</a></li>  
+                            </ul></li>
+                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Build<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                               <li><a href="http://ai2.appinventor.mit.edu" TARGET="_blank">MIT App Inventor (AI2)</a></li> 
+                               <li><a href="http://beta.appinventor.mit.edu" TARGET="_blank">App Inventor Classic</a></li>  
+                            </ul></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Share<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                               <li><a href="http://gallery.appinventor.mit.edu" TARGET="_blank">App Inventor Gallery</a></li> 
+                               <li><a href="/appPage">Publishing Your App</a></li>  
+                                <li><a href="https://groups.google.com/forum/#!forum/mitappinventortest">App Inventor Forum</a></li> 
+                            </ul></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">About<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                               <li><a href="/about" TARGET="_blank">About</a></li>
+                                <li><a href="http://appinventorblog.com" TARGET="_blank">App Inventor Blog</a></li> 
+                                 <li><a href="/media">Media</a></li>  
+                               <li><a href="http://democratizecomputing.org TARGET="_blank"">Democratize Computing Lab</a></li>  
+                               
+                            </ul></li>
                         
                         {% if userStatus.ifUser%}                     
                         <li class='hidden-on-big-screen'><a href="/profile">Profile</a></li> 
