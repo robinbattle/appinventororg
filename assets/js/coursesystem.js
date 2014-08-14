@@ -53,7 +53,7 @@ $('.vertical-content-nav-bar-item').click (function() {
 		newUrl = document.URL + "/" + $(this).attr('module_ID') + "/" +$(this).attr('content_ID');
 		window.location = newUrl;
 	} else {
-		window.location = wordToPrettyURL($(this).attr('title'));
+		window.location = $(this).attr('content_ID');
 	}
 });
 
