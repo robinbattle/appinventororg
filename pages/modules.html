@@ -22,13 +22,13 @@
                 {% for v in values %}
                     {% if forloop.counter0 > 2 %}
                     <div id='modules_page' module_id='{{values.2}}' content_id='{{v.c_identifier}}' module_title='{{key}}' content_title='{{v.c_title}}' class='vertical-content-nav-bar-item'>
-                        {% if v.c_type == "App" %} <img class='vertical-content-nav-bar-item-icon' src='/assets/img/appinventor-Jigsaw.jpg' height='28px' width='28px'>
+                        {% if v.c_type == "App" %} <img class='vertical-content-nav-bar-item-icon' src='/assets/img/ModuleIcons/video.png' height='28px' width='28px'>
                         {% endif %} 
                         {% if v.c_type == "Quiz" %} 
-                        <img class='vertical-content-nav-bar-item-icon' src='/assets/img/bird.png' height='28px' width='28px'>
+                        <img class='vertical-content-nav-bar-item-icon' src='/assets/img/ModuleIcons/question.png' height='28px' width='28px'>
                         {% endif %} 
                         {% if v.c_type == "Nugget" %}
-                        <img  class='vertical-content-nav-bar-item-icon' src='/assets/img/kitty.png' height='28px' width='28px'>
+                        <img  class='vertical-content-nav-bar-item-icon' src='/assets/img/ModuleIcons/light.png' height='28px' width='28px'>
                         {% endif %}
                         <div class='vertical-content-nav-bar-item-text'>{{v.c_title}}</div>
                     </div>  
