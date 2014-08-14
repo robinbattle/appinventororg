@@ -4454,21 +4454,15 @@ class AdminCourseDisplayHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))  
 
 class AdminModuleDisplayHandler(webapp.RequestHandler):
-    def get(self, course_Title=''):
+    def get(self, course_ID=''):
         # retrieve corresponding module entities
-        # (if they exist (course_Title might not correspond to an existing entity))
-        # and render the module editor page
-        # if no entities are found, a page telling the user the bad news :( is displayed
-        
-        # translate url pretty title to real title
-        course_Title = course_Title.replace('.', ' ')
         
         # retrieve the key of the course entity with the course_title
-        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_identifier == course_ID).fetch()
         
         if len(x) == 0:
             template_values = {}
-            path = os.path.join(os.path.dirname(__file__), 'static_pages/other/pagenotfound.html')
+            path = os.path.join(os.path.dirname(__file__), 'pages/pagenotfound.html')
             self.response.out.write(template.render(path, template_values))  
         else:
             # course exists display the page!
@@ -4511,31 +4505,23 @@ class AdminModuleDisplayHandler(webapp.RequestHandler):
             self.response.out.write(template.render(path, template_values))
         
 class AdminContentsDisplayHandler(webapp.RequestHandler):
-    def get(self, module_Title="", course_Title=""):
+    def get(self, course_ID = "", module_ID=""):
         # retrieve corresponding contents entities
-        # (if they exist (course_Title and or module_Title might not correspond to an existing entity))
-        # and render the contents editor page
-        # if no entities are found, a page telling the user the bad news :( is displayed
         
-        
-        # translate url pretty title to real title
-        course_Title = course_Title.replace('.', ' ')
-        module_Title = module_Title.replace('.', ' ')
-        
-        # retrieve the key of the course entity with the course_title
-        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        # retrieve the key of the course entity with the course_ID
+        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_identifier == course_ID).fetch()
         
         if len(x) == 0:
             template_values = {}
-            path = os.path.join(os.path.dirname(__file__), 'static_pages/other/pagenotfound.html')
+            path = os.path.join(os.path.dirname(__file__), 'pages/pagenotfound.html')
             self.response.out.write(template.render(path, template_values))     
         else:
             course_entity = x[0]
             # course exists, attempt to look up module title entity
-            x = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_title == module_Title).fetch()
+            x = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_identifier == module_ID).fetch()
             if len(x) == 0:
                 template_values = {}
-                path = os.path.join(os.path.dirname(__file__), 'static_pages/other/pagenotfound.html')
+                path = os.path.join(os.path.dirname(__file__), 'pages/pagenotfound.html')
                 self.response.out.write(template.render(path, template_values))  
             else:
                 # module and course exist, display the page!
@@ -4565,43 +4551,34 @@ class AdminContentsDisplayHandler(webapp.RequestHandler):
  
 
 class AdminContentDisplayHandler(webapp.RequestHandler):
-    def get(self, module_Title="", course_Title="", content_Title=""):
+    def get(self, course_ID="", module_ID="", content_ID=""):
         # retrieve corresponding content entity
-        # (if it exists (course_Title and or module_Title and or content_Title 
-        # might not correspond to an existing entity))
-        # and render the content editor page
-        # if no entity is found, a page telling the user the bad news :( is displayed
         
         
-        # translate pretty url to real title
-        course_Title = course_Title.replace('.', ' ')
-        module_Title = module_Title.replace('.', ' ')
-        content_Title = content_Title.replace('.', ' ')
-
         # retrieve the key of the course entity with the course_title
-        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_title == course_Title).fetch()
+        x = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Course.c_identifier == course_ID).fetch()
         
         if len(x) == 0:
             template_values = {}
-            path = os.path.join(os.path.dirname(__file__), 'static_pages/other/pagenotfound.html')
+            path = os.path.join(os.path.dirname(__file__), 'pages/pagenotfound.html')
             self.response.out.write(template.render(path, template_values))     
         else:
             course_entity = x[0]
             # course exists, attempt to look up module title entity
-            x = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_title == module_Title).fetch()
+            x = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_identifier == module_ID).fetch()
             if len(x) == 0:
                 template_values = {}
-                path = os.path.join(os.path.dirname(__file__), 'static_pages/other/pagenotfound.html')
+                path = os.path.join(os.path.dirname(__file__), 'pages/pagenotfound.html')
                 self.response.out.write(template.render(path, template_values))  
             else:
                 # module and course exist, attempt to look up content
                 module_entity = x[0]
                 
-                content = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()), Module, long(module_entity.key.id()))).filter(Content.c_title == content_Title).fetch()
+                content = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()), Module, long(module_entity.key.id()))).filter(Content.c_identifier == content_ID).fetch()
                 
                 if len(content) == 0:
                     template_values = {}
-                    path = os.path.join(os.path.dirname(__file__), 'static_pages/other/pagenotfound.html')
+                    path = os.path.join(os.path.dirname(__file__), 'pages/pagenotfound.html')
                     self.response.out.write(template.render(path, template_values))  
                 else:
                     # everything was found! display the page
@@ -4612,64 +4589,77 @@ class AdminContentDisplayHandler(webapp.RequestHandler):
                     # must look up all content in current module
                     module_contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()), Module, long(module_entity.key.id()))).order(Content.c_index).fetch()
                     
+                    
+                    # look up userstatus for globalnavbar
+                    userStatus = UserStatus().getStatus(self.request.uri)
+        
+                    # look up all the courses for the global navbar and the display
+                    courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()            
+
+
+                    # look up the next_module_entity
+                    next_module_entity = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course_entity.key.id()))).filter(Module.m_index > module_entity.m_index).order(Module.m_index).fetch()
+                    
+                    if len(next_module_entity) == 0:
+                        next_module_entity = "null"
+                    else:
+                        next_module_entity = next_module_entity[0]
+                    
+                    
+                    
                     # render the template
                     template_values = {"current_content" : content,
-                           "current_module" : module_entity,
-                           "current_course" : course_entity,
+                           "module" : module_entity,
+                           "course" : course_entity,
                            "contents" : module_contents,
                            "title" : "Content Display Preview",
-                           "content" : content
+                           "content" : content,
+                           'userStatus' : userStatus,
+                           'courses' : courses,
+                           'next_module' : next_module_entity,
+                           'stylesheets' : ['/assets/css/coursesystem.css'],
+                           'scripts' : ['/assets/js/coursesystem.js']
                            }
                             
-                    path = os.path.join(os.path.dirname(__file__), 'CourseSystem/Editor/pages/content_display.html')
+                    path = os.path.join(os.path.dirname(__file__), 'pages/content.html')
                     self.response.out.write(template.render(path, template_values))  
                     
-                    
-                    logging.info(content.c_url)
-                    
-                    #path = os.path.join(os.path.dirname(__file__), "static_pages/other/Quiz2.html")
-                    #self.response.out.write(template.render(path, {}))  
-        
 
 class AdminCourseSystemCreateHandler(webapp.RequestHandler):
     def post(self, kind=""):
         if kind == "Course":
+            logging.info("creating course")
             # retrieve data from the request
             title = self.request.get("title")
-            url_title = self.request.get('new_url_title')
-            logging.info(url_title)
             description = self.request.get("description")
             icon = str(self.request.get("icon"))
             last_index = int(self.request.get("last_index"))
             new_index = last_index + 1
+            identifier = self.request.get("s_identifier")            
             # root ancestor of all courses, for now the ADMINSET are the courses created by the admins
             course_ancestor_key = ndb.Key('Courses', 'ADMINSET')
             # create the new Course entity and store it in the datastore
-            new_course = Course(parent=course_ancestor_key, c_title=title, c_description=description, c_icon=icon, c_index=new_index, c_url_title=url_title)
+            new_course = Course(parent=course_ancestor_key, c_title=title, c_description=description, c_icon=icon, c_index=new_index, c_identifier = identifier)
             new_course.put()
         elif kind == "Module":
             title = self.request.get("title")
             description = self.request.get("description")
             icon = str(self.request.get("icon"))
             course_id = self.request.get("course_id")
-            new_module = Module(parent=ndb.Key('Courses', 'ADMINSET', Course, long(course_id)), m_title=title, m_description=description, m_icon=icon)        
-            new_module.put()        
+            identifier = self.request.get("s_identifier")
+            new_module = Module(parent=ndb.Key('Courses', 'ADMINSET', Course, long(course_id)), m_title=title, m_description=description, m_icon=icon, m_identifier = identifier)        
+            new_module.put()   
         elif kind == "Content":
-            logging.info("CREATING NEW CONTENT!")
-            
             title = self.request.get("s_title")
             description = self.request.get("s_description")
             content_type = str(self.request.get("s_content_type"))
             course_id = self.request.get("s_course_id")
             module_id = self.request.get("s_module_id")
             file_path = self.request.get("s_file_path")
+            identifier = self.request.get("s_identifier")
             
-            
-            logging.info(course_id)
-            logging.info(module_id)
-            
-                        
             new_content = Content(parent=ndb.Key('Courses', 'ADMINSET', Course, long(course_id), Module, long(module_id)), c_title=title, c_description=description, c_type=content_type, c_url=file_path)
+            new_content.c_identifier = identifier
             new_content.put()
         else:
             logging.error("An invalid kind was attempted to be created: " + kind)
@@ -4726,15 +4716,13 @@ class AdminCourseSystemUpdateHandler(webapp.RequestHandler):
             description = self.request.get("s_description")
             course_id = self.request.get("s_course_id")
             icon = str(self.request.get('s_icon'))
-            url_title = self.request.get('s_url_title')
-            
-            logging.info("recieved url title: " + url_title)
+            identifier = self.request.get('s_identifier')
             # retrieve course entity and update it
             course = ndb.Key('Courses', 'ADMINSET', Course, long(course_id)).get()
             course.c_title = title
             course.c_description = description
             course.c_icon = icon
-            course.c_url_title = url_title
+            course.c_identifier = identifier
             course.put()
         elif kind == "Module":
             title = self.request.get("s_title")
@@ -4742,11 +4730,13 @@ class AdminCourseSystemUpdateHandler(webapp.RequestHandler):
             course_id = self.request.get("s_course_id")
             module_id = self.request.get("s_module_id")
             icon = str(self.request.get('s_icon'))
+            identifier = self.request.get('s_identifier')
             # retrieve module entity and update it
             module = ndb.Key('Courses', 'ADMINSET', Course, long(course_id), Module, long(module_id)).get()
             module.m_title = title
             module.m_description = description
             module.m_icon = icon
+            module.m_identifier = identifier
             module.put()
         elif kind == "Content":
             title = self.request.get("s_title")
@@ -4756,13 +4746,14 @@ class AdminCourseSystemUpdateHandler(webapp.RequestHandler):
             content_id = self.request.get("s_content_id")
             content_type = self.request.get("s_content_type")
             url = self.request.get("s_url")
-            
+            identifier = self.request.get("s_identifier")
             # retrieve content entity and update it
             content = ndb.Key('Courses', 'ADMINSET', Course, long(course_id), Module, long(module_id), Content, long(content_id)).get()
             content.c_title = title
             content.c_description = description
             content.c_url = url
             content.c_type = content_type
+            content.c_identifier = identifier
             content.put()
         else:
             logging.error("An invalid kind was attempted to be updated: " + kind)
@@ -5045,9 +5036,9 @@ application = webapp.WSGIApplication(
           
         # Editor Display Handlers
         ('/admin/courses', AdminCourseDisplayHandler),  # courses menu
-        webapp.Route(r'/admin/courses/<course_Title>', handler=AdminModuleDisplayHandler),  # modules menu
-        webapp.Route(r'/admin/courses/<course_Title>/<module_Title>', handler=AdminContentsDisplayHandler),  # contents menu
-        webapp.Route(r'/admin/courses/<course_Title>/<module_Title>/<content_Title>', handler=AdminContentDisplayHandler),  # contents menu
+        webapp.Route(r'/admin/courses/<course_ID>', handler=AdminModuleDisplayHandler),  # modules menu
+        webapp.Route(r'/admin/courses/<course_ID>/<module_ID>', handler=AdminContentsDisplayHandler),  # contents menu
+        webapp.Route(r'/admin/courses/<course_ID>/<module_ID>/<content_ID>', handler=AdminContentDisplayHandler),  # contents menu
         
         # Editor Modifier Handlers
         webapp.Route(r'/admin/course_system/create/<kind>', handler=AdminCourseSystemCreateHandler),

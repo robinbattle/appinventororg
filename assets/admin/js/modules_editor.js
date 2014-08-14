@@ -3,19 +3,6 @@
  * 
  */
 
-function wordToPrettyURL(word) {
-	urlPrettyTitle = ""
-	for(i = 0; i < word.length; i++) {
-		console.log(word[i] + ' ' + word.charCodeAt(i))
-		if(word.charCodeAt(i) == 32) {
-			urlPrettyTitle += '.'
-		} else {
-			urlPrettyTitle += word[i]
-		}
-	}
-	return urlPrettyTitle;
-}
-
 
 function handleFileSelect(evt) {
         files = evt.target.files;
@@ -52,13 +39,15 @@ $('#edit_icon_btn').mouseout(function() {
 });
 
 
-$('#updateModule').click(function() {
+$('#updateModulebtn').click(function() {
     // gather the data from the editModal
     title = $('#edit_module_title').val();
     description = $('#edit_module_description').val();
     icon = $('#edit_icon_img').attr('src');
+    identifier = $('#edit_module_identifier').val()
     course_id = $('.subject-box-top-half-inner').attr('course_id');
     module_id = $('#editModal').attr('module_id');
+    
     // post it to the server and refresh the page
     if (title == "") {
         alert("title cannot be empty!")
@@ -69,6 +58,7 @@ $('#updateModule').click(function() {
             s_title: title,
             s_description: description,
             s_icon: icon,
+            s_identifier: identifier
         }, function(data, status) {
             location.reload(true);
         });
@@ -86,6 +76,7 @@ $(document).on('click', '#editmodulebtn', function() {
     $('#edit_module_title').val(title.text());
     $('#edit_module_description').val(description.text());
     $('#edit_icon_img').attr('src', content_root.find('img').attr('src'));
+    $('#edit_module_identifier').val(content_root.attr('identifier'));
     // how should i set the file chooser?
     // have actual button offscreen!
     // set some sneaky modal attributes for later XP
@@ -94,18 +85,18 @@ $(document).on('click', '#editmodulebtn', function() {
 
 
 
-$("#NewModuleForm").submit(function(event) {
-    event.preventDefault();
+$("#createModulebtn").click(function(event) {
+	
     new_title = $("#ModuleTitle").val();
     new_description = $("#ModuleDescription").val();
     file = $('#ModuleIcon').get(0).files[0];
+    identifier = $('#ModuleIdentifier').val();
+    
     var reader = new FileReader();
     var dataURL = null;
     
     
-    
-    alert
-    
+
     // Closure to capture the file information.
     reader.onload = (function(theFile) {
         return function(e) {
@@ -114,6 +105,7 @@ $("#NewModuleForm").submit(function(event) {
                 title: new_title,
                 course_id: $('.subject-box-top-half-inner').attr('course_id'),
                 description: new_description,
+                s_identifier : identifier,
                 icon: dataURL,
             }, function(data, status) {
                 location.reload(true);
@@ -148,9 +140,7 @@ $(document).ready(function() {
         if (insideNoClick == true) {
             // alert("NO LINK!");
         } else {
-            moduleTitle = $(this).find('h1').text();
-            courseTitle = $('.subject-box-top-half-inner').attr('course_Title');
-            window.location = "/admin/courses/" + wordToPrettyURL(courseTitle) + "/" + wordToPrettyURL(moduleTitle);
+            window.location = document.URL + "/" + $(this).attr('identifier');
         }
     });
     // XXX DONE

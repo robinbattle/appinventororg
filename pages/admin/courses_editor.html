@@ -7,34 +7,15 @@
 
 <div class='container-fluid'>
     <div class='row'>
-        <div class='col-md-4'>
-            <div class='row'>
-                <div class='col-md-12 new-course-form-box'>
+        <div class='col-md-12'>
+            <button type="button" data-toggle="modal" data-target="#newCourseModal" class="btn btn-primary new-course-button">
+                <span class="glyphicon glyphicon-plus"></span> Create New Course
+            </button>
 
-                    <h3 id='newcourseformtitle'>Create A New Course</h3>
-                    <form role="form" id="NewCourseForm" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="CourseTitle">Title</label> <input type="text" class="form-control" id="CourseTitle" placeholder="New Title">
-                        </div>
-                        <div class="form-group">
-                            <label for="CourseDescription">Description</label> <input type="text" class="form-control" id="CourseDescription" placeholder="New Description">
-                        </div>
-                        <div class="form-group">
-                            <label for="CourseIcon">Icon</label> <input type="file" id="CourseIcon">
-                        </div>
-                        <button type="submit" class="btn btn-default">Create it!</button>
-                    </form>
-                </div>
-            </div>
-
-
-
-        </div>
-        <div class='col-md-8'>
             <div class='course-edit-box'>
                 <ul id="sortable">
                     {% for course in courses %}
-                    <li id='noDrag' keyid='{{ course.key.id }}' class='row course-box' index='{{course.c_index}}'>
+                    <li id='noDrag' keyid='{{ course.key.id }}' identifier='{{course.c_identifier}}' class='row course-box' index='{{course.c_index}}'>
                         <div class='col-md-3 course-view-box-setting-left'>
                             <img class='course-view-box-icon margin-right-90' src='{{course.c_icon}}' height='100px' width='100px'>
                         </div>
@@ -87,6 +68,11 @@
                     <label for="edit_course_description">Description</label> <input type="text" class="form-control" id="edit_course_description" value="Description">
                 </div>
                 <div class="form-group">
+                    <label for="edit_course_identifier">URL Identifier <div class="help-block warning">Caution! Changing the identifier may cause broken external URLS</div></label>
+                    
+                    <input type="text" class="form-control" id="edit_course_identifier" placeholder="Identifier">
+                </div>
+                <div class="form-group">
                     <label for="edit_icon_btn">Icon</label>
                     <button id='edit_icon_btn' type="button" class='btn btn-primary'>
                         <div hidden id='edit_icon_btn_text'>
@@ -105,10 +91,37 @@
     </div>
 </div>
 
-
-
-
-
-
+<div class="modal fade" id="newCourseModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Create New Course</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="NewCourseForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="CourseTitle">Title</label> <input type="text" class="form-control" id="CourseTitle" placeholder="New Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="CourseDescription">Description</label> <input type="text" class="form-control" id="CourseDescription" placeholder="New Description">
+                    </div>
+                    <div class="form-group">
+                        <label for="CourseIdentifier">URL Identifier</label> <input type="text" class="form-control" id="CourseIdentifier" placeholder="New Identifier">
+                    </div>
+                    <div class="form-group">
+                        <label for="CourseIcon">Icon</label> <input type="file" id="CourseIcon">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id='createCoursebtn' type="button" class="btn btn-primary">Create It!</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 {% endblock %}

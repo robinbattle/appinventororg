@@ -30,6 +30,8 @@
 .course-edit-box {
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 80px;
 }
 
 .course-box {
@@ -236,4 +238,29 @@
 
 .module-edit-box-title {
     margin-left: 30%;
+}
+
+
+.new-course-button {
+    z-index: 1000;
+    height: 80px;    
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+    text-align: left;
+    padding-left: 50px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.new-course-button-container {
+    padding-left: 0px;
+}
+
+.warning {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 0px;
 }

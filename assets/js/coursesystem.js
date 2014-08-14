@@ -54,6 +54,8 @@ $('.vertical-content-nav-bar-item').click (function() {
 	}
 });
 
+
+
 $('.vertical-content-nav-bar-next-section-box').click (function() {
 	url = String(document.URL).split('/');
 	window.location = url[0] + '/' + url[1] + '/' + url[2] + '/' + url[3] + '/' + url[4] + '/' + wordToPrettyURL($(this).attr('title'));
@@ -69,6 +71,13 @@ $('.vertical-content-nav-bar').css('height', $('body').height() - $('.banner-wra
 // back to course page button
 $('.vertical-content-nav-bar-course-title-text').click(function() {
 	url = String(document.URL).split('/');
-	newUrl = url[0] + '/' + url[1] + '/' + url[2] + '/' + url[3] + '/' + url[4];
-	window.location = newUrl;
+	
+	newURL = ""
+	for(i = 0; i < url.length - 2; i++) {
+		newURL += url[i] + "/";
+	}
+	
+	newURL += url[i];
+	
+	window.location = newURL;
 });

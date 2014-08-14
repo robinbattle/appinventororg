@@ -111,14 +111,14 @@ class Message(ndb.Model):
     author = ndb.UserProperty()
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
-
-
+    
 class Module(ndb.Model):
     """ Represents a single Module """
     m_title = ndb.StringProperty()
     m_description = ndb.StringProperty()
     m_icon = ndb.BlobProperty(indexed=False)
     m_index = ndb.IntegerProperty()
+    m_identifier = ndb.StringProperty()
     
 class Content(ndb.Model):
     """ Represents a content item """
@@ -127,6 +127,7 @@ class Content(ndb.Model):
     c_type = ndb.StringProperty()
     c_url = ndb.StringProperty()  # the url of the content
     c_index = ndb.IntegerProperty()    
+    c_identifier = ndb.StringProperty()
 
 class Course(ndb.Model):
     """Represents a single course"""
@@ -135,6 +136,7 @@ class Course(ndb.Model):
     c_description = ndb.StringProperty()
     c_icon = ndb.BlobProperty(indexed=False)
     c_index = ndb.IntegerProperty()
+    c_identifier = ndb.StringProperty()
 
 
 

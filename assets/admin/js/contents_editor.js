@@ -9,33 +9,20 @@
  */
 
 
-/* Highlight on mouseover of change icon button*/
-
-function wordToPrettyURL(word) {
-	urlPrettyTitle = ""
-	for(i = 0; i < word.length; i++) {
-		console.log(word[i] + ' ' + word.charCodeAt(i))
-		if(word.charCodeAt(i) == 32) {
-			urlPrettyTitle += '.'
-		} else {
-			urlPrettyTitle += word[i]
-		}
-	}
-	return urlPrettyTitle;
-}
 
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
 
 
-$("#NewContentForm").submit(function(event) {
-	event.preventDefault();
+$("#createContentbtn").click(function(event) {
+	alert("create new content!")
 
 	title = $("#new_content_title").val();
 	description = $("#new_content_description").val();
 	content_type = $('input:radio[name=inlineRadioOptions]:checked').val();
 	file_path = $("#new_content_file_path").val();
+	identifier = $('#new_content_identifier').val();
 	
 	// need better way to get course and module id
 	course_id = $('.subject-box-top-half-inner').attr('course_id')
@@ -76,7 +63,8 @@ $("#NewContentForm").submit(function(event) {
 			s_file_path : file_path,
 			s_content_type : content_type,
 			s_course_id : course_id,
-			s_module_id : module_id
+			s_module_id : module_id,
+			s_identifier : identifier
 		}, function(data, status) {
 			location.reload(true)
 		});
@@ -92,11 +80,11 @@ $(document).ready(function() {
 	var insideNoClick = false;
 
 	/* Clickable item boxes that take you to corresponding content page */
-	$(document).on('click', '.item-box', function() {
+	$(document).on('click', '.module-edit-box', function() {
 		if (insideNoClick == true) {
 			// alert("NO LINK!");
 		} else {
-			window.location = window.location + "/" + wordToPrettyURL($(this).find('h1').text());
+			window.location = document.URL + "/" + $(this).attr('identifier');
 		}
 	});
 
@@ -196,10 +184,13 @@ $(document).ready(function() {
 		
 		editableURL = url.substring(0,url.indexOf('?'));
 		
+		identifier = content_root.attr('identifier');
+		
 		// set modal form inputs to current content values
 		$('#edit_content_title').val(title.text());
 		$('#edit_content_description').val(description.text());
 		$('#edit_content_url').val(editableURL);
+		$('#edit_content_identifier').val(identifier);
 		$('#radioForm' + content_type).attr('checked', true);
 		
 		// set some sneaky modal attributes for later XP
@@ -217,6 +208,7 @@ $(document).ready(function() {
 		title = $('#edit_content_title').val();
 		description = $('#edit_content_description').val();
 		url = $('#edit_content_url').val();
+		identifier = $('#edit_content_identifier').val();
 		
 		content_type = $('input:radio[name=editinlineRadioOptions]:checked').val();
 
@@ -236,7 +228,8 @@ $(document).ready(function() {
 				s_title : title,
 				s_description : description,
 				s_url : url,
-				s_content_type : content_type
+				s_content_type : content_type,
+				s_identifier : identifier
 			}, function(data, status) {
 				location.reload(true);
 			});
