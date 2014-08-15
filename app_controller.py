@@ -511,6 +511,8 @@ class CourseInABox2Handler(webapp.RequestHandler):
 
 class SoundBoardHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -526,6 +528,8 @@ class SoundBoardHandler(webapp.RequestHandler):
 
 class PortfolioHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -633,6 +637,9 @@ class HelloPurrHandler(webapp.RequestHandler):
 
 class AppPageHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
+
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -648,6 +655,8 @@ class AppPageHandler(webapp.RequestHandler):
 
 class AppInventorIntroHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -921,6 +930,8 @@ class IHaveADreamTutHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 class BiblioHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -936,6 +947,8 @@ class BiblioHandler(webapp.RequestHandler):
 
 class TimedActivityHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -951,6 +964,8 @@ class TimedActivityHandler(webapp.RequestHandler):
 
 class EventsHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -966,6 +981,8 @@ class EventsHandler(webapp.RequestHandler):
 
 class ConditionalsHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -981,6 +998,8 @@ class ConditionalsHandler(webapp.RequestHandler):
 
 class RecordingItemHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1011,6 +1030,8 @@ class WalkingalistHandler(webapp.RequestHandler):
 
 class VariablesHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1026,6 +1047,8 @@ class VariablesHandler(webapp.RequestHandler):
 
 class ListsHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1041,6 +1064,8 @@ class ListsHandler(webapp.RequestHandler):
 
 class ProcHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1056,6 +1081,8 @@ class ProcHandler(webapp.RequestHandler):
         
 class LocationHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1071,6 +1098,8 @@ class LocationHandler(webapp.RequestHandler):
 
 class DrawingHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1086,6 +1115,8 @@ class DrawingHandler(webapp.RequestHandler):
 
 class SpritesHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1119,6 +1150,8 @@ class ResourcesHandler(webapp.RequestHandler):
           
 class TimedListsHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1134,6 +1167,8 @@ class TimedListsHandler(webapp.RequestHandler):
 
 class IncrementingVariablesHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1149,6 +1184,8 @@ class IncrementingVariablesHandler(webapp.RequestHandler):
     
 class UserListNavHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1164,6 +1201,8 @@ class UserListNavHandler(webapp.RequestHandler):
         
 class PersistenceHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1519,6 +1558,8 @@ class NoTexting2Handler(webapp.RequestHandler):
 
 class MakeQuiz10Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -1876,6 +1917,8 @@ class WorkingWithMediaHandler(webapp.RequestHandler):
 
 class MathBlasterHandler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2099,7 +2142,6 @@ class QuizQuestionsHandler(webapp.RequestHandler):
 #Quizzes Begin
 class Quiz1Handler(webapp.RequestHandler):
     def get(self):
-        
         if redirector(self) == True:
             return None
         
@@ -2133,23 +2175,8 @@ class ConditionsHandler(webapp.RequestHandler):
 
 class Quiz2Handler(webapp.RequestHandler):
     def get(self):
-        # redirect test
-        if self.request.get('flag') == 'true':
-            logging.info("do not redirect!")
-        else:
-            # look up a content that uses this url
-            logging.info(self.request.path)
-            results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
-            if len(results) == 0:
-                logging.info("Could not find a content to redirect too!")
-            else:
-                content = results[0]
-                # build the url
-                content_id = content.c_identifier
-                module_id = content.key.parent().get().m_identifier
-                course_id = content.key.parent().parent().get().c_identifier
-                redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
-                self.redirect(redirectURL)
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2180,23 +2207,8 @@ class ConditionsHandler(webapp.RequestHandler):
 ###END OF QUIZ 2###
 class Quiz3Handler(webapp.RequestHandler):
     def get(self):
-        # redirect test
-        if self.request.get('flag') == 'true':
-            logging.info("do not redirect!")
-        else:
-            # look up a content that uses this url
-            logging.info(self.request.path)
-            results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
-            if len(results) == 0:
-                logging.info("Could not find a content to redirect too!")
-            else:
-                content = results[0]
-                # build the url
-                content_id = content.c_identifier
-                module_id = content.key.parent().get().m_identifier
-                course_id = content.key.parent().parent().get().c_identifier
-                redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
-                self.redirect(redirectURL)
+        if redirector(self) == True:
+            return None
                         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2226,6 +2238,8 @@ class ConditionsHandler(webapp.RequestHandler):
 ###END OF QUIZ 3###
 class Quiz4Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2255,6 +2269,8 @@ class ConditionsHandler(webapp.RequestHandler):
 ###END OF QUIZ 4###
 class Quiz5Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2284,6 +2300,8 @@ class ConditionsHandler(webapp.RequestHandler):
 ###END OF QUIZ 5###
 class Quiz6Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2313,6 +2331,8 @@ class ConditionsHandler(webapp.RequestHandler):
 ###END OF QUIZ 6###
 class Quiz7Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -2371,6 +2391,8 @@ class ConditionsHandler(webapp.RequestHandler):
 ###END OF QUIZ 8###
 class Quiz9Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -3159,6 +3181,8 @@ class NewAppRenderer(webapp.RequestHandler):
 
 class NewAppRenderer_AI2(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         path = self.request.path
         #t_path = path[1:]
         t_path = path[1:(len(path)-6)] #take out -steps in path
@@ -4082,6 +4106,9 @@ class HelloPurrMiniHandler(webapp.RequestHandler):
 
 class Chapter1Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
+        
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch01.html')
@@ -4089,6 +4116,8 @@ class Chapter1Handler(webapp.RequestHandler):
 
 class Chapter2Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch02.html')
@@ -4096,6 +4125,8 @@ class Chapter2Handler(webapp.RequestHandler):
 
 class Chapter3Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch03.html')
@@ -4104,6 +4135,8 @@ class Chapter3Handler(webapp.RequestHandler):
 
 class Chapter4Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch04.html')
@@ -4111,6 +4144,8 @@ class Chapter4Handler(webapp.RequestHandler):
 
 class Chapter5Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch05.html')
@@ -4125,6 +4160,8 @@ class Chapter6Handler(webapp.RequestHandler):
 
 class Chapter7Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch07.html')
@@ -4132,6 +4169,8 @@ class Chapter7Handler(webapp.RequestHandler):
 
 class Chapter8Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch08.html')
@@ -4153,6 +4192,8 @@ class Chapter10Handler(webapp.RequestHandler):
 
 class Chapter11Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch11.html')
@@ -4174,6 +4215,8 @@ class Chapter13Handler(webapp.RequestHandler):
 
 class Chapter14Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch14.html')
@@ -4188,6 +4231,8 @@ class Chapter15Handler(webapp.RequestHandler):
 
 class Chapter16Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch16.html')
@@ -4195,6 +4240,8 @@ class Chapter16Handler(webapp.RequestHandler):
 
 class Chapter17Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch17.html')
@@ -4202,6 +4249,8 @@ class Chapter17Handler(webapp.RequestHandler):
 
 class Chapter18Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch18.html')
@@ -4209,6 +4258,8 @@ class Chapter18Handler(webapp.RequestHandler):
 
 class Chapter19Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch19.html')
@@ -4223,6 +4274,8 @@ class Chapter20Handler(webapp.RequestHandler):
 
 class Chapter21Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch21.html')
@@ -4230,6 +4283,8 @@ class Chapter21Handler(webapp.RequestHandler):
 
 class Chapter22Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch22.html')
@@ -4237,6 +4292,8 @@ class Chapter22Handler(webapp.RequestHandler):
 
 class Chapter23Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch23.html')
@@ -4244,6 +4301,8 @@ class Chapter23Handler(webapp.RequestHandler):
 
 class Chapter24Handler(webapp.RequestHandler):
     def get(self):
+        if redirector(self) == True:
+            return None
         template_values = {}
 
         path = os.path.join(os.path.dirname(__file__),'bookChapters/ch24.html')
@@ -4965,7 +5024,25 @@ class AdminSerialViewHandler(webapp.RequestHandler):
             output += "**********\n"        
         
         self.response.out.write(output)
+
+#TODO: DELETE
+class testView(webapp.RequestHandler):
+    
+    def get(self):
+        output = ""
+        courses = Course.query(ancestor=ndb.Key('Courses', 'ADMINSET')).order(Course.c_index).fetch()
+        # for every course
+        for course in courses:
+            # for every module
+            modules = Module.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()))).order(Module.m_index).fetch()
+            for module in modules:
+                # for every content
+                contents = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET', Course, long(course.key.id()), Module, long(module.key.id()))).order(Content.c_index).fetch()
+                for content in contents:
+                    output += content.c_url + "<br>"
+    
         
+        self.response.out.write(output)        
 
 ####################################
 #       End Jordan's Classes       #
@@ -5108,6 +5185,8 @@ application = webapp.WSGIApplication(
         ('/admin/exportcourses', AdminExportCoursesHandler),
         ('/admin/importcourses', AdminImportCoursesHandler),
         ('/admin/serialview', AdminSerialViewHandler),
+        
+        ('/testView', testView)
         
         ########################
         #  END Jordan's Pages  #
