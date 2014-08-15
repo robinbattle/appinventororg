@@ -21,6 +21,7 @@ $(document).ready(function() {
 				s_File_Contents : reader.result,
 			}, function(data, status) {
 				alert(status);
+				location.reload(true);
 			});
 		}
 		reader.readAsText(file);

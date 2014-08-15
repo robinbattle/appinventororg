@@ -30,7 +30,7 @@ APPSDIR='/apps'
 APPS2DIR='/apps2'
 
 
-def redirector(self):
+def redirector(requesthandler):
     """Used to redirect old content to their new url in a course
     
     Returns true if a redirect occurs and false otherwise.
@@ -40,12 +40,12 @@ def redirector(self):
     following the call to redirector.
     """
     # redirect test
-    if self.request.get('flag') == 'true':
+    if requesthandler.request.get('flag') == 'true':
         logging.info("Do not redirect!")
         return False
     else:
         # look up a content that uses this url
-        results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
+        results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == requesthandler.request.path + "?flag=true").fetch()
         if len(results) == 0:
             logging.error("Could not find a content to redirect too!")
         else:
@@ -56,8 +56,8 @@ def redirector(self):
             course_id = content.key.parent().parent().get().c_identifier
             redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
                 
-            logging.info("redirecting: " + self.request.path + " >>> " + redirectURL)
-            self.redirect(redirectURL)
+            logging.info("redirecting: " + requesthandler.request.path + " >>> " + redirectURL)
+            requesthandler.redirect(redirectURL)
             return True;
 
 
@@ -2975,7 +2975,7 @@ class PostApp(webapp.RequestHandler):
         #flush all the memcache
         memcache.flush_all()
         
-        self.redirect('/Admin') # TODO: change to /admin (area)
+        self.redirect('/admin/apps') # TODO: change to /admin (area)
         # wherever we put() to datastore, we'll need to also save the appId
 
 class DeleteApp(webapp.RequestHandler):
@@ -3183,6 +3183,7 @@ class NewAppRenderer_AI2(webapp.RequestHandler):
     def get(self):
         if redirector(self) == True:
             return None
+        
         path = self.request.path
         #t_path = path[1:]
         t_path = path[1:(len(path)-6)] #take out -steps in path
@@ -5186,6 +5187,8 @@ application = webapp.WSGIApplication(
         ('/admin/importcourses', AdminImportCoursesHandler),
         ('/admin/serialview', AdminSerialViewHandler),
         
+        
+        #TODO: delete this when no longer needed
         ('/testView', testView)
         
         ########################
