@@ -29,6 +29,39 @@ from google.appengine.api import mail
 APPSDIR='/apps'
 APPS2DIR='/apps2'
 
+
+def redirector(self):
+    """Used to redirect old content to their new url in a course
+    
+    Returns true if a redirect occurs and false otherwise.
+    
+    The caller function should return if a redirect occurs
+    as to stop unwanted execution of code in the caller function
+    following the call to redirector.
+    """
+    # redirect test
+    if self.request.get('flag') == 'true':
+        logging.info("Do not redirect!")
+        return False
+    else:
+        # look up a content that uses this url
+        results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
+        if len(results) == 0:
+            logging.error("Could not find a content to redirect too!")
+        else:
+            content = results[0]
+            # build the url
+            content_id = content.c_identifier
+            module_id = content.key.parent().get().m_identifier
+            course_id = content.key.parent().parent().get().c_identifier
+            redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
+                
+            logging.info("redirecting: " + self.request.path + " >>> " + redirectURL)
+            self.redirect(redirectURL)
+            return True;
+
+
+
 def intWithCommas(x):
     if type(x) not in [type(0), type(0L)]:
         raise TypeError("Parameter must be an integer.")
@@ -2066,26 +2099,9 @@ class QuizQuestionsHandler(webapp.RequestHandler):
 #Quizzes Begin
 class Quiz1Handler(webapp.RequestHandler):
     def get(self):
-        # redirect test
-        if self.request.get('flag') == 'true':
-            logging.info("do not redirect!")
-        else:
-            # look up a content that uses this url
-            logging.info(self.request.path)
-            results = Content.query(ancestor=ndb.Key('Courses', 'ADMINSET')).filter(Content.c_url == self.request.path + "?flag=true").fetch()
-            if len(results) == 0:
-                logging.info("Could not find a content to redirect too!")
-            else:
-                content = results[0]
-                # build the url
-                content_id = content.c_identifier
-                module_id = content.key.parent().get().m_identifier
-                course_id = content.key.parent().parent().get().c_identifier
-                redirectURL = "courses/" + course_id + "/" + module_id + "/" + content_id
-                
-                
-                self.redirect(redirectURL)
-            
+        
+        if redirector(self) == True:
+            return None
         
         cacheHandler = CacheHandler()
         allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
@@ -4433,7 +4449,6 @@ class ContentHandler(webapp.RequestHandler):
                     # iterate over all the modules in the current course
                     
                     for module in modules:
-                        logging.info("module: " + str(module.m_title))
                         # initialize key in mapping
                         moduleContentMapping[str(module.m_title)] = ['null']
                         # now look up the content associated with this module
