@@ -1476,6 +1476,7 @@ class PaintPot2Handler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus, 'apps2Dir':APPS2DIR}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/paintpotAI2.html')
         self.response.out.write(template.render(path, template_values))
+
         
 class NoTexting2Handler(webapp.RequestHandler):
     def get(self):
@@ -2109,6 +2110,23 @@ class ConditionsHandler(webapp.RequestHandler):
         template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
         path = os.path.join(os.path.dirname(__file__),'static_pages/other/introIf.html')
         self.response.out.write(template.render(path, template_values))
+
+
+class BookFilesHandler(webapp.RequestHandler):
+    def get(self):
+        
+        cacheHandler = CacheHandler()
+        allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+        allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+        #user status
+        userStatus = UserStatus()
+        userStatus = userStatus.getStatus(self.request.uri)
+        
+        template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+        path = os.path.join(os.path.dirname(__file__),'static_pages/other/bookFiles.html')
+        self.response.out.write(template.render(path, template_values))
+
 
 #Quiz Page
 class QuizQuestionsHandler(webapp.RequestHandler):
@@ -3273,6 +3291,27 @@ class DeleteCommentHandler (webapp.RequestHandler):
             
             print 'Content-Type: text/plain'
             print 'You are NOT administrator'
+
+class RemoveBadCommentHandler(webapp.RequestHandler):
+    def get(self):
+        
+		cacheHandler = CacheHandler()
+		allAppsList = cacheHandler.GettingCache("App", True, "version", "1", True, "number", "ASC", True)
+		allAppsList2 = cacheHandler.GettingCache("App", True, "version", "2", True, "number", "ASC", True)
+        
+		#user status
+		userStatus = UserStatus()
+		userStatus = userStatus.getStatus(self.request.uri)
+        
+		q = db.GqlQuery("SELECT * FROM Comment WHERE submitter = KEY('ahBzfmFwcGludmVudG9yb3JnchALEgdBY2NvdW50GIuEzwEM')")
+		results = q.fetch(1000)
+		db.delete(results)
+        
+        
+        
+		template_values={ 'allAppsList': allAppsList, 'allAppsList2': allAppsList2, 'userStatus': userStatus}
+		path = os.path.join(os.path.dirname(__file__),'static_pages/other/Quiz8.html')
+		self.response.out.write(template.render(path, template_values))
         
        
 class AboutHandler(webapp.RequestHandler):
@@ -4278,7 +4317,7 @@ application = webapp.WSGIApplication(
 
         # AI2
 
-        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2),('/notext-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),('/pong-steps', NewAppRenderer_AI2),('/stockMarket-steps', NewAppRenderer_AI2),('/logo-steps', NewAppRenderer_AI2),
+        ('/IHaveADream-steps', NewAppRenderer_AI2), ('/paintpot2-steps', NewAppRenderer_AI2),('/presidentsQuiz2-steps', NewAppRenderer_AI2),('/notext-steps', NewAppRenderer_AI2), ('/mathblaster-steps', NewAppRenderer_AI2), ('/AndroidMash-steps', NewAppRenderer_AI2),('/PresidentsQuiz-steps', NewAppRenderer_AI2),('/pong-steps', NewAppRenderer_AI2),('/stockMarket-steps', NewAppRenderer_AI2),('/logo-steps', NewAppRenderer_AI2), ('/BroadcastHub2-steps', NewAppRenderer_AI2),
 	('/book2', Book2Handler), ('/starterApps',StarterAppsHandler),  ('/appInventor2Changes', AppInventor2ChangesHandler),('/presidentsQuizTut', PresidentsQuizTutHandler),('/IHaveADreamTut', IHaveADreamTutHandler), ('/TimedActivity',TimedActivityHandler), ('/TimedLists',TimedListsHandler), ('/Conditionals', ConditionalsHandler), ('/Variables', VariablesHandler), ('/recordItems', RecordingItemHandler), ('/incrementing', IncrementingVariablesHandler), ('/Walkingalist', WalkingalistHandler), ('/Events', EventsHandler), ('/Lists', ListsHandler), ('/UserListNav',UserListNavHandler), ('/Persistence',PersistenceHandler),('/FAQ',FAQHandler), ('/knowledgeMap',KnowledgeMapHandler),('/lists',ListsHandler), 
 	('/proc',ProcHandler),('/location',LocationHandler),('/resources',ResourcesHandler), ('/Drawing',DrawingHandler),('/sprites',SpritesHandler),
      ('/MakeQuiz10',MakeQuiz10Handler), ('/teacherList',TeacherListHandler), ('/cs107f14',CS107Handler),('/cs107sched',CS107SchedHandler),
@@ -4286,10 +4325,10 @@ application = webapp.WSGIApplication(
 
         # AI2 view all steps, error on 'IHaveADream'
         #('/IHaveADream', AppRenderer),
-        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),('/notext', AppRenderer),('/pong',AppRenderer),('/stockMarket',AppRenderer),('/logo',AppRenderer),
+        ('/IHaveADream', AppRenderer),('/paintpot2', AppRenderer), ('/AndroidMash', AppRenderer), ('/presidentsQuiz2', AppRenderer),('/notext', AppRenderer),('/pong',AppRenderer),('/stockMarket',AppRenderer),('/logo',AppRenderer), ('/BroadcastHub2',AppRenderer),
      
         # Comment
-        ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler),
+        ('/postComment', PostCommentHandler),('/deleteComment', DeleteCommentHandler), ('/removeBadComment', RemoveBadCommentHandler),
 
         # Memcache Flush
         ('/memcache_flush_all', MemcacheFlushHandler),
@@ -4298,7 +4337,8 @@ application = webapp.WSGIApplication(
       
 
         ('/IHaveADream2', IHaveADreamHandler),('/properties', PropertiesHandler), ('/eventHandlers', EventHandlersHandler),('/quizly',QuizlyHandler),('/conditionalsInfo',ConditionalsInfoHandler), ('/workingWithMedia',WorkingWithMediaHandler),('/mathBlaster',MathBlasterHandler),('/appInventor2',AppInventor2Handler) ,('/slideshowQuiz',SlideShowQuizHandler), ('/javaBridge',JavaBridgeHandler), ('/meetMyClassmates',MeetMyClassmatesHandler), ('/webDatabase',WebDatabaseHandler), ('/concepts',ConceptsHandler), ('/abstraction',AbstractionHandler),('/galleryHowTo', GalleryHowToHandler), 
-        ('/sentEmail', EmailHandler),
+        ('/sentEmail', EmailHandler), ('/bookFiles', BookFilesHandler),
+
 
         # Update Database
         ('/updateDB', UpdateDatabase),('/updateDBGEO', UpdateGEODatabase),('/PrintOut', PrintOut),
